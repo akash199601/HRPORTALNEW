@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+<style>
+    .navbar{
+        visibility: hidden;
+    }
+
+    @media (max-width: 1279px){
+        .mobile-nav-show {
+          color: rgba(73, 70, 70, 0.6);
+          font-size: 28px;
+          cursor: pointer;
+          line-height: 0;
+          transition: 0.5s;
+          z-index: 9999;
+          margin-right: 10px;
+        }
+      }
+</style>
+<div class="container">
+    <input type="hidden" name="refId" id="refId" value="{{refId}}">
+    <input type="hidden" name="slug" id="slug" value="{{slug}}">
+    <input type="hidden" name="tbl_id" id="tbl_id" value="{{tbl_id}}">
+    <input type="hidden" name="start_time" id="start_time" value="{{start_time}}">
+    <input type="hidden" name="end_time" id="end_time" value="{{end_time}}">
+    <input type="hidden" name="cand_id" id="cand_id" value="{{cand_id}}">
+    <input type="hidden" name="application_id" id="application_id" value="{{application_id}}">
+    <input type="hidden" name="time_in_secs" id="time_in_secs" value="{{time_in_secs}}">
+    <div class="contentarea"> 
+        <div class="Input"> 
+            <form method="POST" id="inputForm" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div id="camera" class="camera">
+                    <video id="video">Video stream not available.</video>
+                    {% comment %} <button id="stopbutton" type="button">STOP</button> {% endcomment %}
+                    <input id="webimg" name="src" type="text" value="" hidden>
+                    <canvas id="canvas">
+                    </canvas> 
+                </div>
+                <br>
+                {% comment %} <div>
+                    <img id="photo" alt="your image">
+                </div>
+                <br> {% endcomment %}
+                {% comment %} <button type="submit" class="button" id="submit">Submit</button> {% endcomment %}
+            </form>
+        </div>
+       {% comment %} <img src="{{ path }}" alt="The screen capture will appear in this box."> {% endcomment %}
+    </div>
+    <div>
+        <div>
+            <h1 class="text-danger mt-3">Sonata Online Test</h1>
+        </div>
+        <div>
+            <div style="text-align: right;">
+                <p style="font-size: 18px;font-weight: 500;color: aqua;">Start Time:-{{start_time}}</p>
+            </div>
+            <div class="d-flex" style="margin-left: 83%;justify-content: space-around;">
+                <p style="font-size: 18px;color: #b928c7;">Time Left-</p>
+                <p id="demo" style=" color:red; font-size: 18px; font-weight: 500;"></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- <h1> {{question.sheet_id}}</h1> -->
+  
+    <!-- <div >
+        <a  href="{% url 'post_question' %}"> 
+          <button class="btn p-4  btn-primary btn-lg d-flex gap-3 justify-content-center align-items-center" type="button">Add Question <i class="bi bi-plus-square-fill"></i>                      
+          </button>
+        </a>
+    </div> -->
+
+    <hr>
+    <div id="question_div">
+        
+        {% for question in question %}
+        <table>
+     
+            <tr>
+                <td class="text-primary"> {{question.question_id}} ). {{question.question_text}} ?</td>
+            </tr>
+            <tr>
+                <td><input class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_1_{{question.question_id}}" value="a">{{question.option_a}}</td>
+            </tr>
+            <tr>
+                <td><input class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_2_{{question.question_id}}" value="b">{{question.option_b}}</td>
+            </tr>
+            <tr>
+                <td><input class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_3_{{question.question_id}}" value="c">{{question.option_c}}</td>
+            </tr>
+            <tr>
+                <td><input class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_4_{{question.question_id}}" value="d">{{question.option_d}}</td>
+            </tr>
+
+            <!-- <tr>
+                <td><label  id="corans" class= "rb" style="display:none ; color : green"><b>{{question.answer}}</b></label></td>
+            </tr> -->
+
+        </table>
+<hr>
+
+        
+        {% endfor %}
+         <div style="display:flex;flex-align:center;">
+        <input type="submit" class="btn btn-success" value="Submit" id="b1" name="submit" style="margin-left:auto;margin-right:auto;" onclick="getanswers_1({{question_id_list}})">
+        </div>
+        <br>
+        <b id="UserAnswers"></b>
+        </div>
+</div>
+
+<script>
+const d1={}
+var q=document.getElementById('question_div')
+console.log(q)
+q.addEventListener("click",(e)=>{
+    // console.log("event",e.target)
+    // console.log(e.target.name)
+    // console.log(e.target.value)
+    d1[e.target.name]=e.target.value
+    console.log(d1)
+
+    // console.log(d1)
+
+
+    
+
+});
+</script>
+<!-- <script>
+    function check_value(e){
+        console.log("event")
+        // console.log(e.target)
+        // document.get
+    }
+</script> -->
+<script>
+    // var deadline = new Date("Jul 06, 2023 17:37:25").getTime();
+    var deadline1= document.getElementById('end_time').value
+    var start_date=document.getElementById('start_time').value
+    // var deadline2=new Date('2023-07-06T17:37:25');
+    var deadline2=new Date(deadline1);
+    var x = setInterval(function() {    
+    var t= deadline2- new Date()
+    // console.log("t",t)
+    
+    var days = Math.floor(t / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60));
+    var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((t % (1000 * 60)) / 1000);
+    // document.getElementById("demo").innerHTML = days + "d " 
+    // + hours + "h " + minutes + "m " + seconds + "s ";
+    document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
+        if (t < 1) {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "Exam Submitted";
+            button=document.getElementById('b1').click();
+        }
+        if (t === 1800000) {
+            // clearInterval(x);
+            // document.getElementById("demo").innerHTML = "Exam Submitted";
+            // button=document.getElementById('b1').click();
+            alert("Dear candidate Only 30 Minutes are Left")
+        }
+        if (t === 300000) {
+            // clearInterval(x);
+            // document.getElementById("demo").innerHTML = "Exam Submitted";
+            // button=document.getElementById('b1').click();
+            alert("Dear candidate Only 5 Minutes are Left")
+        }
+    }, 1000);
+</script>
+<script>
+    
+</script>
+
+<script>
+    $(document).ready(function(){
+    $("#b1").click(function(){
+        $(".rb").show();
+        $(".rb").attr("disabled",true);
+
+    });
+    });
+
+function getanswers_1(question_id_list){
+    refId=document.getElementById('refId').value
+    slug=document.getElementById('slug').value
+    tbl_id=document.getElementById('tbl_id').value
+    // console.log("llllllllll",question_id_list)
+    // var list_2=[]
+    // for(i = 0 ; i<= question_id_list.length ; i++){
+    //     console.log(question_id_list[i])
+    //     a=document.getElementById("option_1_"+question_id_list[i]).value
+    //     console.log(a,"aaaaaa")
+    //     list_2.append(a)
+    // }
+    // glob={
+    //     "list_1":question_id_list,
+    //     "list_2":list_2
+    // }
+    // console.log(glob)
+    let csr = $("input[name=csrfmiddlewaretoken").val();
+    glob={
+        'd':d1,
+        'csrfmiddlewaretoken':csr
+    }
+    // d1=JSON.stringify(d1)
+    // formdata = new FormData();
+    // formdata.append('csrfmiddlewaretoken', csr)
+    // console.log("Formdata1111",formdata)
+    // formdata.append('d',d1)
+    // console.log("d1",d1)
+    // console.log("Formdata22",formdata)
+    cand_id = document.getElementById("cand_id").value;
+    formdata = new FormData();
+    // formdata.append('call_path', 'support_calling');
+    // formdata.append('user_id', user_id);
+    var d11=JSON.stringify(d1);
+    formdata.append('d',d11)
+    console.log("2222222222222222")
+    console.log(formdata)
+    formdata.append('csrfmiddlewaretoken', $("input[name=csrfmiddlewaretoken").val());
+    formdata.append('fetchdata', 'fetchdata');
+    // formdata.append('support_calling', 'support_calling');
+    formdata.append('question_id_list',question_id_list)
+    console.log("question_id_list")
+    formdata.append('final_step','final_step')
+    console.log(formdata)
+
+    var url = "/exam/" + slug
+    console.log(url)
+    console.log(refId)
+    
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            console.log("OKKKKKK")
+            document.getElementById('question_div').innerHTML="Dear User Your Exam is Submitted successfully";
+
+            // document.getElementById('b1').attr('readonly','readonly')
+            $("#b1").attr("disabled",true);
+            $("#b1").attr("disabled",true);
+            $("#demo").attr("disabled",true);
+            alert("Dear User Your Exam is Submitted successfully --")
+            redirect_to_page();
+            // document.getElementById("demo").innerHTML = "Exam Submitted";
+            
+
+            // console.log(data)
+            // if (data.status == 'success') {
+            //     alert("Call Initiated Successfully");
+            // }
+            // else {
+            //     alert("Call Failed");
+            // }
+        }
+    })
+    
+
+    
+
+    // document.getElementById("UserAnswers").innerHTML = "";
+    // var e = document.getElementsByTagName("input");
+    //     for(i = 0 ; i<=e.length;i++)
+    //     {
+    //         if(e[i].type=="radio")
+    //         {
+    //             if(e[i].checked)
+    //             {
+    //                 document.getElementById("UserAnswers").innerHTML+="Q "+e[i].name + " The Answers You Are Selected Is : "+e[i].value+"<br>";
+
+    //             }
+    //         }
+    //     }
+}
+</script>
+
+<script>
+    function redirect_to_page(){
+        window.location.href = '/signIn';
+    }
+</script>
+
+{% endblock main_content%}

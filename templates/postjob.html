@@ -1,0 +1,343 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+
+        
+            <div class="container">    
+                {% comment %} <div class="row align-items-center mb-3">
+                    <div class="col-lg-8 mb-4 mb-lg-0">
+                        <div class="d-flex align-items-center">
+                            <div class="post-job">
+                                <h2>Post A Vacancy</h2>
+                            </div>
+                        </div>
+                    </div>  
+                </div> {% endcomment %}
+                {% comment %} {% if messages %}
+                    <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }} message" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %} {% endcomment %}
+
+                {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                  <li {% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+
+                <div class="container-xxl py-w">
+                  
+                        <div class="section_half">
+                            <ul class="item_list">
+                                <!---->
+                                <li class="item_list_block step_open">
+                                    <div class="info_title theme-color">
+                                        {% comment %} <span class="count_Icon theme-color">
+                                            
+                                        </span> {% endcomment %}
+                                        Post A Vacancy
+                                         <!----><!---->
+                                         {% comment %} <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> </span> {% endcomment %}
+                                         <!---->
+                                    </div>
+                                    {{ form.errors }}
+                                    
+                                    <form action = "" class="container mt-3" method="POST" enctype="multipart/form-data" id="applicationForm">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <label>Walk-In</label>
+                                                {{form.walk_in_id}}
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <label>Branch Name<span class="required-star" style="color:red;">*</span></label>
+                                                {{form.branch}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <label>No. of Vacancies<span class="required-star" style="color:red;">*</span></label>
+                                                {{form.no_of_vacancies}}
+                                            </div>
+                                        </div>
+                
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <label>Role<span class="required-star" style="color:red;">*</span></label>
+                                                {% comment %} <input type="text" class="form-control" name="job_role" id=" category_id" placeholder="Role" required> {% endcomment %}
+                                                {{form.role}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <label>Required Experience</label>
+                                                {{form.required_experience}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <label>Required Skill</label>
+                                                {{form.required_skills}}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row mt-3">
+                                            {% comment %} <div class="form-group col-md-6">
+                                                <label> Start Date</label>
+                                                <input type="date" class="form-control" name="published_on" id="published_on" placeholder="Start Date" required>
+                                            </div> {% endcomment %}
+                                            <div class="form-group col-md-12">
+                                                <label>Salary (per month)<span class="required-star" style="color:red;">*</span></label>
+                                                {% comment %} <input type="number" class="form-control" name="salary" id="Salary" placeholder="Enter Salary (per month)" required> {% endcomment %}
+                                                {{ form.salary }}
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <label>Qualifications<span class="required-star" style="color:red;">*</span></label>
+                                                {{form.qualification}}
+                                            </div>
+                                        </div> 
+                
+                                        <div class="row mt-3">
+                                            <div class="form-group col-md-12">
+                                                <label>Interview Place<span class="required-star" style="color:red;">*</span></label>
+                                                {% comment %} <input type="text" class="form-control" name="interview_place" id="interview_place" placeholder="Interview Place" required> {% endcomment %}
+                                                {{form.interview_place}}
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="form-group col-md-12">
+                                                <label>Address<span class="required-star" style="color:red;">*</span></label>
+                                                {% comment %} <input type="text" class="form-control" name="interview_place" id="interview_place" placeholder="Interview Place" required> {% endcomment %}
+                                                {{form.address}}
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="form-group col-md-6">
+                                                <label>Interview Date<span class="required-star" style="color:red;">*</span></label>
+                                                {% comment %} <input type="date" class="form-control" name="interview_date" id=" interview_date" placeholder="Interview Date" required> {% endcomment %}
+                                                {{form.interview_date}}
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Interview Time<span class="required-star" style="color:red;">*</span></label>
+                                                {% comment %} <input type="time" class="form-control" name="interview_time" id="interview_time" placeholder="Interviewv Time" required> {% endcomment %}
+                                                {{form.interview_time}}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row mt-3">
+                                            <h5><b> Interview Panel:- </b></h5>
+                                            <div class="form-group col-md-12">
+                                                <label>Panel Member 1<span class="required-star" style="color:red;">*</span></label>
+                                                {% comment %} <Select  name="interview_panel_1" id="panel_1" class="form-control" required>
+                                                    <option selected disabled><--Select Panel-1--></option>
+                                                        <option value="dummy1">dummy1</option>
+                                                        <option value="dummy2">dummy2</option>
+                                                        <option value="dummy3">dummy3</option>
+                                                        <option value="dummy3">dummy4</option>
+                                                </select> {% endcomment %}
+                                                {{form.interview_panel_1}}
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label>Panel Member 2<span class="required-star" style="color:red;">*</span></label>
+                                               {% comment %} <Select  name="interview_panel_2" id="panel_2" class="form-control" required>
+                                                <option selected disabled><--Select Panel-2--></option>
+                                                    <option value="dummy1">dummy1</option>
+                                                    <option value="dummy2">dummy2</option>
+                                                    <option value="dummy3">dummy3</option>
+                                                    <option value="dummy3">dummy4</option>
+                                               </select> {% endcomment %}
+                                               {{form.interview_panel_2}}
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label>Panel Member 3<span class="required-star" style="color:red;">*</span></label>
+                                               {% comment %} <Select  name="interview_panel_3" id="panel_3" class="form-control" required>
+                                                <option selected disabled><--Select Panel-3--></option>
+                                                    <option value="dummy1">dummy1</option>
+                                                    <option value="dummy2">dummy2</option>
+                                                    <option value="dummy3">dummy3</option>
+                                                    <option value="dummy3">dummy4</option>
+                                               </select> {% endcomment %}
+                                               {{form.interview_panel_3}}
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label>Panel Member 4<span class="required-star" style="color:red;">*</span></label>
+                                               {% comment %} <Select  name="interview_panel_4" id="panel_4" class="form-control" required>
+                                                <option value=""><--Select Panel-4--></option>
+                                                    <option value="dummy1">dummy1</option>
+                                                    <option value="dummy2">dummy2</option>
+                                                    <option value="dummy3">dummy3</option>
+                                                    <option value="dummy3">dummy4</option>
+                                               </select> {% endcomment %}
+                                               {{form.interview_panel_4}}
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <div class="form-group col-md-12">
+                                                <label>Job Responsibility<span class="required-star" style="color:red;">*</span></label>
+                                               {% comment %} <textarea name="job_responsibility" id="responsibilities" class="form-control" cols="30" rows="4" placeholder="Description of the exact job" required></textarea> {% endcomment %}
+                                                {{form.job_responsibility}}
+                                            </div>
+                                        </div>
+                                    
+                                    
+                                        <div class="row mt-3">
+                                            <div class="form-group col-md-12">
+                                                <label>Job Description<span class="required-star" style="color:red;">*</span></label>
+                                               {% comment %} <textarea name="job_description" id="description" class="form-control" cols="30" rows="4" placeholder="Description of the exact job" required></textarea> {% endcomment %}
+                                                {{form.job_description}}
+                                            </div>
+                                        </div>
+                               
+        
+                                        {% if update %}
+                                            <input type="submit" value="UPDATE" id="update" class="btn mt-3" style="background-color: #4f868c; color: white; font-size: larger; width: 8rem; padding-bottom: 25px;">
+                                        {% else %}
+                                            <input type="submit" value="CREATE" id="create" class="btn mt-3" style="background-color: #4f868c; color: white; font-size: larger; width: 8rem; padding-bottom: 25px;">
+                                        
+                                        {% endif %}
+                                        
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>                   
+                    </div>
+                </div>  
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+            <script>
+            $(document).ready(function() {
+            // Get the initial queryset data from Django
+            var initialData = {{ queryset|safe }};
+            console.log(initialData)
+            Fields = ['panel-1', 'panel-2','panel-3','panel-4']
+            // Store the selected options for each panel
+            var selectedOptions = {};
+
+            // Loop through each choice field
+            $('.panel-choice').each(function() {
+                var fieldId = $(this).attr('id');
+                
+                // Initialize the selected options list
+                selectedOptions[fieldId] = null;
+            });
+            
+            // Event handler when any choice field is changed
+            $('.panel-choice').change(function() {
+                var selectedValue = $(this).val();
+                var fieldId = $(this).attr('id');
+                if (selectedValue === "") {
+                    selectedValue = null;
+                }
+                console.log(selectedValue, fieldId);
+                
+                // Remove the selected option from other choice fields
+                $('.panel-choice').each(function() {
+                var otherFieldId = $(this).attr('id');
+                
+                    if(selectedValue === null) {
+                        console.log("Other Field ID: ", otherFieldId)
+                        $('#' + otherFieldId + ' option[value="' + selectedOptions[fieldId] + '"]').prop('disabled', false);
+                        console.log(selectedOptions[fieldId], "enabled in ", otherFieldId);
+                    }
+                //console.log(otherFieldId);
+
+                if((selectedValue === null)&&(otherFieldId === 'panel-4')) {
+                    selectedOptions[fieldId] = null;
+                }
+                
+
+                if (fieldId !== otherFieldId) {
+                    if (selectedValue !== null ) {
+                        $('#' + otherFieldId + ' option[value="' + selectedValue + '"]').prop('disabled', true);
+                        console.log(selectedValue, "is disabled in ", otherFieldId);
+                        if(selectedOptions[fieldId] !== null) {
+                            for (let i = 0; i < Fields.length; i++) {
+                                $('#' + Fields[i] + ' option[value="' + selectedOptions[fieldId] + '"]').prop('disabled', false);
+                                console.log(selectedOptions[fieldId], "enabled in ", Fields[i]);
+                            }
+                        }
+                    }
+                }
+                });
+
+                // Add the selected option to the selected options list for the panel
+                selectedOptions[fieldId] = selectedValue;
+                console.log(selectedOptions);
+            });
+            });
+            </script>
+            <script>
+                document.getElementById("applicationForm").addEventListener("submit", function(event) {
+                    event.preventDefault();
+
+                    const branchName = document.getElementById("branch_name").value;
+                    const vacancies = document.getElementById("no_of_vacancies").value;
+                    const role = document.getElementById("job_role").value;
+                    const salary = document.getElementById("salary").value;
+                    const interviewPlace = document.getElementById("interview_place").value;
+                    const interviewDateInput = document.getElementById("interview_date");
+                    const interviewDate = new Date(interviewDateInput.value);
+                    const currentDate = new Date();
+                    const update = document.getElementById("update");
+                    console.log(branchName, vacancies, role, salary, interviewPlace, interviewDate)
+
+                    const branchNamePattern = /^[A-Za-z\s]+$/;
+                    const vacanciesPattern = /^[0-9]+$/;
+                    const rolePattern = /^[A-Za-z\s]+$/;
+                    const salaryPattern = /^[0-9]+$/;
+                    const interviewPlacePattern = /^[A-Za-z\s]+$/;
+    
+                    console.log("validations")
+                    console.log(branchNamePattern.test(branchName), vacanciesPattern.test(vacancies), rolePattern.test(role))
+                    console.log(salaryPattern.test(salary), interviewPlacePattern.test(interviewPlace))
+                    console.log(update)
+                    if (!branchNamePattern.test(branchName)) {
+                        alert("Branch Name should only contain characters.");
+                    } else if (!vacanciesPattern.test(vacancies)) {
+                        alert("No. of Vacancies should only contain positive numbers.");
+                    } else if (!rolePattern.test(role)) {
+                        alert("Role should only contain characters.");
+                    } else if (!salaryPattern.test(salary)) {
+                        alert("Salary (per month) should only contain positive numbers.");
+                    } else if (!interviewPlacePattern.test(interviewPlace)) {
+                        alert("Interview Place should only contain characters.");
+                    } else if (interviewDate <= currentDate) {
+                        alert("Interview date should be greater than the current date.");
+                    } else {
+                        // If all validations pass, you can proceed with submitting the form.
+                        alert('Vacancy Created Successfully');
+                        event.target.submit();
+                    }
+                });
+            </script>
+
+          
+
+            {% comment %} <script>
+                function showalert(){
+                    console.log('Vacancy Added Successfully');
+                    if (form.submit == 'success'):
+                        alert('Vacancy Added Successfully');
+                    else :
+                        alert('error');
+                }
+            </script> {% endcomment %}
+
+        {% endblock main_content%}
+        

@@ -1,0 +1,55 @@
+{% extends 'hr_dashboard.html' %}
+
+{% block content %}
+<style>
+  @media (max-width: 1279px){
+    .mobile-nav-show {
+      color: rgba(73, 70, 70, 0.6);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 0;
+      transition: 0.5s;
+      z-index: 9999;
+      margin-right: 10px;
+    }
+  }
+
+ 
+  
+</style>  
+
+<div class="gy-4 mt-5" style="display: flex; justify-content: space-between;">
+
+  <div _ngcontent-nfn-c13="" class="card-cp ng-star-inserted">
+    <a _ngcontent-nfn-c13="" class="card-inner-cp card-cp-wt cursor" href="{% url 'rejected_applications' %}">
+      <h3 _ngcontent-nfn-c13="" class="title-large theme-color">{{ counts.reject_count }}</h3>
+      <span _ngcontent-nfn-c13="" class="title20 ng-star-inserted">Rejected Candidates</span>
+    </a>
+  </div>
+          
+  <div _ngcontent-nfn-c13="" class="card-cp ng-star-inserted">
+    <a _ngcontent-nfn-c13="" class="card-inner-cp card-cp-wt cursor" href="{% url 'alloted_applications' %}">
+      <h3 _ngcontent-nfn-c13="" class="title-large theme-color">{{ rejected_review_allotment_count.id }}</h3>
+      <span _ngcontent-nfn-c13="" class="title20 ng-star-inserted">Rejected Candidates To Be Reviewed</span>
+    </a>
+  </div>
+    
+  <div _ngcontent-nfn-c13="" class="card-cp ng-star-inserted">
+    <a _ngcontent-nfn-c13="" class="card-inner-cp card-cp-wt cursor" href="{% url 'reviewed_applications' %}">
+      <h3 _ngcontent-nfn-c13="" class="title-large theme-color">{{reviewed_rejected_candidates_count.id}}</h3>
+      <span _ngcontent-nfn-c13="" class="title20 ng-star-inserted">Reviewed Rejected Candidates</span>
+    </a>
+  </div>
+
+             
+</div>
+
+
+<style>
+  .card-text{
+    width:100%;
+    height:60px;
+  }
+</style>
+
+{% endblock %}

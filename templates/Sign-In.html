@@ -1,0 +1,370 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Application Portal</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+  <link rel="stylesheet" href="{% static 'css/loginPage.css' %}">
+  <style>
+        .messages {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .messages li {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #333333;
+            background-color: #F5F5F5;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+        }
+
+        .loading-icon {
+            display: inline-block;
+            animation: spin 1s infinite linear;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .messages li.success {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .messages li.error {
+            background-color: #FFEBEE;
+            color: #C62828;
+        }
+        body{
+          height: auto;
+        }
+        @media (max-width: 1279px){
+          .mobile-nav-show {
+            color: rgba(73, 70, 70, 0.6);
+            font-size: 28px;
+            cursor: pointer;
+            line-height: 0;
+            transition: 0.5s;
+            z-index: 9999;
+            margin-right: 10px;
+          }
+        }
+    </style>
+    <script>
+        // Delay message alert removal after a specified duration
+        document.addEventListener("DOMContentLoaded", function() {
+            var messageElements = document.getElementsByClassName("message");
+            var duration = 5000; // Adjust the duration in milliseconds (5 seconds in this example)
+
+            Array.from(messageElements).forEach(function(element) {
+                // Create a loading icon
+                var loadingIcon = document.createElement("span");
+                loadingIcon.className = "loading-icon";
+                loadingIcon.innerHTML = "&#x21BB;"; // You can customize the loading icon here
+
+                // Append the loading icon to the message element
+                element.appendChild(loadingIcon);
+
+                // Hide the loading icon after the specified duration
+                setTimeout(function() {
+                    loadingIcon.style.display = "none";
+                }, duration - 1000); // Hide the loading icon 1 second before the message disappears
+
+                // Hide the message element after the specified duration
+                setTimeout(function() {
+                    element.style.display = "none";
+                }, duration);
+            });
+        });
+    </script>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+
+<div class="cont" style="margin-top:100px;">
+  <div class="form sign-in" id="signIn">
+    <h2 class="heading">Welcome to Sonata Finance Application Portal</h2>
+    {% if messages %}
+      <ul class="messages">
+      {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    <form action= "/Login" method='post'>
+      {% csrf_token %}
+      {% comment %} <label>
+        <span>Email</span>
+        <input type="email" name="email" id="email" placeholder="name@example.com" required/>
+      </label> {% endcomment %}
+      <input type="hidden" value="{{signup}}" id="signup_true">
+      <label>
+        <span>Username</span>
+        <input type="text" class="text" id="username" name="username" placeholder="Choose a unique username" required />
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" name="pass1" id="pass1" placeholder="Choose Your Password" required/>
+      </label>
+      <p class="forgot-pass"><a href="{% url 'forget_password_send_otp' %}" style="text-decoration:none;color:#cfcfcf;">Forgot password?</a></p>
+      <button type="submit" class="submit">Sign In</button>
+    </form>
+  </div>
+  <div class="sub-cont">
+    <div class="img">
+      <div class="img__text m--up">
+        <h2>New here?</h2>
+        <p>Sign up and discover great amount of new opportunities!</p>
+      </div>
+      <div class="img__text m--in">
+        <h2>One of us?</h2>
+        <p>If you already has an account, just sign in. We've missed you!</p>
+      </div>
+      <div class="img__btn">
+        <span class="m--up" id="signup-btn">Sign Up</span>
+        <span class="m--in" id="signin-btn">Sign In</span>
+      </div>
+    </div>
+    <div class="form sign-up" id="signup" style="overflow-y: scroll;">
+      <h2>Register here</h2>
+      {% if messages %}
+      <ul class="messages">
+      {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }}</li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+      <form method='post' id="signup_form" action="/signup" >
+        {% csrf_token %}
+        {% comment %} <div class="emp_type">
+          <div class="emp">
+          <input type="radio" id="employee" name="fav_language" value="Employee" class="employee">
+          <label for="employee" class="employee_signup">Employee</label>
+          </div>
+          <div class="emr">
+          <input type="radio" id="employer" name="fav_language" class="employer" value="Employer">
+          <label for="employer" class="employee_signup">Employer</label>
+          </div>
+        </div> {% endcomment %}
+        <label>
+          <span>Name</span>
+          <input type="text" class="text" id="name" name="name" placeholder="Enter the Name " maxlength="30" required />
+        </label>
+        <!-- <div style="display: flex;"> -->
+          <label>
+            <span>Email</span>
+            <input type="email" class="text" id="email" name="email" onchange="checkEmailDuplicate(this.value)" placeholder="name@example.com" pattern=".+@gmail.com" size="30" maxlength="30" required/>
+          </label>
+          <label>
+            <span>Username</span>
+            <input type="text" class="text" id="user" name="user" onchange="checkUsernameDuplicate(this.value)" placeholder="Choose a unique username" maxlength="30" required />
+          </label>
+        <!-- </div> -->
+        <!-- <div style="display: flex; justify-content: space-around;"> -->
+          <label>
+            <span>Date Of Birth</span>
+            <input type="date" class="text" id="dob" name="dob" placeholder="Date Of Birth"  required/>
+          </label>
+          <label style="display: flex; flex-direction: column; ">
+            <span>Gender</span>
+            <select class="text" id="gender" name="gender" required style="width: 40%; text-align: center;margin-top: 8%; margin-left: 31%;border: none;">
+              <option value="">Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+  
+            </select>
+            <hr style="width: 50%;margin-left: 27%;margin-top: 3%;">
+            <!-- <input type="email" class="text" id="email" name="email" placeholder="name@example.com" pattern=".+@gmail.com" size="30" maxlength="30" required/> -->
+          </label>
+          <label>
+            <span>Mobile Number</span>
+            <input type="number" class="text" id="mob" name="mob" placeholder="Enter Mobile Number" pattern="[0-9]{10}" maxlength="10" minlength="10" 
+                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
+          </label>
+        <!-- </div> -->
+        
+        
+       
+        <label>
+          <span>Password</span>
+          <input type="password" class="text" id="pass" name="pass1" placeholder="Choose Your Password" required/>
+        </label>
+        <label>
+          <span>Confirm Password</span>
+          <input type="password" class="text" id="pass2" name="pass2" placeholder="Enter your password again" required/>
+        </label>
+        <button type="submit" class="submit">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+  <script  src="{% static 'js/script.js' %}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var signUpBtn = document.querySelector(".m--up");
+      var signInBtn = document.querySelector(".m--in");
+      var container = document.querySelector(".cont");
+      var signup = document.getElementById("signup_true").value
+      
+      console.log(signup)
+
+      signUpBtn.addEventListener("click", function() {
+        container.classList.add("s--signup");
+      });
+
+      signInBtn.addEventListener("click", function() {
+        container.classList.remove("s--signup");
+      });
+
+      if(signup == "True") {
+        signUpBtn.click()
+      }
+
+    });
+  </script>
+  <script>
+      document.getElementById("signup_form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        console.log("validation");
+        const username = document.getElementById("user").value;
+        const email = document.getElementById("email").value;
+        const pass1 = document.getElementById("pass").value;
+        const pass2 = document.getElementById("pass2").value;
+        const nameInput = document.getElementById("name").value;
+        const dobInput = document.getElementById("dob").value;
+        const genderInput = document.getElementById("gender").value;
+        const mobInput = document.getElementById("mob").value;
+        const dob = new Date(dobInput);
+        const now = new Date();
+        const age = now.getFullYear() - dob.getFullYear();
+        console.log(username);
+        console.log(email);
+        console.log(pass1);
+        const usernamePattern = /^[A-Za-z0-9]+$/;
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const genderRegex = /^(Male|Female)$/;
+        const mobRegex = /^[6-9]\d{9}$/;
+        const nameRegex = /^[a-zA-Z\s]{1,30}$/;
+        console.log(usernamePattern.test(username));
+        if (!usernamePattern.test(username)) {
+            alert("Username must contain characters and numbers only.");
+            console.log("Username must contain characters and numbers only.")
+        } else if (!emailPattern.test(email)) {
+            alert("Invalid email address.");
+            console.log("Invalid email address.")
+        } else if (!passwordPattern.test(pass1)) {
+            alert("Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&).");
+            console.log("Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&).")
+        } else if (age<18) {
+            alert("You must be 18 years or above to register at this portal.");
+            console.log("You must be 18 years or above to register at this portal.")
+        } else if (!genderRegex.test(genderInput)) {
+            alert("Please select a valid Gender.");
+            console.log("Please select a valid Gender.")
+        } else if(!nameRegex.test(nameInput)) {
+            alert("Name must be alphanumeric and between 1 and 30 characters.");
+            console.log("Name must be alphanumeric and between 1 and 30 characters.")
+        } else if(!mobRegex.test(mobInput)){
+            alert("Please enter a valid 10-digit Mobile Number.");
+            console.log("Please enter a valid 10-digit Mobile Number.")
+        }else {
+            // If all validations pass, you can proceed with submitting the form.
+            event.target.submit();
+        }
+    });
+  </script>
+<script>
+function checkUsernameDuplicate(username) {
+  console.log('username to chck: ', username)
+  const nameInput = document.getElementById('name')
+  if (nameInput.value === null || nameInput.value === undefined || nameInput.value === '') {
+    console.log('name is none or empty.');
+    $('#user').val('');
+  } else {
+    console.log('name has a non-empty value:', nameInput.value);
+    $.ajax({
+      url: `/check-duplicate-username/${username}/`,
+      type: 'GET',
+      success: function(response) {
+        if (response.is_duplicate) {
+          // Username already taken, display an error message or take appropriate action
+          console.log('Username already taken');
+          alert('Username already taken')
+          console.log($('#user'));
+          $('#user').val('');
+        } else {
+          // Username is available, do something (optional)
+          console.log('Username is available');
+        }
+      },
+      error: function(error) {
+        // Handle errors (optional)
+        console.log('Error occurred:', error);
+      }
+    });
+  }
+    
+}
+
+//$('#user').on('change', function () {
+//  checkUsernameDuplicate($('#user').val());
+//});
+
+function checkEmailDuplicate(email) {
+  console.log('email to chck: ', email)
+  const nameInput = document.getElementById('name')
+  if (nameInput.value === null || nameInput.value === undefined || nameInput.value === '') {
+    console.log('name is none or empty.');
+    $('#email').val('');
+  } else {
+    console.log('name has a non-empty value:', nameInput.value);
+    $.ajax({
+      url: `/check-duplicate-email/${email}/`,
+      type: 'GET',
+      success: function(response) {
+        if (response.is_duplicate) {
+          // Username already taken, display an error message or take appropriate action
+          console.log('Email already taken');
+          alert('Email already taken')
+          // Clear the input field value
+          $('#email').val('');
+        } else {
+          // Username is available, do something (optional)
+          console.log('email is available');
+        }
+      },
+      error: function(error) {
+        // Handle errors (optional)
+        console.log('Error occurred:', error);
+      }
+    });
+  }
+    
+}
+
+//$('#email').on('change', function () {
+//  checkEmailDuplicate($('#email').val());
+//});
+</script>
+</body>
+</html>

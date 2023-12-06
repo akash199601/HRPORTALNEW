@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+
+<body>
+    <div class="contentarea">
+        <div class="Input">
+            <form method="POST" id="inputForm" name="inputForm" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div id="camera" class="camera">
+                    <video id="video">Video stream not available.</video>
+                    {% comment %} <button id="stopbutton" type="button">STOP</button> {% endcomment %}
+                    <input id="webimg" name="src" type="text" value="" hidden>
+                    <canvas id="canvas">
+                    </canvas> 
+                </div>
+                <br>
+                {% comment %} <div>
+                    <img id="photo" alt="your image">
+                </div>
+                <br> {% endcomment %}
+                {% comment %} <button type="submit" class="button" id="submit">Submit</button> {% endcomment %}
+            </form>
+        </div>
+       {% comment %} <img src="{{ path }}" alt="The screen capture will appear in this box."> {% endcomment %}
+    </div>
+    <div>
+        {% for pic in pics %}
+            <img src="data:image/png;base64,{{ pic }}" alt="Image">
+        {% endfor %}
+    </div>
+</body>
+
+{% endblock main_content %}

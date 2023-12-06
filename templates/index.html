@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+
+{% if messages %}
+<ul class="messages">
+{% for message in messages %}
+  <li {% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+<!-- 
+<div _ngcontent-xns-c10="" class="section-card padding-t5 clearfix">
+    <div _ngcontent-xns-c10="" class="card-block  card-flip card-4">
+        <div _ngcontent-xns-c10="" class="card-flip-block">
+            <div _ngcontent-xns-c10="" class="card-block-inner clearfix">
+                <div _ngcontent-xns-c10="" class="card-flip-top clearfix">
+                    <div _ngcontent-xns-c10="" class="profile-progress-large">
+                        
+                        <div _ngcontent-xns-c10="" class="c100 p31 profileColor">
+                            
+                            <img _ngcontent-xns-c10="" alt="Candidate Portal" src="../static/img/profile_logo.jpg">
+                            
+                        </div>
+                    </div>
+                </div>
+                <div _ngcontent-xns-c10="" class="card-flip-middle clearfix">
+                    
+                    
+                    <h2 _ngcontent-xns-c10="" class="purple-color theme-color"> {{user.username}} </h2
+                        >
+                        
+                        <div _ngcontent-xns-c10="" class="profile-detail-row clearfix">
+                            <div _ngcontent-xns-c10="" class="text-cell padding-b5">
+                                <span _ngcontent-xns-c10="" class="material-icons dp18 purple-color theme-color">
+                                   Phone No :-
+                                </span>
+                                 
+                            </div>
+                                <div _ngcontent-xns-c10="" class="text-cell text-dotted">
+                                    <span _ngcontent-xns-c10="" class="material-icons dp18 purple-color theme-color">
+                                        Email ID -:</span>
+                                         {{user.email}}
+                                </div>
+                                <div _ngcontent-xns-c10="" class="conpleted-profile-cell">
+                                    </div>
+                                </div>
+                            </div>
+                            <div _ngcontent-xns-c10="" class="card-flip-bottom">
+                                <a _ngcontent-xns-c10="" class="completed-link theme-color" gaevent="dashboard#profileupdate" href="/profile/update">
+                                    
+                                    <span _ngcontent-xns-c10="" class="material-icons dp18 purple-color theme-color">
+                                        
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+{% if request.user.is_authenticated %}
+    <div class="container-xxl py-3" >
+      <div class="container">
+      <!-- ======= Hero Section ======= -->
+      <section id="hero" class="hero">
+          <div class="icon-boxes position-relative">
+            <div class="container position-relative">
+              <div class="row gy-4 mt-5">
+              
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                  <div class="icon-box">
+                    <div class="icon"><i class="bi bi-easel"></i></div>
+                    <h4 class="title"><a href="{% url 'applied_user_details' %}" class="stretched-link">Candidate Screening</a></h4>
+                  </div>
+                </div><!--End Icon Box -->
+            
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                  <div class="icon-box">
+                    <div class="icon"><i class="bi bi-gem"></i></div>
+                    <h4 class="title"><a href="{% url 'sceduled_user_details' %}" class="stretched-link">Schedule Interview</a></h4>
+                  </div>
+                </div><!--End Icon Box -->
+            
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                  <div class="icon-box">
+                    <div class="icon"><i class="bi bi-geo-alt"></i></div>
+                    <h4 class="title"><a href="{% url 'rejected_user_details' %}" class="stretched-link">Rejected Candidates</a></h4>
+                  </div>
+                </div><!--End Icon Box -->
+            
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                  <div class="icon-box">
+                    <div class="icon"><i class="bi bi-command"></i></div>
+                    <h4 class="title"><a href="{% url 'hold_user_details' %}" class="stretched-link">Hold Candidates</a></h4>
+                  </div>
+                </div><!--End Icon Box -->
+
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                  <div class="icon-box">
+                    <div class="icon"><i class="bi bi-command"></i></div>
+                    <h4 class="title"><a href="{% url 'postjob' %}" class="stretched-link">Post A Vacancy</a></h4>
+                  </div>
+                </div><!--End Icon Box -->
+
+                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                  <div class="icon-box">
+                    <div class="icon"><i class="bi bi-command"></i></div>
+                    <h4 class="title"><a href="{% url 'vacancy_lists' %}" class="stretched-link">Vacancy Details</a></h4>
+                  </div>
+                </div><!--End Icon Box -->
+            
+              </div>
+            </div>
+          </div>
+      </section>
+    </div>
+  </div>
+  {% endif %}
+
+{% endblock main_content%}
+

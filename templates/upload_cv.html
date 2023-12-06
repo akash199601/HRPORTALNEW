@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block main_content %}
+
+<style>
+
+    .form-group label {
+        font-weight: normal;
+        font-size: 15px;
+    }
+
+    .form-group button {
+        font-weight: normal;
+        font-size: 15px;
+    }
+
+    .form-container{
+        margin:100px auto;
+        max-width: 600px;
+        border: 1px solid #6d6666;
+        border-radius: 5px;
+       
+    }
+
+    @media(max-width:640px){
+        .form-container{
+            margin:100px auto;
+            margin-left:10px;
+            margin-right:10px;
+    }
+    }
+
+    .upload-cv-heading{
+        color: #21201e;
+        background: #00000030;
+        padding-top: 15px;
+    }
+
+    .form-group{
+
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top:5px;
+    }
+
+    .form-group .label{
+        color:000000de;
+        margin-top:10px;
+        background-color:transparent;
+    }
+
+    @media (max-width: 1279px){
+      .mobile-nav-show {
+        color: rgba(73, 70, 70, 0.6);
+        font-size: 28px;
+        cursor: pointer;
+        line-height: 0;
+        transition: 0.5s;
+        z-index: 9999;
+        margin-right: 10px;
+      }
+    }
+
+</style>
+
+    <div class="form-container">
+        <form action="{% url 'upload_CV' %}" method="POST" enctype="multipart/form-data" id="applicationForm">
+            {% csrf_token %}
+            <h1 class="upload-cv-heading">Upload CV</h1>
+            {% comment %} <div class="form-group">
+                <label for="candidate_full_name" class="required-label" style="background-color:transparent;">Candidate Full Name</label>
+                <input type="text" required class="form-control" placeholder="Enter Candidate's Full Name" name="candidate_full_name" id="candidate_full_name">
+            </div>
+
+            <div class="form-group">
+                <label for="candidate_email" class="required-label" style="background-color:transparent;">Candidate Email</label>
+                <input type="email" required class="form-control" placeholder="Enter Candidate's Email" name="candidate_email" id="candidate_email" onchange="checkEmailDuplicate(this.value)">
+            </div>
+
+            <div class="form-group">
+                <label for="candidate_mobile_no" class="required-label" style="background-color:transparent;">Candidate Mobile Number</label>
+                <input type="tel" required class="form-control" placeholder="Enter Candidate's Mobile No" name="candidate_mobile_no" id="candidate_mobile_no" pattern="[0-9]{10}" maxlength="10" minlength="10"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onchange="checkMobileDuplicate(this.value)">
+            </div>
+
+            <div class="form-group">
+                <label for="referred_by" style="background-color:transparent;">Refered By UserID(Optional)</label>
+                <input type="number" class="form-control" placeholder="Enter ID of the Referrer" name="referred_by" id="referred_by">
+            </div> {% endcomment %}
+
+            <div class="form-group">
+                <label for="candidate_resume" class="required-label" style="background-color:transparent;">Candidate Resume</label>
+                <input type="file" required class="form-control" onchange="validateFileType()" name="candidate_resume" id="candidate_resume">
+                <p>&nbsp (Only PDF File are allowed) <p>
+            </div>
+            <div class="form-group" style="margin:30px auto;text-align: center;">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+    
+
+    {% comment %} <script>
+        document.getElementById("applicationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById("candidate_full_name").value;
+            const email = document.getElementById("candidate_email").value;
+            const mobileNo = document.getElementById("candidate_mobile_no").value;
+
+            const fullNamePattern = /^[A-Za-z\s]+$/;
+            const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+            const mobileNoPattern =  /^[6-9]\d{9}$/;
+
+            if (!fullNamePattern.test(fullName)) {
+                alert("Candidate's Full Name should contain only alphabetic characters and spaces.");
+            } else if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+            } else if (!mobileNoPattern.test(mobileNo)) {
+                alert("Please enter a valid 10-digit Mobile No.");
+            } else {
+                alert(" Candidate "+fullName+ " CV Uploaded successfully");
+                // If all validations pass, you can proceed with submitting the form.
+                event.target.submit();
+            }
+        });
+    </script> {% endcomment %}
+
+   <script>
+      function validateFileType() {
+         var selectedFile = document.getElementById('candidate_resume').files[0];
+         var allowedTypes = ['application/pdf'];
+
+         if (!allowedTypes.includes(selectedFile.type)) {
+            alert('Invalid file type. Please upload a PDF file.');
+            document.getElementById('candidate_resume').value = '';
+         }
+      }
+   </script>
+
+
+{% endblock main_content%}

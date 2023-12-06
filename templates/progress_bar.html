@@ -1,0 +1,60 @@
+
+
+{% load static %}
+
+<style>
+  @media(max-width:640px){
+    .stepper-wrapper{
+      height:120px;
+      margin-left:2%;
+      margin-right:2%;
+    }
+    
+    .stepper-item{
+      width:10%;
+    }
+
+    .step-name{
+      font-size:.7rem!important;
+      padding:1px;
+      margin-right:5px;
+    }
+  }
+
+</style>
+
+<div class="stepper-wrapper bg-white" style="margin-top:100px;">
+    <div class="stepper-item {% if status >= 0 and status <= 7  %} completed {% endif %}">
+      <div class="step-counter"></div>
+      <div class="step-name">Recieved CVs</div>
+    </div>
+    <div class="stepper-item {% if status >= 1 and status <= 7 %} completed {% endif %}">
+      <div class="step-counter"></div>
+      <div class="step-name">HR Screening</div>
+    </div>
+    <div class="stepper-item {% if status >= 2 and status <= 7 %} completed {% endif %}">
+      <div class="step-counter"></div>
+      <div class="step-name">Profile Update</div>
+    </div>
+    <div class="stepper-item {% if status >= 3 and status <= 7 %} completed {% endif %}">
+        <div class="step-counter"></div>
+        <div class="step-name">Online Test Scheduled</div>
+    </div>
+    <div class="stepper-item {% if status >= 4 and status <= 7 %} completed {% endif %}">
+        <div class="step-counter"></div>
+        <div class="step-name">Online Test Submitted</div>
+    </div>
+    <div class="stepper-item {% if status >= 5 and status <= 7 %} completed {% endif %}">
+        <div class="step-counter"></div>
+        <div class="step-name">Interview Scheduled</div>
+    </div>
+    <div class="stepper-item {% if status >= 6 and status <= 7 %} completed {% endif %}">
+        <div class="step-counter"></div>
+        <div class="step-name">Interview Assessed</div>
+    </div>
+    <div class="stepper-item {% if status == 7 and status <= 7 %} completed {% endif %}">
+        <div class="step-counter"></div>
+        <div class="step-name">Onboarding</div>
+    </div>
+</div>
+

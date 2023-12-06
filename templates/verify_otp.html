@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    
+    @media (max-width: 1279px){
+      .mobile-nav-show {
+        color: rgba(73, 70, 70, 0.6);
+        font-size: 28px;
+        cursor: pointer;
+        line-height: 0;
+        transition: 0.5s;
+        z-index: 9999;
+        margin-right: 10px;
+      }
+    }
+  </style>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+  <link rel="stylesheet" href="{% static 'css/loginPage.css' %}">
+</head>
+
+<body>
+  <div class="container">
+    <h2>OTP Verification</h2>
+    {% if messages %}
+      <ul class="messages">
+      {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    <form method="POST" action="{% url 'verify_otp' %}">
+      {% csrf_token %}
+      <label for="otp">Enter OTP to {{email}}:</label>
+      <input type="text" id="otp" name="otp" required>
+    
+      <input type="submit" value="Verify">
+    </form>
+  </div>
+</body>
+
+</html>

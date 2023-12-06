@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+<style>
+  .row input,.row select{
+  width: 95%;
+  margin-left: 1%;
+  
+  
+}
+input,select{
+  border: 1px solid rgb(187, 187, 246);
+  border-radius: 5px;
+  padding: 4px;
+  background-color: #e3e3ec;
+  
+}
+input:hover,select:hover{
+  border: 2px solid rgb(137, 137, 190);
+}
+.row span{
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 8px;
+  margin-top: 15px;
+}
+.address_div,.education_div,.training_div,.current_emp_div,.family_div{
+  margin-top: 4%;
+}
+.address tr td input,.education tr td input,.training tr td input,.current_emp tr td input,.family tr td input{
+  /* padding: 10px; */
+  /* border: none; */
+  width: 88%;
+  margin-top: 14px;
+}
+.address tr,.education tr,.training tr,.current_emp tr,.family tr{
+  margin-left: 40px;
+  margin-top: 15px;
+}
+textarea{
+  border: 1px solid rgb(187, 187, 246);
+  border-radius: 15px;
+  margin-left: 3%;
+}
+
+@media (max-width: 1279px){
+  .mobile-nav-show {
+    color: rgba(73, 70, 70, 0.6);
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 0;
+    transition: 0.5s;
+    z-index: 9999;
+    margin-right: 10px;
+  }
+}
+
+
+</style>
+<div class="container">
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li {% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+    <!-- <h2 style="text-align:center; margin-top: 60px;">Add Question</h2> -->
+
+
+    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+      <div class="container">
+          <div style="width:100%;float:left">
+              <ul class="item_list">
+                  <!---->
+                  <li class="item_list_block step_open">
+                      <div class="info_title theme-color">
+                          <span class="count_Icon theme-color">
+                              1
+                          </span>
+                          
+                          <!----><!---->
+                          <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host="">ADD Question</span>
+                          <!---->
+                      </div>
+                          
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="panel-body ng-star-inserted">
+                                <!----><!---->
+                                <div class="d-flex" style="justify-content: space-around;">
+                                  <div class="row" style="width:30%;">
+                                    <span class="panel-col panel-col1">Sheet ID</span>
+                                    
+                                    <select style="height: 30px;" name="sheet_id" id="sheet_id" required onchange="get_question_id()">
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
+                                      <option value="4">4</option>
+                                    </select>
+                                  </div>
+                                
+                                  <div class="row" style="width:60%;">
+                                    <span class="panel-col panel-col1">Question ID</span>
+                                    <input style="height: 30px;margin-top: 8px;" type="number" class="panel-col text-bold-cell" name="question_id" id="question_id" required readonly> 
+                                  </div>
+                                </div>
+                          
+                            
+                                <div class="row" style="width: 95%;">
+                                  <span class="panel-col panel-col1">Question</span>
+                                  
+                                  <textarea  name="question_text" id="question_text" cols="10" rows="5" required></textarea>
+                              </div>
+                            <div class="row">
+                              <span class="panel-col panel-col1">Option A</span>
+                              <input type="text" class="panel-col text-bold-cell" name="option_a" required> 
+                            </div>
+                            <div class="row">
+                              <span class="panel-col panel-col1">Option B</span>
+                              <input type="text" class="panel-col text-bold-cell" name="option_b" required> 
+                            </div>
+                            <div class="row">
+                              <span class="panel-col panel-col1">Option C</span>
+                              <input type="text" class="panel-col text-bold-cell" name="option_c" required> 
+                            </div>
+                            <div class="row">
+                              <span class="panel-col panel-col1">Option D</span>
+                              <input type="text" class="panel-col text-bold-cell" name="option_d" required> 
+                            </div>
+                            <div class="row">
+                              <span class="panel-col panel-col1">Answer</span>
+                              <select name="answer" id="answer" required>
+                                <option value="a">A</option>
+                                <option value="b">B</option>
+                                <option value="c">C</option>
+                                <option value="d">D</option>
+                              </select>
+                            </div>
+                          
+                        </div>
+                        
+                        <div style="align-items: center;">
+                          <input type="hidden" name="step2">
+                          <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                  </li>
+                  
+              </ul>
+              
+          </div>
+          
+          
+      </div>
+  </div>
+    <br><br><br>
+</div>   
+    
+<script>
+  function get_question_id(){
+    var sheet_id=document.getElementById('sheet_id').value
+    console.log("sheet_id",sheet_id)
+    formdata = new FormData();
+        
+    formdata.append('step1', 'step1');
+    formdata.append('sheet_id',sheet_id)
+    var url = "{% url 'post_question' %}"
+    $.ajax({
+    url: url,
+    method: 'POST',
+    data: formdata,
+    processData: false,
+    contentType: false,
+    success: function (data) {
+        console.log("OKKKKKK",data.question_id_new,data.status)
+
+        if (data.status==='success'){
+          var a = document.getElementById('question_id')
+          console.log(a)
+          a.value=data.question_id_new
+          console.log("edjbvkewbviwb",data.question_id_new) 
+        } 
+    }
+    })
+  }
+</script>
+    
+    
+{% endblock main_content %}

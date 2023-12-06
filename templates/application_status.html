@@ -1,0 +1,422 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+
+    <link href="{% static 'css/vacancy_style.css' %}" rel="stylesheet">
+
+    <style>
+
+  .card-cp {
+    width: 29%;
+    float: left;
+  
+  }
+  
+  .cursor {
+    cursor: pointer;
+  }
+  
+  .card-cp-wt {
+    height: 180px;
+    border-radius: 25px;
+    background-color: #ffffff;
+    text-align: center;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
+  }
+
+  @media(max-width:640px){
+    .card-cp-wt {
+      height:50px;
+    }
+  }
+  
+  .card-inner-cp {
+    display: block;
+  }
+  
+  a {
+    color: #a8a8a8;
+    text-decoration: none;
+    outline: 0 none;
+  }
+
+  .title-large{
+    font-size: 60px;
+    line-height: 48px;
+    font-family: 'DIN Medium';
+    margin: 0px;
+    padding: 58px 0 0 0px;
+    color: #C8215C!important;
+  }
+  
+  .title20 {
+    font-size: 21px;
+    font-family: 'DIN Light';
+    color: #0496ad;;
+    display: block;
+    line-height: 20px;
+    padding-top: 8px;
+    text-transform: inherit;
+  }
+  
+  
+  @media (min-width:720px){
+    .mt-5{
+      display:flex;
+    }
+  }
+  
+  
+  @media (max-width: 640px){
+    .mt-5{
+      width:100%;
+      display:block;
+    }
+  }
+  
+  @media(max-width: 640px){
+    .card-cp{
+      width: 100%;
+      margin: 3px; 
+    }
+  
+  .title-large{
+    font-size:40px;
+    padding:5px 0px 0px 0px;
+  } 
+  
+  .title20 {
+    font-size: 15px;
+  }
+  
+  }
+  
+.wow{
+  width: 25%;
+}
+
+@media (min-width: 720px){
+.d-flex{
+  display: flex!important;
+}
+}
+
+@media (max-width: 640px){
+.p-4{
+  width: 100%;
+}
+}
+
+#myDIV {
+  animation: mymove 5s infinite;
+}
+
+@keyframes mymove {
+  50% {text-shadow: 10px 20px 30px skyblue;}
+}
+</style>
+
+  <style>
+        .messages {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .messages li {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #333333;
+            background-color: #F5F5F5;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+        }
+
+        .loading-icon {
+            display: inline-block;
+            animation: spin 1s infinite linear;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .messages li.success {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .messages li.error {
+            background-color: #FFEBEE;
+            color: #C62828;
+        }
+        body{
+          height: auto;
+        }
+
+        @media (max-width: 1279px){
+          .mobile-nav-show {
+            color: rgba(73, 70, 70, 0.6);
+            font-size: 28px;
+            cursor: pointer;
+            line-height: 0;
+            transition: 0.5s;
+            z-index: 9999;
+            margin-right: 10px;
+          }
+        }
+
+    </style>
+
+<div class="data" style="margin-top: 80px">
+    <div class="container-xxl py-3" >
+        <div class="container">
+          <div class="row g-4">
+            <div class='d-flex justify-content-between align-item-center'>
+
+              <div style="color:#FFFFFF">
+
+              <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;">Positions applied to</h1>
+
+              </div>
+
+            </div>
+            <hr>
+            <section class="vacancy">
+      {% comment %} <div class="container">
+        <div id="myDIV">
+          <h1 class="section-title" style="margin-top:30px; margin-bottom:25px;">{% if request.user.is_authenticated %} Vacancies For You {% else %} Open Positions {% endif %}<span style="color: #f96f59;">.</span></h1>
+        </div> {% endcomment %}
+
+        <div class="d-flex flex-wrap" style="gap:1.5rem 10rem;">
+          {% if vacancies %}
+          {% for vacancy in vacancies %}
+
+          <div class=" wow fadeInUp card p-4 " style="background-color: #fff;box-shadow: 0px 3px 4px 2px rgba(0,0,0,0.3);border-radius: 6px;" data-wow-delay="0.1s" id="received">
+            <div class="card-item card-button" style="min-height:260px;margin-bottom:px;">
+                <a class="cat-item rounded " href="{% url 'applied_vacancy_card_details' vacancy.id %}"> 
+                  <p class="mb-0" style="color:#494949;font-weight: 800; margin-bottom: -0.5rem;font-size:21px;
+                  margin-top: -0.5rem;">{{vacancy.job_role}}</p>
+                  
+                  {% comment %} <ul class="mb-0" style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;font-weight: 500;">
+                    <li> Branch Name :- <span style="font-weight: 600;font-size: 13px"> {{ vacancy.branch_name }}  </span><li>
+                    <li>Posted On:- <span style="font-weight: 600;font-size: 13px"> {{ vacancy.posted_on }} </span></li>
+                  </ul> {% endcomment %}
+
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 600;margin-top: 0.5rem">Branch Name:  <span style="font-weight: 800;font-size: 13px;"> {{ vacancy.branch_name }} </span> </p>
+
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Posted On:  <span style="color: #6da4d8;font-weight: 800;font-size: 13px;"> {{ vacancy.vacancy_date }} </span> </p>
+  
+                  {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">No. of Vacancies: <span style="font-weight: 800;font-size: 13px;"> {{ vacancy.no_of_vacancies }} </span> </p> {% endcomment %}
+                
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Qualification: <span style="font-weight: 800;font-size: 13px;">{{  vacancy.qualification_type }}</span> <br>
+                 
+                  {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Salary:<span style="font-weight: 800;font-size: 13px;"> &#x20b9; {{ vacancy.salary }} </span> </p> {% endcomment %}
+  
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Experience:<span style="font-weight: 800;font-size: 13px;"> {{ vacancy.required_experience }} Years</span> </p>
+                  
+                  <div class="required-experience-row">
+                    <span class="required-cell">Required Skills</span> 
+                    <div class="skill-row">
+                      <div class="scroll-main scroll-h92 scrollCustome">
+                        {% for skill in vacancy.required_skills %}
+                        <span class="tag-job">{{skill}}</span>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                {% comment %} </a> {% endcomment %}
+            </div>        
+             <div>
+              <button style="background-color: #e7e7e7!important;
+              color: black;
+              width: 100%;
+              margin-left: 1.5px;
+              box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.3);
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+              height: 30px;
+              position: relative;
+              border-color: #C8215C!important;">Applied</button>
+            </div> 
+          </a>
+          </div>
+          {% comment %} <div class=" wow fadeInUp card p-4 " style="flex-basis: 25%; max-width: 23%;background-color: #fff;" data-wow-delay="0.1s" id="received">
+            <div class="card-item card-button" style="height:260px;">
+                <a class="cat-item rounded " href="{% url 'vacancy_card_details' vacancy.id %}"> 
+                  <h5 class="mb-3" style="color:#000000ba;font-weight: 600;">{{ vacancy.branch_name }} </h5>
+                  <hr>
+                  <p class="mb-0" style="color:#000000ba">No. of Vacancies :- {{ vacancy.no_of_vacancies }} </p>
+                  <hr>
+                  <p class="mb-0" style="color:#000000ba">Qualification :- {{  vacancy.qualification_type }} <br>
+                  <hr>
+                  <p class="mb-0" style="color:#000000ba">Salary:-{{ vacancy.salary }}  </p>
+                </a>
+            </div>
+          </div> {% endcomment %}
+          {% endfor %}
+          {% else %}
+        <p>No vacancies are available right now. Please try again later.</p>
+      {% endif %}
+        </div>
+      </div>
+    </section>
+          </div>
+        </div>
+    </div>   
+</div>
+{% comment %} 
+<script>
+function fetchBranchOptions(selectedPosition) {
+  $.ajax({
+    url: `/get_branch_vacancy_options/?position=${selectedPosition}`,
+    processData: false,
+    contentType: false,
+    success: function(response) {
+      const branchFilter = document.getElementById('branchFilter');
+      branchFilter.innerHTML = '<option value="None">All Branches</option>'; // Add a default option
+      response.branch_options.forEach(branch => {
+          // Append a new option to the branch select for each branch option
+          branchFilter.innerHTML += `<option value="${branch}">${branch}</option>`;
+      });
+    },
+    error: function(error) {
+    // Handle errors (optional)
+    console.log('Error occurred:', error);
+    }
+  });
+}
+</script>
+
+<script>
+    const positionFilter = document.getElementById('positionFilter');
+    const branchFilter = document.getElementById('branchFilter');
+    const filteredResults = document.getElementById('filtered-results');
+    const filterButton = document.getElementById('filter-button');
+    
+    // Make AJAX API call to fetch the filtered data
+      filterButton.addEventListener('click', () => {
+      formdata = new FormData();
+      const selectedPosition = positionFilter.value;
+      const selectedBranch = branchFilter.value;
+      formdata.append('csrfmiddlewaretoken', $("input[name=csrfmiddlewaretoken").val());
+      formdata.append('position', selectedPosition);
+      formdata.append('branch', selectedBranch);
+      console.log($("input[name=csrfmiddlewaretoken").val())
+
+      $.ajax({
+            url: "{% url 'api_vacancy_filter' %}",
+            type: 'POST',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+            let html = ``;
+            for (const vac of response) {
+            url = "/vacancy_card_details/"+vac.id
+            html += `
+                <div class="card-block card-3 card-height269" style="height: 297px; width:325.33px;margin-bottom:30px;" data-wow-delay="0.1s" id="received">
+                <div class="card-block-inner" style="height:100%;">
+                    <a class="cat-item rounded " href=${url}> 
+                      <div class="card-row card-top-job">
+                      <h2 class="title title_block text_inherit" style="color:#494949;font-weight: 600; margin-bottom: -0.5rem;font-size:21px;
+                      margin-top: -0.5rem;">${vac.job_role}<span>..</span></h2>
+                      </div>
+                      <div class="card-row">
+                        <ul class="list-reset clearfix listing-inline"> 
+                          <li> Branch Name  <span style="font-weight: 600;"> ${ vac.branch_name }  </span><li>
+                          <li class="last-child position-rel">Posted On <span class="link2"> ${ vac.posted_on } </span></li>
+                        </ul>
+                      </div>
+                      <div class="card-row">
+                      <p class="mb-0" style="color:#000000ba;">No. of Vacancies  <span style="font-weight: 800;"> ${ vac.no_of_vacancies } </span> </p>
+                      </div>
+                      <div class="card-row">
+                      <p class="mb-0" style="color:#000000ba;">Qualification 
+                      {% if vac.qualification_type %}
+                      <span style="color: #6da4d8;">${  vac.qualification_type }</span> <br>
+                      {% else %}
+                      <span style="color: #6da4d8;">None</span><br>
+                      {% endif %}
+                      </p>
+                      </div
+                      {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;">Salary<span style="font-weight: 800;"> ${ vac.salary } </span> </p> 
+                      <div class="card-row">
+                      <span class="text-cell">Required Experience <span class="text-cell font-bold ng-star-inserted" style="font-weight: 700;"> ${ vac.required_experience }</span> </span>
+                      </div>
+                      <div class="required-experience-row">
+                        <span class="required-cell">Required Skills</span> 
+                        <div class="skill-row">
+                          <div class="scroll-main scroll-h92 scrollCustome">
+                            {% if vac.required_skills %}
+                            {% for skill in vac.required_skills %}
+                            <span class="tag-job">${skill}</span>
+                           {% endfor %}
+                           {% else %}
+                           <span class="tag-job">None</span>
+                           {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                </div>
+              </div>
+            `;
+            }
+
+            // Update the content on the page
+            filteredResults.innerHTML = html;
+            },
+            error: function(error) {
+            // Handle errors (optional)
+            console.log('Error occurred:', error);
+            }
+        });
+    });
+
+
+//clear filter and show all vacancy
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("wow fadeInUp");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+</script> {% endcomment %}
+{% comment %} <script>
+document.addEventListener('DOMContentLoaded', function() {
+ var buttons = document.querySelectorAll('.btn');
+
+ buttons.forEach(function(button) {
+    var status = button.getAttribute('data-status');
+
+    if (status === '6') {
+      button.classList.remove('btn-primary');
+      button.classList.add('btn-warning');
+    } else if (status === '7') {
+      button.classList.remove('btn-primary');
+      button.classList.add('btn-success');
+    } else if (status === '8') {
+      button.classList.remove('btn-primary');
+      button.classList.add('btn-danger');
+    }
+ });
+});
+</script> {% endcomment %}
+{% endblock main_content%}

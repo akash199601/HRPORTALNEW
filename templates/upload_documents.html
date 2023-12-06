@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+<style>
+
+  .data{
+    margin-top:60px;
+  }
+
+  .col-md-12{
+    width:100%;
+    margin-bottom: 10px;
+  }
+
+  @media (min-width: 720px){
+    .col-md-12{
+      width:23%;
+      display:block;
+    }
+  }
+
+  .card{
+    height:100%;
+  }
+
+  @media (min-width: 720px){
+    .flex-wrap{
+      display: flex!important;
+    }
+  }
+  @media (max-width: 1279px){
+    .mobile-nav-show {
+      color: rgba(73, 70, 70, 0.6);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 0;
+      transition: 0.5s;
+      z-index: 9999;
+      margin-right: 10px;
+    }
+  }
+
+</style>
+
+        <div class="container">
+            <div class="container-xxl py-w">
+                  
+                <div class="section_half">
+                    <ul class="item_list">
+                        <!---->
+                        <li class="item_list_block step_open">
+                            <div class="info_title theme-color">
+                                {% comment %} <span class="count_Icon theme-color">
+                                    
+                                </span> {% endcomment %}
+                                Upload Documents
+                                 <!----><!---->
+                                 {% comment %} <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> </span> {% endcomment %}
+                                 <!---->
+                            </div>
+                            {% comment %} {{ form.errors }} {% endcomment %}
+                            
+                            <form action = "" class="container mt-3" method="POST" enctype="multipart/form-data" id="applicationForm">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label>aadhar</label>
+                                        <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="aadhar_doc" id="aadhar_doc" value="" placeHolder=""> 
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label>pan<span class="required-star" style="color:red;">*</span></label>
+                                        <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder=""> 
+
+                                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label>dl<span class="required-star" style="color:red;">*</span></label>
+                                        <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="dl_doc" id="dl_doc" value="" placeHolder=""> 
+
+                                        
+                                    </div>
+                                </div>
+        
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label>high school<span class="required-star" style="color:red;">*</span></label>
+                                        <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="ssc_doc" id="ssc_doc" value="" placeHolder=""> 
+                                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label>hsc</label>
+                                        <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="hsc_doc" id="hsc_doc" value="" placeHolder=""> 
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label>graduate</label>
+                                        <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="graduate_doc" id="graduate_doc" value="" placeHolder=""> 
+
+                                       
+                                    </div>
+                                </div>
+                                
+                                    
+
+                                {% comment %} {% if update %}
+                                    <input type="submit" value="UPDATE" id="update" class="btn mt-3" style="background-color: #4f868c; color: white; font-size: larger; width: 8rem; padding-bottom: 25px;">
+                                {% else %} {% endcomment %}
+                                <input type="submit" value="submit" id="create" class="btn mt-3" style="background-color: #4f868c; color: white; font-size: larger; width: 8rem; padding-bottom: 25px;">
+                                
+                                {% comment %} {% endif %} {% endcomment %}
+                                
+                            </form>
+                        </li>
+                    </ul>
+                </div>                   
+            </div>
+        </div>  
+
+
+
+{% endblock main_content%}

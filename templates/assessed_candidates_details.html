@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+<style>
+
+  .data{
+    margin-top:60px;
+  }
+
+  .col-md-12{
+    width:100%;
+    margin-bottom: 10px;
+  }
+
+  @media (min-width: 720px){
+    .col-md-12{
+      width:23%;
+      display:block;
+    }
+  }
+
+  .card{
+    height:100%;
+  }
+
+  @media (min-width: 720px){
+    .flex-wrap{
+      display: flex!important;
+    }
+  }
+  @media (max-width: 1279px){
+    .mobile-nav-show {
+      color: rgba(73, 70, 70, 0.6);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 0;
+      transition: 0.5s;
+      z-index: 9999;
+      margin-right: 10px;
+    }
+  }
+
+</style>
+
+<!--Pagination-->
+{% comment %} <div style="margin-top:20px;">
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if ticket.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ ticket.previous_page_number }}">Previous</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Previous</a>
+      </li>
+    {% endif %}
+    {% for i in ticket.paginator.page_range %}
+      {% if ticket.number == i %}
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">
+            {{ i }}
+            <span class="sr-only">(current)</span>
+          </span>
+        </li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if ticket.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ ticket.next_page_number }}">Next</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Next</a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+</div> {% endcomment %}
+<!--end of Pagination-->
+<div class="data">
+ {% comment %} <div class ="table-data">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Published On</th>
+            <th scope="col">Total Vacancies</th>
+            <th scrope="col">Required Experience</th>
+            <th scope="col">Candidate Name</th>
+            <th scope="col">Candidate Email</th>
+            <th scope="col">Candidate Mobile No.</th>
+            <th scope="col">Cover Letter</th>
+            <th scope="col">Candidate Resume</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in ticket %}
+          <tr>
+            <td>{{x.id}}</td>
+            <td>{{x.joblisting.title}}</td>
+            <td>{{x.joblisting.company_name}}</td>
+            <td>{{x.joblisting.published_on}}</td>
+            <td>{{x.joblisting.vacancy}}</td>
+            <td>{{x.joblisting.minimum_exp.minimum}} - {{x.joblisting.maximum_exp.maximum}}</td>
+            <td>{{x.name}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.mobile_no}}</td>
+            <td>{{x.coverletter}}</td>
+            <td>
+              {% if x.file %}
+              <button type="button"><a href="{{x.file.url}}">Resume</a></button>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+  </div>  {% endcomment %}
+
+ 
+      <div class="container-xxl py-3" >
+        <div class="container">
+          <div class="row g-4">
+            <h1 style="color: #000000ba;font-weight: 600;">Assessed Candidates</h1>
+            <hr>
+            {% comment %} <div class="container">
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            </div> {% endcomment %}
+            {% if applicants %}
+            {% for x in applicants %}
+            
+            <div class="col-md-12 col-xl-4">
+              <div class="card" style="border-radius: 15px;">
+                <div class="card-body text-center">
+                  <div class="mt-3 mb-4">
+                    {% comment %} <img src="static\img\profile_logo.jpg"
+                      class="rounded-circle img-fluid" style="width: 100px;" /> {% endcomment %}
+                  </div>
+                  <h4 class="mb-2">{{ x.applicant.name }}</h4>
+                  <p class="text-muted">{{x.applicant.email}}</p>
+                  <p class="text-muted">{{x.applicant.mobile_no}}</p>
+                  {% comment %} <p class="text-muted">{{interview_score}}</p> {% endcomment %}
+                  <a href="{% url 'assessed_candidate_full_details' application_id=x.applicant.application_id %}" style="text-decoration:none;"><button type="button" class="btn btn-primary btn-rounded btn-lg" style="padding-top:2px;font-size: 14px;">
+                   More Details
+                  </button></a>
+                  <div class="d-flex justify-content-between text-center mt-3 mb-2">
+                    
+                  </div> 
+                </div>
+              </div>
+            </div>
+
+
+            {% comment %} <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s" id="received">
+              <div class="card-item card-button" >
+                  <a class="cat-item rounded p-4" href="{% url 'assessed_candidate_full_details' refId=x.applicant.id %}"> 
+
+                      <h6 class="mb-3">Name :- {{x.applicant.name}} </h6>
+                      <hr>
+                      <p class="mb-0">Email :- {{x.applicant.email}}</p>
+                      <hr>
+                      <p class="mb-0">Mobile No. :- {{x.applicant.mobile_no}}</p>
+                      <hr>
+                      <p class="mb-0">Interview Score :- {{x.interview_score}}</p>
+                  </a>
+                
+              </div>
+            </div> {% endcomment %}
+           
+            {% endfor %}
+            {% else %}
+              <h3> No candidates have been assessed for this vacancy. </h3>
+            {% endif %}
+          </div>
+        </div>
+      </div>   
+</div>
+
+
+{% endblock main_content%}

@@ -1,0 +1,260 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+
+  <style>
+    .containerh1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-container {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .mt-3{
+      height:25px;
+    }
+
+    @media(max-width:640px){
+      .inter{
+        height:48px;
+      
+      }}
+   
+
+    @media(max-width:640px){
+      .col-md-4{
+        flex: 0 0 auto;
+        width: 49.33%;
+      }
+
+      .col-md-6 {
+        flex: 0 0 auto;
+        width: 48%;
+      }
+      #demo{
+        width:40%;
+      }
+
+      .item_list_block {
+        min-height:580px;
+      }
+      
+      .containerh1{
+        display:block;
+      }
+
+      .btn-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    }
+
+
+
+    @media (max-width: 1279px){
+      .mobile-nav-show {
+        color: rgba(73, 70, 70, 0.6);
+        font-size: 28px;
+        cursor: pointer;
+        line-height: 0;
+        transition: 0.5s;
+        z-index: 9999;
+        margin-right: 10px;
+      }
+    }
+    
+  </style>
+
+  {% include 'candidate_progress_bar.html' %}
+
+<div class="data" style="margin-top:70px;">
+    <div class="container-xxl py-3" >
+        <div class="container">
+          <div class="row g-4">
+            <div class="containerh1">
+              <h1 style="color: #000000ba;font-weight: 600;">Vacancy Details </h1>
+            </div>
+            <hr>
+
+            <div class="container-xxl py-w">
+                  
+              <div class="section_half">
+                  <ul class="item_list">
+                      <!---->
+                      <li class="item_list_block step_open">
+                          <div class="info_title theme-color">
+                           Basic Details
+                          </div>
+                        
+                              {% comment %} <div class="row mt-3" style="font-size:large; padding-left:10px; ">
+                                  <div class="form-group col-md-4">
+                                      <label>No. of Vacancies</label>
+                                  </div>
+            
+                                  <div class="form-group col-md-6" style="font-weight:600;">
+                                    {{ vacancy.capacity }}
+                                  </div>
+                              </div> 
+                              <center><hr style="width:95%;"></center>{% endcomment %}
+                              <div class="row mt-3" style="font-size:large;padding-left:10px; ">
+                                  <div class="form-group col-md-4">
+                                      <label>Branch Name</label>
+                                  </div>
+                                 
+                                  <div class="form-group col-md-6" style="font-weight:600;">
+                                    {{ vacancy.branch }}
+                                  </div>
+                              </div>
+                              <center><hr style="width:95%;"></center>
+                              <div class="row mt-3 inter" style="font-size:large;padding-left:10px;">
+                                  <div class="form-group col-md-4">
+                                      <label>Minimum Experience</label>
+                                  </div>
+                               
+                                  <div class="form-group col-md-6" style="font-weight:600;">
+                                    {{ vacancy.required_experience }}
+                                  </div>
+                              </div>
+                              <center><hr style="width:95%;"></center>
+                              <div class="row mt-3" style="font-size:large;padding-left:10px;">
+                                <div class="form-group col-md-4">
+                                    <label>Required Skills</label>
+                                </div>
+                             
+                                <div class="form-group col-md-6" style="font-weight:600;">
+                                  {{ vacancy.required_skills }}
+                                </div>
+                              </div>
+                              {% comment %} <center><hr style="width:95%;"></center>
+                              <div class="row mt-3" style="font-size:large;padding-left:10px;">
+                                  <div class="form-group col-md-4">
+                                      <label>Salary (per month)</label>
+                                  </div>
+                                  &#x20b9;
+                                  <div id="demo"  class="form-group col-md-6 " style="font-weight:600;">
+                                   
+                                    {{ vacancy.salary }}
+                                  </div>
+                              </div> {% endcomment %}
+                              <center><hr style="width:95%;"></center>
+                              <div class="row mt-3" style="font-size:large;padding-left:10px;">
+                                  <div class="form-group col-md-4">
+                                      <label>Qualifications</label>
+                                  </div>
+                           
+                                  <div class="form-group col-md-6" style="font-weight:600;">
+                                    {{ vacancy.qualification }}
+                                  </div>
+                              </div> 
+                              <center><hr style="width:95%;"></center>
+                              <div class="row mt-3" style="font-size:large;padding-left:10px;">
+                                  <div class="form-group col-md-4">
+                                      <label>Interview Place</label>
+                                  </div>
+                             
+                                  <div class="form-group col-md-6" style="font-weight:600;">
+                                    {{ vacancy.interview_place }}
+                                  </div>
+                              </div>
+                              {% if vacancy.walk_in_id == 1 %}
+                              <center><hr style="width:95%;"></center>
+                              <div class="row mt-3" style="font-size:large;padding-left:10px;">
+                                  <div class="form-group col-md-4">
+                                      <label>Address</label>
+                                  </div>
+                             
+                                  <div class="form-group col-md-6" style="font-weight:600;">
+                                    {{ vacancy.address }}
+                                  </div>
+                              </div>
+                              {% endif %}
+                              {% comment %} <center><hr style="width:95%;"></center>
+                              <div class="row mt-3" style="font-size:large;padding-left:10px;">
+                                  <div class="form-group col-md-4">
+                                      <label>Interview Date</label>
+                                  </div>
+                              
+                                  <div class="form-group col-md-6" style="font-weight:600;">
+                                    {{ vacancy.interview_date  }}
+                                  </div>
+                              </div> {% endcomment %}
+                               {% comment %} <center><hr style="width:95%;"></center>
+                               <div class="row mt-3" style="font-size:large;padding-left:10px;">
+                                  <div class="form-group col-md-4">
+                                      <label>Interview Time</label>
+                                  </div>
+                               
+                                  <div class="form-group col-md-6" style="font-weight:600;">
+                                    {{ vacancy.interview_time }} 
+                                  </div>
+                              </div>  {% endcomment %}
+                              {% comment %} <center><hr style="width:95%;"></center>
+                              <div class="row mt-3 inter" style="font-size:large;padding-left:10px;">
+                                  <div class="form-group col-md-4">
+                                      <label>Interview Panel Member</label>
+                                  </div>
+                               
+                                <div class="form-group col-md-6" style="font-weight:600;">
+                                  {{ vacancy.interview_panel_1 }}, 
+                                  {{ vacancy.interview_panel_2 }}, 
+                                  {{ vacancy.interview_panel_3 }}, 
+                                  {{ vacancy.interview_panel_4 }}
+                                </div>
+                              
+                              </div>  {% endcomment %}
+                              <center><hr style="width:95%;"></center>
+                              <div class="row mt-3" style="font-size:large;padding-left:10px;">
+                                  <div class="form-group col-md-4">
+                                      <label>Job Responsibility</label>
+                                  </div>
+                                 
+                                  <div class="form-group col-md-6" style="font-weight:600;">
+                                    {{ vacancy.job_responsibility }}
+                                  </div>
+                              </div>
+                              <center><hr style="width:95%;"></center>
+                          
+                              <div class="row mt-3" style="font-size:large;padding-left:10px; ">
+                                  <div class="form-group col-md-4" >
+                                      <label>Job Description</label>
+                                  </div>
+                               
+                                  <div class="form-group col-md-6" style="font-weight:600;">
+                                    {{ vacancy.job_description }}
+                                  </div>
+                              </div>
+                              
+                              
+                          </form>
+                      </li>
+                  </ul>
+              </div>                   
+          </div>
+      </div>  
+          </div>
+        </div>
+    </div>   
+</div>
+<script>
+  document.getElementById("demo").innerHTML =
+  parseInt("{{ vacancy.salary }}")
+</script>
+
+<script>
+  var link = document.getElementById("link");
+  link.onclick = function() {
+     var check = confirm("login required..");
+     if (check == true) {
+        return true;
+     } else {
+        return false;
+     }
+  }
+</script>
+{% endblock main_content%}

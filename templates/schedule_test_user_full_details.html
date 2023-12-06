@@ -1,0 +1,1046 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+    .row input,.row select{
+    width: 95%;
+    margin-left: 1%;
+    
+    
+}
+input,select{
+    border: 1px solid rgb(187, 187, 246);
+    border-radius: 5px;
+    padding: 4px;
+    background-color: #e3e3ec;
+    
+}
+input:hover,select:hover{
+    border: 2px solid rgb(137, 137, 190);
+}
+.row span{
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    margin-top: 15px;
+}
+.address_div,.education_div,.training_div,.current_emp_div,.family_div{
+    margin-top: 4%;
+}
+.address tr td input,.education tr td input,.training tr td input,.current_emp tr td input,.family tr td input{
+    /* padding: 10px; */
+    /* border: none; */
+    width: 88%;
+    margin-top: 14px;
+}
+.address tr,.education tr,.training tr,.current_emp tr,.family tr{
+    margin-left: 40px;
+    margin-top: 15px;
+}
+textarea{
+    border: 1px solid rgb(187, 187, 246);
+    border-radius: 15px;
+    margin-left: 3%;
+}
+
+{% comment %} .basic-details-card{
+    margin-top: 80px;
+} {% endcomment %}
+
+
+.dow_row{
+    width:30%; 
+}
+
+@media(max-width:720px){
+    .dow_row{
+        width:100%;  
+    }
+}
+
+.education_doc{
+    display:flex;
+    justify-content:space-between;  
+}
+
+@media(max-width:720px){
+    .education_doc{
+        width:100%;  
+        display:block;
+    }
+}
+
+.resume-file {
+    height: 89%;
+    width: 100%;
+}
+
+  @media (min-width: 720px){
+    .basic-details-card{
+      width:48%;
+      float:left; 
+    }
+  }
+
+  .resume-card{
+    border-radius: 5px;
+    border: 1px solid #b3aeaed1;
+    height: 400px;
+    margin-bottom:10px;
+  }
+
+
+  @media(min-width:720px){
+    .resume-card {
+      width:48%;
+      float:right;
+      border-radius: 5px;
+      border: 1px solid #b3aeaed1;
+      margin-top: 20px;
+      height: 515px;
+    }
+  }
+
+.aadhar-documents{
+    border-radius: 5px;
+    border: 1px solid #b3aeaed1;
+    height: 400px;
+    margin-bottom:10px;
+ 
+  }
+
+  @media(min-width:720px){
+    .aadhar-documents {
+      width:48%;   
+      border-radius: 5px;
+      border: 1px solid #b3aeaed1;
+      margin-top: 20px;
+      height: 515px;
+      float: left;
+    }
+  }
+
+  .ssc-documents{
+    border-radius: 5px;
+    border: 1px solid #b3aeaed1;
+    height: 400px;
+    margin-bottom:10px;
+  }
+
+  @media(min-width:720px){
+    .ssc-documents {
+      width:48%;
+      border-radius: 5px;
+      border: 1px solid #b3aeaed1;
+      margin-top: 20px;
+      height: 515px;
+      float:right;
+    }
+  }
+
+  .py-5 {
+    margin-top: 0px;
+  }
+
+
+  @media(max-width:640px){
+    .btn{
+        width:100%;
+    }
+  }
+
+  @media (max-width: 1279px){
+    .mobile-nav-show {
+      color: rgba(73, 70, 70, 0.6);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 0;
+      transition: 0.5s;
+      z-index: 9999;
+      margin-right: 10px;
+    }
+  }
+
+
+  .modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 10px;
+    border: 1px solid #888;
+    width: 80%;
+    }
+
+    .content{
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 10px;
+        border: 1px solid #888;
+        width: 50%;
+    }
+
+    .popup{
+        width:20%;
+    }
+
+    .action-buttons{
+        width:10%;
+        margin-left:10px;
+    }
+
+    @media(max-width: 640px){
+        .modal-content{
+            width: 90%;
+        }
+        .reject_reason{
+            width: 60%;
+        }
+        .popup{
+            width:45%;
+        }
+        .action-buttons{
+            width:45%;
+        }
+
+    }
+
+    .close {
+    color: #aaa;
+    float: right;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    } 
+    
+</style>
+        <!------------PROGRESS BAR------------>
+
+        {% include 'progress_bar.html' %}
+
+
+            <div class="form-group col-4 mt-4" style="margin-left: 25px;display:flex;width:90%;">
+              <input type="button" class="btn btn-success popup" data-toggle="modal" data-target="#popupModal" value="Schedule Exam">
+                <div class="action-buttons">
+                    <div style="display: flex;">
+                        <div style="width:100%;">
+                            <button type="button" id="rejectButton" class="btn btn-danger" style="width: 100%;">
+                              Reject
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+          
+       
+          <!-- Popup Modal -->
+        <div class="modal fade" id="popupModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form id="popupForm" action="{% url 'schedule_test' refId=application.application_id %}" method = "POST">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="popupModalLabel">Schedule Exam</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            
+                                <div class="form-group">
+                                <label for="exam_mode">Exam Mode</label>
+                                <select class="form-control" name="exam_mode" id="exam_mode">
+                                    <option value="online">Online</option>
+                                    <option value="offline">Offline</option>
+                                </select>
+                                </div>
+                                <div class="form-group" id="exam_sheets_group">
+                                <label for="exam_sheets">Exam Sheet</label>
+                                <select class="form-control" name="exam_sheets" id="exam_sheets"></select>
+                                </div>
+                                <div class="form-group" id="exam_date_group">
+                                <label for="exam_date">Exam Date</label>
+                                <input type="date" class="form-control" name="exam_date" id="exam_date">
+                                </div>
+                            
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" onclick="showalert()" class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+
+    
+          
+         <!-- Reject Modal -->
+        <div id="rejectModal" class="modal"  tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content content" style="margin-top: 200px;">
+                <span class="close">&times;</span>
+                <form id="rejectForm" method="POST" action="{% url 'reject' refId=application.application_id %}">
+                    {% csrf_token %}
+                    <div>
+                        <center>
+                            <label for="rejectReason" class="reject_label" style="display:list-item;">Reason For Rejection:</label>
+                            <textarea id="rejectReason" name="reject_reason" style="width: 50%;padding: 5px;" required></textarea>
+                            <br />
+                            <button type="submit" onclick="showalert3()">Reject</button>
+                        </center>
+                    </div>
+                </form>
+            </div>
+        </div> 
+          
+
+
+        <!-- Job Detail Start -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+
+                <div class="basic-details-card">
+                    <ul class="item_list">
+                        <!---->
+                        <li class="item_list_block step_open">
+                            <div class="info_title theme-color">
+                                <span class="count_Icon theme-color">
+                                    1
+                                </span>
+                                
+                                <!----><!---->
+                                <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Basic Details </span>
+                                <!---->
+                            </div>
+                                
+                            <div class="panel-body ng-star-inserted">
+                                    <!----><!---->
+                                {% comment %} <div class="row">
+                                    <span class="panel-col panel-col1">Position Applied For</span>
+                                    <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.position_applied_for %}{{ user_profile.position_applied_for }}{% endif %}" name="position_applied_for" readonly> 
+                                </div> {% endcomment %}
+                                <!-- <div class="panel-row clearfix">
+                                    <span class="panel-col panel-col1">Date Applied</span>
+                                    <input type="date" class="panel-col text-bold-cell" name="applied_date" value="{% if user_profile.applied_date %}{{ user_profile.applied_date|date:'Y-m-d' }}{% endif %}"> 
+                                </div> -->
+                                <!-- <div class="clearfix"> -->
+                                <div class="row">
+                                    <span class="panel-col panel-col1">Name</span>
+                                    <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" readonly> 
+                                </div>
+                                    <!-- </div> -->
+            
+                                <!-- <div class="panel-row clearfix"> -->
+                                <div class="row">
+                                    <span class="panel-col panel-col1">Primary Email</span>
+                                    <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
+                                </div>
+                                    
+                                <!-- </div> -->
+                                <!-- <div class="panel-row clearfix"> -->
+                                <div class="row">
+                                    <span class="panel-col panel-col1">Mobile Number</span>
+                                    <input readonly type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
+                                </div>
+                                    
+                                <!-- </div> -->
+                                <!---->
+                                <div class="row">
+                                    <span class="panel-col panel-col1">Date Of Birth</span>
+                                    <input readonly type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
+                                </div>
+                                <!-- <div class="row">
+                                    <span class="panel-col panel-col1">Address</span>
+                                    <input type="text" class="panel-col text-bold-cell" name="address" value="{% if user_profile.address %}{{ user_profile.address }}{% endif %}" required> 
+                                </div> -->
+
+                                <div class="row">
+                                    <span class="panel-col panel-col1">Gender</span>
+                                    <select readonly id="gender" name="gender" class="panel-col text-bold-cell" required>
+                                        <option class="panel-col text-bold-cell" value="" disabled selected hidden>Select Gender</option>
+                                        {% for choice in gender_choices %}
+                                        <option class="panel-col text-bold-cell" value="{{ choice.0 }}" {% if choice.0 == user_profile.gender %}selected{% endif %}>{{ choice.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <!-- <div class="column-footer row2 text-right">
+                                    <button  href="javascript:void(0)" id="id" class="btn btn-primary">
+                                        Update
+                                    </button>
+                                </div>  -->
+                            </div>
+                            
+                        <!-- </form> -->
+                        
+                        </li>
+                                <!---->
+                                <!---->
+                        
+                    </ul>
+                    
+                </div>
+                <div class="resume-card" style="height:550px;">
+                    <div style="height:100%;width:100%;">
+
+                        <h1 class="Resume-font" style="background: #a9a9a985;">Resume</h1>
+                        <div class="resume-file">
+                            {% if mime_type == 'application/pdf' %}
+                                <embed src="data:application/pdf;base64,{{ binary_data }}" type="application/pdf" width="100%" height="100%">      
+                            {% elif mime_type|lower == 'image/jpg' or mime_type|lower == 'image/jpeg' or mime_type|lower == 'image/png' %}
+                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                <img src="data:{{ mime_type }};base64,{{ binary_data }}" width="100%" alt="Resume Image">
+                            </div>
+                            {% else %}
+                            <div style="width: 100%; height: 500px; overflow: auto;">
+                                <h3>This file type is not supported for preview or no resume uploaded.</h3>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="aadhar-documents" style="height:450px;" >
+                    <div style="height:100%;width:100%;">
+
+                        <h1 class="Resume-font" style="background: #a9a9a985;">Aadhar Card Copy</h1>
+                        <div class="resume-file">
+                            
+                            <div style="width: 100%; height: 100%;">
+                                {% if document_obj.aadhar_doc %}
+                                <embed src="{{ document_obj.aadhar_doc.url }}" type="application/pdf" width="100%" height="100%"> 
+                                {% else %}
+                                <h3>This file type is not supported for preview or no Aadhar card uploaded.</h3>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            
+                <div class="ssc-documents" style="height:450px;">
+                    <div style="height:100%;width:100%;">
+
+                        <h1 class="Resume-font" style="background: #a9a9a985;">High School Marksheet Copy</h1>
+                        <div class="resume-file">
+                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                {% if document_obj.ssc_doc %}
+                                <embed src="{{ document_obj.ssc_doc.url }}" type="application/pdf" width="100%" height="100%"> 
+                                {% else %}
+                                <h3>This file type is not supported for preview or no Aadhar card uploaded.</h3>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div> 
+                <div>
+                    <ul class="item_list">
+                        <!---->
+                        <li class="item_list_block step_open">
+                            <div class="info_title theme-color">
+                                <span class="count_Icon theme-color">
+                                    2
+                                </span>
+                                
+                                <!----><!---->
+                                <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Personal Details </span>
+                                <!---->
+                            </div>
+                                
+                        <!-- {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
+                        {% comment %} {% for profile in user_profile%} {% endcomment %}
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            {% csrf_token %} -->
+                             <div class="panel-body ng-star-inserted">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div class="row" style="width: 50%">
+                                        <span class="panel-col panel-col1">Identity Adadhar</span>
+                                        <input readonly type="text" class="panel-col text-bold-cell" name="identity_Aadhar" value="{% if user_profile.identity_Aadhar %}{{ user_profile.identity_Aadhar }}{% endif %}"> 
+                                    </div>
+                                    <div class="row" style="width: 50%">
+                                        <button type="button" download><a href="{{aadhar_doc.url}}">Document {{aadhar_doc}}</a></button>
+                                    </div>
+                                </div>
+                                    <!----><!---->
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div class="row" style="width: 50%">
+                                        <span class="panel-col panel-col1">Identity PAN</span>
+                                        <input readonly type="text" class="panel-col text-bold-cell" value="{% if user_profile.identity_PAN %}{{ user_profile.identity_PAN }}{% endif %}" name="identity_PAN"> 
+                                    </div>
+                                    <div class="row" style="width: 50%">
+                                        <button type="button" ><a href="{{pan_doc.url}}">Document {{pan_doc}}</a></button>
+                                    </div>
+                                </div>
+                            
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div class="row" style="width: 50%">
+                                        <span class="panel-col panel-col1">Identity Driving Licence</span>
+                                        <input readonly type="text" class="panel-col text-bold-cell" value="{% if user_profile.identity_DL_No %}{{ user_profile.identity_DL_No }}{% endif %}" name="identity_DL_No"> 
+                                    </div>
+                                    <div class="row" style="width: 50%">
+                                        <button type="button" download><a href="{{dl_doc.url}}">Document {{dl_doc}}</a></button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Extra Form -->
+                                <hr style="margin-top: 50px;">
+                                <div class="address_div">
+                                    <h4>ADDRESS</h4>
+                                    <table class="address" style="width: 100%;">
+                                        <tr>
+                                            <th></th>
+                                            <th>State</th>
+                                            <th>City</th>
+                                            <th>PIN</th>
+                                        </tr>
+                                        <tr >
+                                            <th>Present</th>
+                                            <td><input readonly type="text" value="{% if user_profile.present_state %}{{ user_profile.present_state }}{% endif %}" name="present_state"> </td>
+                                            <td><input readonly type="text" value="{% if user_profile.present_city %}{{ user_profile.present_city }}{% endif %}" name="present_city"> </td>
+                                            <td><input readonly type="number" value="{% if user_profile.present_pin %}{{ user_profile.present_pin }}{% endif %}" name="present_pin"> </td>
+                                            
+
+                                        </tr>
+                                        <tr>
+                                            <th>Permanent</th>
+                                            <td><input readonly type="text" value="{% if user_profile.permanent_state %}{{ user_profile.permanent_state }}{% endif %}" name="permanent_state"> </td>
+                                            <td><input readonly type="text" value="{% if user_profile.permanent_city %}{{ user_profile.permanent_city }}{% endif %}" name="permanent_city"> </td>
+                                            <td><input readonly type="number" value="{% if user_profile.permanent_pin %}{{ user_profile.permanent_pin }}{% endif %}" name="permanent_pin"> </td>
+                                            
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <hr style="margin-top: 50px;">
+
+                                <div class="address_div">
+                                    <h4 style="font-size:15px;font-weight:350"><b>Education Documents</b></h4>
+                                    <div class="education_doc">
+                                        <div class="row dow_row" >
+                                            <span class="panel-col panel-col1" style="font-size:15px;font-weight:350"><b>High School Marksheet</b></span>
+                                            <button type="button" download><a href="{{ssc_doc.url}}">Document {{ssc_doc}}</a></button>
+                                         
+                                        </div>
+                                        <div class="row dow_row">
+                                            <span class="panel-col panel-col1" style="font-size:15px;font-weight:350"><b>Intermediate School Marksheet</b></span>
+                                            <button type="button" download><a href="{{hsc_doc.url}}">Document {{hsc_doc}}</a></button>
+                                         
+                                        </div>
+                                        <div class="row dow_row">
+                                            <span class="panel-col panel-col1" style="font-size:15px;font-weight:350"><b>Graduation Marksheet</b></span>
+                                            <button type="button" download><a href="{{graduate_doc.url}}">Document {{graduate_doc}}</a></button>
+                                         
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <hr style="margin-top: 50px;">
+
+                                <div class="education_div">
+                                    <h4>EDUCATION</h4>
+                                    <table class="education" style="width: 100%;">
+                                        <tr>
+                                            <th>  </th>
+                                            <th>Degree/
+                                                Diploma</th>
+                                            {% comment %} <th>Subjects</th> {% endcomment %}
+                                            <th>Name and Location of the
+                                                Institution</th>
+                                            <th>% obtained</th>
+                                            <th>Year of Passing</th>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th>High School</th>
+                                            <td><input readonly type="text" value="{% if user_profile.high_school_Degree_Diploma %}{{ user_profile.high_school_Degree_Diploma }}{% endif %}" name="high_school_Degree_Diploma"></td>
+                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.high_school_subjects %}{{ user_profile.high_school_subjects }}{% endif %}" name="high_school_subjects"></td> {% endcomment %}
+                                            <td><input readonly type="text" value="{% if user_profile.high_school_name_location %}{{ user_profile.high_school_name_location }}{% endif %}" name="high_school_name_location"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.high_school_marks_obtained %}{{ user_profile.high_school_marks_obtained }}{% endif %}" name="high_school_marks_obtained"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.high_school_passing_year %}{{ user_profile.high_school_passing_year }}{% endif %}" name="high_school_passing_year"></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th>Intermediate</th>
+                                            <td><input readonly type="text" value="{% if user_profile.intermediate_Degree_Diploma %}{{ user_profile.intermediate_Degree_Diploma }}{% endif %}" name="intermediate_Degree_Diploma"></td>
+                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.intermediate_subjects %}{{ user_profile.intermediate_subjects }}{% endif %}" name="intermediate_subjects"></td> {% endcomment %}
+                                            <td><input readonly type="text" value="{% if user_profile.intermediate_name_location %}{{ user_profile.intermediate_name_location }}{% endif %}" name="intermediate_name_location"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.intermediate_marks_obtained %}{{ user_profile.intermediate_marks_obtained }}{% endif %}" name="intermediate_marks_obtained"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.intermediate_passing_year %}{{ user_profile.intermediate_passing_year }}{% endif %}" name="intermediate_passing_year"></td>
+
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th>Graduation</th>
+                                            <td><input readonly type="text" value="{% if user_profile.graduation_Degree_Diploma %}{{ user_profile.graduation_Degree_Diploma }}{% endif %}" name="graduation_Degree_Diploma"></td>
+                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.graduation_subjects %}{{ user_profile.graduation_subjects }}{% endif %}" name="graduation_subjects"></td> {% endcomment %}
+                                            <td><input readonly type="text" value="{% if user_profile.graduation_name_location %}{{ user_profile.graduation_name_location }}{% endif %}" name="graduation_name_location"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.graduation_marks_obtained %}{{ user_profile.graduation_marks_obtained }}{% endif %}" name="graduation_marks_obtained"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.graduation_passing_year %}{{ user_profile.graduation_passing_year }}{% endif %}" name="graduation_passing_year"></td>
+
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th>PG</th>
+                                            <td><input readonly type="text" value="{% if user_profile.pg_Degree_Diploma %}{{ user_profile.pg_Degree_Diploma }}{% endif %}" name="pg_Degree_Diploma"></td>
+                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.pg_subjects %}{{ user_profile.pg_subjects }}{% endif %}" name="pg_subjects"></td> {% endcomment %}
+                                            <td><input readonly type="text" value="{% if user_profile.pg_name_location %}{{ user_profile.pg_name_location }}{% endif %}" name="pg_name_location"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.pg_marks_obtained %}{{ user_profile.pg_marks_obtained }}{% endif %}" name="pg_marks_obtained"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.pg_passing_year %}{{ user_profile.pg_passing_year }}{% endif %}" name="pg_passing_year"></td>
+                                        
+                                        </tr>
+                                        <tr>
+                                            <th>Professional
+                                                Qualification</th>
+                                                <td><input readonly type="text" value="{% if user_profile.professional_qualification_Degree_Diploma %}{{ user_profile.professional_qualification_Degree_Diploma }}{% endif %}" name="professional_qualification_Degree_Diploma"></td>
+                                                {% comment %} <td><input readonly type="text" value="{% if user_profile.professional_qualification_subjects %}{{ user_profile.professional_qualification_subjects }}{% endif %}" name="professional_qualification_subjects"></td> {% endcomment %}
+                                                <td><input readonly type="text" value="{% if user_profile.professional_qualification_name_location %}{{ user_profile.professional_qualification_name_location }}{% endif %}" name="professional_qualification_name_location"></td>
+                                                <td><input readonly type="text" value="{% if user_profile.professional_qualification_marks_obtained %}{{ user_profile.professional_qualification_marks_obtained }}{% endif %}" name="professional_qualification_marks_obtained"></td>
+                                                <td><input readonly type="text" value="{% if user_profile.professional_qualification_passing_year %}{{ user_profile.professional_qualification_passing_year }}{% endif %}" name="professional_qualification_passing_year"></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th>others</th>
+                                            <td><input readonly type="text" value="{% if user_profile.others_qualification_Degree_Diploma %}{{ user_profile.others_qualification_Degree_Diploma }}{% endif %}" name="others_qualification_Degree_Diploma"></td>
+                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.others_qualification_subjects %}{{ user_profile.others_qualification_subjects }}{% endif %}" name="others_qualification_subjects"></td> {% endcomment %}
+                                            <td><input readonly type="text" value="{% if user_profile.others_qualification_name_location %}{{ user_profile.others_qualification_name_location }}{% endif %}" name="others_qualification_name_location"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.others_qualification_marks_obtained %}{{ user_profile.others_qualification_marks_obtained }}{% endif %}" name="others_qualification_marks_obtained"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.others_qualification_passing_year %}{{ user_profile.others_qualification_passing_year }}{% endif %}" name="others_qualification_passing_year"></td>
+
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <hr style="margin-top: 50px;">
+
+                                <div class="training_div">
+                                    <h4>TRAINING PROGRAMS/WORKSHOP ATTENDED</h4>
+                                    <table class="training" style="width: 100%;">
+                                        <tr>
+                                            <th>Program Title</th>
+                                            <th>Institution &
+                                                Location</th>
+                                            <th>Skill Areas/Course Content</th>
+                                            <th>Start Date</th>
+                                            <th>Course
+                                                Duration</th>
+                                        </tr>
+                                        <tr>
+                                            <td><input readonly type="text" value="{% if user_profile.training_workshop_title %}{{ user_profile.training_workshop_title }}{% endif %}" name="training_workshop_title"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.training_workshop_Institution_location %}{{ user_profile.training_workshop_Institution_location }}{% endif %}" name="training_workshop_Institution_location"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.training_workshop_skill %}{{ user_profile.training_workshop_skill }}{% endif %}" name="training_workshop_skill"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.training_workshop_start_date %}{{ user_profile.training_workshop_start_date }}{% endif %}" name="training_workshop_start_date"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.training_workshop_duration %}{{ user_profile.training_workshop_duration }}{% endif %}" name="training_workshop_duration"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <hr style="margin-top: 50px;">
+
+                                <div class="current_emp_div">
+                                    <h4>CURRENT EMPLOYMENT DETAILS</h4>
+                                    <table class="current_emp" style="width: 100%;">
+                                        <tr>
+                                            <td>Join date </td>
+                                            <td><input readonly type="date" value="{% if user_profile.current_emp_start_date %}{{ user_profile.current_emp_start_date }}{% endif %}" name="current_emp_start_date"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>: Current Employer (Name and Address, Type of Business):</td>
+                                            <td><input readonly type="text" value="{% if user_profile.current_employer %}{{ user_profile.current_employer }}{% endif %}" name="current_employer"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Current Salary:</td>
+                                            <td><input readonly type="text" value="{% if user_profile.current_emp_salary %}{{ user_profile.current_emp_salary }}{% endif %}" name="current_emp_salary"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Benefits like HRA, Fuels,
+                                                Medical etc.</td>
+                                            <td><input readonly type="text" value="{% if user_profile.current_emp_benefits %}{{ user_profile.current_emp_benefits }}{% endif %}" name="current_emp_benefits"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Position:</td>
+                                            <td><input readonly type="text" value="{% if user_profile.current_emp_position %}{{ user_profile.current_emp_position }}{% endif %}" name="current_emp_position"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Reason For Leaving:</td>
+                                            <td><input readonly type="text" value="{% if user_profile.current_emp_reason_for_leaving %}{{ user_profile.current_emp_reason_for_leaving }}{% endif %}" name="current_emp_reason_for_leaving"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Expect. Salary</td>
+                                            <td><input readonly type="text" value="{% if user_profile.expected_salary %}{{ user_profile.expected_salary }}{% endif %}" name="expected_salary"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Brief Job Description:</td>
+                                            <td><input readonly type="text" value="{% if user_profile.current_emp_job_description %}{{ user_profile.current_emp_job_description }}{% endif %}" name="current_emp_job_description"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Supervisor’s Name:</td>
+                                            <td><input readonly type="text" value="{% if user_profile.current_emp_supervisor_name %}{{ user_profile.current_emp_supervisor_name }}{% endif %}" name="current_emp_supervisor_name"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <hr style="margin-top: 50px;">
+
+                                <div class="family_div">
+                                    <h4>FAMILY DETAILS </h4>
+                                    <table class="family" style="width: 100%;">
+                                        <tr>
+                                            <th>Relationship</th>
+                                            <th>Name</th>
+                                            <th>DOB</th>
+                                            <th>Profession</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Father</td>
+                                            <td><input readonly type="text" value="{% if user_profile.father_name %}{{ user_profile.father_name }}{% endif %}" name="father_name"></td>
+                                            <td><input readonly type="date" value="{% if user_profile.father_dob %}{{ user_profile.father_dob }}{% endif %}" name="father_dob"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.father_profession %}{{ user_profile.father_profession }}{% endif %}" name="father_profession"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mother</td>
+                                            <td><input readonly type="text" value="{% if user_profile.mother_name %}{{ user_profile.mother_name }}{% endif %}" name="mother_name"></td>
+                                            <td><input readonly type="date" value="{% if user_profile.mother_dob %}{{ user_profile.mother_dob }}{% endif %}" name="mother_dob"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.mother_profession %}{{ user_profile.mother_profession }}{% endif %}" name="mother_profession"></td>
+                                        </tr><tr>
+                                            <td>Spouse</td>
+                                            <td><input readonly type="text" value="{% if user_profile.spouse_name %}{{ user_profile.spouse_name }}{% endif %}" name="spouse_name"></td>
+                                            <td><input readonly type="date" value="{% if user_profile.spouse_dob %}{{ user_profile.spouse_dob }}{% endif %}" name="spouse_dob"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.spouse_profession %}{{ user_profile.spouse_profession }}{% endif %}" name="spouse_profession"></td>
+                                        </tr><tr>
+                                            <td>Children</td>
+                                            <td><input readonly type="text" value="{% if user_profile.Children_name_1 %}{{ user_profile.Children_name_1 }}{% endif %}" name="Children_name_1"></td>
+                                            <td><input readonly type="date" value="{% if user_profile.Children_dob_1 %}{{ user_profile.Children_dob_1 }}{% endif %}" name="Children_dob_1"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.Children_1_profession %}{{ user_profile.Children_1_profession }}{% endif %}" name="Children_1_profession"></td>
+                                        </tr><tr>
+                                            <td>Children</td>
+                                            <td><input readonly type="text" value="{% if user_profile.Children_name_2 %}{{ user_profile.Children_name_2 }}{% endif %}" name="Children_name_2"></td>
+                                            <td><input readonly type="date" value="{% if user_profile.Children_dob_2 %}{{ user_profile.Children_dob_2 }}{% endif %}" name="Children_dob_2"></td>
+                                            <td><input readonly type="text" value="{% if user_profile.Children_2_profession %}{{ user_profile.Children_2_profession }}{% endif %}" name="Children_2_profession"></td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                                <div class="row" style="width: 95%;">
+                                    <span class="panel-col panel-col1">Why have you chosen to apply for a career with Sonata?</span>
+                                    <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.reason_to_apply_sonata %}{{ user_profile.reason_to_apply_sonata }}{% endif %}" name="reason_to_apply_sonata">  -->
+                                    <textarea readonly name="reason_to_apply_sonata" id="" cols="10" rows="5">{% if user_profile.reason_to_apply_sonata %}{{ user_profile.reason_to_apply_sonata }}{% endif %}</textarea>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 41px;">
+                                    <div class="panel-row clearfix" style="width: 40%">
+                                        <span class="panel-col panel-col1" style="width: 90%;"> Are you willing to relocate anywhere in India</span>
+                                        <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}" name="willing_to_relocate">  -->
+                                        <select readonly name="willing_to_relocate" id="" style="margin-left: 18%; margin-top: 15px;">
+                                            <option value="" selected>{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}</option>
+                                            
+                                        </select>
+                                    </div>
+                                    <div class="panel-row clearfix" style="width: 46%">
+                                        <span class="panel-col panel-col1" style="width: 90%;">Have you been interviewed by Sonata before?</span>
+                                        <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}" name="interviewed_by_Sonata_before">  -->
+                                        <select readonly name="interviewed_by_Sonata_before" id=""  style="margin-left: 18%; margin-top: 15px;">
+                                            <option value="" selected>{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}</option>
+                                           
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 95%;">
+                                    <span class="panel-col panel-col1">Locational Preference:</span>
+                                    <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.locational_preferences %}{{ user_profile.locational_preferences }}{% endif %}" name="locational_preferences">  -->
+                                    <textarea readonly name="locational_preferences" id="" cols="10" rows="5">{% if user_profile.locational_preferences %}{{ user_profile.locational_preferences }}{% endif %}</textarea>
+                                </div>
+                                <!-- <div class="column-footer row2 text-right" style="margin-top: 55px;">
+                                    <button  href="javascript:void(0)" id="id" class="btn btn-primary">
+                                        Update
+                                    </button>
+                                </div>  -->
+                            </div>
+                           
+                        <!-- </form> -->
+                        
+                        </li>
+                                
+                        
+                    </ul>
+                    
+                </div>
+               
+        
+            </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+
+    <script>
+        function showalert(){
+            console.log('exam has been scheduled');
+            alert('exam has been scheduled');
+        }
+    </script>
+        <!-- Job Detail End -->
+
+    
+        <script>
+            $(document).ready(function() {
+              // Function to fetch options for Exam Sheets based on selected Exam Mode
+                function fetchExamSheets() {
+                    var examMode = $('#exam_mode').val();
+                    var examSheetsGroup = $('#exam_sheets_group');
+                    var examSheetsSelect = $('#exam_sheets');
+            
+                  // Make AJAX request to fetch options for Exam Sheets
+                  $.ajax({
+                    url: '{% url "get_exam_sheet" %}', // Replace with your actual URL to fetch the options
+                    method: 'GET',
+                    success: function(response) {
+                      // Update the Exam Sheets select input with the fetched options
+                      console.log(response, response.length);
+                      
+                      var options = '';
+                      for (var i = 0; i < response.length; i++) {
+                        options += '<option value="' + response[i] + '"> Exam Sheet ' + response[i] + '</option>';
+                      }
+                      examSheetsSelect.html(options);
+                      examSheetsGroup.show();
+                    },
+                    error: function() {
+                      console.log('Failed to fetch Exam Sheets options.');
+                    }
+                  });
+                }
+
+
+              function showOrhideSheets() {
+                var examMode = $('#exam_mode').val();
+                var examSheetsGroup = $('#exam_sheets_group');
+                var examDateGroup = $('#exam_date_group');
+            
+                if (examMode === 'online') {
+                  examSheetsGroup.show();
+                  examDateGroup.show();
+                } else {
+                  examSheetsGroup.hide();
+                  examDateGroup.hide();
+
+                }
+              }
+            
+              // Event handler for Exam Mode change
+              $('#exam_mode').on('change', function() {
+                showOrhideSheets();
+              });
+            
+             
+            
+              // Initial fetch of Exam Sheets options based on the default Exam Mode
+              fetchExamSheets();
+            });
+            </script>
+            
+
+<script>
+
+
+
+
+            // Open the popup modal
+            function openPopup(event) {
+              event.preventDefault();
+              var modal = document.getElementById("popupModal");
+              modal.style.display = "block";
+            }
+          
+            // Close the popup modal
+            function closePopup() {
+              var modal = document.getElementById("popupModal");
+              modal.style.display = "none";
+            }
+          
+            // Submit the form after popup form submission
+            function submitForm(event) {
+                event.preventDefault();
+                    
+                // Get selected values from the popupForm
+                var examMode = $('#exam_mode').val();
+                var examDate = $('#exam_date').val();
+                var examSheets = $('#exam_sheets').val();
+
+                // Append values to the schedule_form
+                var scheduleForm = $('#schedule_form');
+                scheduleForm.append('<input type="hidden" name="exam_mode" value="' + examMode + '">');
+
+                if ($('#exam_date_group').is(':visible')) {
+                scheduleForm.append('<input type="hidden" name="exam_date" value="' + examDate + '">');
+                }
+
+                if ($('#exam_sheets_group').is(':visible')) {
+                scheduleForm.append('<input type="hidden" name="exam_sheets" value="' + examSheets + '">');
+                }
+
+                // Submit the schedule_form
+                scheduleForm.submit();
+                        
+            }
+          
+            // Close the popup modal when the user clicks outside the modal
+            window.onclick = function(event) {
+              var modal = document.getElementById("popupModal");
+              if (event.target == modal) {
+                closePopup();
+              }
+            }
+</script>
+          
+
+
+<script>
+    function fetchDate() {
+        var place = document.getElementById('place').value;
+        
+        console.log(place);
+        
+       
+        var formData = new FormData();
+        formData.append('place', place);
+    
+        
+        fetch("{% url 'fetch_interview_dates' %}", {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            var date = document.getElementById('date');
+            date.innerHTML = ''; // Clear previous options
+            date.innerHTML = '<option value="" disabled selected>Select Date</option>';
+            data.forEach(element => {
+                var option = document.createElement('option');
+                option.value = element;
+                option.textContent = element;
+                date.appendChild(option);
+            });
+        })
+        .catch(error => console.error(error));
+    }
+
+    function fetchPanel(){
+        //var place = document.getElementById('place').value;
+        var date = document.getElementById('date').value;
+        //console.log(place);
+        console.log(date);
+        var formData = new FormData();
+        //formData.append('place', place);
+        formData.append('date', date);
+    
+        
+        fetch("{% url 'fetch_interview_panel' %}", {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            var panel = document.getElementById('panel');
+            panel.innerHTML = ''; // Clear previous options
+            panel.innerHTML = '<option value="" disabled selected>Select Panel</option>';
+            data.forEach(element => {
+                var option = document.createElement('option');
+                option.value = element;
+                option.textContent = element;
+                panel.appendChild(option);
+            });
+        })
+        .catch(error => console.error(error));
+    }
+    
+    
+    
+</script>
+
+
+
+<script>
+    var date = new Date();
+
+    var day = ("0" + date.getDate()).slice(-2);
+    var month = ("0" + (date.getMonth() + 1)).slice(-2);
+    
+    var today = date.getFullYear() + "-" + (month) + "-" + (day);
+    
+    $('#exam_date').val(today);
+</script>
+
+<script>
+    // Get the modal elements
+
+    var rejectModal = document.getElementById("rejectModal");
+  
+    // Get the button elements
+
+    var rejectButton = document.getElementById("rejectButton");
+
+  
+    // Get the <span> elements that close the modals
+    var closeSpans = document.getElementsByClassName("close");
+    var closeModal = document.getElementsByClassName("close");
+  
+    // Open the reject modal
+    rejectButton.onclick = function() {
+      rejectModal.style.display = "block";
+    };
+    
+    closeModal.onclick = function(){
+        rejectModal.style.display = "None";
+    }
+    
+    // Close the modals when the <span> element is clicked
+    for (var i = 0; i < closeSpans.length; i++) {
+      closeSpans[i].onclick = function() {
+        rejectModal.style.display = "none";
+      };
+    };
+  
+    // Close the modals when clicking anywhere outside of them
+    window.onclick = function(event) {
+      if (event.target == rejectModal) {
+        rejectModal.style.display = "none";
+      }
+    };
+  </script>
+
+    <script>
+        function showalert3(){
+            console.log('Interview has been scheduled');
+            alert('Interview has been reject Successfully');
+        }
+    </script>
+
+
+    {% endblock main_content%}
+

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+<style>
+    .text{
+        color: black;
+        margin-top:10%;
+    }
+
+    @media(max-width:640px){
+        .text{
+            margin-top:20%;
+            margin-bottom: 30px;
+        }
+    }
+
+    .btn{
+        height: 40px;
+        /*width: 130px;*/
+    }
+
+    .second{
+        height:35px;
+        width:10%;
+    }
+
+    @media(max-width:640px){
+        .first {
+            height: 30px;
+            width:33%;
+        }
+
+        .second{
+            height:30px;
+            width:20%;
+        }
+    }
+
+    @media (max-width: 1279px){
+        .mobile-nav-show {
+          color: rgba(73, 70, 70, 0.6);
+          font-size: 28px;
+          cursor: pointer;
+          line-height: 0;
+          transition: 0.5s;
+          z-index: 9999;
+          margin-right: 10px;
+        }
+      }
+
+
+</style>
+
+<div class="container">
+    <div>
+        <div>
+            <h1 class="text">Sonata Online Test</h1>
+        </div>
+    </div>
+    
+    <!-- <h1> {{question.sheet_id}}</h1> -->
+  
+    <div >
+        <a  href="{% url 'post_question' %}"> 
+          <button class="btn btn-primary first" type="button">Add Question <i class="bi bi-plus-square-fill"></i>                      
+          </button>
+        </a>
+    </div> 
+
+    <hr>
+    <div id="question_div">
+        
+        {% for question in quest_details %} 
+        <table>
+     
+            <tr>
+                <td class="text" style="color:black; font-size:15px;"> {{question.question_id}} ). {{question.question_text}} ?</td>
+            </tr>
+            <tr>
+                <td style="color:black; font-size:15px;"><input class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_1_{{question.question_id}}">{{question.option_a}}</td>
+            </tr>
+            <tr>
+                <td style="color:black; font-size:15px;"><input class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_2_{{question.question_id}}" >{{question.option_b}}</td>
+            </tr>
+            <tr>
+                <td style="color:black; font-size:15px;"><input class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_3_{{question.question_id}}">{{question.option_c}}</td>
+            </tr>
+            <tr>
+                <td style="color:black; font-size:15px;"><input  class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_4_{{question.question_id}}">{{question.option_d}}</td>
+            </tr>
+
+            <tr>
+                <td><label  id="corans" class= "rb" style=" color : white; background-color: #000000;"><b> Correct Answer :- {{question.answer}}</b></label></td>
+            </tr>
+            
+            <a href="{% url 'edit_question' id=question.id %}"><button style="float:right;" type="submit" class="btn btn-primary second" name="submit">Modify</button></a>
+            <button type="button" class="btn btn-danger second" data-bs-toggle="modal" data-bs-target="#exampleModal" style="float:right;">
+               Delete
+              </button>
+            {% comment %} <a href="{% url 'delete_question' id=question.id %}"><button style="float:right;" type="submit" class="btn btn-danger second" name="submit">Delete</button>  </a>  {% endcomment %}
+
+
+        </table>  
+<hr>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">WARNING !!</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Are you sure, you want to delete this question ?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <a href="{% url 'delete_question' id=question.id %}"><button type="submit" class="btn btn-danger" name="submit">Delete</button></a>
+                </div>
+              </div>
+            </div>
+        </div>
+     {% endfor %}
+        {% comment %} <input type="submit" class="btn btn-success" value="Submit" id="b1" name="submit" onclick="getanswers_1({{question_id_list}})">
+        <br>
+        <b id="UserAnswers"></b>
+        </div> {% endcomment %}
+   
+</div>
+
+    
+
+{% endblock main_content%}

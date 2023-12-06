@@ -1,0 +1,738 @@
+{% extends 'base.html' %}
+
+{% block extra_styles %}
+<!-- Add this code within your template or in a separate CSS file -->
+    <style>
+        /* Modal styles */
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        }
+
+        .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+        }
+
+        form {
+        margin-top: 20px;
+        }
+
+        label {
+        display: block;
+        margin-bottom: 10px;
+        }
+
+        input[type="date"] {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        }
+
+        button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 0px 20px;
+        border: none;
+        cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+        background-color: #45a049;
+        }
+
+          
+
+        .loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            
+          }
+          
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+          
+
+    </style>
+    <style>
+        .row input,.row select{
+        width: 95%;
+        margin-left: 1%;
+        
+        
+    }
+    input,select{
+        border: 1px solid rgb(187, 187, 246);
+        border-radius: 5px;
+        padding: 4px;
+        background-color: #e3e3ec;
+        
+    }
+    input:hover,select:hover{
+        border: 2px solid rgb(137, 137, 190);
+    }
+    .row span{
+        font-size: 14px;
+        font-weight: 300;
+        margin-bottom: 8px;
+        margin-top: 15px;
+    }
+    .address_div,.education_div,.training_div,.current_emp_div,.family_div{
+        margin-top: 4%;
+    }
+    .address tr td input,.education tr td input,.training tr td input,.current_emp tr td input,.family tr td input{
+        /* padding: 10px; */
+        /* border: none; */
+        width: 88%;
+        margin-top: 14px;
+    }
+    .address tr,.education tr,.training tr,.current_emp tr,.family tr{
+        margin-left: 40px;
+        margin-top: 15px;
+    }
+    textarea{
+        border: 1px solid rgb(187, 187, 246);
+        border-radius: 15px;
+        margin-left: 3%;
+    }
+    </style>
+    <style>
+      .basic-details-card{
+        margin: 10px;
+      }
+
+      @media (min-width: 720px){
+        .basic-details-card{
+          width:48%;
+          float:left; 
+        }
+      }
+
+      .resume-card{
+        margin: 10px;
+        border-radius: 5px;
+        border: 1px solid #b3aeaed1;
+        height: 600px;
+      }
+
+      @media(min-width:720px){
+        .resume-card {
+          width:48%;
+          float:right;
+          border-radius: 5px;
+          border: 1px solid #b3aeaed1;
+          margin-top: 30px;
+          height: 660px;
+        }
+      }
+
+      @media (max-width: 1279px){
+        .mobile-nav-show {
+          color: rgba(73, 70, 70, 0.6);
+          font-size: 28px;
+          cursor: pointer;
+          line-height: 0;
+          transition: 0.5s;
+          z-index: 9999;
+          margin-right: 10px;
+        }
+      }
+
+     
+
+    </style>
+{% endblock %}
+{% block main_content %}
+
+{% load static %}
+
+    
+
+        <!------------PROGRESS BAR------------>
+
+        <!-- <div class="stepper-wrapper">
+            <div class="stepper-item {% if user_profile.status >= 1 and user_profile.status <= 6  %} completed {% endif %}">
+              <div class="step-counter"></div>
+              <div class="step-name">1.Profile Details</div>
+            </div>
+            <div class="stepper-item {% if user_profile.status >= 2 and user_profile.status <= 6 %} completed {% endif %}">
+              <div class="step-counter"></div>
+              <div class="step-name">2.Screening</div>
+            </div>
+            <div class="stepper-item {% if user_profile.status >= 3 and user_profile.status <= 6 %} completed {% endif %}">
+              <div class="step-counter"></div>
+              <div class="step-name">3.Online Test</div>
+            </div>
+            <div class="stepper-item {% if user_profile.status >= 4 and user_profile.status <= 6 %} completed {% endif %}">
+                <div class="step-counter"></div>
+                <div class="step-name">4.Interview Scheduled</div>
+            </div>
+            <div class="stepper-item {% if user_profile.status >= 5 and user_profile.status <= 6 %} completed {% endif %}">
+                <div class="step-counter"></div>
+                <div class="step-name">5.Interview Status</div>
+            </div>
+            <div class="stepper-item {% if user_profile.status == 6 and user_profile.status <= 6 %} completed {% endif %}">
+                <div class="step-counter"></div>
+                <div class="step-name">6.Onboarding</div>
+            </div>
+        </div> -->
+        {% include 'progress_bar.html' %}
+
+
+
+
+        <!-----END PROGRESS BAR------>
+        {% comment %} <div class="action-buttons" style="display: flex; justify-content: flex-end; margin-right: 5%;">
+            <div style="display: flex;">
+              <div style="margin: 5%;">
+                <button type="button" id="acceptButton" class="btn btn-success" style="width: 100%;">
+                  Accept
+                </button>
+              </div>
+              <div style="margin: 5%;">
+                <button type="button" id="holdButton" class="btn btn-warning" style="width: 100%;">
+                  Hold
+                </button>
+              </div>
+              <div style="margin: 5%;">
+                <button type="button" id="rejectButton" class="btn btn-danger" style="width: 100%;">
+                  Reject
+                </button>
+              </div>
+            </div>
+        </div> {% endcomment %}
+          
+        <!-- Accept Modal -->
+        <div id="acceptModal" class="modal">
+            <div class="modal-content" style="margin-top: 200px;">
+              <span class="close">&times;</span>
+              <form id="acceptForm" >
+                {% csrf_token %}
+                <div>
+                  <center>
+                    <div class="form-group">
+                      <label for="positionDropdown">Position:</label>
+                      <select class="form-control" id="positionDropdown" name="position" required>
+                        <!-- Options will be populated dynamically using JavaScript -->
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="placeDropdown">Place:</label>
+                      <select class="form-control" id="placeDropdown" name="place" required>
+                        <!-- Options will be populated dynamically using JavaScript -->
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Accept</button>
+                  </center>
+                </div>
+              </form>
+            </div>
+        </div>
+  
+  
+          
+          <!-- Hold Modal -->
+          <div id="holdModal" class="modal">
+            <div class="modal-content" style="margin-top: 200px;">
+              <span class="close">&times;</span>
+              <form id="holdForm" method="POST" action="{% url 'hold_user' refId=user_profile.id %}">
+                {% csrf_token %}
+                <div>
+                  <center>
+                    <label for="holdDate">Put Application On Hold Till Date:</label>
+                    <input type="date" id="holdDate" name="hold_date" required style="width: 50%;">
+                    <button type="submit">Hold</button>
+                  </center>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+          <!-- Reject Modal -->
+          <div id="rejectModal" class="modal">
+            <div class="modal-content" style="margin-top: 200px;">
+              <span class="close">&times;</span>
+              <form id="rejectForm" method="POST" action="{% url 'reject_user' refId=user_profile.id %}">
+                {% csrf_token %}
+                <div>
+                  <center>
+                    <label for="rejectReason">Reason For Rejection:</label>
+                    <textarea id="rejectReason" name="reject_reason" required></textarea>
+                    <br />
+                    <button type="submit">Reject</button>
+                  </center>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        <div class="container">
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+
+        <!-- Job Detail Start -->
+        
+        <!-- {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
+                                    {% comment %} {% for profile in user_profile%} {% endcomment %} -->
+                                    <form method="POST" id="applicationForm"> 
+                                        {% csrf_token %} 
+                                        <div class="basic-details-card">
+                                            <ul class="item_list">
+                                                <!---->
+                                                <li class="item_list_block step_open">
+                                                    <div class="info_title theme-color">
+                                                        <span class="count_Icon theme-color">
+                                                            1
+                                                        </span>
+                                                        
+                                                        <!----><!---->
+                                                        <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Basic Details </span>
+                                                        <!---->
+                                                    </div>
+                                                        
+                                                <!-- {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
+                                                {% comment %} {% for profile in user_profile%} {% endcomment %}
+                                                <form method="POST" action="" enctype="multipart/form-data">
+                                                    {% csrf_token %} -->
+                                                    <div class="panel-body ng-star-inserted">
+                                                      <div class="form-group" style="display:flex;justify-content:end;">
+                                                        <a id="add-vacancy-link" class="btn btn-sm btn-secondary">Add New Vacancy</a>
+                                                      </div>
+                                                            <!----><!---->
+                                                            {% for field in form %}
+                                                             
+                                                                <div class="form-group">
+                                                                  {{ field.label_tag }}
+                                                                  {{ field }}
+                                                                  {% if field.errors %}
+                                                                    <div class="text-danger">
+                                                                      {% for error in field.errors %}
+                                                                        {{ error }}
+                                                                      {% endfor %}
+                                                                    </div>
+                                                                  {% endif %}
+                                                                </div>
+                                                             
+                                                            {% endfor %}
+                                                         <div class="form-group my-4">
+                                                          <div class='row'>
+                                                            <div class='col-md'>
+                                                            <button type="Submit" id="id" class="btn btn-lg btn-primary " style='width:100%'>
+                                                                Submit
+                                                            </button>
+                                                            </div>
+                                                          </div>
+                                                        </div> 
+                                                    </div>
+                                                 </form> 
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="resume-card">
+                                            <div style="height:100%;width:100%;">
+                                                <h1 class="Resume-font" style="background: #a9a9a985;">Resume</h1>
+                                                <div class="resume-file">
+                                                  {% if mime_type == 'application/pdf' %}
+                                                      <embed src="data:application/pdf;base64,{{ binary_data }}" type="application/pdf" width="100%" height="500px" style="height: 92%;">      
+                                                  {% elif mime_type|lower == 'image/jpg' or mime_type|lower == 'image/jpeg' or mime_type|lower == 'image/png' %}
+                                                  <div style="width: 100%; height: 500px; overflow: auto;">
+                                                      <img src="data:{{ mime_type }};base64,{{ binary_data }}" width="100%" alt="Resume Image">
+                                                  </div>
+                                                  {% else %}
+                                                  <div style="width: 100%; height: 500px; overflow: auto;">
+                                                      <h3 style="color:black;">This file type is not supported for preview or no resume uploaded.</h3>
+                                                  </div>
+                                                  {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+    </div>
+  </div>
+
+</div>
+
+        <!-- Job Detail End -->
+
+
+
+    {% comment %} <script>
+
+    const progressBar = document.getElementById("progress-bar");
+    const progressNext = document.getElementById("progress-next");
+    const progressPrev = document.getElementById("progress-prev");
+    const steps = document.querySelectorAll(".step");
+    let active = 1;
+
+    progressNext.addEventListener("click", () => {
+        active++;
+        if (active > steps.length) {
+          active = steps.length;
+        }
+        updateProgress();
+      });
+      
+      progressPrev.addEventListener("click", () => {
+        active--;
+        if (active < 1) {
+          active = 1;
+        }
+        updateProgress();
+    });
+
+
+    const updateProgress = () => {
+        // toggle active class on list items
+        steps.forEach((step, i) => {
+          if (i < active) {
+            step.classList.add("active");
+          } else {
+            step.classList.remove("active");
+          }
+        });
+        // set progress bar width  
+        progressBar.style.width = 
+          ((active - 1) / (steps.length - 1)) * 100 + "%";
+        // enable disable prev and next buttons
+        if (active === 1) {
+          progressPrev.disabled = true;
+        } else if (active === steps.length) {
+          progressNext.disabled = true;
+        } else {
+          progressPrev.disabled = false;
+          progressNext.disabled = false;
+        }
+      };
+
+
+
+    </script> {% endcomment %}
+    <!-- Add this code within your template or in a separate JS file -->
+  <script>
+    document.getElementById('applicationForm').addEventListener('submit', function(event) {
+
+        event.preventDefault();
+        console.log("application form validation");
+        const fullName = document.getElementById('full_name').value;
+        const email = document.getElementById('email').value;
+        const dobInput = document.getElementById('dob');
+        const dobValue = dobInput.value;
+        const dob = new Date(dobValue);
+        const currentDate = new Date();
+        const mobileNo = document.getElementById('mobile_no').value;
+        const id_position = document.getElementById('id_position').value;
+        const id_place = document.getElementById('id_place').value;
+
+        console.log(fullName, email, dob, mobileNo, currentDate);
+
+        const fullNamePattern = /^[A-Za-z\s]+$/;
+        const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+        const mobileNoPattern = /^[6-9]\d{9}$/;
+       
+
+        if (!fullNamePattern.test(fullName)) {
+            alert('Full Name should contain only alphabetic characters and spaces.');
+        } else if (!emailPattern.test(email)) {
+            alert('Please enter a valid email address.');
+        } else if (!dobValue) {
+            alert('Please select Date of Birth.');
+        } else if (dob >= currentDate) {
+            alert('Date of Birth should be a valid date in the past.');
+        } else if ((currentDate.getFullYear() - dob.getFullYear()) < 18) {
+            alert('You must be 18 years or above.');
+        } else if (!mobileNoPattern.test(mobileNo)) {
+            alert('Please enter a valid 10-digit Mobile Number.');
+        } else {
+            alert("Candidate "+fullName+ " Successfully applied the Position of "+id_position+" for "+id_place);
+            event.target.submit();
+        }
+    });
+  </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+
+        //---------------- Add Vacancy  link script -----------------//
+          // Get the URL parameters from the current URL
+          var fullUrl = (window.location.href).split('/')
+          console.log(fullUrl)
+
+          var url = fullUrl[fullUrl.length - 2]
+          var id = fullUrl[fullUrl.length - 1]
+
+          // Build the "Add Vacancy" link with the extracted parameters
+          var addVacancyLink = '{% url 'postjob' %}' + '?url=' + encodeURIComponent(url) + '&id=' + encodeURIComponent(id);
+
+          // Set the href attribute of the "Add Vacancy" link
+          document.getElementById('add-vacancy-link').setAttribute('href', addVacancyLink);
+        //------------------ End Add Vacancy link script ---------------//
+
+        const placeSelect = document.getElementById('id_place');
+        const positionSelect = document.getElementById('id_position');
+      
+        // Event listener for position select change
+        positionSelect.addEventListener('change', () => {
+          const positionValue = positionSelect.value;
+          const formData = new FormData();
+          formData.append('position', positionValue);
+
+          if (positionValue) {
+            // Send fetch request to fetch places for the selected position
+            fetch('{% url 'fetch_interview_branches' %}', {
+              method: 'POST',
+              body: formData,
+            })
+              .then(response => {
+                if (response.ok) {
+
+                  return response.json();
+                }
+                throw new Error('Network response was not OK.');
+              })
+              .then(data => {
+                data=JSON.parse(data);
+                console.log(data);
+                
+                // Clear previous options and add new options based on the response
+                placeSelect.innerHTML = '<option value="">Select Place</option>';
+                
+                data.forEach(place => {
+                  const option = document.createElement('option');
+                  option.value = place.branch;
+                  option.text = place.branch;
+                  placeSelect.appendChild(option);
+                  
+                  console.log(placeSelect.appendChild(option))
+                });
+               
+
+                
+              })
+              .catch(error => {
+                // Handle the error if needed
+                console.error('Error:', error.message);
+              });
+
+          } else {
+            // Clear the place select options if no position is selected
+            placeSelect.innerHTML = '<option value="">Select Place</option>';
+          }
+        });
+      });
+      
+    </script>  
+
+<script>
+    // Get the modal elements
+    var acceptModal = document.getElementById("acceptModal");
+    var holdModal = document.getElementById("holdModal");
+    var rejectModal = document.getElementById("rejectModal");
+  
+    // Get the button elements
+    var acceptButton = document.getElementById("acceptButton");
+    var holdButton = document.getElementById("holdButton");
+    var rejectButton = document.getElementById("rejectButton");
+  
+    // Get the <span> elements that close the modals
+    var closeSpans = document.getElementsByClassName("close");
+  
+  
+  
+    // Open the hold modal
+    holdButton.onclick = function() {
+      holdModal.style.display = "block";
+    };
+  
+    // Open the reject modal
+    rejectButton.onclick = function() {
+      rejectModal.style.display = "block";
+    };
+  
+    // Close the modals when the <span> element is clicked
+    for (var i = 0; i < closeSpans.length; i++) {
+      closeSpans[i].onclick = function() {
+        acceptModal.style.display = "none";
+        holdModal.style.display = "none";
+        rejectModal.style.display = "none";
+      };
+    };
+  
+    // Close the modals when clicking anywhere outside of them
+    window.onclick = function(event) {
+      if (event.target == acceptModal) {
+        acceptModal.style.display = "none";
+      }
+      if (event.target == holdModal) {
+        holdModal.style.display = "none";
+      }
+      if (event.target == rejectModal) {
+        rejectModal.style.display = "none";
+      }
+    };
+  </script>
+
+
+  <script>
+    // Get the select dropdown elements
+var positionDropdown = document.getElementById("positionDropdown");
+var placeDropdown = document.getElementById("placeDropdown");
+
+// Function to populate the position dropdown options
+function populatePositionDropdown() {
+  // Call the API to fetch interview positions
+    // Show loader while fetching data
+    var loader = document.createElement("div");
+    loader.className = "loader";
+    positionDropdown.parentNode.appendChild(loader);
+
+  fetch("/fetch_interview_positions")
+    .then(response => response.json())
+    .then(data => {
+      // Clear existing options
+      positionDropdown.innerHTML = "<option value='' selected>Select Position</option>";
+        console.log(data)
+      // Populate options from the API response
+      
+      data.forEach(position => {
+        var option = document.createElement("option");
+        option.value = position;
+        option.text = position;
+        positionDropdown.appendChild(option);
+      });
+       // Remove loader once data is fetched
+       loader.parentNode.removeChild(loader);
+    })
+    .catch(error => {
+      console.error("Error fetching interview positions:", error);
+    });
+   
+
+}
+// Function to populate the place dropdown options
+function populatePlaceDropdown(position) {
+  console.log(position)
+    // Show loader while fetching data
+    var loader = document.createElement("div");
+    loader.className = "loader";
+    placeDropdown.parentNode.appendChild(loader);
+
+    // Create a new FormData object
+    var formData = new FormData();
+    formData.append('position', position);
+  
+    // Call the API to fetch interview branches
+    fetch("/fetch_interview_branches", {
+      method: "POST",
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Clear existing options
+        placeDropdown.innerHTML = "";
+        console.log(data)
+  
+        // Populate options from the API response
+        data.forEach(place => {
+          var option = document.createElement("option");
+          option.value = place;
+          option.text = place;
+          placeDropdown.appendChild(option);
+        });
+        // Remove loader once data is fetched
+      loader.parentNode.removeChild(loader);
+      })
+      .catch(error => {
+        console.error("Error fetching interview branches:", error);
+      });
+  }
+  
+
+// Event listener for position dropdown change
+positionDropdown.addEventListener("change", function() {
+  var position = this.value;
+  populatePlaceDropdown(position);
+});
+
+// Open the accept modal
+acceptButton.onclick = function() {
+  populatePositionDropdown();
+  acceptModal.style.display = "block";
+};
+
+// Get the form and select elements
+var acceptForm = document.getElementById("acceptForm");
+
+// Event listener for form submission
+acceptForm.addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent form from submitting normally
+
+  // Get the selected values
+  var position = positionDropdown.value;
+  var place = placeDropdown.value;
+
+  // Create a FormData object to send the data as a POST request
+  var formData = new FormData();
+  formData.append("position", position);
+  formData.append("place", place);
+
+  // Call the API to accept the user
+  fetch("{% url 'accept_user' refId=user_profile.id %}", {
+    method: "POST",
+    body: formData
+  })
+    .then(response => {
+      // Handle the response as needed
+      // ...
+      window.location.replace("{% url 'sceduled_user_full_details' refId=user_profile.id %}");
+    })
+    .catch(error => {
+      console.error("Error accepting user:", error);
+    });
+});
+
+
+  </script>
+
+    {% endblock main_content%}

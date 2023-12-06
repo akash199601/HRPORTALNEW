@@ -1,0 +1,735 @@
+{% extends 'base.html' %}
+{% block main_content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    .row input,.row select{
+    width: 95%;
+    margin-left: 1%;
+    
+    
+}
+input,select{
+    border: 1px solid rgb(187, 187, 246);
+    border-radius: 5px;
+    padding: 4px;
+    background-color: #e3e3ec;
+    
+}
+input:hover,select:hover{
+    border: 2px solid rgb(137, 137, 190);
+}
+.row span{
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    margin-top: 15px;
+}
+.address_div,.education_div,.training_div,.current_emp_div,.family_div{
+    margin-top: 4%;
+}
+.address tr td input,.education tr td input,.training tr td input,.current_emp tr td input,.family tr td input{
+    /* padding: 10px; */
+    /* border: none; */
+    width: 88%;
+    margin-top: 14px;
+}
+.address tr,.education tr,.training tr,.current_emp tr,.family tr{
+    margin-left: 40px;
+    margin-top: 15px;
+}
+textarea{
+    border: 1px solid rgb(187, 187, 246);
+    border-radius: 15px;
+    margin-left: 3%;
+}
+
+
+
+
+  @media (min-width: 720px){
+    .basic-details-card{
+      width:48%;
+      float:left; 
+    }
+  }
+
+  .resume-card{
+    border-radius: 5px;
+    border: 1px solid #b3aeaed1;
+    height: 600px;
+  }
+
+  @media(min-width:720px){
+    .resume-card {
+      width:48%;
+      float:right;
+      border-radius: 5px;
+      border: 1px solid #b3aeaed1;
+      margin-top: 15px;
+      height: 470px;
+    }
+  }
+
+  .cam-shot{
+    margin-bottom: 70px;
+    width:50%;
+  }
+
+  @media(max-width:640px){
+    .cam-shot{
+        width:100%;
+    }
+  }
+
+  @media (max-width: 1279px){
+    .mobile-nav-show {
+      color: rgba(73, 70, 70, 0.6);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 0;
+      transition: 0.5s;
+      z-index: 9999;
+      margin-right: 10px;
+    }
+  }
+  .dow_row{
+    width:30%; 
+}
+
+@media(max-width:720px){
+    .dow_row{
+        width:100%;  
+    }
+}
+
+.education_doc{
+    display:flex;
+    justify-content:space-between;  
+}
+
+@media(max-width:720px){
+    .education_doc{
+        width:100%;  
+        display:block;
+    }
+}
+</style>
+{% load static %}
+
+
+
+        <div class="container">
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+        {% if user_profile.status == 0 %}
+        <div class="container-xxl"><a href="{% url 'profile_update' candidate.id %}"><button class="btn btn-primary" style="margin-left:20px">Update Profile</button></a></div>
+        {% endif %}
+        <!-- Job Detail Start -->
+        
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+                
+                <div class="cam-shot" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" class="active"></li>
+                        {% for pic in camshot %}
+                        <li data-target="#carouselExampleIndicators"></li>
+                        {% endfor %}
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            {% for pic in pics %}
+                            <div class="d-flex justify-content-center">
+                                <img class="d-block w-100" src="data:image/png;base64,{{ pic }}" style="margin:auto;height:500px;">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% for pic in camshot %}
+                        <div class="carousel-item">
+                            <div class="d-flex justify-content-center">
+                                <img class="d-block w-100" src="data:image/png;base64,{{ pic }}" style="margin:auto;">
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <!-- <div class="row gy-5 gx-4">
+                    <div class="col-lg-6">
+       
+                        <div class="d-flex align-items-center mb-5">
+                            {% comment %} {% for x in ticket %} {% endcomment %}
+                            <div class="text-start ps-8">
+                                <h3 class="mb-3">Name :- {{profile.name}}</h3>
+                                <hr>
+                                <span class="text-truncate me-3">Email :- {{profile.email}}</span>
+                                <hr>
+                                <span class="text-truncate me-3">Mobile No. :- {{profile.mobile_no}}</span>
+                                <hr>
+                                <span class="text-truncate me-0">Address :- {{profile.address}}</span> 
+                                <hr>
+                                <span class="text-truncate me-0">Date Of Birth :-  {{profile.dob|date:'Y-m-d'}}</span>
+                                <hr>
+                                {% comment %} <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>Cover Letter :- {{x.coverletter}}</span> {% endcomment %}
+                            </div>
+                            {% comment %} {% endfor %} {% endcomment %}
+                        </div>
+
+                        {% comment %} {% for list in joblisting %}   {% endcomment %}
+                        {% comment %} <div class="panel-full ng-star-inserted">
+                            <div class="panel panel-open">
+                                <div class="panel-heading clearfix">
+                                    <h2 class="panel-title theme-color fl-left text-capitalize">Cover Letter</h2>
+                                </div>
+                                <div class="panel-body ng-star-inserted">
+                                    <p><li style="font-size:12px;">{{profile.file}}</li></p>
+                                </div>
+                            </div>
+                        
+                        </div> {% endcomment %}
+
+                        {% comment %} <div class="panel-full ng-star-inserted">
+                            <div class="panel panel-open">
+                                <div class="panel-heading clearfix">
+                                    <h2 class="panel-title theme-color fl-left text-capitalize">Responsibility</h2>
+                                </div>
+                                <div class="panel-body ng-star-inserted">
+                                    <p><li style="font-size:12px;">{{list.responsibilities}}</li></p>
+                                </div>
+                            </div>
+                        </div> {% endcomment %}
+
+                        {% comment %} <div class="panel-full ng-star-inserted">
+                            <div class="panel panel-open">
+                                <div class="panel-heading clearfix">
+                                    <h2 class="panel-title theme-color fl-left text-capitalize">Skills</h2>
+                                </div>
+                                <div class="panel-body padding-b10">
+                                    <div class="skill-section ng-star-inserted">
+                                        <h4 class="title-12">Skill</h4>
+                                        <div class="skill-section-row-2 clearfix ng-star-inserted">
+                                            <span class="tag-job ng-star-inserted">{{list.skill.skill}}</span>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="skill-section ng-star-inserted">
+                                        <h4 class="title-12">Minimum Qualification</h4>
+                                        <div class="skill-section-row-2 clearfix ng-star-inserted">
+                                            <span class="tag-job ng-star-inserted">{{list.education.education}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                {% comment %} {% endfor %}                         {% endcomment %}
+                    
+                {% comment %} {% for list in joblisting %} {% endcomment %}
+
+                    {% comment %} <div class="col-lg-6 showresume">
+                        <div class="bg-light rounded p-5 mb-4 wow " data-wow-delay="0.1s">
+                            <h4 class="mb-4" style="text-align:center;">Resume</h4>
+                            <h1 class="resume"></h1>
+                        </div>
+                        
+                    </div> {% endcomment %}
+
+                    <div class="col-lg-6 skill-section ng-star-inserted resume">
+                        <h1 class="Resume-font">Resume</h1>
+                        <div class="resume-file">
+                            {% comment %} <input type="file"  accept="image/*, .doc, .docx, .pdf, .txt, .xlxs" name="doc"  multiple style="width:500px; height=300px;"> {% endcomment %}
+
+                            <embed src="https://sarthi.sonataindia.com/media/resume/{{profile.resume_file}}" width="100%" height="90%">
+                        </div>
+                    </div>
+                
+                {% comment %} {% endfor %} {% endcomment %} -->
+
+                <div class="basic-details-card">
+                    <ul class="item_list">
+                        <!---->
+                        <li class="item_list_block step_open">
+                            <div class="info_title theme-color">
+                                <span class="count_Icon theme-color">
+                                    1
+                                </span>
+                                
+                                <!----><!---->
+                                <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Basic Details </span>
+                                <!---->
+                            </div>
+                                
+                        <!-- {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
+                        {% comment %} {% for profile in user_profile%} {% endcomment %}
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            {% csrf_token %} -->
+                            <div class="panel-body ng-star-inserted">
+                                    <!----><!---->
+                                <div class="row">
+                                    <span class="panel-col panel-col1">Position Applied For</span>
+                                    <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.position_shortlisted_for %}{{ user_profile.position_shortlisted_for }}{% endif %}" name="position_shortlisted_for" readonly> 
+                                </div>
+                                <!-- <div class="panel-row clearfix">
+                                    <span class="panel-col panel-col1">Date Applied</span>
+                                    <input type="date" class="panel-col text-bold-cell" name="applied_date" value="{% if user_profile.applied_date %}{{ user_profile.applied_date|date:'Y-m-d' }}{% endif %}"> 
+                                </div> -->
+                                <!-- <div class="clearfix"> -->
+                                <div class="row">
+                                    <span class="panel-col panel-col1">Name</span>
+                                    <input class="panel-col text-bold-cell" name="name" value="{% if candidate.name %}{{ candidate.name }}{% endif %}" readonly> 
+                                </div>
+                                    <!-- </div> -->
+            
+                                <!-- <div class="panel-row clearfix"> -->
+                                <div class="row">
+                                    <span class="panel-col panel-col1">Primary Email</span>
+                                    <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if candidate.email %}{{ candidate.email }}{% endif %}" required> 
+                                </div>
+                                    
+                                <!-- </div> -->
+                                <!-- <div class="panel-row clearfix"> -->
+                                <div class="row">
+                                    <span class="panel-col panel-col1">Mobile</span>
+                                    <input readonly type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if candidate.mobile_no %}{{ candidate.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
+                                </div>
+                                    
+                                <!-- </div> -->
+                                <!---->
+                                <div class="row">
+                                    <span class="panel-col panel-col1">Date Of Birth</span>
+                                    <input readonly type="date" class="panel-col text-bold-cell" required name="dob" value="{% if candidate.dob %}{{ candidate.dob|date:'Y-m-d' }}{% endif %}"> 
+                                </div>
+                                <!-- <div class="row">
+                                    <span class="panel-col panel-col1">Address</span>
+                                    <input type="text" class="panel-col text-bold-cell" name="address" value="{% if user_profile.address %}{{ user_profile.address }}{% endif %}" required> 
+                                </div> -->
+
+                                <div class="row">
+                                    <span class="panel-col panel-col1">Gender</span>
+                                    {% comment %} <select readonly id="gender" name="gender" class="panel-col text-bold-cell" required>
+                                        <span class="panel-col text-bold-cell" value="{% if user_profile.gender %}{{ user_profile.gender}}{% else %}Select Gender{% endif %}" disabled selected hidden></option>
+                                        {% for choice in gender_choices %}
+                                        <option class="panel-col text-bold-cell" value="{{ choice.0 }}" {% if choice.0 == user_profile.gender %}selected{% endif %}>{{ choice.1 }}</option>
+                                        {% endfor %}
+                                    </select> {% endcomment %}
+                                    <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if candidate.gender %}{{ candidate.gender}}{% endif %}" required>
+                                </div>
+                                <!-- <div class="column-footer row2 text-right">
+                                    <button  href="javascript:void(0)" id="id" class="btn btn-primary">
+                                        Update
+                                    </button>
+                                </div>  -->
+                            </div>
+                            
+                        <!-- </form> -->
+                        
+                        </li>
+                                <!---->
+                                <!---->
+                        
+                    </ul>
+                    
+                </div>
+                <div class="resume-card">
+                    <div style="height:100%;width:100%;">
+
+                        <h1 class="Resume-font" style="background: #a9a9a985;">Resume</h1>
+                        <div class="resume-file">
+                            {% if mime_type == 'application/pdf' %}
+                                <embed src="data:application/pdf;base64,{{ binary_data }}" type="application/pdf" width="100%" height="100%">      
+                            {% elif mime_type|lower == 'image/jpg' or mime_type|lower == 'image/jpeg' or mime_type|lower == 'image/png' %}
+                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                <img src="data:{{ mime_type }};base64,{{ binary_data }}" width="100%" alt="Resume Image">
+                            </div>
+                            {% else %}
+                            <div style="width: 100%; height: 500px; overflow: auto;">
+                                <h3>This file type is not supported for preview or no resume uploaded.</h3>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+                <div>
+                    <ul class="item_list">
+                        <!---->
+                        <li class="item_list_block step_open">
+                            <div class="info_title theme-color">
+                                <span class="count_Icon theme-color">
+                                    2
+                                </span>
+                                
+                                <!----><!---->
+                                <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Personal Details </span>
+                                <!---->
+                            </div>
+                                
+                        <!-- {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
+                        {% comment %} {% for profile in user_profile%} {% endcomment %}
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            {% csrf_token %} -->
+                            <div class="panel-body ng-star-inserted">
+                                                 <div style="display: flex; justify-content: space-between;">
+                                                        <div class="row" style="width: 50%">
+                                                            <span class="panel-col panel-col1">Identity Adadhar</span>
+                                                            <input readonly type="text" class="panel-col text-bold-cell" name="identity_Aadhar" value="{% if candidate.identity_Aadhar %}{{ candidate.identity_Aadhar }}{% endif %}"> 
+                                                        </div>
+                                                        <div class="row" style="width: 50%">
+                                                            <button type="button" download><a href="{{aadhar_doc.url}}">Document {{aadhar_doc}}</a></button>
+                                                        </div>
+                                                    </div>
+                                                        <!----><!---->
+                                                    <div style="display: flex; justify-content: space-between;">
+                                                        <div class="row" style="width: 50%">
+                                                            <span class="panel-col panel-col1">Identity PAN</span>
+                                                            <input readonly type="text" class="panel-col text-bold-cell" value="{% if candidate.identity_PAN %}{{ candidate.identity_PAN }}{% endif %}" name="identity_PAN"> 
+                                                        </div>
+                                                        <div class="row" style="width: 50%">
+                                                            <button type="button" ><a href="{{pan_doc.url}}">Document {{pan_doc}}</a></button>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div style="display: flex; justify-content: space-between;">
+                                                        <div class="row" style="width: 50%">
+                                                            <span class="panel-col panel-col1">Identity Driving Licence</span>
+                                                            <input readonly type="text" class="panel-col text-bold-cell" value="{% if candidate.identity_DL_No %}{{ candidate.identity_DL_No }}{% endif %}" name="identity_DL_No"> 
+                                                        </div>
+                                                        <div class="row" style="width: 50%">
+                                                            <button type="button" download><a href="{{dl_doc.url}}">Document {{dl_doc}}</a></button>
+                                                        </div>
+                                                    </div>
+                                <!-- Extra Form -->
+                                
+                                
+                                <hr style="margin-top: 50px;">
+                                <div class="address_div">
+                                    <h4>Address</h4>
+                                    <table class="address" style="width: 100%;">
+                                        <tr>
+                                            <th></th>
+                                            <th>State</th>
+                                            <th>City</th>
+                                            <th>PIN</th>
+                                        </tr>
+                                        <tr >
+                                            <th>Present</th>
+                                            <td><input readonly type="text" value="{% if candidate.present_state %}{{ candidate.present_state }}{% endif %}" name="present_state"> </td>
+                                            <td><input readonly type="text" value="{% if candidate.present_city %}{{ candidate.present_city }}{% endif %}" name="present_city"> </td>
+                                            <td><input readonly type="number" value="{% if candidate.present_pin %}{{ candidate.present_pin }}{% endif %}" name="present_pin"> </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Permanent</th>
+                                            <td><input readonly type="text" value="{% if candidate.permanent_state %}{{ candidate.permanent_state }}{% endif %}" name="permanent_state"> </td>
+                                            <td><input readonly type="text" value="{% if candidate.permanent_city %}{{ candidate.permanent_city }}{% endif %}" name="permanent_city"> </td>
+                                            <td><input readonly type="number" value="{% if candidate.permanent_pin %}{{ candidate.permanent_pin }}{% endif %}" name="permanent_pin"> </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                               
+                                <div class="education_div">
+                                    <h4>EDUCATION</h4>
+                                    <table class="education" style="width: 100%;">
+                                        <tr>
+                                            <th>  </th>
+                                            <th>Degree/
+                                                Diploma</th>
+                                            {% comment %} <th>Subjects</th> {% endcomment %}
+                                            <th>Name and Location of the
+                                                Institution</th>
+                                            <th>% obtained</th>
+                                            <th>Year of Passing</th>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th>High School</th>
+                                            <td><input readonly type="text" value="{% if candidate.high_school_Degree_Diploma %}{{ candidate.high_school_Degree_Diploma }}{% endif %}" name="high_school_Degree_Diploma"></td>
+                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.high_school_subjects %}{{ user_profile.high_school_subjects }}{% endif %}" name="high_school_subjects"></td> {% endcomment %}
+                                            <td><input readonly type="text" value="{% if candidate.high_school_name_location %}{{ candidate.high_school_name_location }}{% endif %}" name="high_school_name_location"></td>
+                                            <td><input readonly type="text" value="{% if candidate.high_school_marks_obtained %}{{ candidate.high_school_marks_obtained }}{% endif %}" name="high_school_marks_obtained"></td>
+                                            <td><input readonly type="text" value="{% if candidate.high_school_passing_year %}{{ candidate.high_school_passing_year }}{% endif %}" name="high_school_passing_year"></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th>Intermediate</th>
+                                            <td><input readonly type="text" value="{% if candidate.intermediate_Degree_Diploma %}{{ candidate.intermediate_Degree_Diploma }}{% endif %}" name="intermediate_Degree_Diploma"></td>
+                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.intermediate_subjects %}{{ user_profile.intermediate_subjects }}{% endif %}" name="intermediate_subjects"></td> {% endcomment %}
+                                            <td><input readonly type="text" value="{% if candidate.intermediate_name_location %}{{ candidate.intermediate_name_location }}{% endif %}" name="intermediate_name_location"></td>
+                                            <td><input readonly type="text" value="{% if candidate.intermediate_marks_obtained %}{{ candidate.intermediate_marks_obtained }}{% endif %}" name="intermediate_marks_obtained"></td>
+                                            <td><input readonly type="text" value="{% if candidate.intermediate_passing_year %}{{ candidate.intermediate_passing_year }}{% endif %}" name="intermediate_passing_year"></td>
+
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th>Graduation</th>
+                                            <td><input readonly type="text" value="{% if candidate.graduation_Degree_Diploma %}{{ candidate.graduation_Degree_Diploma }}{% endif %}" name="graduation_Degree_Diploma"></td>
+                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.graduation_subjects %}{{ user_profile.graduation_subjects }}{% endif %}" name="graduation_subjects"></td> {% endcomment %}
+                                            <td><input readonly type="text" value="{% if candidate.graduation_name_location %}{{ candidate.graduation_name_location }}{% endif %}" name="graduation_name_location"></td>
+                                            <td><input readonly type="text" value="{% if candidate.graduation_marks_obtained %}{{ candidate.graduation_marks_obtained }}{% endif %}" name="graduation_marks_obtained"></td>
+                                            <td><input readonly type="text" value="{% if candidate.graduation_passing_year %}{{ candidate.graduation_passing_year }}{% endif %}" name="graduation_passing_year"></td>
+
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th>PG</th>
+                                            <td><input readonly type="text" value="{% if candidate.pg_Degree_Diploma %}{{ candidate.pg_Degree_Diploma }}{% endif %}" name="pg_Degree_Diploma"></td>
+                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.pg_subjects %}{{ user_profile.pg_subjects }}{% endif %}" name="pg_subjects"></td> {% endcomment %}
+                                            <td><input readonly type="text" value="{% if candidate.pg_name_location %}{{ candidate.pg_name_location }}{% endif %}" name="pg_name_location"></td>
+                                            <td><input readonly type="text" value="{% if candidate.pg_marks_obtained %}{{ candidate.pg_marks_obtained }}{% endif %}" name="pg_marks_obtained"></td>
+                                            <td><input readonly type="text" value="{% if candidate.pg_passing_year %}{{ candidate.pg_passing_year }}{% endif %}" name="pg_passing_year"></td>
+                                        
+                                        </tr>
+                                        <tr>
+                                            <th>Professional
+                                                Qualification</th>
+                                                <td><input readonly type="text" value="{% if candidate.professional_qualification_Degree_Diploma %}{{ candidate.professional_qualification_Degree_Diploma }}{% endif %}" name="professional_qualification_Degree_Diploma"></td>
+                                                {% comment %} <td><input readonly type="text" value="{% if user_profile.professional_qualification_subjects %}{{ user_profile.professional_qualification_subjects }}{% endif %}" name="professional_qualification_subjects"></td> {% endcomment %}
+                                                <td><input readonly type="text" value="{% if candidate.professional_qualification_name_location %}{{ candidate.professional_qualification_name_location }}{% endif %}" name="professional_qualification_name_location"></td>
+                                                <td><input readonly type="text" value="{% if candidate.professional_qualification_marks_obtained %}{{ candidate.professional_qualification_marks_obtained }}{% endif %}" name="professional_qualification_marks_obtained"></td>
+                                                <td><input readonly type="text" value="{% if candidate.professional_qualification_passing_year %}{{ candidate.professional_qualification_passing_year }}{% endif %}" name="professional_qualification_passing_year"></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <th>others</th>
+                                            <td><input readonly type="text" value="{% if candidate.others_qualification_Degree_Diploma %}{{ candidate.others_qualification_Degree_Diploma }}{% endif %}" name="others_qualification_Degree_Diploma"></td>
+                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.others_qualification_subjects %}{{ user_profile.others_qualification_subjects }}{% endif %}" name="others_qualification_subjects"></td> {% endcomment %}
+                                            <td><input readonly type="text" value="{% if candidate.others_qualification_name_location %}{{ candidate.others_qualification_name_location }}{% endif %}" name="others_qualification_name_location"></td>
+                                            <td><input readonly type="text" value="{% if candidate.others_qualification_marks_obtained %}{{ candidate.others_qualification_marks_obtained }}{% endif %}" name="others_qualification_marks_obtained"></td>
+                                            <td><input readonly type="text" value="{% if candidate.others_qualification_passing_year %}{{ candidate.others_qualification_passing_year }}{% endif %}" name="others_qualification_passing_year"></td>
+
+                                        </tr>
+                                    </table>
+                                </div>
+                                <hr style="margin-top: 50px;">
+                                <div class="training_div">
+                                    <h4>TRAINING PROGRAMS/WORKSHOP ATTENDED</h4>
+                                    <table class="training" style="width: 100%;">
+                                        <tr>
+                                            <th>Program Title</th>
+                                            <th>Institution &
+                                                Location</th>
+                                            <th>Skill Areas/Course Content</th>
+                                            <th>Start Date</th>
+                                            <th>Course
+                                                Duration</th>
+                                        </tr>
+                                        <tr>
+                                            <td><input readonly type="text" value="{% if candidate.training_workshop_title %}{{ candidate.training_workshop_title }}{% endif %}" name="training_workshop_title"></td>
+                                            <td><input readonly type="text" value="{% if candidate.training_workshop_Institution_location %}{{ candidate.training_workshop_Institution_location }}{% endif %}" name="training_workshop_Institution_location"></td>
+                                            <td><input readonly type="text" value="{% if candidate.training_workshop_skill %}{{ candidate.training_workshop_skill }}{% endif %}" name="training_workshop_skill"></td>
+                                            <td><input readonly type="text" value="{% if candidate.training_workshop_start_date %}{{ candidate.training_workshop_start_date }}{% endif %}" name="training_workshop_start_date"></td>
+                                            <td><input readonly type="text" value="{% if candidate.training_workshop_duration %}{{ candidate.training_workshop_duration }}{% endif %}" name="training_workshop_duration"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <hr style="margin-top: 50px;">
+                                <div class="current_emp_div">
+                                    <h4>CURRENT EMPLOYMENT DETAILS</h4>
+                                    <table class="current_emp" style="width: 100%;">
+                                        <tr>
+                                            <td>Join date </td>
+                                            <td><input readonly type="date" value="{% if candidate.current_emp_start_date %}{{ candidate.current_emp_start_date }}{% endif %}" name="current_emp_start_date"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>: Current Employer (Name and Address, Type of Business):</td>
+                                            <td><input readonly type="text" value="{% if candidate.current_employer %}{{ candidate.current_employer }}{% endif %}" name="current_employer"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Current Salary:</td>
+                                            <td><input readonly type="text" value="{% if candidate.current_emp_salary %}{{ candidate.current_emp_salary }}{% endif %}" name="current_emp_salary"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Benefits like HRA, Fuels,
+                                                Medical etc.</td>
+                                            <td><input readonly type="text" value="{% if candidate.current_emp_benefits %}{{ candidate.current_emp_benefits }}{% endif %}" name="current_emp_benefits"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Position:</td>
+                                            <td><input readonly type="text" value="{% if candidate.current_emp_position %}{{ candidate.current_emp_position }}{% endif %}" name="current_emp_position"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Reason For Leaving:</td>
+                                            <td><input readonly type="text" value="{% if candidate.current_emp_reason_for_leaving %}{{ candidate.current_emp_reason_for_leaving }}{% endif %}" name="current_emp_reason_for_leaving"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Expect. Salary</td>
+                                            <td><input readonly type="text" value="{% if candidate.expected_salary %}{{ candidate.expected_salary }}{% endif %}" name="expected_salary"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Brief Job Description:</td>
+                                            <td><input readonly type="text" value="{% if candidate.current_emp_job_description %}{{ candidate.current_emp_job_description }}{% endif %}" name="current_emp_job_description"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Supervisor’s Name:</td>
+                                            <td><input readonly type="text" value="{% if candidate.current_emp_supervisor_name %}{{ candidate.current_emp_supervisor_name }}{% endif %}" name="current_emp_supervisor_name"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <hr style="margin-top: 50px;">
+                                <div class="family_div">
+                                    <h4>FAMILY DETAILS </h4>
+                                    <table class="family" style="width: 100%;">
+                                        <tr>
+                                            <th>Relationship</th>
+                                            <th>Name</th>
+                                            <th>DOB</th>
+                                            <th>Profession</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Father</td>
+                                            <td><input readonly type="text" value="{% if candidate.father_name %}{{ candidate.father_name }}{% endif %}" name="father_name"></td>
+                                            <td><input readonly type="date" value="{% if candidate.father_dob %}{{ candidate.father_dob }}{% endif %}" name="father_dob"></td>
+                                            <td><input readonly type="text" value="{% if candidate.father_profession %}{{ candidate.father_profession }}{% endif %}" name="father_profession"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mother</td>
+                                            <td><input readonly type="text" value="{% if candidate.mother_name %}{{ candidate.mother_name }}{% endif %}" name="mother_name"></td>
+                                            <td><input readonly type="date" value="{% if candidate.mother_dob %}{{ candidate.mother_dob }}{% endif %}" name="mother_dob"></td>
+                                            <td><input readonly type="text" value="{% if candidate.mother_profession %}{{ candidate.mother_profession }}{% endif %}" name="mother_profession"></td>
+                                        </tr><tr>
+                                            <td>Spouse</td>
+                                            <td><input readonly type="text" value="{% if candidate.spouse_name %}{{ candidate.spouse_name }}{% endif %}" name="spouse_name"></td>
+                                            <td><input readonly type="date" value="{% if candidate.spouse_dob %}{{ candidate.spouse_dob }}{% endif %}" name="spouse_dob"></td>
+                                            <td><input readonly type="text" value="{% if candidate.spouse_profession %}{{ candidate.spouse_profession }}{% endif %}" name="spouse_profession"></td>
+                                        </tr><tr>
+                                            <td>Children</td>
+                                            <td><input readonly type="text" value="{% if candidate.Children_name_1 %}{{ candidate.Children_name_1 }}{% endif %}" name="Children_name_1"></td>
+                                            <td><input readonly type="date" value="{% if candidate.Children_dob_1 %}{{ candidate.Children_dob_1 }}{% endif %}" name="Children_dob_1"></td>
+                                            <td><input readonly type="text" value="{% if candidate.Children_1_profession %}{{ candidate.Children_1_profession }}{% endif %}" name="Children_1_profession"></td>
+                                        </tr><tr>
+                                            <td>Children</td>
+                                            <td><input readonly type="text" value="{% if candidate.Children_name_2 %}{{ candidate.Children_name_2 }}{% endif %}" name="Children_name_2"></td>
+                                            <td><input readonly type="date" value="{% if candidate.Children_dob_2 %}{{ candidate.Children_dob_2 }}{% endif %}" name="Children_dob_2"></td>
+                                            <td><input readonly type="text" value="{% if candidate.Children_2_profession %}{{ candidate.Children_2_profession }}{% endif %}" name="Children_2_profession"></td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                                <div class="row" style="width: 95%;">
+                                    <span class="panel-col panel-col1">Why have you chosen to apply for a career with Sonata?</span>
+                                    <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.reason_to_apply_sonata %}{{ user_profile.reason_to_apply_sonata }}{% endif %}" name="reason_to_apply_sonata">  -->
+                                    <textarea readonly name="reason_to_apply_sonata" id="" cols="10" rows="5">{% if candidate.reason_to_apply_sonata %}{{ candidate.reason_to_apply_sonata }}{% endif %}</textarea>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 41px;">
+                                    <div class="panel-row clearfix" style="width: 40%">
+                                        <span class="panel-col panel-col1" style="width: 90%;"> Are you willing to relocate anywhere in India</span>
+                                        <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}" name="willing_to_relocate">  -->
+                                        <select readonly name="willing_to_relocate" id="" style="margin-left: 18%; margin-top: 15px;">
+                                            <option value="" selected>{% if candidate.willing_to_relocate %}{{ candidate.willing_to_relocate }}{% endif %}</option>
+                                            
+                                        </select>
+                                    </div>
+                                    <div class="panel-row clearfix" style="width: 46%">
+                                        <span class="panel-col panel-col1" style="width: 90%;">Have you been interviewed by Sonata before?</span>
+                                        <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}" name="interviewed_by_Sonata_before">  -->
+                                        <select readonly name="interviewed_by_Sonata_before" id=""  style="margin-left: 18%; margin-top: 15px;">
+                                            <option value="" selected>{% if candidate.interviewed_by_Sonata_before %}{{ candidate.interviewed_by_Sonata_before }}{% endif %}</option>
+                                           
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 95%;">
+                                    <span class="panel-col panel-col1">Locational Preference:</span>
+                                    <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.locational_preferences %}{{ user_profile.locational_preferences }}{% endif %}" name="locational_preferences">  -->
+                                    <textarea readonly name="locational_preferences" id="" cols="10" rows="5">{% if candidate.locational_preferences %}{{ candidate.locational_preferences }}{% endif %}</textarea>
+                                </div>
+                        
+                                {% if user_profile.status == 1 %}
+                                <div class="column-footer row2 text-right" style="margin-top: 55px;">
+                                    <a  href="{% url 'profile_update' candidate.email %}" id="id" class="btn btn-primary">
+                                        Edit
+                                    </a>
+                                </div>  
+                                {% endif %}
+                            </div>
+                            
+                        <!-- </form> -->
+                        
+                        </li>
+                                
+                        
+                    </ul>
+                    
+                </div>
+               
+        
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+        <!-- Job Detail End -->
+
+
+
+    {% comment %} <script>
+
+    const progressBar = document.getElementById("progress-bar");
+    const progressNext = document.getElementById("progress-next");
+    const progressPrev = document.getElementById("progress-prev");
+    const steps = document.querySelectorAll(".step");
+    let active = 1;
+
+    progressNext.addEventListener("click", () => {
+        active++;
+        if (active > steps.length) {
+          active = steps.length;
+        }
+        updateProgress();
+      });
+      
+      progressPrev.addEventListener("click", () => {
+        active--;
+        if (active < 1) {
+          active = 1;
+        }
+        updateProgress();
+    });
+
+
+    const updateProgress = () => {
+        // toggle active class on list items
+        steps.forEach((step, i) => {
+          if (i < active) {
+            step.classList.add("active");
+          } else {
+            step.classList.remove("active");
+          }
+        });
+        // set progress bar width  
+        progressBar.style.width = 
+          ((active - 1) / (steps.length - 1)) * 100 + "%";
+        // enable disable prev and next buttons
+        if (active === 1) {
+          progressPrev.disabled = true;
+        } else if (active === steps.length) {
+          progressNext.disabled = true;
+        } else {
+          progressPrev.disabled = false;
+          progressNext.disabled = false;
+        }
+      };
+
+
+
+    </script> {% endcomment %}
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    {% endblock main_content%}
+

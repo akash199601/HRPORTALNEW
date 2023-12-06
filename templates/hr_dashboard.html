@@ -1,0 +1,387 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Sonata Finance Recruitment Portal</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <!-- <link href="{% static 'assets/img/favicon.png' %}" rel="icon"> -->
+  <!-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css" rel="stylesheet' %}">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+  <link href="{% static ' css/style_2.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style_1.css' %}" rel="stylesheet">
+  <link href="{% static 'css/card.css' %}" rel="stylesheet">
+
+
+<style>
+  #myDIV {
+    animation: mymove 5s infinite;
+  }
+  
+  @keyframes mymove {
+    50% {text-shadow: 10px 20px 30px skyblue;}
+  }
+
+
+.card-cp {
+  width: 29%;
+  float: left;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.card-cp-wt {
+  height: 180px;
+  border-radius: 25px;
+  background-color: #ffffff;
+  text-align: center;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
+}
+
+.card-inner-cp {
+  display: block;
+}
+
+a {
+  color: #a8a8a8;
+  text-decoration: none;
+  outline: 0 none;
+}
+
+.title-large{
+  font-size: 60px;
+  line-height: 48px;
+  font-family: 'DIN Medium';
+  margin: 0px;
+  padding: 45px 0 0 0px;
+  color: #C8215C!important;
+}
+
+.title20 {
+  font-size: 21px;
+  font-family: 'DIN Light';
+  color: #0c0c0c;
+  display: block;
+  line-height: 20px;
+  padding-top: 8px;
+  text-transform: inherit;
+}
+
+
+@media (min-width:720px){
+  .mt-5{
+    display:flex;
+  }
+}
+
+
+@media (max-width: 640px){
+  .mt-5{
+    width:100%;
+    display:block;
+  }
+}
+
+@media(max-width: 640px){
+  .card-cp{
+    width: 48%;
+    margin: 3px; 
+  }
+
+.title-large{
+  font-size:40px;
+} 
+
+.title20 {
+  font-size: 15px;
+}
+
+}
+
+@media (max-width: 1279px){
+  .mobile-nav-show {
+    color: rgba(73, 70, 70, 0.6);
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 0;
+    transition: 0.5s;
+    z-index: 9999;
+    margin-right: 10px;
+  }
+}
+
+#google_element{
+  padding-top: 18px;
+  padding-left: 5px;
+}
+@media(max-width:720px){
+  #google_element{
+    margin-left:15px;
+  }
+  .goog-te-combo{
+    width:100px;
+  }
+}
+#google_element span{
+  display:none;
+}
+iframe{
+  display:none;
+}
+.goog-te-gadget .goog-te-combo {
+  margin: 4px 0;
+  height: 25px;
+  border-radius: 5px;
+  font-weight: 700;
+}
+.translated-ltr{
+  margin-top: -40px;
+}
+.goog-te-banner-frame{
+  display: none;
+  margin-top : -20px;
+}
+.goog-logo-link{
+  display: none !important;
+}
+.goog-te-gadget{
+  color: transparent !important;
+  padding-top:10px;
+}
+
+#goback{
+  margin-left:90%;
+  margin-bottom: 10px;
+}
+
+@media(max-width:720px){
+  #goback{
+    margin-left: 60%;
+    width: 30%;
+    height: 45px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+}
+
+</style>
+
+</head>
+
+<body style="background-color: #f0f1f2;">
+
+  
+
+  <header id="header" class="header d-flex align-items-center">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between site-width" >
+      <a href="{% url 'dashboard' %}" class="logo d-flex">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 id ="myDIV">HR Dashboard<span>.</span></h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="/" style="color:black;">Home</a></li>
+          
+          <li class="dropdown"><a href="#" style="color:black;"><span>Welcome , {{username}}</span></a>
+            {% comment %} <i class="bi bi-chevron-down dropdown-indicator"></i> {% endcomment %}
+            <ul>
+              <li><a href="{% url 'change_password' %}" style="color:black;">Change Password </a></li>
+            </ul>
+          </li>
+          
+          <li><a class="nav-link register" href="{% url 'Logout' %}"><button class="second_button" style="width:100px; height:40px;">Logout</button></a></li>
+          <li id="google_element" style="width:100px;"></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header><!-- End Header -->
+  <!-- End Header -->
+    <div class="layout-main candidate-portal" style="background:#f0f1f2;">
+     <div class="site-width" style="min-height: 800px;">
+      <!-- ======= Hero Section ======= -->
+      <section id="hero" class="hero">
+      
+        <div class="position-relative">
+          <div class="container position-relative" style="margin-bottom: 100px;">
+            {% block content %}
+            <div class="gy-4 mt-5" style="justify-content: space-between;">
+              <div class="card-cp ng-star-inserted">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'vacancy_lists' %}">
+                  <h3 class="title-large theme-color">{{ counts.vacancy_count }}</h3>
+                  <span id="threed" class="title20 ng-star-inserted">Vacancies</span>
+                </a>
+              </div>
+            
+              <div class="card-cp ng-star-inserted">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'applied_user_details' %}">
+                  <h3 class="title-large theme-color">{{ counts.cv_count }}</h3>
+                  <span class="title20 ng-star-inserted">Candidate's CV</span>
+                </a>
+              </div>
+            
+              <div class="card-cp ng-star-inserted">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'schedule_online_test' %}">
+                  <h3 class="title-large theme-color">{{ counts.sch_test }}</h3>
+                  <span class="title20 ng-star-inserted">Schedule Test</span>
+                </a>
+              </div>
+
+            </div>
+          
+            <div class="gy-4 mt-5" style="justify-content: space-between;">
+              <div class="card-cp ng-star-inserted">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'offline_test_details' %}">
+                  <h3 class="title-large theme-color">{{ counts.offline_test }}</h3>
+                  <span class="title20 ng-star-inserted">Update Offline Test Scores</span>
+                </a>
+              </div>
+            
+              <div class="card-cp ng-star-inserted">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'sceduled_user_details' %}">
+                  <h3 class="title-large theme-color">{{ counts.sch_int }}</h3>
+                  <span class="title20 ng-star-inserted">Schedule Interview</span>
+                </a>
+              </div>
+            
+              <div class="card-cp ng-star-inserted">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'shortlist_candidates' %}">
+                  <h3 class="title-large theme-color">{{ counts.shortlist }}</h3>
+                  <span class="title20 ng-star-inserted">Shortlist Candidates</span>
+                </a>
+              </div>
+            
+            </div>
+            <div class="gy-4 mt-5" style="justify-content: space-between;">
+              <div class="card-cp ng-star-inserted">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'Onboarding_candidates' %}">
+                  <h3 class="title-large theme-color">{{ counts.onboarding }}</h3>
+                  <span class="title20 ng-star-inserted">Candidates To Be Onboarded</span>
+                </a>
+              </div>
+            
+              <div class="card-cp ng-star-inserted">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'hold_user_details' %}">
+                  <h3 class="title-large theme-color">{{ counts.hold_count }}</h3>
+                  <span class="title20 ng-star-inserted">Hold Candidates</span>
+                </a>
+              </div>
+            
+              <div class="card-cp ng-star-inserted">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'rejected' %}">
+                  <h3 class="title-large theme-color">{{ counts.reject_count }}</h3>
+                  <span class="title20 ng-star-inserted">Rejected Candidates</span>
+                </a>
+              </div>
+            
+            </div>
+            <div class="gy-4 mt-5" style="justify-content: space-between;">
+              <div class="card-cp ng-star-inserted">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'quest_sheet_list' %}">
+                  <h3 class="title-large theme-color">{{ counts.sheet_count }}</h3>
+                  <span class="title20 ng-star-inserted">Question Sheet</span>
+                </a>
+              </div>
+            
+              {% comment %} <div class="card-cp ng-star-inserted">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'exam_snapshot_dashboard' %}">
+                  <h3 class="title-large theme-color">{{ counts.snaps }}</h3>
+                  <span class="title20 ng-star-inserted">View Exam Snapshots</span>
+                </a>
+              </div> {% endcomment %}
+            
+              <div class="card-cp ng-star-inserted">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'reschedule_interview_user' %}">
+                  <h3 class="title-large theme-color">{{ counts.reschedule }}</h3>
+                  <span class="title20 ng-star-inserted">Re-Schedule Interview</span>
+                </a>
+              </div>              
+            </div>
+            {% endblock %} 
+          </div> 
+        </div>
+      
+        </div>
+      
+        </div>
+      </section>
+    
+    </div>
+<button class="btn btn-lg btn-primary back-to-top" id="goback" onclick="history.back()">&#129052</button>
+
+  <!-- End Hero Section -->
+
+  <!-- ======= Footer ======= -->
+  <!-- <footer id="footer" class="footer" style="padding: 1px;">
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; 2022 Sonata Finance Pvt. Ltd. All Rights Reserved
+      </div>
+    </div>
+
+  </footer> -->
+  <!-- End Footer -->
+
+<style>
+  .card-text{
+    width:100%;
+    height:60px;
+  }
+</style>
+
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <script src ="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+  <script>
+    function loadGoogleTranslate(){
+      new google.translate.TranslateElement({
+        defaultLanguage :"en",
+        pageLanguage : "en",
+        includedLanguages : 'hi,en',
+        multilanguagePage : true},"google_element")
+    };
+  </script>
+
+</body>
+
+</html>

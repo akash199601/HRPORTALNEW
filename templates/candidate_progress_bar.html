@@ -1,0 +1,60 @@
+
+
+{% load static %}
+
+<style>
+  @media(max-width:640px){
+    .stepper-wrapper{
+      height:120px;
+      margin-left:8px;
+      margin-right:8px;
+    }
+    
+    .stepper-item{
+      width:10%;
+    }
+
+    .step-name{
+      font-size:.7rem!important;
+      padding:1px;
+      margin-right:5px;
+    }
+  }
+
+</style>
+
+<div class="stepper-wrapper bg-white" style="margin-top:100px;">
+    {% comment %} <div class="stepper-item {% if status >= 0 and status <= 7  %} completed {% endif %}">
+      <div class="step-counter"></div>
+      <div class="step-name">1.Application Applied</div>
+    </div> {% endcomment %}
+    <div class="stepper-item {% if status >= 1 and status <= 7 %} completed {% endif %}">
+      <div class="step-counter"></div>
+      <div class="step-name">Application Applied</div>
+    </div>
+    <div class="stepper-item {% if status >= 2 and status <= 7 %} completed {% endif %}">
+      <div class="step-counter"></div>
+      <div class="step-name">Documentation Upload</div>
+    </div>
+    <div class="stepper-item {% if status >= 3 and status <= 7 %} completed {% endif %}">
+        <div class="step-counter"></div>
+        <div class="step-name">Application Qualified for Test</div>
+    </div>
+    {% comment %} <div class="stepper-item {% if status >= 4 and status <= 7 %} completed {% endif %}">
+        <div class="step-counter"></div>
+        <div class="step-name">5.Online Test Submitted</div>
+    </div> {% endcomment %}
+    <div class="stepper-item {% if status >= 5 and status <= 7 %} completed {% endif %}">
+        <div class="step-counter"></div>
+        <div class="step-name">Interview</div>
+    </div>
+    <div class="stepper-item {% if status >= 6 and status <= 7 %} completed {% endif %}">
+        <div class="step-counter"></div>
+        <div class="step-name">HR Process</div>
+    </div>
+    <div class="stepper-item {% if status == 7 and status <= 7 %} completed {% endif %}">
+        <div class="step-counter"></div>
+        <div class="step-name">Onboarding</div>
+    </div>
+</div>
+

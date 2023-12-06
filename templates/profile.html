@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+
+<!-- partial:index.partial.html -->
+
+
+    {% comment %} <div class="form sign-up">
+      <h2>Update here</h2>
+      {% if messages %}
+      <ul class="messages">
+      {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+      <form action= "/profile_update" method='post'>
+        {% csrf_token %}
+
+        {% if messages %}
+        <div class="form-group">
+        <div class="col-12">
+            {% for message in messages %}
+            {% if message.tags == "error" %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            {% elif message.tags == "success" %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+        {% endif %}
+
+
+        <label>
+          <span>Username</span>
+          <input type="text" class="text" id="username" name="username" value="{{ user.username }}" />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" class="text" id="email" name="email" value="{{ user.email }}" />
+        </label>
+        <label>
+          <span>Password</span>
+          <input type="password" class="text" id="pass1" name="pass1" value="{{ user.pass }}"/>
+        </label>
+        <label>
+          <span>Confirm Password</span>
+          <input type="password" class="text" id="pass2" name="pass2" placeholder="Enter your password again" required/>
+        </label>
+        <button type="submit" class="submit">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</div> {% endcomment %}
+
+
+  {% comment %} <script  src="{% static 'js/script.js' %}"></script> {% endcomment %}
+
+<div class="layout-main candidate-portal myProfile-page">
+  <div class="site-width" style="min-height: 917px;">
+    <div class="main-container"><div class="container-inner">
+      <div class="content">
+        <app-notification>
+          <div class="position-rel container935">
+          <!---->
+          </div>
+        </app-notification>
+        <router-outlet></router-outlet>
+        <app-update-profile class="ng-star-inserted">
+          <!---->
+          <!---->
+          <div class="ng-star-inserted">
+            <div class="main-title-row">
+              <h1 class="main-title">My Profile </h1>
+            </div>
+            <div class="padding-t10">
+              <div class="section_halfLess">
+                <ul class="item_list item_list2">
+                  <li class="item_list_block first_row_btn">
+                    <div class="candidate-profile-progres" style="margin-top: 0">
+                      <div class="progress-title clearfix">
+                        <span class="pull-left">
+                          Profile Complete 
+                          <span class="big">31%</span>
+                        </span>
+                      </div>
+                      <div class="candidate-profile-progres-inner">
+                        <div class="doted_progress_bar2 clearfix">
+                          <ul class="list-reset">
+                            <li>
+                              <span class="doted"></span>
+                            </li>
+                            <li>
+                              <span class="doted"></span>
+                            </li>
+                            <li>
+                              <span class="doted"></span>
+                            </li>
+                            <li>
+                              <span class="doted"></span>
+                            </li>
+                            <li>
+                              <span class="doted"></span>
+                            </li>
+                            <li>
+                              <span class="doted"></span>
+                            </li>
+                            <li>
+                              <span class="doted"></span>
+                            </li>
+                            <li>
+                              <span class="doted"></span>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="progress_bar_active" style="width: 31%;">
+                          <div class="doted_progress_bar2 doted-active clearfix">
+                            <ul class="list-reset">
+                              <li>
+                                <span class="doted"></span>
+                              </li>
+                              <li>
+                                <span class="doted"></span>
+                              </li>
+                              <li>
+                                <span class="doted"></span>
+                              </li>
+                              <li>
+                                <span class="doted"></span>
+                              </li>
+                              <li>
+                                <span class="doted"></span>
+                              </li>
+                              <li>
+                                <span class="doted"></span>
+                              </li>
+                              <li>
+                                <span class="doted"></span>
+                              </li>
+                              <li>
+                                <span class="doted"></span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <!---->
+                  <!---->
+                  <li class="item_list_block desktop-only video-block ng-star-inserted">
+                    <div>No Resume Attached</div>
+                  </li>
+                </ul>
+              </div>
+              <div class="section_halfPluse">
+                <form novalidate="" class="ng-untouched ng-pristine ng-valid">
+                  <ul class="item_list">
+                    <li class="item_list_block first_row_btn">
+                      <div class="row">
+                        <!---->
+                        <div class="col-md-6 ng-star-inserted">
+                          <label class="displayBlock" for="resumeFile">
+                            <input accept=".doc,.docx,.pdf" gaevent="UpdateProfile#ResumeUpload" id="resumeFile" name="resumeFile" style="display: none;" type="file">
+                            <span class="btn btn-primary btn-block">UPLOAD RESUME (.DOC/.PDF)</span>
+                          </label>
+                        </div>
+                        <!---->
+                        <div class="col-md-6 ng-star-inserted">
+                          <span class="btn btn-primary btn-block">Proceed Without Resume</span>
+                        </div>
+                      </div>
+                    </li>
+                    <!---->
+                    <li formgroupname="basicSection" class="item_list_block step_close ng-untouched ng-pristine ng-valid ng-star-inserted">
+                      <div class="info_title theme-color">
+                        <span class="count_Icon theme-color">1</span>
+                        Basic  
+                      </div>
+                      <div class="form_outer">
+                        <div class="row">
+                          <div class="form-group row2 mgn-btm-0">
+                            <!---->
+                            <div class="col-md-6 input-field ng-star-inserted">
+                              <div class="row">
+                                <!---->
+                                <div class="col-xs-6 col-md-6 ng-star-inserted">
+                                  <label class="control-label clearfix">
+                                    Upload Candidate Photo
+                                     <!---->
+                                    </label>
+                                    <div class="row2">
+                                      <div class="btn-file">
+                                        <span class="material-icons dp20">camera_alt</span>
+                                        <input accept=".jpg, .jpeg, .png" class="file" id="camera" name="camera" type="file">
+                                      </div>
+                                      <span class="fileValue text-nowrap-grad"></span>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                </div>
+                              </div>
+                              <div class="col-md-6 input-field">
+                                <label class="control-label">
+                                  First Name 
+                                  <span>*</span>
+                                </label>
+                                <input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="firstName" type="text" placeholder="First Name">
+                              </div>
+                              <!---->
+                              <div class="col-md-6 input-field ng-star-inserted">
+                                <label class="control-label">Middle Name 
+                                  <!---->
+                                </label>
+                                <input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="middleName" type="text" placeholder="Middle Name"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Last name <!----><span class="ng-star-inserted">*</span></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="lastName" type="text" placeholder="Last name"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Do you have any relatives working in CSB Bank Ltd? (Yes/No) <!----><span class="ng-star-inserted">*</span></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="localFirstName" type="text" placeholder="Enter"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Have you been arrested/been convicted by any court of law/have any pending legal cases?(Yes/No) <!----><span class="ng-star-inserted">*</span></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="localMiddleName" type="text" placeholder="Enter"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">I hereby authorize CSB Bank or its vendors to access my credit score (Yes/No) <!----><span class="ng-star-inserted">*</span></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="localLastName" type="text" placeholder="Enter"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">I agree to receive communication about my candidature with CSB via WhatsApp/Email/SMS (Yes/No) <!----><span class="ng-star-inserted">*</span></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="nickName" type="text" placeholder="Enter"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">All information provided by me in this application is true to the best of my knowledge (Yes/No) <!----><span class="ng-star-inserted">*</span></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="localNickName" type="text" placeholder="Enter"></div><!----><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Mobile <!----><span class="ng-star-inserted">*</span></label><input class="form-control ng-untouched ng-pristine ng-valid" disabled="disabled" formcontrolname="mobileNumber" type="text" readonly="" placeholder="Enter"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Primary Email <!----><span class="ng-star-inserted">*</span></label><input class="form-control ng-untouched ng-pristine ng-valid" disabled="disabled" formcontrolname="primaryEmail" type="text" readonly="" placeholder="Enter"></div><!----><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Date Of Birth <!----><span class="ng-star-inserted">*</span></label><alt-datepicker role="datepicker" aria-required="false" aria-disabled="false"><div class="md2-datepicker-trigger"><div class="md2-datepicker-input"><span class="sort-label"></span><input autocomplete="off" class="form-control" placeholder="DD/MM/YYYY" type="text" tabindex="0"><button class="md2-datepicker-button" tabindex="-1" type="button"><span class="material-icons cal-icon">today</span></button></div></div></alt-datepicker></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Candidate Age</label><input class="form-control" disabled="" type="text" placeholder="Enter"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Gender <!----><span class="ng-star-inserted">*</span></label><alt-custom-single-select _nghost-rah-c1=""><div _ngcontent-rah-c1="" class="select-dropdown"><!----><!----><a _ngcontent-rah-c1="" class="dropdown-button tooltip-section ng-star-inserted" href="javascript:void(0)"><span _ngcontent-rah-c1="" class="text-dropdown text-nowrap-grad">Select</span><span _ngcontent-rah-c1="" class="material-icons keyboard_arrow_down md24"></span><!----></a><!----><!----></div></alt-custom-single-select></div><!----><div class="col-md-6 input-field ng-star-inserted"><div class="clearfix"><label class="control-label">PAN Available <!----></label></div><div class="col-md-6 radio_first radioPan"><div class="radio radio-20 radio-inline"><span class="radio_label_inline "><input formcontrolname="panAvailable" id="panVerifiedYes" name="panAvailable" type="radio" value="true" class="ng-untouched ng-pristine ng-valid"><label for="panVerifiedYes">Yes</label></span></div></div><div class="col-md-6 not-applicable radioPan"><div class="radio radio-20 radio-inline"><span class="radio_label_inline "><input formcontrolname="panAvailable" id="panVerifiedNo" name="panAvailable" type="radio" value="false" class="ng-untouched ng-pristine ng-valid"><label for="panVerifiedNo">No</label></span></div></div></div><!----><!----><div class="col-md-6 input-field ng-star-inserted"><div class="clearfix"><label class="control-label">PAN Number <!----><span class="ng-star-inserted">*</span></label><!----><!----><span class="pan-icon material-icons fl-right disabled ng-star-inserted"> assignment_ind </span><!----></div><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="panNumber" type="text" readonly="" placeholder="Enter"></div><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----></div><div class="column-footer row2 text-right"><alt-spinner-button gaevent="UpdateProfile#Update_Basic" _nghost-rah-c4=""><button _ngcontent-rah-c4="" href="javascript:void(0)" id="id" class="btn btn-primary"><!----><!---->Update
+</button></alt-spinner-button></div></div></div></li><!----><li formgroupname="personalSection" class="item_list_block step_close ng-untouched ng-pristine ng-valid ng-star-inserted"><div class="info_title theme-color"><span class="count_Icon theme-color">2</span>Personal Section  </div><div class="form_outer"><!----><div class="candidate-tab-detail-block outer-border-bot clearfix ng-star-inserted"><h3 class="title-12">Current Address</h3><div class="row"><div class="form-group row2 mgn-btm-0"><!----><!----><div class="col-md-12 input-field ng-star-inserted"><div class="location-search location-search-filed"><div class="input_icon"><button class="btn material-icons left_0right0">search</button><input class="form-control pad-left40 ng-untouched ng-pristine ng-valid" formcontrolname="googleCurrentAddress" maxlength="300" type="text" placeholder="Search..."></div><div class="location-listing displayNone"><ul class="list-reset"><!----><!----><li class="ng-star-inserted">No Data Available</li></ul></div></div></div><!----><div class="col-md-12 input-field ng-star-inserted"><label class="control-label">ADDRESS LINE1 <!----><span class="ng-star-inserted">*</span></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="addressLine1" maxlength="300" type="text" placeholder="ADDRESS LINE1"></div><!----><div class="col-md-12 input-field ng-star-inserted"><label class="control-label">ADDRESS LINE 2 <!----><span class="ng-star-inserted">*</span></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="addressLine2" maxlength="200" type="text" placeholder="ADDRESS LINE 2"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">City <!----></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="city" maxlength="100" type="text" placeholder="City"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">State <!----></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="state" maxlength="100" type="text" placeholder="State"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Country <!----></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="country" maxlength="100" type="text" placeholder="Country"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Pin Code <!----></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="pincode" maxlength="50" type="text" placeholder="Pin Code"></div><!----><!----><!----><!----><!----></div></div></div><!----><div class="candidate-tab-detail-block outer-border-bot clearfix ng-star-inserted"><h3 class="title-12">Permanent Address</h3><div class="row"><!----><div class="check-box checkbox checkbox-address ng-star-inserted"><input class="styled" id="sameAddress" type="checkbox"><label for="sameAddress">Permanent Address same as your Current Address</label></div><div class="form-group row2 mgn-btm-0 ng-untouched ng-pristine ng-valid" formgroupname="permanentAddressTO"><!----><div class="col-md-12 input-field ng-star-inserted"><div class="location-search location-search-filed"><div class="input_icon"><button class="btn material-icons left_0right0">search</button><input class="form-control pad-left40 ng-untouched ng-pristine ng-valid" formcontrolname="googlePermanentAddress" maxlength="300" type="text" placeholder="Search..."></div><div class="location-listing displayNone"><ul class="list-reset"><!----><!----><li class="ng-star-inserted">No Data Available</li></ul></div></div></div><!----><div class="col-md-12 input-field ng-star-inserted"><label class="control-label">ADDRESS LINE1 <!----><span class="ng-star-inserted">*</span></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="addressLine1" maxlength="300" type="text" placeholder="ADDRESS LINE1"></div><!----><div class="col-md-12 input-field ng-star-inserted"><label class="control-label">ADDRESS LINE 2 <!----><span class="ng-star-inserted">*</span></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="addressLine2" maxlength="200" type="text" placeholder="ADDRESS LINE 2"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">City <!----></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="city" maxlength="100" type="text" placeholder="City"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">State <!----></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="state" maxlength="100" type="text" placeholder="State"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Country <!----></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="country" maxlength="100" type="text" placeholder="Country"></div><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Pin Code <!----></label><input class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="pincode" maxlength="50" type="text" placeholder="Pin Code"></div></div></div></div><div class="row"><div class="column-footer row2 text-right"><alt-spinner-button gaevent="UpdateProfile#Update_Personal" _nghost-rah-c4=""><button _ngcontent-rah-c4="" href="javascript:void(0)" id="id" class="btn btn-primary"><!----><!---->Update
+</button></alt-spinner-button></div></div></div></li><!----><li formgroupname="workSection" class="item_list_block step_close ng-untouched ng-pristine ng-valid ng-star-inserted"><div class="info_title theme-color"><span class="count_Icon theme-color">3</span>Work Section  </div><div class="form_outer"><div class="row"><!----><div class="input-block-common ng-star-inserted"><div class="row2"><div class="checkbox checkbox-inline margin-b15"><input class="styled ng-untouched ng-pristine ng-valid" formcontrolname="fresher" id="working" type="checkbox"><label class="control-label gray-color" for="working">Fresher</label></div></div></div><div class="input-block-common"><div class="form-group row2 marginBnone"><!----><div class="col-md-6 input-field ng-star-inserted"><label class="control-label">Total Experience <!----></label><div class="row"><div class="col-xs-6 col-md-6"><alt-custom-single-select _nghost-rah-c1=""><div _ngcontent-rah-c1="" class="select-dropdown"><!----><!----><a _ngcontent-rah-c1="" class="dropdown-button tooltip-section ng-star-inserted" href="javascript:void(0)"><span _ngcontent-rah-c1="" class="text-dropdown text-nowrap-grad">0</span><span _ngcontent-rah-c1="" class="material-icons keyboard_arrow_down md24"></span><!----></a><!----><!----></div></alt-custom-single-select></div><div class="col-xs-6 col-md-6"><alt-custom-single-select _nghost-rah-c1=""><div _ngcontent-rah-c1="" class="select-dropdown"><!----><!----><a _ngcontent-rah-c1="" class="dropdown-button tooltip-section ng-star-inserted" href="javascript:void(0)"><span _ngcontent-rah-c1="" class="text-dropdown text-nowrap-grad">0</span><span _ngcontent-rah-c1="" class="material-icons keyboard_arrow_down md24"></span><!----></a><!----><!----></div></alt-custom-single-select></div></div></div><!----><!----><!----></div></div><div formarrayname="workExpTOs" class="ng-untouched ng-pristine ng-valid"><!----></div><!----><!----><div class="col-md-12 ng-star-inserted"><div class="add-new-btn-outer margin-b15"><div gaevent="UpdateProfile#Section_Add_Work" class="add-new-btn"><span class="material-icons dp10">add</span> Add Past Job </div></div></div><div class="column-footer row2  text-right"><alt-spinner-button gaevent="UpdateProfile#Update_Work" _nghost-rah-c4=""><button _ngcontent-rah-c4="" href="javascript:void(0)" id="id" class="btn btn-primary"><!----><!---->Update
+</button></alt-spinner-button></div></div></div></li><!----><!----><li formgroupname="educationSection" class="item_list_block step_close ng-untouched ng-pristine ng-valid ng-star-inserted"><div class="info_title theme-color"><span class="count_Icon theme-color">4</span>Education Section  </div><div class="form_outer"><div class="row"><div formarrayname="educationTOs" class="ng-untouched ng-pristine ng-valid"><!----></div><!----><!----><div class="col-md-12 ng-star-inserted"><div class="add-new-btn-outer margin-b15"><div gaevent="UpdateProfile#Section_Add_Education" class="add-new-btn"><span class="material-icons dp10">add</span> add Earlier Education </div></div></div><div class="column-footer row2 text-right"><alt-spinner-button gaevent="UpdateProfile#Update_Education" _nghost-rah-c4=""><button _ngcontent-rah-c4="" href="javascript:void(0)" id="id" class="btn btn-primary"><!----><!---->Update
+</button></alt-spinner-button></div></div></div></li><!----><li formgroupname="skillSection" class="item_list_block step_close ng-untouched ng-pristine ng-valid ng-star-inserted"><div class="info_title theme-color"><span class="count_Icon theme-color">5</span>Skills  </div><div class="form_outer"><div class="form-group ng-untouched ng-pristine ng-valid" formarrayname="skillTOs"><div class="skill-row clearfix"><!----><div class="clearfix ng-star-inserted"><label class="control-label">Skills <!----><span class="ng-star-inserted">*</span></label></div><!----><div class="autoComplete"><app-custom-auto-complete filter="skill" _nghost-rah-c5=""><!----><div _ngcontent-rah-c5="" class="location-search displayBlock"><div _ngcontent-rah-c5="" class="input_icon selected"><input _ngcontent-rah-c5="" class="form-control" type="text" placeholder="Start Typing..."></div><!----><!----></div></app-custom-auto-complete></div></div></div><div class="row"><div class="column-footer row2 text-right"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right"><alt-spinner-button gaevent="UpdateProfile#Update_Skill" _nghost-rah-c4=""><button _ngcontent-rah-c4="" href="javascript:void(0)" id="id" class="btn btn-primary"><!----><!---->Update
+</button></alt-spinner-button></div></div></div></div></li><!----><li formgroupname="languageSection" class="item_list_block step_close ng-untouched ng-pristine ng-valid ng-star-inserted"><div class="info_title theme-color"><span class="count_Icon theme-color">6</span>Languages  </div><div class="form_outer"><div class="form-group ng-untouched ng-pristine ng-valid" formarrayname="languageTOs"><div class="skill-row clearfix"><!----><div class="clearfix ng-star-inserted"><label class="control-label">Language <!----></label></div><!----><div class="autoComplete"><app-custom-auto-complete filter="language" _nghost-rah-c5=""><!----><div _ngcontent-rah-c5="" class="location-search displayBlock"><div _ngcontent-rah-c5="" class="input_icon selected"><input _ngcontent-rah-c5="" class="form-control" type="text" placeholder="Start Typing..."></div><!----><!----></div></app-custom-auto-complete></div></div></div><div class="row"><div class="column-footer row2 text-right"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right"><alt-spinner-button gaevent="UpdateProfile#Update_Language" _nghost-rah-c4=""><button _ngcontent-rah-c4="" href="javascript:void(0)" id="id" class="btn btn-primary"><!----><!---->Update
+</button></alt-spinner-button></div></div></div></div></li><!----><li class="item_list_block step_close ng-star-inserted"><div class="info_title theme-color"><span class="count_Icon theme-color">7</span>Attach Documents  </div><div class="form_outer"><div class="table-responsive"><table class="table document-table"><thead><tr><th class="count-cell">#</th><!----><th class="doc-name-cell ng-star-inserted">Document Name</th><!----><th class="option-cell mbh33 ng-star-inserted">Options</th></tr></thead><tbody><!----><!----><tr class="ng-star-inserted"><td class="count-cell">1</td><!----><td class="doc-name-cell ng-star-inserted"><span class="material-icons">done</span>ID Proof (Any Govt ID proof with Name, Date of Birth, Photograph and Address) <!----><!----></td><!----><td class="option-cell ng-star-inserted" style="position: relative;"><!----><!----><!----><a href="javascript:void" class="ng-star-inserted"><label for="attachDocument0"><span class="material-icons">file_upload</span></label><input style="display: none;" type="file" id="attachDocument0"></a><!----></td></tr><!----><tr class="ng-star-inserted"><td class="count-cell">2</td><!----><td class="doc-name-cell ng-star-inserted"><span class="material-icons">done</span>PAN Card <!----><!----></td><!----><td class="option-cell ng-star-inserted" style="position: relative;"><!----><!----><!----><a href="javascript:void" class="ng-star-inserted"><label for="attachDocument1"><span class="material-icons">file_upload</span></label><input style="display: none;" type="file" id="attachDocument1"></a><!----></td></tr><!----><tr class="ng-star-inserted"><td class="count-cell">3</td><!----><td class="doc-name-cell ng-star-inserted"><span class="material-icons">done</span>Last Three Month Salary Slip*	- Please convert the Document to Zip to attach multiple file <!----><!----></td><!----><td class="option-cell ng-star-inserted" style="position: relative;"><!----><!----><!----><a href="javascript:void" class="ng-star-inserted"><label for="attachDocument2"><span class="material-icons">file_upload</span></label><input style="display: none;" type="file" id="attachDocument2"></a><!----></td></tr><!----><tr class="ng-star-inserted"><td class="count-cell">4</td><!----><td class="doc-name-cell ng-star-inserted"><span class="material-icons">done</span>Performance  Evidence (Rating Letter / Incentive Proof / Promotion Letter ETC) <!----><!----></td><!----><td class="option-cell ng-star-inserted" style="position: relative;"><!----><!----><!----><a href="javascript:void" class="ng-star-inserted"><label for="attachDocument3"><span class="material-icons">file_upload</span></label><input style="display: none;" type="file" id="attachDocument3"></a><!----></td></tr><!----><tr class="ng-star-inserted"><td class="count-cell">5</td><!----><td class="doc-name-cell ng-star-inserted"><span class="material-icons">done</span>Recent Passport Size Photograph ( In White Back Ground ) <!----><!----></td><!----><td class="option-cell ng-star-inserted" style="position: relative;"><!----><!----><!----><a href="javascript:void" class="ng-star-inserted"><label for="attachDocument4"><span class="material-icons">file_upload</span></label><input style="display: none;" type="file" id="attachDocument4"></a><!----></td></tr></tbody></table></div></div></li></ul><div class="form_outer btn-row-2 clearfix"><div class="fl-right"><button class="btn btn-white" gaevent="UpdateProfile#Back" type="button">Go Back</button></div></div></form></div></div><div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div></div></app-update-profile></div></div></div></div></div>
+
+
+
+{% endblock main_content%}

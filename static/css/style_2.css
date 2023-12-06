@@ -1,0 +1,110 @@
+label{
+    color:#000;
+    
+    background:#fff;
+    margin-bottom:5px;
+    padding:4px;
+    border-radius:4px;
+  }
+  input{
+    margin-bottom:10px
+  }
+  .sub-bg {
+          background: url('https://the-french.co.uk/wp-content/uploads/2018/02/111-400x600.jpg')no-repeat;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          }
+          .subs-header{
+          padding-top: 0px;
+          border-bottom: 0px;
+          }
+          .heading-text h4{
+          color: #fff;
+          padding: 20px;
+          border: 2px solid #d3d3d3;
+          display: inline-block;
+          border-radius: 20px;
+          box-shadow: inset 10px 12px 13px -7px rgba(0,0,0,0.7);
+          -moz-box-shadow: inset 10px 12px 13px -7px rgba(0,0,0,0.7);
+          -webkit-box-shadow: inset 10px 12px 13px -7px rgba(0,0,0,0.7);
+          -o-box-shadow: inset 10px 12px 13px -7px rgba(0,0,0,0.7);
+          }
+          .heading-text{
+          margin-top: 10px;
+      }
+  .close:not(:disabled):not(.disabled):focus, .close:not(:disabled):not(.disabled):hover {
+      outline: none;
+  }
+
+  .drop{
+    float: right;
+    margin-right: 40px;
+    font-size: 15px;
+  }
+
+  .lab{
+    font-size: 17px;
+  }
+  .assessment {
+    text-align: center!important;
+    border: 1px solid black;
+    padding-top: 3px;
+    margin-bottom: 25px;
+    border-radius: 15px;
+    
+   
+}
+
+
+
+.col-md-12{
+  width:100%;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 720px){
+  .col-md-12{
+    display:block;
+  }
+}
+
+@media (min-width: 720px){
+  .flex-wrap{
+    display: flex!important;
+  }
+  }
+
+
+  #google_element{
+    padding-top: 18px;
+    padding-left: 5px;
+  }
+  #google_element span{
+    display:none;
+  }
+  iframe{
+    display:none;
+  }
+  .goog-te-gadget .goog-te-combo {
+    margin: 4px 0;
+    height: 25px;
+    border-radius: 5px;
+    font-weight: 700;
+  }
+  .translated-ltr{
+    margin-top: -40px;
+  }
+  .translated-ltr{
+    margin-top : -40px;
+  }
+  .goog-te-banner-frame{
+    display: none;
+    margin-top : -20px;
+  }
+  .goog-logo-link{
+    display: none !important;
+  }
+  .goog-te-gadget{
+    color: transparent !important;
+  }

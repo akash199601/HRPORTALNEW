@@ -1,0 +1,291 @@
+<style>
+
+    .container {
+        position: relative;
+      }
+      
+      .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        display: none;
+        z-index: 1000;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        animation: spin 2s linear infinite;
+      }
+      .show {
+        display: block;
+      }
+    
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    
+    .time-slot {
+      background-color: #f7f7f7;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      height: 50px;
+      border-bottom: 1px solid #ddd;
+      
+    }
+    
+    
+    .date-cell {
+      background-color: #f7f7f7;
+      border-right: 1px solid #ddd;
+      padding: 5px;
+      position: relative;
+    }
+    .date-cell h5{
+      display: flex;
+    padding: 0.5rem;
+    background: white;
+    border-radius: 0.5rem;
+    }
+    
+    .event-count {
+     
+      color: #333;
+      padding: 2px 5px;
+      font-size: 12px;
+      border-radius: 50%;
+    }
+    
+    .current-date {
+      background-color: #007bff;
+   
+    }
+    
+    .btn-container {
+      margin-bottom: 10px;
+    }
+
+    @media(max-width:640px){
+      .btn-container{
+        display: flex;
+        width: 100%;
+      }
+      .btn{
+        width:30%;
+        margin:5px;
+      }
+    }
+
+    @media (max-width: 1279px){
+      .mobile-nav-show {
+        color: rgba(73, 70, 70, 0.6);
+        font-size: 28px;
+        cursor: pointer;
+        line-height: 0;
+        transition: 0.5s;
+        z-index: 9999;
+        margin-right: 10px;
+      }
+    }
+  </style>
+  
+
+  <div class="container calendar-container">
+    <div class="loader"></div>
+    <div class="btn-container">
+      <button class="btn btn-primary" id="prevBtn">Previous Week</button>
+      <button class="btn btn-primary" id="currentWeekBtn">Current Week</button>
+      <button class="btn btn-primary" id="nextBtn">Next Week</button>
+    </div>
+    <div class="row">
+      
+      <div class="col">
+        <div class="row">
+          <div class="col date-cell">
+            <h5>Date/Time</h5>
+            <div class='time-slot'><span class='time-slot-text'>10-12</span></div>
+            <div class='time-slot'><span class='time-slot-text'>12-2</span></div>
+            <div class='time-slot'><span class='time-slot-text'>2-4</span></div>
+            <div class='time-slot'><span class='time-slot-text'>4-6</span></div>
+            
+          </div>
+          <div class="col date-cell"></div>
+          <div class="col date-cell"></div>
+          <div class="col date-cell"></div>
+          <div class="col date-cell"></div>
+          <div class="col date-cell"></div>
+          <div class="col date-cell"></div>
+          <div class="col date-cell"></div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+
+  <script>
+    $(document).ready(function() {
+      var timeSlots = ['10-12', '12-2', '2-4', '4-6'];
+
+        // Function to show the loader
+  function showLoader() {
+    $('.loader').addClass('show');
+  }
+
+  // Function to hide the loader
+  function hideLoader() {
+    $('.loader').removeClass('show');
+  }
+
+      function updateCalendar(data) {
+        var countMatrix = data;
+        var dateCells = $('.date-cell');
+        dateCells= dateCells.slice(1);
+      
+        // Clear the previous calendar data
+        dateCells.empty();
+      
+        // Set the date cells and time slots dynamically
+        for (var i = 0; i < countMatrix.length; i++) {
+          var row = countMatrix[i];
+          var dateData = row[0];
+          var date = dateData.date;
+            let currentdate = new Date();
+            currentdate = currentdate.toISOString().split('T')[0];
+            console.log(date, 'date')
+            console.log(currentdate, 'currentdate')
+
+           
+            
+          var dateCell = dateCells.eq(i);
+          // remove current-date class from all date cells
+            dateCell.removeClass('current-date');
+          dateCell.attr('data-date', date);
+          if (date == currentdate) {
+            dateCell.addClass('current-date');
+        }
+          dateCell.html('<h5>' + date + '</h5>');
+      
+          for (var j = 1; j < row.length; j++) {
+            var timeSlot = Object.keys(row[j])[0];
+            var count = row[j][timeSlot];
+      
+            var slotDiv = $('<div>').addClass('time-slot');
+            var timeSlotText = $('<span>').addClass('time-slot-text').text(timeSlot);
+            var eventCount = $('<span>').addClass('event-count').text(count);
+            //slotDiv.append(timeSlotText);
+            slotDiv.append(eventCount);
+            dateCell.append(slotDiv);
+          }
+          console.log(i, 'i')
+          if (i===6){
+              $('#currentWeekBtn').attr('data-date', date);
+          }
+
+        }
+      }
+
+      function fetchCalendarData(interviewer_id, date) {
+        var url = '/get-calender'
+        //let formdata = new FormData();
+        //formdata.append('interviewer_id', interviewer_id);
+        //formdata.append('date', date);
+        var formdata = {
+            interviewer_id: interviewer_id,
+            date: date
+        };
+
+        console.log(date, 'date')
+        showLoader();
+        $.ajax({
+          url: url,
+          type: 'GET',
+       
+            data: formdata,
+          success: function(data) {
+            console.log(data);
+            updateCalendar(data);
+          },
+          error: function(xhr, textStatus, errorThrown) {
+            console.log('Error:', errorThrown);
+          },
+          complete: function() {
+            hideLoader(); // Hide the loader after receiving the response
+          }
+        });
+      }
+      
+      // Get the user ID from your frontend (replace with your actual logic)
+      var interviewer_id = {{ request.user.id }};
+      console.log(interviewer_id, 'interviewer_id')
+      
+      // Fetch the initial calendar data
+      
+      currentWeekDate = getCurrentWeekDate();
+    fetchCalendarData(interviewer_id, currentWeekDate);
+
+  // Update the data-date attribute of the current week button
+
+      
+      // Function to get the date of the current week (Monday)
+      function getCurrentWeekDate() {
+        var now = new Date();
+        var dayOfWeek = now.getDay();
+        var diff = now.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Adjust for Sunday
+        var currentWeekDate = new Date(now.setDate(diff));
+        var formattedDate = currentWeekDate.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+        return formattedDate;
+      }
+      
+      // Add event listeners to the previous, current week, and next buttons
+  $('#prevBtn').click(function() {
+    var prevWeekDate = new Date($('#currentWeekBtn').attr('data-date'));
+    prevWeekDate.setDate(prevWeekDate.getDate() - 8); // Subtract 8 days for previous week
+    console.log(prevWeekDate,'prevWeekDate');
+    var formattedDate =
+      prevWeekDate.getFullYear() +
+      '-' +
+      (prevWeekDate.getMonth() + 1).toString().padStart(2, '0') +
+      '-' +
+      prevWeekDate.getDate().toString().padStart(2, '0'); // Format as YYYY-MM-DD
+   
+    fetchCalendarData(interviewer_id, formattedDate);
+  });
+
+  $('#currentWeekBtn').click(function() {
+    var currentWeekDate = '';// by default it will be current week date
+    fetchCalendarData(interviewer_id, currentWeekDate);
+  });
+
+  $('#nextBtn').click(function() {
+    var nextWeekDate = new Date($('#currentWeekBtn').attr('data-date'));
+    nextWeekDate.setDate(nextWeekDate.getDate() + 1); // Add 1 day to get the first day of the next week
+    console.log(nextWeekDate,'nextWeekDate');
+    var formattedDate =
+      nextWeekDate.getFullYear() +
+      '-' +
+      (nextWeekDate.getMonth() + 1).toString().padStart(2, '0') +
+      '-' +
+      nextWeekDate.getDate().toString().padStart(2, '0'); // Format as YYYY-MM-DD
+    
+    fetchCalendarData(interviewer_id, formattedDate);
+  });
+    });
+  </script>
+
+
+
+
+
+
+

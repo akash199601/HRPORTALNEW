@@ -1,0 +1,325 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Sonata Finance Recruitment Portal</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <!-- <link href="{% static 'assets/img/favicon.png' %}" rel="icon"> -->
+  <!-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css" rel="stylesheet' %}">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style_2.css' %}" rel="stylesheet">
+  <link href="{% static 'css/card.css' %}" rel="stylesheet">
+
+  <style>
+  
+  .card-cp {
+    width: 29%;
+    float: left;
+  }
+  
+  .cursor {
+    cursor: pointer;
+  }
+  
+  .card-cp-wt {
+    height: 180px;
+    border-radius: 25px;
+    background-color: #ffffff;
+    text-align: center;
+    margin-bottom: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
+  }
+  
+  .card-inner-cp {
+    display: block;
+  }
+  
+  a {
+    color: #a8a8a8;
+    text-decoration: none;
+    outline: 0 none;
+  }
+  
+  .title-large{
+    font-size: 60px;
+    line-height: 48px;
+    font-family: 'DIN Medium';
+    margin: 0px;
+    padding: 45px 0 0 0px;
+    color: #C8215C!important;
+  }
+  
+  .title20 {
+    font-size: 16px;
+    font-family: 'DIN Light';
+    color: #000000;
+    display: block;
+    line-height: 20px;
+    padding-top: 8px;
+    text-transform: inherit;
+  }
+
+  @media (min-width:720px){
+    .mt-5{
+      display:flex;
+    }
+  }
+  
+  
+  @media (max-width: 640px){
+    .mt-5{
+      width:100%;
+      display:block;
+    }
+  }
+  
+  @media(max-width: 640px){
+    .card-cp{
+      width: 48%;
+      margin: 3px; 
+    }
+  }
+  
+  .title-large{
+    font-size:40px;
+  } 
+  
+  .title20 {
+    font-size: 15px;
+  }
+  
+  #myDIV {
+    animation: mymove 5s infinite;
+  }
+  
+  @keyframes mymove {
+    50% {text-shadow: 10px 20px 30px skyblue;}
+  }
+
+  @media (max-width: 1279px){
+    .mobile-nav-show {
+      color: rgba(73, 70, 70, 0.6);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 0;
+      transition: 0.5s;
+      z-index: 9999;
+      margin-right: 10px;
+    }
+  }
+
+  #google_element{
+    padding-top: 18px;
+    padding-left: 5px;
+  }
+  @media(max-width:720px){
+    #google_element{
+      margin-left:15px;
+    }
+    .goog-te-combo{
+      width:100px;
+    }
+  }
+  #google_element span{
+    display:none;
+  }
+  iframe{
+    display:none;
+  }
+  .goog-te-gadget .goog-te-combo {
+    margin: 4px 0;
+    height: 25px;
+    border-radius: 5px;
+    font-weight: 700;
+  }
+  .translated-ltr{
+    margin-top: -40px;
+  }
+  .goog-te-banner-frame{
+    display: none;
+    margin-top : -20px;
+  }
+  .goog-logo-link{
+    display: none !important;
+  }
+  .goog-te-gadget{
+    color: transparent !important;
+    padding-top:10px;
+  }
+
+  #goBack{
+    margin-left:90%;
+    margin-bottom: 10px;
+    margin-top: 600px;
+  }
+  
+  @media(max-width:720px){
+    #goBack{
+      margin-left: 60%;
+      width: 30%;
+      height: 45px;
+      margin-bottom: 10px;
+      margin-top: 500px;
+    }
+  }
+  </style>
+</head>
+
+<body style="background-color: #f0f1f2;margin-bottom:70px;">
+  <header id="header" class="header d-flex align-items-center">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="{% url 'dashboard' %}" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 id ="myDIV">Interviewer Dashboard<span>.</span></h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="{% url 'heading' %}" style="color:black;">Home</a></li>
+          
+          <li class="dropdown"><a href="#" style="color:black;"><span>Welcome , {{username}}</span> </a>
+            {% comment %} <i class="bi bi-chevron-down dropdown-indicator"></i> {% endcomment %}
+            <ul>
+              <li><a href="{% url 'change_password' %}" style="color:black;">Change Password </a></li>
+            </ul>
+          </li>
+          
+          <li><a class="nav-link register" href="{% url 'Logout' %}"><button class="second_button" style="width:100px; height:40px;">Logout</button></a></li>
+          <li id="google_element" style="width:100px;"></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header><!-- End Header -->
+  <!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero">
+
+
+    
+    <!-- <div class="container position-relative">
+      <div class="row gy-5" data-aos="fade-in">
+        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
+          <h2>Welcome to <span>Sonata Finance Application Portal</span></h2>
+          <p>If you have a reference ID of a previously submitted application, you can check the status here.</p>
+          <div class="d-flex justify-content-center justify-content-lg-start">
+            <input style="padding: 5px;height: 48px;border-radius: 10px;border: 0.2px;margin-right: 10px; width: 54%;" type="text" name="referencID" placeholder="Enter Reference ID">
+            <a href="#about" class="btn-get-started">Check Status</a>
+            
+          </div>
+          <div style="margin-top: 50px;">
+            <p>If you are already registered with us or a part of our team, please log in.</p>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2">
+          <img src="{% static 'assets/img/hero-img.svg' %}" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
+        </div>
+      </div>
+    </div> -->
+
+    <div class="position-relative">
+      <div class="container position-relative" style=" margin-top: 50px;">
+
+        {% comment %} {% include 'interviewer_calender.html' %} {% endcomment %}
+
+        <div class="gy-4 mt-5" style="display: flex; justify-content: space-around;">
+
+            {% comment %} <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100" style="width: 29%">
+                <div class="icon-box">
+                  <div class="icon"><i class="bi bi-easel"></i></div>
+                  <h4 class="title"><a href="{% url 'sceduled_interview_details' %}" class="stretched-link">Today's interviews</a></h4>
+                  {% for i in scheduled_interview_count %}
+                  <h1 class="count" style="color:white;">{{ i.id }}</h1>
+                  {% endfor %}
+                </div>
+              </div><!--End Icon Box --> {% endcomment %}
+
+              
+            <div class="card-cp ng-star-inserted">
+              <a class="card-inner-cp card-cp-wt cursor" href="{% url 'sceduled_interview_details' %}">
+                <h3 class="title-large theme-color">{{ counts.int_sch_done }}</h3>
+                <span class="title20 ng-star-inserted" style="font-size:20px;">Interviews Today</span>
+              </a>
+            </div>
+          
+              {% comment %} <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200" style="width: 29%">
+                <div class="icon-box">
+                  <div class="icon"><i class="bi bi-gem"></i></div>
+                  <h4 class="title"><a href="" class="stretched-link">upcoming schedule</a></h4>
+                </div>
+              </div><!--End Icon Box --> {% endcomment %}
+          
+              
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  <!-- End Hero Section -->
+
+  <!-- ======= Footer ======= -->
+  <!-- <footer id="footer" class="footer" style="padding: 1px;">
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; 2022 Sonata Finance Pvt. Ltd. All Rights Reserved
+      </div>
+    </div>
+
+  </footer> -->
+  <!-- End Footer -->
+  <button class="btn btn-lg btn-primary  back-to-top" id="goBack" onclick="history.back()">&#129052</button>
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <script src ="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+  <script>
+    function loadGoogleTranslate(){
+      new google.translate.TranslateElement({
+        defaultLanguage :"en",
+        pageLanguage : "en",
+        includedLanguages : 'hi,en',
+        multilanguagePage : true},"google_element")
+    };
+  </script>
+</body>
+
+</html>

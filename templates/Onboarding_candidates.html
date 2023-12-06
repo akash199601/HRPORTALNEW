@@ -1,0 +1,369 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+
+<style>
+
+  .data{
+    margin-top:60px;
+  }
+
+  .col-md-12{
+    width:100%;
+    margin-bottom: 10px;
+  }
+
+  @media (min-width: 720px){
+    .col-md-12{
+      width:25%;
+      display:block;
+    }
+  }
+
+  .card{
+    height:100%;
+    
+  }
+
+@media (max-width: 640px){
+.card {
+    width: 100%;
+    display: block;
+    width: 350px;
+}}
+
+  @media (min-width: 720px){
+    .flex-wrap{
+      display: flex!important;
+    }
+    }
+    .center {
+      margin: 0;
+     
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+</style>
+
+<style>
+        /* Styling for the form */
+        #filter-form {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        #filter-form label {
+            margin-left: 10px;
+        }
+
+        #filter-form .form-control {
+            margin-left: 10px;
+            width: 150px;
+        }
+
+        #filter-button {
+            margin-left: 10px;
+        }
+
+        
+        @media(max-width:640px){
+          #filter-form {
+            display: block;
+          }
+          #filter-form label{
+            width: 100%;
+            margin-left:0px;
+          }
+          #filter-form .form-control {
+            margin-bottom: 10px;
+            margin-left:0px;
+            width: 100%;
+          }
+          #filter-button {
+            margin-left: 0px;
+        }
+        }
+
+        @media (max-width: 1279px){
+          .mobile-nav-show {
+            color: rgba(73, 70, 70, 0.6);
+            font-size: 28px;
+            cursor: pointer;
+            line-height: 0;
+            transition: 0.5s;
+            z-index: 9999;
+            margin-right: 10px;
+          }
+        }
+    </style>
+<!--Pagination-->
+{% comment %} <div style="margin-top:20px;">
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if ticket.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ ticket.previous_page_number }}">Previous</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Previous</a>
+      </li>
+    {% endif %}
+    {% for i in ticket.paginator.page_range %}
+      {% if ticket.number == i %}
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">
+            {{ i }}
+            <span class="sr-only">(current)</span>
+          </span>
+        </li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if ticket.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ ticket.next_page_number }}">Next</a>
+      </li>
+    {% else %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Next</a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+</div> {% endcomment %}
+<!--end of Pagination-->
+<div class="data">
+ {% comment %} <div class ="table-data">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Published On</th>
+            <th scope="col">Total Vacancies</th>
+            <th scrope="col">Required Experience</th>
+            <th scope="col">Candidate Name</th>
+            <th scope="col">Candidate Email</th>
+            <th scope="col">Candidate Mobile No.</th>
+            <th scope="col">Cover Letter</th>
+            <th scope="col">Candidate Resume</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for x in ticket %}
+          <tr>
+            <td>{{x.id}}</td>
+            <td>{{x.joblisting.title}}</td>
+            <td>{{x.joblisting.company_name}}</td>
+            <td>{{x.joblisting.published_on}}</td>
+            <td>{{x.joblisting.vacancy}}</td>
+            <td>{{x.joblisting.minimum_exp.minimum}} - {{x.joblisting.maximum_exp.maximum}}</td>
+            <td>{{x.name}}</td>
+            <td>{{x.email}}</td>
+            <td>{{x.mobile_no}}</td>
+            <td>{{x.coverletter}}</td>
+            <td>
+              {% if x.file %}
+              <button type="button"><a href="{{x.file.url}}">Resume</a></button>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+  </div>  {% endcomment %}
+
+ 
+      <div class="container-xxl py-3" >
+        <div class="container">
+          <div class="row g-4">
+            <h1 style="color: #000000ba;font-weight: 600;">Candidates To Be Onboarded</h1>
+            <hr>
+            {% comment %} <form id="filter-form">
+              {% csrf_token %}
+              <label for="positionFilter" class="form-label">Select a position:</label>
+              <select id="positionFilter" onchange="fetchBranchOptions(this.value)" class="form-control">
+                  <option value="None">All Positions</option>
+                  {% for position in distinct_positions %}
+                      <option value="{{ position }}">{{ position }}</option>
+                  {% endfor %}
+              </select>
+
+              <label for="branchFilter" class="form-label">Select a branch:</label>
+              <select id="branchFilter" class="form-control">
+                  <option value="None">All Branches</option>
+                  <!-- Options will be populated dynamically using JavaScript -->
+              </select>
+
+              <button type="button" id="filter-button" class="btn btn-primary">Filter</button>
+              <button id="filter-button" class="btn btn-primary" onclick="filterSelection('all')">Clear Filter</button>
+
+            </form> {% endcomment %}
+
+
+            {% comment %} <div class="flex-wrap" style="gap:1rem 1.4rem;" id="filtered-results"> {% endcomment %}
+              
+              {% if applicants %}
+              <div class="row">
+              
+              {% for x in data_list %}
+
+              <div class="col-md-12 col-xl-4">
+                <div class="card" style="border-radius: 15px;">
+                  <div class="card-body text-center">
+                    <div class="mt-3 mb-4">
+                      <img src="static\img\profile_logo.jpg"
+                        class="rounded-circle img-fluid" style="width: 100px;" />
+                    </div>
+                    <h4 class="mb-2">{{ x.name }}</h4>
+                    <p class="text-muted">{{x.email}}</p>
+                    <p class="text-muted">{{x.mobile_no}}</p>
+                    <p class="text-muted">Position Shortlisted For :-<b>{{x.position_shortlisted_for}}</b></p>
+                    <p class="text-muted">Branch Shortlisted For :- <b>{{x.branch_shortlisted_for}}</b></p>
+                    <a href="{% url 'applied_user_full_details' refId=x.candidate_id %}" style="text-decoration:none;"><button type="button" class="btn btn-primary btn-rounded btn-lg" style="height:35px;">
+                       More Details
+                    </button></a>
+                    <div class="d-flex justify-content-between text-center mt-3 mb-2">
+                      
+                    </div> 
+                  </div>
+                </div>
+              </div>
+
+             {% comment %} <div class="wow fadeInUp" style="flex-basis: 25%; max-width: 23%;background-color:white; border: radius #FFFFFF; border-radius: 10px;" data-wow-delay="0.1s" id="received">
+                  <div class="card-item card-button">
+                    <a class="cat-item rounded " href="{% url 'applied_user_full_details' refId=x.candidate_id %}" style="text-decoration:none;">
+                        <h6 class="mb-3" style="color:#000000ba;font-weight: 600; margin: 0;">Name :- {{x.full_name}} </h6>
+                        <hr>
+                        <p class="mb-0" style="color:#000000ba;font-weight: 600;">Email :- {{x.email}}</p>
+                        <hr>
+                        <p class="mb-0" style="color:#000000ba;font-weight: 600;">Mobile No. :- {{x.mobile_no}}</p>
+                        <hr>
+                        <p class="mb-0" style="color:#000000ba;font-weight: 600;">Position Shortlisted For :- {{x.position_shortlisted_for}}</p>
+                        <hr>
+                        <p class="mb-0" style="color:#000000ba;font-weight: 600;">Branch Shortlisted For :- {{x.branch_shortlisted_for}}</p>
+                        <hr>
+                    </a>
+                  
+                </div>
+              </div> {% endcomment %}
+              {% endfor %}
+              {% else %}
+              <h3 style="color: #000000ba;"> No candidates have been Onboarded. </h3>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>   
+      
+</div>
+
+<script>
+function fetchBranchOptions(selectedPosition) {
+  $.ajax({
+    url: `/get_branch_onboarding_options/?position=${selectedPosition}`,
+    processData: false,
+    contentType: false,
+    success: function(response) {
+      const branchFilter = document.getElementById('branchFilter');
+      branchFilter.innerHTML = '<option value="None">All Branches</option>'; // Add a default option
+      response.branch_options.forEach(branch => {
+          // Append a new option to the branch select for each branch option
+          branchFilter.innerHTML += `<option value="${branch}">${branch}</option>`;
+      });
+    },
+    error: function(error) {
+    // Handle errors (optional)
+    console.log('Error occurred:', error);
+    }
+  });
+}
+</script>
+
+<script>
+    const positionFilter = document.getElementById('positionFilter');
+    const branchFilter = document.getElementById('branchFilter');
+    const filteredResults = document.getElementById('filtered-results');
+    const filterButton = document.getElementById('filter-button');
+    
+    // Make AJAX API call to fetch the filtered data
+      filterButton.addEventListener('click', () => {
+      formdata = new FormData();
+      const selectedPosition = positionFilter.value;
+      const selectedBranch = branchFilter.value;
+      formdata.append('csrfmiddlewaretoken', $("input[name=csrfmiddlewaretoken").val());
+      formdata.append('position', selectedPosition);
+      formdata.append('branch', selectedBranch);
+      console.log($("input[name=csrfmiddlewaretoken").val())
+
+      $.ajax({
+            url: "{% url 'api_onboarding_filter' %}",
+            type: 'POST',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+            let html = ``;
+            for (const x of response) {
+            url = "/applied_user_full_details/"+x.id
+            img_url = "/static/img/profile_logo.jpg"
+            html += `
+                <div class="col-md-12 col-xl-4">
+                <div class="card" style="border-radius: 15px;">
+                  <div class="card-body text-center">
+                    <div class="mt-3 mb-4">
+                      <img src=${img_url}
+                        class="rounded-circle img-fluid" style="width: 100px;" />
+                    </div>
+                    <h4 class="mb-2">${ x.name }</h4>
+                    <p class="text-muted">${x.email}</p>
+                    <p class="text-muted">${x.mobile_no}</p>
+                    <p class="text-muted">Position Shortlisted For :-<b>${x.position_shortlisted_for}</b></p>
+                    <p class="text-muted">Branch Shortlisted For :- <b>${x.branch_shortlisted_for}</b></p>
+                    <a href=${url} style="text-decoration:none;"><button type="button" class="btn btn-primary btn-rounded btn-lg">
+                     More Details
+                    </button></a>
+                    <div class="d-flex justify-content-between text-center mt-3 mb-2">
+                      
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            `;
+            }
+
+            // Update the content on the page
+            filteredResults.innerHTML = html;
+            },
+            error: function(error) {
+            // Handle errors (optional)
+            console.log('Error occurred:', error);
+            }
+        });
+    });
+
+
+          //clear filter and show all vacancy
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("col-md-12");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+</script>
+
+
+{% endblock main_content%}

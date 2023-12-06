@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+  <style>
+    .required-label::after {
+      content: "*";
+      color: red;
+    }
+
+    .col-md-12{
+      width:100%;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 720px){
+      .col-md-12{
+        width:23%;
+        display:block;
+      }
+    }
+
+    .card{
+      height:100%;
+    }
+
+    @media (min-width: 720px){
+      .flex-wrap{
+        display: flex!important;
+      }
+      }
+
+  @media (max-width: 1279px){
+    .mobile-nav-show {
+      color: rgba(73, 70, 70, 0.6);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 0;
+      transition: 0.5s;
+      z-index: 9999;
+      margin-right: 10px;
+    }
+  }
+
+
+  </style>
+
+<div class="data" style="background-color: #f0f1f2;margin-top:100px;height:fit-content;">
+ 
+        <div class="container">
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+    <div class="container">
+        <div class="row g-4">
+            <h1 style="color:#000000ba;font-weight:600;">Contact Details</h1>
+            <hr>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                  <tr>
+                    
+                    <th scope="row">ID</th>  {% comment %} text-align: center; {% endcomment %}
+                    <th scope="row">Name</th>
+                    <th scope="row">Email</th>
+                    <th scope="row">Mobile_No.</th>
+                    <th scope="row">Message</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for con in contact %}
+                  <tr>
+                     <th scope="row">{{con.ID}}- </td>
+                     <td>{{con.name}} </td>
+                     <td>{{con.email}} </td>
+                     <td>{{con.mobile_no}} </td>
+                     <td>{{con.message}} </td>
+                  </tr>
+                   {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock main_content%}

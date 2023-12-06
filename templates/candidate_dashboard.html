@@ -1,0 +1,711 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Sonata Finance Application Portal</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <!-- <link href="{% static 'assets/img/favicon.png' %}" rel="icon"> -->
+  <!-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css" rel="stylesheet' %}">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style_1.css' %}" rel="stylesheet">
+  <link href="{% static 'css/card.css' %}" rel="stylesheet">
+
+<style>
+
+  .card-cp {
+    width: 29%;
+    float: left;
+  
+  }
+  
+  .cursor {
+    cursor: pointer;
+  }
+  
+  .card-cp-wt {
+    height: 180px;
+    border-radius: 25px;
+    background-color: #ffffff;
+    text-align: center;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
+  }
+
+  @media(max-width:640px){
+    .card-cp-wt {
+      height:50px;
+    }
+  }
+  
+  .card-inner-cp {
+    display: block;
+  }
+  
+  a {
+    color: #a8a8a8;
+    text-decoration: none;
+    outline: 0 none;
+  }
+
+  .title-large{
+    font-size: 60px;
+    line-height: 48px;
+    font-family: 'DIN Medium';
+    margin: 0px;
+    padding: 58px 0 0 0px;
+    color: #C8215C!important;
+  }
+  
+  .title20 {
+    font-size: 21px;
+    font-family: 'DIN Light';
+    color: #0496ad;;
+    display: block;
+    line-height: 20px;
+    padding-top: 8px;
+    text-transform: inherit;
+  }
+  
+  
+  @media (min-width:720px){
+    .mt-5{
+      display:flex;
+    }
+  }
+  
+  
+  @media (max-width: 640px){
+    .mt-5{
+      width:100%;
+      display:block;
+    }
+  }
+  
+  @media(max-width: 640px){
+    .card-cp{
+      width: 100%;
+      margin: 3px; 
+    }
+  
+  .title-large{
+    font-size:40px;
+    padding:5px 0px 0px 0px;
+  } 
+  
+  .title20 {
+    font-size: 15px;
+  }
+  
+  }
+  
+.wow{
+  width: 25%;
+}
+
+@media (min-width: 720px){
+.d-flex{
+  display: flex!important;
+}
+}
+
+@media (max-width: 640px){
+.p-4{
+  width: 100%;
+}
+}
+
+#myDIV {
+  animation: mymove 5s infinite;
+}
+
+@keyframes mymove {
+  50% {text-shadow: 10px 20px 30px skyblue;}
+}
+</style>
+
+  <style>
+        .messages {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .messages li {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #333333;
+            background-color: #F5F5F5;
+            border: 1px solid #CCCCCC;
+            border-radius: 5px;
+        }
+
+        .loading-icon {
+            display: inline-block;
+            animation: spin 1s infinite linear;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .messages li.success {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .messages li.error {
+            background-color: #FFEBEE;
+            color: #C62828;
+        }
+        body{
+          height: auto;
+        }
+
+        @media (max-width: 1279px){
+          .mobile-nav-show {
+            color: rgba(73, 70, 70, 0.6);
+            font-size: 28px;
+            cursor: pointer;
+            line-height: 0;
+            transition: 0.5s;
+            z-index: 9999;
+            margin-right: 10px;
+          }
+        }
+
+        #google_element{
+          padding-top: 18px;
+          padding-left: 5px;
+        }
+        @media(max-width:720px){
+          #google_element{
+            margin-left:15px;
+          }
+          .goog-te-combo{
+            width:100px;
+          }
+        }
+        #google_element span{
+          display:none;
+        }
+        iframe{
+          display:none;
+        }
+        .goog-te-gadget .goog-te-combo {
+          margin-top: 10px;
+          height: 25px;
+          border-radius: 5px;
+          font-weight: 700;
+        }
+        .translated-ltr{
+          margin-top: -40px;
+        }
+        .goog-te-banner-frame{
+          display: none;
+          margin-top : -20px;
+        }
+        .goog-logo-link{
+          display: none !important;
+        }
+        .goog-te-gadget{
+          color: transparent !important;
+          padding-top:10px;
+        }
+
+        button#reference_id {
+          width: 100%;
+      }
+
+      label {
+        display: inline-block;
+        padding: 5px;
+        margin-bottom: 5px;
+        color: #0496ad;
+        height: 48px;
+        margin-right: 10px;
+        width: 54%;
+        font-weight:700;
+        font-size:20px;
+    }
+
+      .modal {
+        position: fixed; /* positioning in center of page */
+        top: 50vh;
+        left: 50vw;
+        transform: translate(-50%,-50%);
+        height: 300px; /* size */
+        border-radius: 5px;
+        width: 600px;
+        background-color: white; /* background color */
+      }
+
+      .refId{
+        padding: 5px;
+        height: 48px;
+        display: flex;
+        margin-left: 20%;
+        border-radius: 10px;
+        border: 0.2px solid black;
+        margin-right: 20%;
+        margin-bottom: 10px;
+        width: 60%;
+      }
+
+      @media(max-width:640px){
+        .modal{
+          width: 90%;
+        }
+        label{
+          width:64%;
+          margin-bottom : 35px;
+        }
+        .refId{
+          padding: 5px;
+          height: 48px;
+          display: flex;
+          margin-left: 20%;
+          border-radius: 10px;
+          border: 0.2px solid black;
+          margin-right: 20%;
+          margin-bottom: 10px;
+          width: 60%;
+        }
+      }
+    </style>
+    <script>
+        // Delay message alert removal after a specified duration
+        document.addEventListener("DOMContentLoaded", function() {
+            var messageElements = document.getElementsByClassName("message");
+            var duration = 5000; // Adjust the duration in milliseconds (5 seconds in this example)
+
+            Array.from(messageElements).forEach(function(element) {
+                // Create a loading icon
+                var loadingIcon = document.createElement("span");
+                loadingIcon.className = "loading-icon";
+                loadingIcon.innerHTML = "&#x21BB;"; // You can customize the loading icon here
+
+                // Append the loading icon to the message element
+                element.appendChild(loadingIcon);
+
+                // Hide the loading icon after the specified duration
+                setTimeout(function() {
+                    loadingIcon.style.display = "none";
+                }, duration - 1000); // Hide the loading icon 1 second before the message disappears
+
+                // Hide the message element after the specified duration
+                setTimeout(function() {
+                    element.style.display = "none";
+                }, duration);
+            });
+        });
+    </script>
+</head>
+
+<body style="background-color: #f0f1f2;">
+  <header id="header" class="header d-flex align-items-center">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="{% url 'dashboard' %}" class="logo d-flex">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 id ="myDIV">Recruitment Portal<span>.</span></h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="{% url 'heading' %}" style="color:black;">Home</a></li>
+          
+          <li class="dropdown"><a href="#" style="color:black;"><span>Welcome, {{username}}</span> </a>
+            {% comment %} <i class="bi bi-chevron-down dropdown-indicator"></i> {% endcomment %}
+            <ul>
+              <li><a href="{% url 'change_password' %}" style="color:black;">Change Password </a></li>
+            </ul>
+          </li>
+          
+          <li><a href="Logout"><button class="second_button" style="width:100px; height:40px;">Logout</button></a></li>
+
+          <li id="google_element" style="width:100px;"></li>
+        </ul>
+        {% comment %} <div id="google_element"></div> {% endcomment %}
+      </nav><!-- .navbar -->
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+<div class="layout-main candidate-portal" style="background:#f0f1f2;">
+  <div class="site-width" style="min-height: 1400px;">
+   
+    <section id="hero" class="hero">
+      {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+          <li {% if message.tags %} class="{{ message.tags }} message"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+      {% if profile.status == 4 %}
+      <div style="border: 0.3px solid rgb(49, 49, 49); text-align: center;">
+          <a href="{% url 'show_exam_result' id=profile.id %}" >
+            <p style="color: rgb(247, 243, 243);margin-bottom: 0px; padding: 10px;" >Your exam results are available,to see the result click here >></p>
+          </a>
+      </div>
+      {% elif profile.status == 5 %}
+      <div style="border: 0.3px solid rgb(49, 49, 49); text-align: center;">
+        <a href="#" class="stretched-link">
+          <p style="color: rgb(247, 243, 243);margin-bottom: 0px; padding: 10px;" >Your Interview is Scheduled below are the Details</p>
+        </a>
+      </div>
+
+      <div class="position-relative">
+        <div class="container position-relative" style="margin-top: 0px;">
+          <div class="gy-4 mt-5" style="display: flex; justify-content: space-between;">
+            <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon-box" style="width: 230%; margin-left: 83%; padding: 10px;">
+                <div style="margin-left: 23%; width: 45%;">
+                  <h4 style="color: white;">Interview Details</h4>
+                  <div class="d-flex">
+                      <p class="msg_text_1">Interview Date:-</p>
+                      <pre>    </pre>
+                      <p class="msg_text_2">{{profile.interview_date}}</p>
+                  </div>
+                  <div class="d-flex">
+                      <p class="msg_text_1">Interview Time:- </p>
+                      <pre>    </pre>
+                      <p class="msg_text_2">{{profile.interview_time}}</p>
+                  </div>
+                  <div class="d-flex">
+                      <p class="msg_text_1">Position ShortListed For:-</p>
+                      <pre>    </pre>
+                      <p class="msg_text_2">{{profile.position_shortlisted_for}}</p>
+                  </div>
+                  <div class="d-flex">
+                      <p class="msg_text_1">Branch Shortlisted For :-</p>
+                      <pre>    </pre>
+                      <p class="msg_text_2">{{profile.branch_shortlisted_for}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% else %}
+      {% endif %}
+      
+      <div class="position-relative">
+        <div class="container position-relative" style="margin-bottom: 50px;">
+          <div class="gy-4 mt-5" style="justify-content: space-between;">
+
+
+            {% comment %} <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon-box">
+                <div class="icon"><i class="bi bi-gem"></i></div>
+                <h4 class="title"><a href="{% url 'application_status' %}" class="stretched-link" >Application status</a></h4>
+              </div>
+            </div> {% endcomment %}
+
+            <div class="card-cp ng-star-inserted">
+              <a class="card-inner-cp card-cp-wt cursor" href="{% url 'candidate_application_status' email=request.user.email %}">
+                <h3 class="title-large theme-color"></h3>
+                <span id="threed" class="title20 ng-star-inserted">Applied Vacancies</span>
+              </a>
+            </div>
+
+            {% comment %} <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon-box">
+                <div class="icon"><i class="bi bi-easel"></i></div>
+                <h4 class="title"><a href="{% url 'application_status' %}" class="stretched-link">View Profile</a></h4>
+              </div>
+            </div> {% endcomment %}
+
+            <div class="card-cp ng-star-inserted">
+              <a class="card-inner-cp card-cp-wt cursor" href="{% url 'view_candidate_profile' email=request.user.email %}">
+                <h3 class="title-large theme-color"></h3>
+                <span class="title20 ng-star-inserted">View Profile</span>
+              </a>
+            </div>
+
+            {% comment %} <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon-box">
+                <div class="icon"><i class="bi bi-geo-alt"></i></div>
+                <h4 class="title"><a href="{% url 'home_page' %}" class="stretched-link">Check status by reference ID</a></h4>
+              </div>
+            </div> {% endcomment %}
+
+            <div class="card-cp ng-star-inserted">
+              <button type="button" id="referenceButton" class="card-inner-cp card-cp-wt cursor" style="border:none;width:100%;">
+                <h3 class="title-large theme-color" style="padding-top:0px; border:none;"></h3>
+                <span class="title20 ng-star-inserted">Check status by reference ID</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+  
+{% comment %} <div class="overlay"> {% endcomment %}
+  <div id="referenceModal" class="modal">
+    <div class="modal-content" style="height:100%;">
+      <span class="close" style="padding-left: 10px;cursor: pointer;font-size:25px;">&times;</span>  
+      <div class="modal-body text-center font-18">
+        <form action="{% url 'profile' %}" method="POST" style="width: 100%">
+          {% csrf_token %}
+          <label for="referenceID">Check Status By Reference ID</label><br>
+          <input type="text" name="refId" class="refId"placeholder="Enter Reference ID" required>
+          <button type="submit" class="btn-get-started" style="border-radius: 30px;width: 130px;height: 30px;">Check Status</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% comment %} </div> {% endcomment %}
+
+    <section class="vacancy">
+      <div class="container">
+        <div id="myDIV">
+          <h1 class="section-title" style="margin-top:30px; margin-bottom:25px;"> WalkIn Positions <span style="color: #f96f59;">.</span></h1>
+        </div>
+
+        <div class="d-flex flex-wrap" style="gap:1.5rem 10rem;">
+          {% if vacancies %}
+          {% for vacancy in vacancies %}
+
+          <div class=" wow fadeInUp card p-4 " style="background-color: #fff;box-shadow: 0px 3px 4px 2px rgba(0,0,0,0.3);border-radius: 6px;margin-bottom: 5px;" data-wow-delay="0.1s" id="received">
+            <div class="card-item card-button" style="min-height:260px;margin-bottom:8px;">
+                <a class="cat-item rounded " href="{% url 'vacancy_card_details' vacancy.id %}"> 
+                  <p class="mb-0" style="color:#494949;font-weight: 800; margin-bottom: -0.5rem;font-size:21px;
+                  margin-top: -0.5rem;">{{vacancy.job_role}}</p>
+                  
+                  {% comment %} <ul class="mb-0" style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;font-weight: 500;">
+                    <li> Branch Name :- <span style="font-weight: 600;font-size: 13px"> {{ vacancy.branch_name }}  </span><li>
+                    <li>Posted On:- <span style="font-weight: 600;font-size: 13px"> {{ vacancy.posted_on }} </span></li>
+                  </ul> {% endcomment %}
+
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 600;margin-top: 0.5rem">Branch Name:  <span style="font-weight: 800;font-size: 13px;"> {{ vacancy.branch_name }} </span> </p>
+
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Posted On:  <span style="color: #6da4d8;font-weight: 800;font-size: 13px;"> {{ vacancy.vacancy_date }} </span> </p>
+  
+                  {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">No. of Vacancies: <span style="font-weight: 800;font-size: 13px;"> {{ vacancy.no_of_vacancies }} </span> </p> {% endcomment %}
+                
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Qualification: <span style="font-weight: 800;font-size: 13px;">{{  vacancy.qualification_type }}</span> <br>
+                 
+                  {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Salary:<span style="font-weight: 800;font-size: 13px;"> &#x20b9; {{ vacancy.salary }} </span> </p> {% endcomment %}
+  
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Experience:<span style="font-weight: 800;font-size: 13px;"> {{ vacancy.required_experience }} Years</span> </p>
+                  
+                  <div class="required-experience-row">
+                    <span class="required-cell">Required Skills</span> 
+                    <div class="skill-row">
+                      <div class="scroll-main scroll-h92 scrollCustome">
+                        {% for skill in vacancy.required_skills %}
+                        <span class="tag-job">{{skill}}</span>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+            </div>
+            <div class="buttons">
+              <a href="{% url 'vacancy_card_details' vacancy.id %}"><button class="second_button">View Details</button></a>
+            </div>
+  
+          </div>
+          {% comment %} <div class=" wow fadeInUp card p-4 " style="flex-basis: 25%; max-width: 23%;background-color: #fff;" data-wow-delay="0.1s" id="received">
+            <div class="card-item card-button" style="height:260px;">
+                <a class="cat-item rounded " href="{% url 'vacancy_card_details' vacancy.id %}"> 
+                  <h5 class="mb-3" style="color:#000000ba;font-weight: 600;">{{ vacancy.branch_name }} </h5>
+                  <hr>
+                  <p class="mb-0" style="color:#000000ba">No. of Vacancies :- {{ vacancy.no_of_vacancies }} </p>
+                  <hr>
+                  <p class="mb-0" style="color:#000000ba">Qualification :- {{  vacancy.qualification_type }} <br>
+                  <hr>
+                  <p class="mb-0" style="color:#000000ba">Salary:-{{ vacancy.salary }}  </p>
+                </a>
+            </div>
+          </div> {% endcomment %}
+          {% endfor %}
+          {% else %}
+        <p>No vacancies are available right now. Please try again later.</p>
+      {% endif %}
+        </div>
+      </div>
+    </section>
+
+    <section class="vacancy">
+      <div class="container">
+        <div id="myDIV">
+          <h1 class="section-title" style="margin-top:30px; margin-bottom:25px;"> Open Positions <span style="color: #f96f59;">.</span></h1>
+        </div>
+
+        <div class="d-flex flex-wrap" style="gap:1.5rem 10rem;">
+          {% if vacancies1 %}
+          {% for vacancy in vacancies1 %}
+
+          <div class=" wow fadeInUp card p-4 " style="background-color: #fff;box-shadow: 0px 3px 4px 2px rgba(0,0,0,0.3);border-radius: 6px;margin-bottom: 5px;" data-wow-delay="0.1s" id="received">
+            <div class="card-item card-button" style="min-height:260px;margin-bottom:8px;">
+                <a class="cat-item rounded " href="{% url 'vacancy_card_details' vacancy.id %}"> 
+                  <p class="mb-0" style="color:#494949;font-weight: 800; margin-bottom: -0.5rem;font-size:21px;
+                  margin-top: -0.5rem;">{{vacancy.job_role}}</p>
+                  
+                  {% comment %} <ul class="mb-0" style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;font-weight: 500;">
+                    <li> Branch Name :- <span style="font-weight: 600;font-size: 13px"> {{ vacancy.branch_name }}  </span><li>
+                    <li>Posted On:- <span style="font-weight: 600;font-size: 13px"> {{ vacancy.posted_on }} </span></li>
+                  </ul> {% endcomment %}
+
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 600;margin-top: 0.5rem">Branch Name:  <span style="font-weight: 800;font-size: 13px;"> {{ vacancy.branch_name }} </span> </p>
+
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Posted On:  <span style="color: #6da4d8;font-weight: 800;font-size: 13px;"> {{ vacancy.vacancy_date }} </span> </p>
+  
+                  {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">No. of Vacancies: <span style="font-weight: 800;font-size: 13px;"> {{ vacancy.no_of_vacancies }} </span> </p> {% endcomment %}
+                
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Qualification: <span style="font-weight: 800;font-size: 13px;">{{  vacancy.qualification_type }}</span> <br>
+                 
+                  {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Salary:<span style="font-weight: 800;font-size: 13px;"> &#x20b9; {{ vacancy.salary }} </span> </p> {% endcomment %}
+  
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Experience:<span style="font-weight: 800;font-size: 13px;"> {{ vacancy.required_experience }} Years</span> </p>
+                  
+                  <div class="required-experience-row">
+                    <span class="required-cell">Required Skills</span> 
+                    <div class="skill-row">
+                      <div class="scroll-main scroll-h92 scrollCustome">
+                        {% for skill in vacancy.required_skills %}
+                        <span class="tag-job">{{skill}}</span>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+            </div>
+            <div class="buttons">
+              <a href="{% url 'apply_for_vacancy' vacancy.id %}"><button class="second_button">Apply</button></a>
+            </div>
+  
+          </div>
+          {% comment %} <div class=" wow fadeInUp card p-4 " style="flex-basis: 25%; max-width: 23%;background-color: #fff;" data-wow-delay="0.1s" id="received">
+            <div class="card-item card-button" style="height:260px;">
+                <a class="cat-item rounded " href="{% url 'vacancy_card_details' vacancy.id %}"> 
+                  <h5 class="mb-3" style="color:#000000ba;font-weight: 600;">{{ vacancy.branch_name }} </h5>
+                  <hr>
+                  <p class="mb-0" style="color:#000000ba">No. of Vacancies :- {{ vacancy.no_of_vacancies }} </p>
+                  <hr>
+                  <p class="mb-0" style="color:#000000ba">Qualification :- {{  vacancy.qualification_type }} <br>
+                  <hr>
+                  <p class="mb-0" style="color:#000000ba">Salary:-{{ vacancy.salary }}  </p>
+                </a>
+            </div>
+          </div> {% endcomment %}
+          {% endfor %}
+          {% else %}
+        <p>No vacancies are available right now. Please try again later.</p>
+      {% endif %}
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+</div>
+  <!-- End Hero Section -->
+
+  <!-- ======= Footer ======= -->
+  <!-- <footer id="footer" class="footer" style="padding: 1px;">
+    <div class="container mt-4">
+      <div class="copyright">
+        &copy; 2022 Sonata Finance Pvt. Ltd. All Rights Reserved
+      </div>
+    </div>
+
+  </footer> -->
+  <!-- End Footer -->
+  <button class="btn btn-lg btn-primary  back-to-top" onclick="history.back()">&#129052</button>
+  {% comment %} <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> {% endcomment %}
+
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <script src ="http://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
+  <script>
+    function loadGoogleTranslate(){
+      new google.translate.TranslateElement({
+        defaultLanguage :"en",
+        pageLanguage : "en",
+        includedLanguages : 'hi,en',
+        multilanguagePage : true},"google_element")
+    };
+  </script>
+  <script>
+    var referenceModal = document.getElementById("referenceModal");
+    var referenceButton = document.getElementById("referenceButton");
+    var closeSpans = document.getElementsByClassName("close");
+    var closeModal = document.getElementsByClassName("close");
+
+    referenceButton.onclick = function() {
+      referenceModal.style.display = "block";
+    };
+
+    closeModal.onclick = function(){
+      referenceModal.style.display = "None";
+    }
+
+   // Close the modals when the <span> element is clicked
+    for (var i = 0; i < closeSpans.length; i++) {
+      closeSpans[i].onclick = function() {
+        referenceModal.style.display = "none";
+      };
+    };
+  
+    // Close the modals when clicking anywhere outside of them
+    window.onclick = function(event) {
+      if (event.target == referenceModal) {
+        referenceModal.style.display = "none";
+      }
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block main_content %}
+
+{% load static %}
+<style>
+
+  .data{
+    margin-top:60px;
+  }
+
+  .col-md-12{
+    width:100%;
+    margin-bottom: 10px;
+  }
+
+  @media (min-width: 640px){
+    .wow{
+      width:25%;
+      display:block;
+    }
+  }
+
+  .card{
+    height:100%;
+  }
+
+  @media (min-width: 720px){
+    .flex-wrap{
+      display: flex!important;
+    }
+    }
+
+  .wow{
+    margin-bottom: 15px;
+    
+  }
+
+  @media (max-width: 1279px){
+    .mobile-nav-show {
+      color: rgba(73, 70, 70, 0.6);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 0;
+      transition: 0.5s;
+      z-index: 9999;
+      margin-right: 10px;
+    }
+  }
+
+
+</style>
+
+
+<div class="data">
+    <div class="container-xxl py-3" >
+        <div class="container">
+          <div class="row g-4">
+            <div class='d-flex justify-content-between align-item-center'>
+
+              <div >
+
+              <h1 style="color: #000000ba;font-weight: 600;">Question Sheets</h1>
+
+              </div>
+
+              {% comment %} <div >
+                    <a  href="{% url 'postjob' %}"> 
+                      <button class="btn p-4  btn-primary btn-lg d-flex gap-3 justify-content-center align-items-center" type="button">Add Vacancy <i class="bi bi-plus-square-fill"></i>                      
+                      </button>
+                    </a>
+              </div> {% endcomment %}
+
+            </div>
+            <hr>
+
+            <div class="flex-wrap" style="gap:1rem 1.4rem;">
+             {% for q in sheets %}
+              <div class="wow fadeInUp" data-wow-delay="0.1s" id="received">
+                <div class="card-item card-button">
+                   <a class="cat-item rounded"href="{% url 'quest_sheetlist_details' sheet_id=q.sheet_id %}"> 
+                      {% for w in questions %}
+                      {% if w.sheet_id == q.sheet_id %}
+                       {% comment %} <div style="background-color: #00008B; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin: -20px -20px 0;">          {% endcomment %}
+                        <h6 class="mb-3" style="color: #000000ba;font-weight: 600; margin: 0;text-align:center;">Sheet Id </h6>
+                        {% comment %} </div> {% endcomment %}
+                        <hr>
+                        <p class="mb-0" style="color:#000000ba;font-weight: 600;text-align:center;">{{q.sheet_id}} </p>
+                        <hr>
+                        <h6 class="mb-3" style="color: #000000ba;font-weight: 600; margin: 0; text-align:center;">No.of Question </h6>
+                        <hr>
+                        <p class="mb-0" style="color:#000000ba;font-weight: 600;text-align:center;">{{w.sheet_id__count}} </p>                      
+                        {% endif %}  
+                        {% endfor %}
+                    </a>
+                </div>
+              </div>
+           {% endfor %}
+            </div>
+          </div>
+        </div>
+    </div>   
+
+</div>
+
+
+{% endblock main_content%}
