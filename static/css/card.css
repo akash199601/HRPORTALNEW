@@ -114,3 +114,108 @@ button.primary.ghost {
   .goog-te-gadget{
 	color: transparent !important;
   }
+
+
+
+  .item_list .info_title {
+    font-size: 26px;
+    font-family: 'DIN Bold';
+    line-height: 0.94;
+    letter-spacing: -0.5px;
+    color: #a8407f;
+    background-color: #e3e3e3;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+.item_list {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+ul {
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.item_list li.first_row_btn {
+    padding: 0px !important;
+    box-shadow: none !important;
+    background: none !important;
+}
+
+.item_list_block {
+    width: 100%;
+    clear: both;
+    background-color: #fff;
+    margin-bottom: 10px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    position: relative;
+
+}
+
+.count_Icon {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    position: relative;
+    border: solid 0.5px #a8407f;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 27px;
+    text-align: center;
+    letter-spacing: -0.5px;
+    color: #a8407f;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 1;
+    margin-right: 10px;
+}
+
+.step_open .form_outer {
+    display: block;
+}
+
+.item_list .form_outer {
+    display: none;
+    padding: 15px;
+}
+
+.panel-row {
+    margin-bottom: 5px;
+}
+
+.material-icons {
+    cursor: pointer;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+}
+
+.panel-body {
+    padding: 13px 15px 15px 15px;
+}
+
+.panel-body:before {
+    display: table;
+    content: "";
+}

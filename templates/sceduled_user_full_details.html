@@ -223,23 +223,33 @@ textarea{
     }
   }
 
+  .container-content{
+    width:80%;
+    margin-left:40px;
+}
 </style>
         {% include 'progress_bar.html' %}
         {% comment %} {% include 'calender.html' %} {% endcomment %}
 
 
-        <div class="action-buttons" style="display: flex; justify-content: flex-end; margin-right: 5%;">
-            <div style="display: flex;">
-              <div style="margin: 5%;">
-                <button type="button" id="acceptButton" class="btn btn-success" style="width: 100%;">
-                  Accept
-                </button>
-              </div>
-              <div style="margin: 5%;">
-                <button type="button" id="rejectButton" class="btn btn-danger" style="width: 100%;">
-                  Reject
-                </button>
-              </div>
+        <div class="action-buttons" style="display: flex; justify-content: flex-end; width: 80%; margin-left: 15px;">
+            <div style="display: flex;width: 300px;">
+                <div style="margin: 5%;">
+                    <button type="button" class="btn btn-primary" style="width: 100%;">
+                        <a href="{% url 'show_exam_result' user_profile.id application.application_id %}" style="color:white;text-decoration: none;">Exam Result</a>
+                    </button>
+                </div>
+                <div style="margin: 5%;">
+                  <button type="button" id="acceptButton" class="btn btn-success" style="width: 100%;">
+                    Accept
+                  </button>
+                </div>
+                <div style="margin: 5%;">
+                  <button type="button" id="rejectButton" class="btn btn-danger" style="width: 100%;">
+                    Reject
+                  </button>
+                </div>
+
             </div>
         </div>
           
@@ -258,6 +268,7 @@ textarea{
                         <button type="button" id="accept_modal_close" class="btn btn-danger border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
                         NO
                     </div>
+
                 </div>
             </div>
             </div>
@@ -327,7 +338,7 @@ textarea{
           
 
         <!-- Job Detail Start -->
-        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container-content py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="cam-shot" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" class="active"></li>
@@ -360,10 +371,8 @@ textarea{
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-            <div class="container">
-                <div class="jumbotron" style="margin-bottom:-30px; margin-top: -20px;margin-right:20px;">
-                    <a class="btn btn-primary" style="" href="{% url 'show_exam_result' user_profile.id application.application_id %}">Exam Result</a>
-                </div>
+            <div class="containers">
+            
 
                 <div class="basic-details-card">
                     <ul class="item_list">
@@ -860,11 +869,7 @@ textarea{
         })
         .catch(error => console.error(error));
     }
-    
-    
-    
 </script>
-
 
 <script>
     // Get the modal elements
@@ -917,7 +922,6 @@ textarea{
   </script>
 
     <script>
-    
         function showalert1(){
             mydiv = document.getElementById("schedule_form");
             accept = document.getElementById('acceptModal');
@@ -933,7 +937,6 @@ textarea{
             alert('Interview has been reject Successfully');
         }
     </script>
-
 
     {% endblock main_content%}
 

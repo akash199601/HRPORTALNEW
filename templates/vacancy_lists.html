@@ -26,7 +26,7 @@
         }
 
         .scroll-h92 {
-          max-height: 92px;
+          max-height: 82px;
         }
         
         .scroll-main {
@@ -81,7 +81,7 @@
     </style>
     <link href="{% static 'css/vacancy_style.css' %}" rel="stylesheet">
 
-<div class="data" style="margin-top: 80px">
+<div class="data" >
     <div class="container-xxl py-3" >
         <div class="container">
           <div class="row g-4">
@@ -102,36 +102,12 @@
 
             </div>
             <hr>
-            {% comment %} <form id="filter-form">
-              {% csrf_token %}
-              <label for="positionFilter" class="form-label">Select a position:</label>
-              <select id="positionFilter" onchange="fetchBranchOptions(this.value)" class="form-control">
-                  <option value="None">All Positions</option>
-                  {% for position in distinct_positions %}
-                      <option value="{{ position }}">{{ position }}</option>
-                  {% endfor %}
-              </select>
-
-              <label for="branchFilter" class="form-label">Select a branch:</label>
-              <select id="branchFilter" class="form-control">
-                  <option value="None">All Branches</option>
-                  <!-- Options will be populated dynamically using JavaScript -->
-              </select>
-
-              <button type="button" id="filter-button" class="btn btn-primary">Filter</button>
-              <button id="filter-button" class="btn btn-primary" onclick="filterSelection('all')">Clear Filter</button>
-            </form> {% endcomment %}
 
             <div style="color:#FFFFFF">
-
               <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;">WalkIn Positions</h1>
-
               </div>
-
             <div class="section-card clearfix ng-star-inserted" id="filtered-results" style="margin-bottom: 30px">
-
-              {% for vac in vacancy1 %}
-             
+              {% for vac in vacancy1 %}             
               <div class="card-block card-3 card-height269" style="height: 297px; width:310px;margin-bottom:30px;" data-wow-delay="0.1s" id="received">
                 <div class="card-block-inner" style="height:100%;">
                     <a class="cat-item rounded " href="{% url 'vacancy_card_details' vac.id %}"> 
@@ -139,13 +115,10 @@
                       <h2 class="title title_block text_inherit" style="color:#494949;font-weight: 600; margin-bottom: -0.5rem;font-size:21px;
                       margin-top: -0.5rem;">{{vac.job_role}}<span>..</span></h2>
                       </div>
-
                       <div class="card-row">
-                        <ul class="list-reset clearfix listing-inline"> {# style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;"> #} 
-                          
+                        <ul class="list-reset clearfix listing-inline"> {# style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;"> #}                         
                           <li> Branch Name  <span style="font-weight: 600;"> {{ vac.branch_name }}  </span><li>
-                          <li class="last-child position-rel">Posted On <span class="link2" >{{ vac.vacancy_date }} </span></li>
-                          
+                          <li class="last-child position-rel">Posted On <span class="link2" >{{ vac.vacancy_date }} </span></li>                         
                         </ul>
                       </div>
                       <div class="card-row">
@@ -177,32 +150,21 @@
                            {% endif %}
                           </div>
                         </div>
-                      </div>
-              
+                      </div>             
                       <input type="hidden" value="{{vac.interview_date}}" id="interview_date">
-                      <p id="interview_status" style="margin-top: 15px;float:right;"></p>
-              
-                    </a>
-                   
+                      <p id="interview_status" style="margin-top: 15px;float:right;"></p>             
+                    </a>                  
                 </div>
-              </div>
-             
-              {% endfor %}
-              
+              </div>            
+              {% endfor %}              
             </div>
-
 
 {% comment %} Open position {% endcomment %}
 <div style="color:#FFFFFF">
-
   <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;">Open Positions</h1>
-
   </div>
-
 <div class="section-card clearfix ng-star-inserted" id="filtered-results" style="margin-bottom: 30px">
-
   {% for vac in vacancy %}
- 
   <div class="card-block card-3 card-height269" style="height: 297px; width:310px;margin-bottom:30px;" data-wow-delay="0.1s" id="received">
     <div class="card-block-inner" style="height:100%;">
         <a class="cat-item rounded " href="{% url 'vacancy_card_details' vac.id %}"> 
@@ -210,13 +172,10 @@
           <h2 class="title title_block text_inherit" style="color:#494949;font-weight: 600; margin-bottom: -0.5rem;font-size:21px;
           margin-top: -0.5rem;">{{vac.job_role}}<span>..</span></h2>
           </div>
-
           <div class="card-row">
-            <ul class="list-reset clearfix listing-inline"> {# style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;"> #} 
-              
+            <ul class="list-reset clearfix listing-inline"> {# style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;"> #}             
               <li> Branch Name  <span style="font-weight: 600;"> {{ vac.branch_name }}  </span><li>
-              <li class="last-child position-rel">Posted On <span class="link2" >{{ vac.vacancy_date }} </span></li>
-              
+              <li class="last-child position-rel">Posted On <span class="link2" >{{ vac.vacancy_date }} </span></li>             
             </ul>
           </div>
           <div class="card-row">
@@ -248,31 +207,20 @@
                {% endif %}
               </div>
             </div>
-          </div>
-  
+          </div> 
           {% comment %} <input type="hidden" value="{{vac.interview_date}}" id="interview_date">
-          <p id="interview_status" style="margin-top: 15px;float:right;"></p> {% endcomment %}
-  
-        </a>
-       
+          <p id="interview_status" style="margin-top: 15px;float:right;"></p> {% endcomment %} 
+        </a>      
     </div>
   </div>
- 
-  {% endfor %}
-  
+  {% endfor %} 
 </div>
 
-
 <div style="color:#FFFFFF">
-
   <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;">Closed Positions</h1>
-
   </div>
-
 <div class="section-card clearfix ng-star-inserted" id="filtered-results" style="margin-bottom: 30px">
-
-  {% for vac in vacancy2 %}
- 
+  {% for vac in vacancy2 %} 
   <div class="card-block card-3 card-height269" style="height: 297px; width:310px;margin-bottom:30px;" data-wow-delay="0.1s" id="received">
     <div class="card-block-inner" style="height:100%;">
         <a class="cat-item rounded " href="{% url 'vacancy_card_details' vac.id %}"> 
@@ -280,13 +228,10 @@
           <h2 class="title title_block text_inherit" style="color:#494949;font-weight: 600; margin-bottom: -0.5rem;font-size:21px;
           margin-top: -0.5rem;">{{vac.job_role}}<span>..</span></h2>
           </div>
-
           <div class="card-row">
-            <ul class="list-reset clearfix listing-inline"> {# style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;"> #} 
-              
+            <ul class="list-reset clearfix listing-inline"> {# style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;"> #}               
               <li> Branch Name  <span style="font-weight: 600;"> {{ vac.branch_name }}  </span><li>
-              <li class="last-child position-rel">Posted On <span class="link2" >{{ vac.vacancy_date }} </span></li>
-              
+              <li class="last-child position-rel">Posted On <span class="link2" >{{ vac.vacancy_date }} </span></li>             
             </ul>
           </div>
           <div class="card-row">
@@ -318,18 +263,13 @@
                {% endif %}
               </div>
             </div>
-          </div>
-  
+          </div> 
           {% comment %} <input type="hidden" value="{{vac.interview_date}}" id="interview_date">
-          <p id="interview_status" style="margin-top: 15px;float:right;"></p> {% endcomment %}
-  
-        </a>
-       
+          <p id="interview_status" style="margin-top: 15px;float:right;"></p> {% endcomment %} 
+        </a>      
     </div>
-  </div>
- 
-  {% endfor %}
-  
+  </div> 
+  {% endfor %} 
 </div>
 
 
@@ -447,7 +387,6 @@ function fetchBranchOptions(selectedPosition) {
         });
     });
 
-
 //clear filter and show all vacancy
 filterSelection("all")
 function filterSelection(c) {
@@ -459,32 +398,24 @@ function filterSelection(c) {
     if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
   }
 }
-
 </script>
 
 {% comment %} <script>
-
   let today= new Date();
-
   let t = today.getDate()+ "-" + (today.getMonth()+1) + "-" + today.getFullYear()
   console.log(t); 
-
   let posted =document.getElementById('interview_date').value;
   console.log("date",posted)
-  
   if (posted >= t){
     console.log("interview_active");
     document.getElementById("interview_status").innerHTML = "Interview Active";
     document.getElementById("interview_status").style.color="green";
-
   }
   else{
     console.log("interview expired");
     document.getElementById("interview_status").innerHTML = "Interview Closed";
     document.getElementById("interview_status").style.color="red";
   }
-
-
 </script>   {% endcomment %}
 
 {% endblock main_content%}

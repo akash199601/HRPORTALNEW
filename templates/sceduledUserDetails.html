@@ -84,115 +84,19 @@
           }
         }
 
+        .container-fluid{
+          margin : 0px;
+        }
+
     </style>
   
   
-<!--Pagination-->
-{% comment %} <div style="margin-top:20px;">
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    {% if ticket.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ ticket.previous_page_number }}">Previous</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Previous</a>
-      </li>
-    {% endif %}
-    {% for i in ticket.paginator.page_range %}
-      {% if ticket.number == i %}
-        <li class="page-item active" aria-current="page">
-          <span class="page-link">
-            {{ i }}
-            <span class="sr-only">(current)</span>
-          </span>
-        </li>
-      {% else %}
-        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if ticket.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ ticket.next_page_number }}">Next</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Next</a>
-      </li>
-    {% endif %}
-  </ul>
-</nav>
-</div> {% endcomment %}
-<!--end of Pagination-->
-<div class="data">
- {% comment %} <div class ="table-data">
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Job Title</th>
-            <th scope="col">Company Name</th>
-            <th scope="col">Published On</th>
-            <th scope="col">Total Vacancies</th>
-            <th scrope="col">Required Experience</th>
-            <th scope="col">Candidate Name</th>
-            <th scope="col">Candidate Email</th>
-            <th scope="col">Candidate Mobile No.</th>
-            <th scope="col">Cover Letter</th>
-            <th scope="col">Candidate Resume</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for x in ticket %}
-          <tr>
-            <td>{{x.id}}</td>
-            <td>{{x.joblisting.title}}</td>
-            <td>{{x.joblisting.company_name}}</td>
-            <td>{{x.joblisting.published_on}}</td>
-            <td>{{x.joblisting.vacancy}}</td>
-            <td>{{x.joblisting.minimum_exp.minimum}} - {{x.joblisting.maximum_exp.maximum}}</td>
-            <td>{{x.name}}</td>
-            <td>{{x.email}}</td>
-            <td>{{x.mobile_no}}</td>
-            <td>{{x.coverletter}}</td>
-            <td>
-              {% if x.file %}
-              <button type="button"><a href="{{x.file.url}}">Resume</a></button>
-              {% endif %}
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-    </table>
-  </div>  {% endcomment %}
-
- 
+{% comment %} <div class="data">
     <div class="container-xxl py-3">
     <div class="container">
       <div class="row g-4">
         <h1 style="color: #000000ba;font-weight: 600;">Schedule Interviews</h1>
         <hr>
-        {% comment %} <form id="filter-form">
-              {% csrf_token %}
-              <label for="positionFilter" class="form-label">Select a position:</label>
-              <select id="positionFilter" onchange="fetchBranchOptions(this.value)" class="form-control">
-                  <option value="None">All Positions</option>
-                  {% for position in distinct_positions %}
-                      <option value="{{ position }}">{{ position }}</option>
-                  {% endfor %}
-              </select>
-
-              <label for="branchFilter" class="form-label">Select a branch:</label>
-              <select id="branchFilter" class="form-control">
-                  <option value="None">All Branches</option>
-                  <!-- Options will be populated dynamically using JavaScript -->
-              </select>
-
-              <button type="button" id="filter-button" class="btn btn-primary">Filter</button>
-              <button id="filter-button" class="btn btn-primary" onclick="filterSelection('all')">Clear Filter</button>
-
-          </form> {% endcomment %}
 
         <div class="flex-wrap" style="gap: 1rem 1.4rem;" id="filtered-results">
           {% for x in applicants %}
@@ -216,27 +120,6 @@
               </div>
             </div>
           </div>
-
-          {% comment %} <div class="wow fadeInUp" style="flex-basis: 22%; max-width: 25%; background-color: white; border: radius #FFFFFF; border-radius: 10px;" data-wow-delay="0.1s" id="received">
-            <div class="card-item card-button">
-              <a class="cat-item rounded " href="{% url 'sceduled_user_full_details' refId=x.id %}" style="text-decoration: none;">
-                  <h6 class="mb-3" style="color: #000000ba;font-weight: 600; margin: 0;">Name: {{ x.name }} </h6>
-                <hr>
-                <p class="mb-0" style="color: #000000ba;font-weight: 600;">Email: {{ x.email }}</p>
-                <hr>
-                <p class="mb-0" style="color: #000000ba;font-weight: 600;">Mobile No.: {{ x.mobile_no }}</p>
-                <hr>
-                <p class="mb-0" style="color: #000000ba;font-weight: 600;">Age: <br></p>
-                <hr>
-                <p class="mb-0" style="color: #000000ba;font-weight: 600;">City: </p>
-                <hr>
-                <p class="mb-0" style="color: #000000ba;font-weight: 600;">Cover Letter: {{ x.file }}</p>
-                <ul>
-                  <li> </li>
-                </ul>
-              </a>
-            </div>
-          </div> {% endcomment %}
           {% empty %}
           <h3 style="color: #000000ba;"> No candidates have been scheduled for the interview. </h3>
           {% endfor %}
@@ -244,7 +127,44 @@
       </div>
     </div>
   </div>
-</div>
+</div> {% endcomment %}
+
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title"> Schedule Interviews </h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Basic Table</h4>
+            <p class="card-description"> Add class <code>.table</code>
+            </p>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Mobile No.</th>
+                  <th>More Details</th>
+                </tr>
+              </thead>
+              {% for x in applicants %}
+              <tbody>
+                <tr>
+                  <td>{{ x.name }}</td>
+                  <td>{{ x.email }}</td>
+                  <td>{{ x.mobile_no }}</td>
+                  <td><a href="{% url 'sceduled_user_full_details' refId=x.id %}" style="text-decoration:none;"><label class="badge badge-danger">View</label></a></td>
+                </tr>
+              </tbody>
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 
 <script>
 function fetchBranchOptions(selectedPosition) {
