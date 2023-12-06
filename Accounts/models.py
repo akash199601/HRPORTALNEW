@@ -403,6 +403,8 @@ class ApplicationDetails(models.Model):
     reject_reason = models.CharField(max_length=255, null=True, blank=True)
     hold_reason = models.CharField(max_length=255, null=True, blank=True)
     reject_date = models.DateTimeField(null=True, blank=True)
+    bypass = models.CharField(max_length=255,null=True, blank=True)
+    bypass_date = models.DateTimeField(null=True,blank=True)
     candidate_id = models.IntegerField(null=True, blank=True)
     application_date = models.DateTimeField(null=True, blank=True)
     application_status = models.IntegerField(null=True, blank=True)
@@ -549,90 +551,3 @@ class Document_Candidate(models.Model):
     graduate_doc = models.FileField(upload_to='media/',null=True, blank=True)
     class Meta:
         db_table = 'UPLOAD_DOCUMENTS'
-
-
-class WhatsAppConversations(models.Model):
-    MessageID = models.AutoField(primary_key=True)
-    UserID = models.IntegerField()
-    CustomerInfoID = models.IntegerField()
-    ConversationID = models.IntegerField()
-    message_date = models.DateField()
-    message_time = models.TimeField()
-    MessageText = models.TextField()
-    Direction = models.CharField(max_length=15)
-    AttachmentURLs = models.TextField()  # You can use JSONField if you want to store JSON data
-    MessageType = models.CharField(max_length=20)
-    Status = models.CharField(max_length=20)
-    IsRead = models.BooleanField()
-    SequenceNumber = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = "WhatsAppConversations"
-
-class LeadRepositoryDem(models.Model):
-    CustomerInfoID = models.IntegerField()
-    mobile = models.IntegerField()
-    name = models.TextField()
-    opt_in_status = models.BooleanField(default=False)
-    is_lead = models.BooleanField(default=False)
-    is_bot_enabled = models.BooleanField(default=True)
-
-    class Meta:
-        managed = False
-        db_table = "LeadRepositoryDem"
-
-
-class LeadQueue(models.Model):
-    name = models.CharField(max_length=255)
-    is_active = models.BooleanField()
-    lead_id = models.BigIntegerField()
-    stage = models.CharField(max_length=10)
-    status = models.IntegerField()
-    last_messate_sent_datetime = models.DateTimeField()
-    message_send_scheduled_datetime = models.DateTimeField()
-    last_message_sent_response = models.CharField(max_length=255)
-    last_message_sent_exception = models.CharField(max_length=255)
-    task_id = models.IntegerField()
-    counter = models.IntegerField()
-    queue_start_datetime = models.DateTimeField()
-    field1 = models.CharField(max_length=255)
-    field2 = models.CharField(max_length=255)
-    field3 = models.CharField(max_length=255)
-    field4 = models.CharField(max_length=255)
-    field5 = models.CharField(max_length=255)
-    field6 = models.CharField(max_length=255)
-    field7 = models.CharField(max_length=255)
-    field8 = models.CharField(max_length=255)
-    field9 = models.CharField(max_length=255)
-    field10 = models.CharField(max_length=255)
-    field11 = models.CharField(max_length=255)
-    field12 = models.CharField(max_length=255)
-    field13 = models.CharField(max_length=255)
-    field14 = models.CharField(max_length=255)
-    field15 = models.CharField(max_length=255)
-    field16 = models.CharField(max_length=255)
-    field17 = models.CharField(max_length=255)
-    field18 = models.CharField(max_length=255)
-    field19 = models.CharField(max_length=255)
-    field20 = models.CharField(max_length=255)
-    mobile = models.BigIntegerField()
-    document_id = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = "LeadQueue"
-
-
-class LeadDocumentRepository(models.Model):
-    lead_id = models.IntegerField()
-    uploaded_file = models.FileField(upload_to='Lead_Documents/', blank=True, null=True)
-    file_status = models.IntegerField()
-    file_type = models.IntegerField()
-    reject_reason = models.CharField(max_length=50)
-    file_url = models.CharField(max_length=500)
-    download_status = models.IntegerField(default=0)
-
-    class Meta:
-        managed = False
-        db_table = "lead_document_repository"

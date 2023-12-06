@@ -2,6 +2,7 @@ import base64
 from collections import Counter
 import pprint
 import string
+from urllib import parse
 import cv2
 from django.contrib import messages
 import json
@@ -35,7 +36,7 @@ from django.views import View
 from .decorators import can_access_candidate_profile
 
 from django.shortcuts import get_object_or_404
- 
+
 
 
 user1 = "SFPL_Connect"
@@ -547,6 +548,7 @@ def profile_update(request,candidate_id):
             document_obj.aadhar_doc = request.FILES['aadhar_doc']
             print( 'aadhar',document_obj.aadhar_doc)
             document_obj.save()
+        
         if 'pan_doc' in request.FILES:
             document_obj.pan_doc = request.FILES['pan_doc']
             print( 'pan_doc',document_obj.pan_doc)
@@ -644,15 +646,12 @@ def schedule_online_test(request):
                         ad.branch_shortlisted_for 
             FROM application_details ad 
             LEFT JOIN candidate_details cd ON ad.candidate_id = cd.id 
-            WHERE ad.application_status = 2"""
+            WHERE ad.application_status = 2 or ad.application_status = 4 or ad.application_status = 5 or ad.application_status = 6"""
     
     df = pd.read_sql(query, engine)
-    
 
     print(df, "data")	
     applicants = candidate_details.objects.filter()
-    # resume = Resume_Repository.objects.get(candidate_id = profile.id).resume
-    # encoded_data = base64.b64encode(resume).decode('utf-8')
     distinct_positions_queryset = applicants.values_list("position_applied_for", flat=True).distinct()
     distinct_positions = [position for position in distinct_positions_queryset if position is not None]
     print(distinct_positions)
@@ -921,8 +920,9 @@ def scedule_interview(request,refId):
         application = ApplicationDetails.objects.get(pk=refId)
     except ApplicationDetails.DoesNotExist:
         messages.error(request, 'Application not found.')
-        return redirect('sceduled_user_details')  # You might need to adjust this URL name
-
+        # return redirect('sceduled_user_details')  # You might need to adjust this URL name
+        return redirect ('schedule_online_test')
+        
     if request.method == 'POST':
         interview_panel_list = request.POST.get('interview_panel', None)
         interview_date = request.POST.get('interview_date', None)
@@ -946,21 +946,18 @@ def scedule_interview(request,refId):
         if is_valid:
             application.save()
             profile = candidate_details.objects.get(id=application.candidate_id)
-            print()
-            print("Candidate ID:", profile.id,profile.mobile_no)
-            url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=2000209909&password=z24gzBUA&send_to={profile.mobile_no}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=Hello+{profile.name}%2C%0ACongratulations%21+Your+job+application+for+the+position+of+{application.position_shortlisted_for}+at+our+{application.branch_shortlisted_for}+branch+has+been+shortlisted+for+interview.%0AInterview+Details+%3A-%0ADate+%3A+{interview.interview_date}%0ATime+%3A+{application.interview_time}%0ALocation+%3A+{interview.interview_place}%0AWe+look+forward+to+your+presence.&isTemplate=true&header=Greetings+From+Sonata%21"
-
+            print("Candidate ID:", profile.id)
+            url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=YOUR_USERID&password=YOUR_PASSWORD&send_to={profile.mobile_no}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=Hello+{profile.name}%2C%0ACongratulations%21+Your+job+application+for+the+position+of+{application.position_shortlisted_for}+at+our+{application.branch_shortlisted_for}+branch+has+been+shortlisted+for+interview.%0AInterview+Details+%3A-%0ADate+%3A+{interview.interview_date}%0ATime+%3A+{application.interview_time}%0ALocation+%3A+{interview.interview_place}%0AWe+look+forward+to+your+presence.&isTemplate=true&header=Greetings+From+Sonata%21"
             payload = {}
             headers = {}
             response = requests.request("GET", url, headers=headers, data=payload)
             print(response.text)
-            
-            
-
-            return redirect('sceduled_user_details')  # You might need to adjust this URL name
+            # return redirect('sceduled_user_details')  # You might need to adjust this URL name
+            return redirect('schedule_online_test')
         else:
             messages.error(request, 'Please fill all the fields')
-            return redirect('sceduled_user_full_details', refId=refId)  # You might need to adjust this URL name
+            return redirect('schedule_test_user_full_details', refId=refId)
+            # return redirect('sceduled_user_full_details', refId=refId)  # You might need to adjust this URL name
 
 def validate_inputs(input_value):
     return input_value is not None and input_value != ''
@@ -1011,10 +1008,9 @@ def schedule_test(request,refId):
             test_scedule.save()
             
             # for creating the id of candidate
-            
-            # doc = Document_Candidate()
-            # doc.candidate_id = application.candidate_id
-            # doc.save()
+            doc = Document_Candidate()
+            doc.candidate_id = application.candidate_id
+            doc.save()
             # encoded_id = base64.urlsafe_b64encode(str(test_scedule.id).encode('utf-8')).decode('utf-8')
             encoded_id = encode_id(test_scedule.test_id)
             print(encoded_id)
@@ -1493,10 +1489,8 @@ def show_exam_result(request,id,application_id):
     context['score']=test_details.test_score
     context['question']=question
     context['responses']=response
-   
+    
     return render(request,'show_exam_result.html',context)
-
-
     # return HttpResponse('exam')
     
 from django.core.files import File
@@ -1555,7 +1549,7 @@ def sceduled_user_full_details(request,refId):
     if refId is not None:
         profile = candidate_details.objects.get(id=application.candidate_id)
         camshots = Candidate_Camshot.objects.filter(application_id=application.application_id)
-        document_obj = Document_Candidate.objects.get(candidate_id = application.candidate_id)
+        # document_obj = Document_Candidate.objects.get(candidate_id = application.candidate_id)
 
         print(camshots)
         pics = []
@@ -1599,7 +1593,7 @@ def sceduled_user_full_details(request,refId):
         )
     else:
         profile = None
-        document_obj = None
+        # document_obj = None
         
     context={
         'mime_type':mime_type,
@@ -1618,10 +1612,11 @@ def sceduled_user_full_details(request,refId):
         'ssc_doc': ssc_doc,
         'hsc_doc': hsc_doc,
         'graduate_doc': graduate_doc,
-        'document_obj': document_obj,
+        # 'document_obj': document_obj,
     }
     return render(request,'sceduled_user_full_details.html',context)
 
+# from urllib.parse import parse
 
 def schedule_test_user_full_details(request,refId):
     if refId is not None:
@@ -1629,15 +1624,44 @@ def schedule_test_user_full_details(request,refId):
         application = ApplicationDetails.objects.get(application_id=refId)
         profile = candidate_details.objects.get(id=application.candidate_id)
         # document_obj = Document_Candidate.objects.get(candidate_id = profile.id)
+        position_shortlisted_for=application.position_shortlisted_for
+        branch_shortlisted_for=application.branch_shortlisted_for
+        print(position_shortlisted_for,branch_shortlisted_for,"position_shortlisted_for,branch_shortlisted_for *************")
+        vacancies = VacancyDetails.objects.filter(role=position_shortlisted_for, branch=branch_shortlisted_for).values_list('vacancy_id')
+        print(vacancies,"vacancies *************")
+        dates= InterviewDetails.objects.filter(vacancy_id__in=vacancies).values_list('interview_date').distinct()
+        print(dates,"dates *************")
+        formatted_dates = [d[0].strftime('%Y-%m-%d') for d in dates]
+        print('formatted_dates',formatted_dates)
+        today_date = datetime.today().strftime('%Y-%m-%d')
+
+        try:
+            testschedule_obj = TestScheduleDetails.objects.get(application_id = application.application_id)
+            testschedule_obj.test_status='3'
+            testschedule_obj.test_score=calculate_test_score(testschedule_obj.test_id)
+            test_score = testschedule_obj.test_score
+            total = total_marks(testschedule_obj.test_id)
+            if test_score is not None and total is not None:
+                percetage = float((test_score/total)*100)
+            else:
+                percetage = None
+            
+        except TestScheduleDetails.DoesNotExist:
+            percetage = None
+            testschedule_obj = None
+        
         try:
             resume_obj = ResumeFiles.objects.get(candidate_id = profile.id)
             resume = resume_obj.resume
             mime_type = resume_obj.mime_type
             encoded_data = base64.b64encode(resume).decode('utf-8')
-        except Exception as e :
+            resume_file = resume_obj.resumeFile if resume_obj.resumeFile else None
+        except ResumeFiles.DoesNotExist :
             print(e)
             encoded_data = None
             mime_type = None
+            # resume_obj = None
+            resume_file = None
             
         try:
             document_obj = Document_Candidate.objects.get(candidate_id = profile.id)
@@ -1654,10 +1678,7 @@ def schedule_test_user_full_details(request,refId):
             graduate_doc = None
             pan_doc = None
             dl_doc = None
-            ssc_doc = None
-            hsc_doc = None
-            graduate_doc = None
-            
+
         GENDER = (
         ('Male', 'Male'),
         ('Female', 'Female'),
@@ -1671,7 +1692,9 @@ def schedule_test_user_full_details(request,refId):
         'mime_type':mime_type,
         'user_profile':profile,
         'binary_data':encoded_data,
+        'interview_dates':formatted_dates,
         'status':application.application_status,
+        'today_date':today_date,
         'application':application,
         'gender_choices': GENDER,
         'candidate_id': profile.id,
@@ -1681,7 +1704,12 @@ def schedule_test_user_full_details(request,refId):
         'ssc_doc' :ssc_doc,
         'hsc_doc' :hsc_doc,
         'graduate_doc' :graduate_doc,
-        # 'document_obj': document_obj,
+        'percetage' : percetage,
+        'resume_file':resume_file,
+        'bypass' : application.bypass,
+        # 'resume_obj':resume_obj,
+  
+        
     }
     return render(request,'schedule_test_user_full_details.html',context)
 
@@ -1703,7 +1731,7 @@ def fetch_interview_branches(request):
         print('branches--',branches)
         branches_json = json.dumps(list(branches))
         return JsonResponse(branches_json, safe=False)
-    return render(request,'sceduled_user_full_details.html',{'user_profile':profile,'status':profile.status})
+    # return render(request,'accepted_user_full_details.html',{'user_profile':profile,'status':profile.status})
 
 @csrf_exempt
 def fetch_interview_dates(request):
@@ -1807,6 +1835,7 @@ def applied_user_full_details(request, refId):
         'ssc_doc': ssc_doc,
         'hsc_doc': hsc_doc,
         'graduate_doc': graduate_doc,
+        
     }
 
     return render(request, 'applied_user_full_detail.html', context)
@@ -1834,9 +1863,6 @@ def upload_CV(request):
             # userroll = User_Rolls(roll_id=0,candidate_id = candidate.id)
             # userroll.save()
             # resume_obj = Resume_Repository()
-            doc = Document_Candidate()
-            doc.candidate_id = candidate.id
-            doc.save()
             resume_obj=ResumeFiles()
             resume_obj.candidate_id = candidate.id
             #storing mime of the file in resume_repository
@@ -2251,6 +2277,18 @@ def accept_user(request, refId):
 
     return redirect("applied_user_details")
 
+# bypass for direct Interview
+def bypass_user(request,refId=None):
+    if request.method == "POST":
+        print(refId)
+        applicants_obj = ApplicationDetails.objects.get(application_id=refId)
+        applicants_obj.application_status=4
+        applicants_obj.checked_by = request.user.id 
+        applicants_obj.bypass = request.POST['bypass']
+        applicants_obj.bypass_date = datetime.date(datetime.now())
+        applicants_obj.save()
+    return redirect("schedule_test_user_full_details",refId=refId)
+
 def hold_user(request,refId=None):
     if request.method == "POST":
         print(refId)
@@ -2362,14 +2400,12 @@ def vacancy_lists(request):
         print(type(str(request.user)))
         distinct_positions = vacancies[['role']]['role'].unique().tolist()
         print(vacancies)
-
         # vacancies = vacancies.sort_values(by=['vacancy_date'], ascending=False, inplace=True)
         vacancies.drop_duplicates(subset="vacancy_id", keep="first", inplace=True)
         vacancies.drop_duplicates(keep="first", inplace=True)
         vacancies = vacancies.to_dict("records")
-        vacancy_list = InterviewDetails.objects.filter(interview_date__lt=today).values_list('vacancy_id')
-        vacancies = VacancyDetails.objects.filter(vacancy_id__in = vacancy_list).order_by('-vacancy_date')                 
-
+        vacancy_list = InterviewDetails.objects.filter(interview_date__lte=today).values_list('vacancy_id')
+        vacancies = VacancyDetails.objects.filter(vacancy_id__in = vacancy_list).order_by('-vacancy_date')
         pprint.pprint(vacancies)
 
         data2 = []
@@ -2434,11 +2470,9 @@ def vacancy_lists(request):
     else:
         data1 = []
         distinct_positions = []
-
-    
+   
     pprint.pprint(data)
-    context = {'vacancy':data,'vacancy1':data1,'vacancy2':data2, 'distinct_positions':distinct_positions}
-    
+    context = {'vacancy':data,'vacancy1':data1,'vacancy2':data2, 'distinct_positions':distinct_positions}    
     return render(request,'vacancy_lists.html',context)
 
 def get_branch_vacancy_options(request):
@@ -2467,16 +2501,11 @@ def vacancy_card_details(request,pk):
     SELECT * FROM "VACANCY_DETAILS" VD LEFT JOIN "INTERVIEW_DETAILS" ID ON VD.vacancy_id = ID.vacancy_id WHERE VD.vacancy_id={pk};
                 """
     vacancy_df = pd.read_sql_query(sql_query, engine)
-
     # change the format of date to dd-mm-yyyy
     vacancy_df['interview_date'] = vacancy_df['interview_date'].dt.strftime('%d-%m-%Y')
 
     vacancy_df.fillna("-", inplace=True)
-
-
-
-    vacancy_obj = vacancy_df.to_dict("records")[0]
-  
+    vacancy_obj = vacancy_df.to_dict("records")[0]  
     return render(request,'vacancy_card_details.html',{'vacancy':vacancy_obj,'is_hr':is_hr})
 
 from dateutil.relativedelta import relativedelta
@@ -2521,10 +2550,7 @@ def home_page(request):
         e['salary']=int(i.salary) if int(i.salary) else "-"
         e['vacancy_date']=i.vacancy_date if i.vacancy_date else "-"
         data1.append(e)
-
-
     return render(request,'index_homepage.html',{'vacancy_list1':data1,'vacancy_list':data})
-
 
 def candidate_login(request):
     return render(request,'candidate_login.html')
@@ -2579,8 +2605,6 @@ def postjob(request):
                              posted_on = posted_on,
                              interview_time=interview_time,
                              panel_member_a=interview_panel_1, panel_member_b=interview_panel_2, panel_member_c=interview_panel_3 , optional_member=interview_panel_4 , panel_list=panel_list, address=address,  interview_place=interview_place, interview_date=interview_date).save()
-
-            
             
             # raise Exception("Test Exception")
             required_skills = request.POST.get('required_skills')
@@ -2616,20 +2640,17 @@ def postjob(request):
                 return redirect(request.GET['url'], refId=refId)
             return redirect('vacancy_lists')
         else:
-
             messages.error(request, "Something went wrong")
             print("form not valid")
             return render(request,'postjob.html',{'form':form, 'queryset': queryset})
     else:
         form = VacancyForm()
-
     return render(request,'postjob.html',{'form':form, 'queryset': queryset})
 
 @transaction.atomic
 def update_job(request, vacancy_id=None):
     # Get the existing VacancyDetails instance
     vacancy = get_object_or_404(VacancyDetails, pk=vacancy_id)
-
     # Get the existing InterviewDetails instance associated with the VacancyDetails
     interview_details = get_object_or_404(InterviewDetails, vacancy_id=vacancy_id)
 
@@ -2646,8 +2667,7 @@ def update_job(request, vacancy_id=None):
             vacancy.required_experience = form.cleaned_data['required_experience']
             vacancy.required_skills = form.cleaned_data['required_skills']
             vacancy.job_description= form.cleaned_data['job_description']
-            vacancy.job_responsibility = form.cleaned_data['job_responsibility']
-                  
+            vacancy.job_responsibility = form.cleaned_data['job_responsibility']                  
             vacancy.save()
 
             # Update the InterviewDetails instance with the new data
@@ -2694,8 +2714,7 @@ def update_job(request, vacancy_id=None):
             'interview_date': interview_details.interview_date,
             'interview_time': interview_details.interview_time,
             'job_description': vacancy.job_description,
-            'job_responsibility': vacancy.job_responsibility,
-            
+            'job_responsibility': vacancy.job_responsibility,            
         }
         form = VacancyForm(initial=initial_data)
 
@@ -2704,7 +2723,6 @@ def update_job(request, vacancy_id=None):
         'update':True
     }
     return render(request, 'postjob.html', context)
-
     
 def application_status(request):
 
@@ -2717,8 +2735,7 @@ def application_status(request):
         User_Details_obj=candidate_details(email=request.user.email)
         User_Details_obj.save()
         redirect_url = reverse('view_candidate_profile', args=[User_Details_obj.email])
-        return redirect(redirect_url)
-  
+        return redirect(redirect_url) 
     else:
         df=pd.DataFrame(candidate_details.objects.filter(email=request.user.email).values()).to_dict(orient="records")
         print(df)
@@ -2726,7 +2743,6 @@ def application_status(request):
         redirect_url = reverse('view_candidate_profile', args=[df[0]['email']])
         return redirect(redirect_url)
   
-
 def applied_vacancy_card_details(request,pk):
     candidate = candidate_details.objects.filter(email = request.user.email).values('id')
     print('candidate',candidate)
@@ -2746,22 +2762,14 @@ def applied_vacancy_card_details(request,pk):
 
     # change the format of date to dd-mm-yyyy
     vacancy_df['interview_date'] = vacancy_df['interview_date'].dt.strftime('%d-%m-%Y')
-
     vacancy_df.fillna("-", inplace=True)
-
-
-
-    vacancy_obj = vacancy_df.to_dict("records")[0]
-    
+    vacancy_obj = vacancy_df.to_dict("records")[0]   
     candidate = vacancy_df['candidate_id']
-    print('candidate', candidate)
-    
+    print('candidate', candidate)    
     # interview = vacancy_df['interview_id'].astype(int)
     # print('interview', interview)
     
     application = ApplicationDetails.objects.filter(candidate_id=candidate).first()
-
-  
     return render(request,'applied_vacancy_card_details.html',{'vacancy':vacancy_obj,'application':application,'status': application.application_status})
 
 def new_form(request,refId):
@@ -2772,8 +2780,7 @@ def new_form(request,refId):
     )
     context = {'user_profile':user_profile_obj,
                'gender_choices': GENDER}
-    return render(request,'form_ui.html',context)
-    
+    return render(request,'form_ui.html',context)    
 from datetime import datetime
 
 @login_required(login_url='signIn')
@@ -2804,7 +2811,6 @@ def sceduled_interview_details(request):
 
     # current date
     date = datetime.today().strftime('%Y-%m-%d')
-
     # fetching applications whose interview has been scheduled
     sql_query = f"""SET NOCOUNT ON;SELECT application_id,interview_id FROM application_details WHERE application_status = 5;SET NOCOUNT OFF"""
     application_df=pd.read_sql_query(sql_query,engine)
@@ -2854,29 +2860,22 @@ def sceduled_interview_details(request):
         print('error', e)
         return render(request, 'sceduled_Interview_Details.html')
     
-def search_exam(request):
-    
+def search_exam(request):   
     if request.method == "POST":
-        searched = request.POST['searched']
-        
+        searched = request.POST['searched']        
         applicants = User_Details.objects.filter(Q(name__contains=searched),status__gte=4)
         print(applicants)
-
         return render(request, 'exam_user_details.html',{'searched':searched,'applicants':applicants})
     else:
         return render(request, 'exam_user_details.html',{'applicants':applicants})
 
-def search(request):
-    
+def search(request):   
     if request.method == "POST":
-        searched = request.POST['searched']
-        
+        searched = request.POST['searched']       
         applicants = User_Details.objects.filter(Q(name__contains=searched),status=5)
-
         return render(request, 'sceduled_Interview_Details.html',{'searched':searched,'applicants':applicants})
     else:
         return render(request, 'sceduled_Interview_Details.html',{'applicants':applicants})
-
 
 def sceduled_interview_full_details(request,refId):
     if refId is not None:
@@ -2888,7 +2887,6 @@ def sceduled_interview_full_details(request,refId):
         data_num = 0
         for i in interview_assignment_obj:
             data_num+=1
-
         try:
             # resume_obj = Resume_Repository.objects.get(candidate_id = profile.id)
             resume_obj = ResumeFiles.objects.get(candidate_id = profile.id)
@@ -2921,7 +2919,6 @@ def sceduled_interview_full_details(request,refId):
     ('Male', 'Male'),
     ('Female', 'Female'),
     )
-
     for obj in interview_assignment_obj:
         if obj.interviewer_id == request.user.id:
             messages.error(request, "You already assessed this Candidate.")
@@ -2945,13 +2942,10 @@ def sceduled_interview_full_details(request,refId):
 #         login_status = False
 #         context['login_status'] = login_status
 #         return render(request, 'get_loc.html', context)
- 
-    
 # function for attendance check
 @csrf_exempt
 def interview_Api(request):
-    context = {}
-    
+    context = {}   
     if request.method=='POST':
         interview_assignment_obj=InterviewResponse()
         
@@ -3049,8 +3043,7 @@ from django.db.models import Count
 
 def quest_sheet_list(request):
     sheets = question_sheet.objects.all().values('sheet_id').distinct()
-    questions = question_sheet.objects.values('sheet_id').annotate(Count('sheet_id'))
- 
+    questions = question_sheet.objects.values('sheet_id').annotate(Count('sheet_id')) 
     return render(request, 'quest_sheet_list.html',{'sheets':sheets,'questions':questions})
 
 def quest_sheetlist_details(request,sheet_id):
@@ -3083,8 +3076,7 @@ def edit_question(request,id):
         edit_ques.answer=answer
         edit_ques.save()
         
-        try:
-            
+        try:            
             error= "no"
             redirect_url = reverse('quest_sheetlist_details', args=[edit_ques.sheet_id])
             return redirect(redirect_url)
@@ -3115,7 +3107,6 @@ def view_candidate_profile(request, email):
         user_profile = candidate_details.objects.get(email=email)
         # Assuming you have a "status" attribute in your User_Details model
         status = user_profile.status
-
         # Resume handling
         try:
             resume_obj = ResumeFiles.objects.get(candidate_id=user_profile.id)
@@ -3124,9 +3115,7 @@ def view_candidate_profile(request, email):
             encoded_data = base64.b64encode(resume).decode('utf-8')
         except ResumeFiles.DoesNotExist:
             encoded_data = None
-            mime_type = None
-        
-        
+            mime_type = None        
         try:
             document_obj = Document_Candidate.objects.get(candidate_id = user_profile.id)
             aadhar_doc = document_obj.aadhar_doc if document_obj.aadhar_doc else None
@@ -3142,8 +3131,7 @@ def view_candidate_profile(request, email):
             graduate_doc = None     
             pan_doc = None
             dl_doc = None
-            
-        
+                   
     except Exception as e:
         # Handle the case when the user profile does not exist.
         # You can redirect the user to a custom 404 page or display an error message.
@@ -3152,8 +3140,7 @@ def view_candidate_profile(request, email):
     GENDER = (
         ('Male', 'Male'),
         ('Female', 'Female'),
-    )
-    
+    )   
     context = {
         'user_profile': user_profile,
         'gender_choices': GENDER,
@@ -4314,9 +4301,9 @@ def apply_for_vacancy(request, id):
         application.application_status = 2
         application.save()
         
-        doc = Document_Candidate()
-        doc.candidate_id = candidate.id
-        doc.save()
+        # doc = Document_Candidate()
+        # doc.candidate_id = candidate.id
+        # doc.save()
         messages.success(request, "Applied Successfully!")
         return redirect('dashboard')
 
@@ -4607,584 +4594,9 @@ def show_contact(request):
     print("contact", contact)
     return render(request,'contact_us_full_details.html',{'contact':contact})
 
-from django.db.models import Avg, Max, Min, Sum
-import traceback
 
-
-def document_upload_status_check(request, lead_running_instance):
-    # here we check whether all docs are verified or not, if not verified, stage = 4 else stage = 5 and next step starts
-    pass
-
-def download_lead_document(request, doc_instance):
-    # here we download the file, encrypt it, stor eit in desired location and then store the filename in the instance
-    pass
-
-def lead_eligibility_check(request, lead_id):
-    # here we hit the APIs, check lead eligible amount and risk score, decide on whether to give loan or not, and if yes, decide which products to show, store them in db
-    pass
-
-from urllib.parse import quote
-
-
-# (0 - not started; 1 - running; 2 - completed; 3 - closed/failed; 4 - paused)
-@csrf_exempt
-def whatsapp_callback(request):
-    try:
-        if request.method == 'POST':
-
-            # process data from webhook
-            byte_str = request.body
-            decoded =  byte_str.decode('utf-8')
-            json_data = json.loads(decoded)
-
-            message_text = f'msg recieved! json data: {str(json_data)}'
-            url = "https://media.smsgupshup.com/GatewayAPI/rest"
-            params = {
-                'userid': '2000209911',
-                'password': '2fb#C5z#',
-                'method': 'SendMessage',
-                'auth_scheme': 'plain',
-                'v': '1.1',
-                'send_to': '8335076174',
-                'msg': message_text,
-                'msg_type': 'DATA_TEXT',
-                'data_encoding': 'text',
-                'format': 'json'
-            }
-            response = requests.get(url, params=params)
-
-            # sender contact
-            contact_number = int(json_data['mobile'][2:])
-
-            # ----------------------------------------------------------------------------------
-
-            # LOS Code 
-
-            # ---------code for customer's conversation storage [DEMO]-------------
-            lead_contact_list = list(LeadRepositoryDem.objects.values_list('mobile', flat=True))
-            if contact_number in lead_contact_list:
-                # fetch customer info ID
-                customer_info_id = LeadRepositoryDem.objects.get(mobile=contact_number).CustomerInfoID
-
-                # fetch conversation id(last conversation of the particular lead)
-                conversation_id = WhatsAppConversations.objects.filter(CustomerInfoID = customer_info_id).aggregate(Max('ConversationID'))['ConversationID__max']
-
-                # fetch last sequence ID
-                latest_sequence_number = WhatsAppConversations.objects.filter(ConversationID = int(conversation_id)).aggregate(Max('SequenceNumber'))['SequenceNumber__max']
-
-                # handle text type, button type messages
-                if json_data['type'] == 'button':
-                    # handle code for button
-                    customer_data = json.loads(json_data['button'])
-                    message_text = customer_data['text']
-                elif json_data['type'] == 'text':
-                    # handle code for text type
-                    message_text = json_data['text']
-
-                # prepare other dummy data to be inserted in the instance
-                from datetime import datetime
-                conversation_instance = WhatsAppConversations(UserID = 0,
-                CustomerInfoID = customer_info_id,
-                ConversationID = conversation_id,
-                message_date = datetime.now().date(),
-                message_time = datetime.now().time(),
-                MessageText = message_text,
-                Direction = 'inbound',
-                AttachmentURLs = '',
-                MessageType = 'text',
-                SequenceNumber = int(latest_sequence_number) + 1)
-
-                conversation_instance.save()
-            
-            # fetch lead running instance if any
-            try:
-                lead_running_instance = LeadQueue.objects.get(Q(mobile = contact_number)&Q(status=1)&Q(is_active=1))
-                message_text = str(f'instance ready, status {lead_running_instance.status}, stage {lead_running_instance.stage}, with types {type(lead_running_instance.status), type(lead_running_instance.stage)}')
-                url = "https://media.smsgupshup.com/GatewayAPI/rest"
-                params = {
-                    'userid': '2000209911',
-                    'password': '2fb#C5z#',
-                    'method': 'SendMessage',
-                    'auth_scheme': 'plain',
-                    'v': '1.1',
-                    'send_to': '8335076174',
-                    'msg': message_text,
-                    'msg_type': 'DATA_TEXT',
-                    'data_encoding': 'text',
-                    'format': 'json'
-                }
-                response = requests.get(url, params=params)
-            except Exception as e:
-                lead_running_instance = None
-                message_text = str(f'trying lead running instance: with contact number {contact_number} the error: ' + traceback.format_exc())
-                url = "https://media.smsgupshup.com/GatewayAPI/rest"
-                params = {
-                    'userid': '2000209911',
-                    'password': '2fb#C5z#',
-                    'method': 'SendMessage',
-                    'auth_scheme': 'plain',
-                    'v': '1.1',
-                    'send_to': '8335076174',
-                    'msg': message_text,
-                    'msg_type': 'DATA_TEXT',
-                    'data_encoding': 'text',
-                    'format': 'json'
-                }
-                response = requests.get(url, params=params) 
-
-            # lead data
-            lead_id = LeadRepositoryDem.objects.get(mobile=contact_number).id
-
-            if json_data['type']=='image':
-                json_data['image'] = json.loads(json_data['image'])
-                if lead_running_instance.stage in ('6', '6.1', '6.2', '6.3', '6.4', '6.5', '6.6', '6.7'):
-                    # store doc with ref to lead
-                    doc_instance = LeadDocumentRepository(
-                        lead_id = lead_id, 
-                        file_status = 1, 
-                        file_url = json_data['image']['url'] + json_data['image']['signature'], 
-                        download_status = 0
-                        )
-                    doc_instance.save()
-
-                    # initiate file downloader function and store encrypted filename in instance
-                    download_lead_document(request, doc_instance)
-
-                    # store id inside queue
-                    lead_running_instance.document_id = doc_instance.id
-                    lead_running_instance.save()
-                    
-                    # check which docs are still not uploaded
-                    try:
-                        aadhar_front_status = LeadDocumentRepository.objects.get(lead_id = lead_id, file_type = 1).file_status
-                    except:
-                        aadhar_front_status = 0
-                    try:
-                        aadhar_back_status = LeadDocumentRepository.objects.get(lead_id = lead_id, file_type = 2).file_status
-                    except:
-                        aadhar_back_status = 0
-                    try:
-                        voter_status = LeadDocumentRepository.objects.get(lead_id = lead_id, file_type = 2).file_status
-                    except:
-                        voter_status = 0
-                    try:
-                        coapp_aadhar_front_status = LeadDocumentRepository.objects.get(lead_id = lead_id, file_type = 2).file_status
-                    except:
-                        coapp_aadhar_front_status = 0
-                    try:
-                        coapp_aadhar_back_status = LeadDocumentRepository.objects.get(lead_id = lead_id, file_type = 2).file_status
-                    except:
-                        coapp_aadhar_back_status = 0
-                    try:
-                        coapp_voter_status = LeadDocumentRepository.objects.get(lead_id = lead_id, file_type = 2).file_status
-                    except:
-                        coapp_voter_status = 0
-
-                    # create json for the unsubmitted docs
-                    json_data = {
-                        "button": "श्रेणी चुनें",
-                        "sections": [{
-                            "rows": []
-                        }]
-                    }
-                    if aadhar_front_status in {0,3}:
-                        json_data["sections"][0]["rows"].append({
-                            "id": "id1",
-                            "title": "आधार",
-                            "description": "सामने साइड"
-                        })
-                    if aadhar_back_status in {0,3}:
-                        json_data["sections"][0]["rows"].append({
-                            "id": "id2",
-                            "title": "आधार",
-                            "description": "पीछे साइड"
-                        })
-                    if voter_status in {0,3}:
-                        json_data["sections"][0]["rows"].append({
-                            "id": "id3",
-                            "title": "वोटर"
-                        })
-                    if coapp_aadhar_front_status in {0,3}:
-                        json_data["sections"][0]["rows"].append({
-                            "id": "id4",
-                            "title": "आधार सह-आवेदक",
-                            "description": "सामने साइड"
-                        })
-                    if coapp_aadhar_back_status in {0,3}:
-                        json_data["sections"][0]["rows"].append({
-                            "id": "id5",
-                            "title": "आधार सह-आवेदक",
-                            "description": "पीछे साइड"
-                        })
-                    if coapp_voter_status in {0,3}:
-                        json_data["sections"][0]["rows"].append({
-                            "id": "id6",
-                            "title": "सह-आवेदक वोटर"
-                        })
-
-                    msg = '📃 कृपया अपलोड किए गए दस्तावेज़ की श्रेणी चुनें'
-                    
-                    action = quote(json.dumps(json_data), safe='')
-                    url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=2000209909&password=z24gzBUA&method=SendMessage&auth_scheme=Plain&v=1.1&send_to={contact_number}&msg={msg}&action={action}&interactive_type=list"
-                    payload = {}
-                    files={}
-                    headers = {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                    response = requests.request("GET", url, headers=headers, data=payload, files=files)
-                    
-                    # change stage to 6.1
-                    lead_running_instance.stage = '6.1'
-                    lead_running_instance.save()
-                    
-            elif json_data['type']=='document':
-                json_data['document'] = json.loads(json_data['document'])
-                if lead_running_instance.stage in ('6', '6.1', '6.2', '6.3', '6.4', '6.5', '6.6', '6.7'):
-                    # store doc with ref to lead
-                    doc_instance = LeadDocumentRepository(
-                        lead_id = lead_id, 
-                        file_status = 1, 
-                        file_url = json_data['document']['url'] + json_data['document']['signature'], 
-                        download_status = 0
-                        )
-                    doc_instance.save()
-
-                    # initiate file downloader function and store encrypted filename in instance
-                    download_lead_document(request, doc_instance)
-
-                    # store id inside queue
-                    lead_running_instance.document_id = doc_instance.id
-                    lead_running_instance.save()
-                    
-                    # check which docs are still not uploaded
-                    try:
-                        aadhar_front_status = LeadDocumentRepository.objects.get(lead_id = lead_id, file_type = 1).file_status
-                    except:
-                        aadhar_front_status = 0
-                    try:
-                        aadhar_back_status = LeadDocumentRepository.objects.get(lead_id = lead_id, file_type = 2).file_status
-                    except:
-                        aadhar_back_status = 0
-                    try:
-                        voter_status = LeadDocumentRepository.objects.get(lead_id = lead_id, file_type = 2).file_status
-                    except:
-                        voter_status = 0
-                    try:
-                        coapp_aadhar_front_status = LeadDocumentRepository.objects.get(lead_id = lead_id, file_type = 2).file_status
-                    except:
-                        coapp_aadhar_front_status = 0
-                    try:
-                        coapp_aadhar_back_status = LeadDocumentRepository.objects.get(lead_id = lead_id, file_type = 2).file_status
-                    except:
-                        coapp_aadhar_back_status = 0
-                    try:
-                        coapp_voter_status = LeadDocumentRepository.objects.get(lead_id = lead_id, file_type = 2).file_status
-                    except:
-                        coapp_voter_status = 0
-
-                    # create json for the unsubmitted docs
-                    json_data = {
-                        "button": "श्रेणी चुनें",
-                        "sections": [{
-                            "rows": []
-                        }]
-                    }
-                    if aadhar_front_status in {0,3}:
-                        json_data["sections"][0]["rows"].append({
-                            "id": "id1",
-                            "title": "आधार",
-                            "description": "सामने साइड"
-                        })
-                    if aadhar_back_status in {0,3}:
-                        json_data["sections"][0]["rows"].append({
-                            "id": "id2",
-                            "title": "आधार",
-                            "description": "पीछे साइड"
-                        })
-                    if voter_status in {0,3}:
-                        json_data["sections"][0]["rows"].append({
-                            "id": "id3",
-                            "title": "वोटर"
-                        })
-                    if coapp_aadhar_front_status in {0,3}:
-                        json_data["sections"][0]["rows"].append({
-                            "id": "id4",
-                            "title": "आधार सह-आवेदक",
-                            "description": "सामने साइड"
-                        })
-                    if coapp_aadhar_back_status in {0,3}:
-                        json_data["sections"][0]["rows"].append({
-                            "id": "id5",
-                            "title": "आधार सह-आवेदक",
-                            "description": "पीछे साइड"
-                        })
-                    if coapp_voter_status in {0,3}:
-                        json_data["sections"][0]["rows"].append({
-                            "id": "id6",
-                            "title": "सह-आवेदक वोटर"
-                        })
-
-                    msg = '📃 कृपया अपलोड किए गए दस्तावेज़ की श्रेणी चुनें'
-                    
-                    action = quote(json.dumps(json_data), safe='')
-                    url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=2000209909&password=z24gzBUA&method=SendMessage&auth_scheme=Plain&v=1.1&send_to={contact_number}&msg={msg}&action={action}&interactive_type=list"
-                    payload = {}
-                    files={}
-                    headers = {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                    response = requests.request("GET", url, headers=headers, data=payload, files=files)
-                    
-                    # change stage to 6.1
-                    lead_running_instance.stage = '6.1'
-                    lead_running_instance.save()
-                    
-            elif json_data['type']=='button': 
-                json_data['button'] = json.loads(json_data['button'])
-                if lead_running_instance.stage == '1':
-                    if json_data['button']['text'] == 'हाँ':
-                        # handle yes reply - send availability text; change stage to 2
-                        url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=2000209909&password=z24gzBUA&send_to={contact_number}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%E0%A4%86%E0%A4%8F%E0%A4%81+%E0%A4%B6%E0%A5%81%E0%A4%B0%E0%A5%82+%E0%A4%95%E0%A4%B0%E0%A5%87%E0%A4%82%E0%A5%A4+%E0%A4%B9%E0%A4%AE%E0%A4%BE%E0%A4%B0%E0%A5%87+%E0%A4%AA%E0%A4%BE%E0%A4%B8+%E0%A4%86%E0%A4%AA%E0%A4%95%E0%A5%87+%E0%A4%B2%E0%A4%BF%E0%A4%8F+%E0%A4%95%E0%A5%81%E0%A4%9B+%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%B6%E0%A5%8D%E0%A4%A8+%E0%A4%B9%E0%A5%88%E0%A4%82.+%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE+%E0%A4%86%E0%A4%AA+%E0%A4%89%E0%A4%AA%E0%A4%B2%E0%A4%AC%E0%A5%8D%E0%A4%A7+%E0%A4%B9%E0%A5%88%E0%A4%82%3F&isTemplate=true"
-                        payload = {}
-                        headers = {}
-                        response = requests.request("GET", url, headers=headers, data=payload)
-                        lead_running_instance.stage = '2'
-                        lead_running_instance.save()
-                        
-                    else:
-                        # handle no reply - send the thanks for your time text; change status to 3
-                        url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=2000209909&password=z24gzBUA&send_to=8335076174&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%E0%A4%86%E0%A4%AA%E0%A4%95%E0%A5%87+%E0%A4%B8%E0%A4%AE%E0%A4%AF+%E0%A4%95%E0%A5%87+%E0%A4%B2%E0%A4%BF%E0%A4%8F+%E0%A4%A7%E0%A4%A8%E0%A5%8D%E0%A4%AF%E0%A4%B5%E0%A4%BE%E0%A4%A6%2C+%E0%A4%86%E0%A4%AA%E0%A4%95%E0%A4%BE+%E0%A4%A6%E0%A4%BF%E0%A4%A8+%E0%A4%B6%E0%A5%81%E0%A4%AD+%E0%A4%B0%E0%A4%B9%E0%A5%87%E0%A5%A4"
-                        payload = {}
-                        headers = {}
-                        response = requests.request("GET", url, headers=headers, data=payload)
-                        lead_running_instance.status = 3
-                        lead_running_instance.save()
-                        
-                elif lead_running_instance.stage == '2':
-                    if json_data['button']['text'] == 'हाँ':
-                        # handle yes reply -
-                        # start credit check using API
-                        lead_eligibility_check(request, lead_id)
-
-                        # ask about address change
-                        url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=2000209909&password=z24gzBUA&send_to=8335076174&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A4%BE+%E0%A4%86%E0%A4%AA%E0%A4%95%E0%A4%BE+%E0%A4%AA%E0%A4%A4%E0%A4%BE+%E0%A4%AC%E0%A4%A6%E0%A4%B2+%E0%A4%97%E0%A4%AF%E0%A4%BE+%E0%A4%B9%E0%A5%88%3F&isTemplate=true"
-                        payload = {}
-                        headers = {}
-                        response = requests.request("GET", url, headers=headers, data=payload)
-
-                        # change stage to 3
-                        lead_running_instance.stage = '3'
-                        lead_running_instance.save()
-                        
-                    else:
-                        # handle no reply - ask available potential day; change state to 2.2 
-                        url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=2000209909&password=z24gzBUA&send_to={contact_number}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%E0%A4%86%E0%A4%AA+%E0%A4%95%E0%A4%AC+%E0%A4%89%E0%A4%AA%E0%A4%B2%E0%A4%AC%E0%A5%8D%E0%A4%A7+%E0%A4%B9%E0%A5%8B%E0%A4%82%E0%A4%97%E0%A5%87%3F&isTemplate=true"
-                        payload = {}
-                        headers = {}
-                        response = requests.request("GET", url, headers=headers, data=payload)
-                        lead_running_instance.stage = '2.2'
-                        lead_running_instance.save()
-                        
-                elif lead_running_instance.stage == '2.2':
-                    if json_data['button']['text'] == 'आज':
-                        # remember lead chose today, ask time slot, change stage to 2.2.1
-                        url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=2000209909&password=z24gzBUA&send_to={contact_number}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%E0%A4%95%E0%A5%83%E0%A4%AA%E0%A4%AF%E0%A4%BE+%E0%A4%90%E0%A4%B8%E0%A4%BE+%E0%A4%B8%E0%A4%AE%E0%A4%AF+%E0%A4%B8%E0%A5%8D%E0%A4%B2%E0%A5%89%E0%A4%9F+%E0%A4%9A%E0%A5%81%E0%A4%A8%E0%A5%87%E0%A4%82+%E0%A4%9C%E0%A4%BF%E0%A4%B8%E0%A4%AE%E0%A5%87%E0%A4%82+%E0%A4%86%E0%A4%AA+%E0%A4%B8%E0%A4%B9%E0%A4%9C+%E0%A4%B9%E0%A5%8B%E0%A4%82&isTemplate=true&wa_template_json=%7B%22components%22%3A%5B%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%220%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%221%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%222%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%223%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%224%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%225%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%226%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%227%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%228%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%5D%7D"
-                        payload = {}
-                        headers = {}
-                        response = requests.request("GET", url, headers=headers, data=payload)
-                        lead_running_instance.stage = '2.2.1'
-                        lead_running_instance.save()
-                        
-                    elif json_data['button']['text'] == 'कल':
-                        # remember lead chose tomorrow, ask time slot, change stage to 2.2.2
-                        url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=2000209909&password=z24gzBUA&send_to={contact_number}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%E0%A4%95%E0%A5%83%E0%A4%AA%E0%A4%AF%E0%A4%BE+%E0%A4%90%E0%A4%B8%E0%A4%BE+%E0%A4%B8%E0%A4%AE%E0%A4%AF+%E0%A4%B8%E0%A5%8D%E0%A4%B2%E0%A5%89%E0%A4%9F+%E0%A4%9A%E0%A5%81%E0%A4%A8%E0%A5%87%E0%A4%82+%E0%A4%9C%E0%A4%BF%E0%A4%B8%E0%A4%AE%E0%A5%87%E0%A4%82+%E0%A4%86%E0%A4%AA+%E0%A4%B8%E0%A4%B9%E0%A4%9C+%E0%A4%B9%E0%A5%8B%E0%A4%82&isTemplate=true&wa_template_json=%7B%22components%22%3A%5B%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%220%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%221%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%222%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%223%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%224%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%225%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%226%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%227%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%228%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%5D%7D"
-                        payload = {}
-                        headers = {}
-                        response = requests.request("GET", url, headers=headers, data=payload)
-                        lead_running_instance.stage = '2.2.2'
-                        lead_running_instance.save()
-                        
-                    else:
-                        # ask lead the ddmmyy; change state to 2.2.3;  
-                        #######  NEED TO IMPLEMENT ddmmyy SAMPLE LOGIC ######## CURRENT ddmmyy in template #########
-                        current_date_str = datetime.now().strftime("%d%m%y")
-                        url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=2000209909&password=z24gzBUA&send_to={contact_number}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%E0%A4%95%E0%A5%83%E0%A4%AA%E0%A4%AF%E0%A4%BE+ddmmyy+%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%B0%E0%A5%82%E0%A4%AA+%E0%A4%AE%E0%A5%87%E0%A4%82+%E0%A4%A6%E0%A4%BF%E0%A4%A8%E0%A4%BE%E0%A4%82%E0%A4%95+%E0%A4%A6%E0%A4%B0%E0%A5%8D%E0%A4%9C+%E0%A4%95%E0%A4%B0%E0%A5%87%E0%A4%82%21+%E0%A4%89%E0%A4%A6%E0%A4%BE%E0%A4%B9%E0%A4%B0%E0%A4%A3+%E0%A4%95%E0%A5%87+%E0%A4%B2%E0%A4%BF%E0%A4%8F+%E0%A4%B8%E0%A4%AE%E0%A4%BE%E0%A4%A8+%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%B0%E0%A5%82%E0%A4%AA+%E0%A4%AE%E0%A5%87%E0%A4%82+%E0%A4%86%E0%A4%9C+%E0%A4%95%E0%A5%80+%E0%A4%A4%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%96+{current_date_str}+%E0%A4%B9%E0%A5%8B%E0%A4%97%E0%A5%80"
-                        payload = {}
-                        headers = {}
-                        response = requests.request("GET", url, headers=headers, data=payload)
-                        lead_running_instance.stage = '2.2.3'
-                        lead_running_instance.save()
-                
-                elif lead_running_instance.stage in ('2.2.1', '2.2.2', '2.2.3.1'):
-                    # check for time slot replies; change stage to 2.2.1.1
-                    if json_data['button']['text'] == 'प्रातः 6 बजे से प्रातः 8':
-                        pass
-                    elif json_data['button']['text'] == 'प्रातः 8 बजे से प्रातः 10':
-                        pass
-                    elif json_data['button']['text'] == 'सुबह 10 बजे से दोपहर 12':
-                        pass
-                    elif json_data['button']['text'] == 'दोपहर 12 बजे से 2 बजे तक':
-                        pass
-                    elif json_data['button']['text'] == 'दोपहर 2 बजे से शाम 4 बजे':
-                        pass
-                    elif json_data['button']['text'] == 'शाम 4 बजे से 6 बजे तक':
-                        pass
-                    elif json_data['button']['text'] == 'शाम 6 बजे से रात 8 बजे तक':
-                        pass
-                    elif json_data['button']['text'] == 'रात्रि 8 बजे से रात्रि 10':
-                        pass
-                    elif json_data['button']['text'] == 'रात्रि 10 बजे से 12 बजे त':
-                        pass
-                    lead_running_instance.stage = '4'
-                    lead_running_instance.status = 0
-                    lead_running_instance.save()
-
-                    url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=2000209909&password=z24gzBUA&send_to={contact_number}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%E0%A4%B9%E0%A4%AE%E0%A5%87%E0%A4%82+%E0%A4%86%E0%A4%B6%E0%A4%BE+%E0%A4%B9%E0%A5%88+%E0%A4%95%E0%A4%BF+%E0%A4%86%E0%A4%AA+%E0%A4%9A%E0%A4%B0%E0%A5%8D%E0%A4%9A%E0%A4%BE+%E0%A4%95%E0%A5%80+%E0%A4%97%E0%A4%88+%E0%A4%A4%E0%A4%BE%E0%A4%B0%E0%A5%80%E0%A4%96+%E0%A4%94%E0%A4%B0+%E0%A4%B8%E0%A4%AE%E0%A4%AF+%E0%A4%AA%E0%A4%B0+%E0%A4%89%E0%A4%AA%E0%A4%B2%E0%A4%AC%E0%A5%8D%E0%A4%A7+%E0%A4%B9%E0%A5%8B%E0%A4%82%E0%A4%97%E0%A5%87%2C+%E0%A4%A7%E0%A4%A8%E0%A5%8D%E0%A4%AF%E0%A4%B5%E0%A4%BE%E0%A4%A6%E0%A5%A4"
-                    payload = {}
-                    headers = {}
-                    response = requests.request("GET", url, headers=headers, data=payload)
-                    # remember the time entered; 
-                    # set the next queue date and time; 
-                    # set stage/status to 4/0;  
-                    # make such that bot detects 4/0s and hit them at set time with availability message; 
-                    # send thanks message and light reminder
-           
-                elif lead_running_instance.stage == '3':
-                    if json_data['button']['text'] == 'हाँ':
-                        # handle yes reply - ask for street address, set stage to 3.1
-                        pass
-                    else:
-                        # handle no reply - ask whether coapp was changed, set stage to 4
-                        pass
-
-                elif lead_running_instance.stage == '4':
-                    if json_data['button']['text'] == 'हाँ':
-                        # handle yes reply - ask for coapp name, set stage to 4.1
-                        pass
-                    else:
-                        # handle no reply - run function to check API results
-                        # inside function - if eligible, show offers, change status to 5; if not, then send msg, change status to 3, stage to 5
-                        pass
-                
-                elif lead_running_instance.stage == '5':
-                    if json_data['button']['text'] == '':
-                        # offer x was chosen
-                        # add as much as you want
-                        # change status to 6
-                        # initiate document collection process
-                        pass
-
-                elif lead_running_instance.stage == '6':
-                    if json_data['button']['text'] == 'आधार का सामने साइड':
-                        pass
-                    elif json_data['button']['text'] == 'आधार का पीछे साइड':
-                        pass
-                    elif json_data['button']['text'] == 'वोटर':
-                        pass
-                    elif json_data['button']['text'] == 'आधार का सामने साइड सह-आवेदक':
-                        pass
-                    elif json_data['button']['text'] == 'आधार का पीछे साइड सह-आवेदक':
-                        pass
-                    elif json_data['button']['text'] == 'सह-आवेदक वोटर':
-                        pass
-                    # initiate verification process
-                    document_upload_status_check(request, lead_running_instance)
-                    # send upload recieved message
-                
-                else:
-                    # wrong response
-                    pass
-            
-            elif json_data['type']=='text':
-                if lead_running_instance.stage == '2.2.3':
-                    #we expect a ddmmyy text entry; stage change to 2.2.3.1, remember date entered, ask time slot
-                    url = f"https://media.smsgupshup.com/GatewayAPI/rest?userid=2000209909&password=z24gzBUA&send_to={contact_number}&v=1.1&format=json&msg_type=TEXT&method=SENDMESSAGE&msg=%E0%A4%95%E0%A5%83%E0%A4%AA%E0%A4%AF%E0%A4%BE+%E0%A4%90%E0%A4%B8%E0%A4%BE+%E0%A4%B8%E0%A4%AE%E0%A4%AF+%E0%A4%B8%E0%A5%8D%E0%A4%B2%E0%A5%89%E0%A4%9F+%E0%A4%9A%E0%A5%81%E0%A4%A8%E0%A5%87%E0%A4%82+%E0%A4%9C%E0%A4%BF%E0%A4%B8%E0%A4%AE%E0%A5%87%E0%A4%82+%E0%A4%86%E0%A4%AA+%E0%A4%B8%E0%A4%B9%E0%A4%9C+%E0%A4%B9%E0%A5%8B%E0%A4%82&isTemplate=true&wa_template_json=%7B%22components%22%3A%5B%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%220%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%221%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%222%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%223%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%224%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%225%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%226%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%227%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%2C%7B%22sub_type%22%3A%22quick_reply%22%2C%22index%22%3A%228%22%2C%22type%22%3A%22button%22%2C%22parameters%22%3A%5B%7B%22payload%22%3A%22%22%2C%22type%22%3A%22payload%22%7D%5D%7D%5D%7D"
-                    payload = {}
-                    headers = {}
-                    response = requests.request("GET", url, headers=headers, data=payload)
-                    lead_running_instance.stage = '2.2.3.1'
-                    lead_running_instance.save()
-                    pass
-
-                elif lead_running_instance.stage == '3.1':
-                # store street address, ask city, change stage to 3.1.1
-                    pass
-
-                elif lead_running_instance.stage == '3.1.1':
-                # store city, ask state, change stage to 3.1.2
-                    pass
-                
-                elif lead_running_instance.stage == '3.1.2':
-                # store state, ask whether coapp changed, change stage to 4
-                    pass
-                
-                elif lead_running_instance.stage == '4.1':
-                # store coapp name, ask coapp mobile, change stage to 4.1.1
-                    pass
-                
-                elif lead_running_instance.stage == '4.1.1':
-                # store coapp mobile, ask coapp dob, change stage to 4.1.2
-                    pass
-
-                elif lead_running_instance.stage == '4.1.2':
-                # store coapp dob, ask coapp gender, change stage to 4.1.3
-                    pass
-
-                elif lead_running_instance.stage == '4.1.3':
-                # store coapp gender, ask coapp father name, change stage to 4.1.4
-                    pass
-
-                elif lead_running_instance.stage == '4.1.4':
-                # store coapp father name, ask coapp address, change stage to 4.1.5
-                    pass
-
-                elif lead_running_instance.stage == '4.1.5':
-                # store coapp address, ask coapp postal code, change stage to 4.1.6
-                    pass
-
-                elif lead_running_instance.stage == '4.1.6':
-                # store coapp postal code, ask coapp bank account no, change stage to 4.1.7
-                    pass
-
-                elif lead_running_instance.stage == '4.1.7':
-                # store coapp bank account no, ask coapp bank branch name, change stage to 4.1.8
-                    pass
-
-                elif lead_running_instance.stage == '4.1.8':
-                # store coapp bank branch name, ask coapp ifsc code, change stage to 4.1.9
-                    pass
-
-                elif lead_running_instance.stage == '4.1.9':
-                    # store coapp ifsc code
-                    # run function to check API results
-                    # inside function - if eligible, show offers, change status to 5; if not, then send msg, change status to 3, stage to 5
-                    pass
-
-                else:
-                    # wrong response
-                    pass
-            # ---------------------------------------------------
-
-            # Actual code for HRMS
-
-            # ----------------------------------------------------------------------------------
-
-            return HttpResponse('success')
-        return HttpResponse('failure')
-    except Exception as e:
-        message_text = traceback.format_exc()
-
-        url = "https://media.smsgupshup.com/GatewayAPI/rest"
-        params = {
-            'userid': '2000209911',
-            'password': '2fb#C5z#',
-            'method': 'SendMessage',
-            'auth_scheme': 'plain',
-            'v': '1.1',
-            'send_to': '8335076174',
-            'msg': message_text,
-            'msg_type': 'DATA_TEXT',
-            'data_encoding': 'text',
-            'format': 'json'
-        }
-        response = requests.get(url, params=params)
+def indexCopy(request):
+    context={}
+    username=request.user.username
+    context['username']=username
+    return render(request, 'index copy.html',context)

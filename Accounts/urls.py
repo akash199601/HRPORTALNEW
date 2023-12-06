@@ -46,6 +46,7 @@ urlpatterns = [
     path('hold_user/<int:refId>',views.hold_user,name="hold_user"),
     path('reject/<int:refId>',views.reject,name="reject"),
     path('reject_user/<int:refId>',views.reject_user,name="reject_user"),
+    path('bypass_user/<int:refId>',views.bypass_user,name="bypass_user"),
     path('reject_user_initial/<int:application_id>',views.reject_user_initial,name="reject_user_initial"),
     path('select_candidate/<int:refId>',views.select_candidate,name="select_candidate"),
     path('vacancy_lists/',views.vacancy_lists,name="vacancy_lists"),
@@ -155,6 +156,5 @@ urlpatterns = [
     path('show_contact',views.show_contact,name="show_contact"),
     
     path('upload_documents/<int:candidate_id>',views.upload_documents,name="upload_documents"),
-    path('whatsapp_callback', views.whatsapp_callback, name='whatsapp_callback'),
-    
+    path('indexCopy',views.indexCopy,name="indexCopy"),
 ]
