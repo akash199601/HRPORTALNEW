@@ -152,7 +152,7 @@
                   <p class="text-muted">{{x.applicant.email}}</p>
                   <p class="text-muted">{{x.applicant.mobile_no}}</p>
                   {% comment %} <p class="text-muted">{{interview_score}}</p> {% endcomment %}
-                  <a href="{% url 'assessed_candidate_full_details' application_id=x.applicant.application_id %}" style="text-decoration:none;"><button type="button" class="btn btn-primary btn-rounded btn-lg" style="padding-top:2px;font-size: 14px;">
+                  <a href="{% url 'schedule_test_user_full_details' refId=x.applicant.application_id %}" style="text-decoration:none;"><button type="button" class="btn btn-primary btn-rounded btn-lg" style="padding-top:2px;font-size: 14px;">
                    More Details
                   </button></a>
                   <div class="d-flex justify-content-between text-center mt-3 mb-2">

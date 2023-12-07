@@ -156,7 +156,7 @@
                   <td>{{ x.name }}</td>
                   <td>{{ x.email }}</td>
                   <td>{{ x.mobile_no }}</td>
-                  <td><a href="{% url 'sceduled_user_full_details' refId=x.id %}" style="text-decoration:none;"><label class="badge badge-danger">View</label></a></td>
+                  <td><a href="{% url 'schedule_test_user_full_details' refId=x.id %}" style="text-decoration:none;"><label class="badge badge-danger">View</label></a></td>
                 </tr>
               </tbody>
               {% endfor %}
