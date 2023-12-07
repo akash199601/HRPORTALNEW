@@ -267,7 +267,6 @@
                                                             <span class="panel-col panel-col1">Upload New Resume</span>
                                                             <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs" name="resume_file" id="resume_file" value="" placeHolder="" onchange="return fileValidation()"> 
                                                             <input type="hidden" value="{% if user_profile.resume_file %}{{user_profile.resume_file}} {% endif %}" id="resume_file_name">
-                                                            
                                                         </div>
                                                         <!-- <div class="column-footer row2 text-right">
                                                             <button  href="javascript:void(0)" id="id" class="btn btn-primary">
@@ -336,7 +335,6 @@
                                                                 <span class="panel-col panel-col1">Upload Identity Adadhar(<span style="color:red;font-size:16px;">*</span>)</span>
                                                                 <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="aadhar_doc" id="aadhar_doc" value="" placeHolder="" required> 
                                                                 <input type="hidden" value="{% if document_obj.aadhar_doc %}{{ document_obj.aadhar_doc }} {% endif %}" id="aadhar_file_name">
-
                                                             </div>
                                                         </div>
                                                         <div style="display: flex; justify-content: space-between;">

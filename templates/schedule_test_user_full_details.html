@@ -760,7 +760,7 @@ textarea{
                                           </button>
                                         </div> 
                                         <div style="margin: 5%;">
-                                            <button type="button" id="rejectButton1" class="btn btn-danger" style="display:flex;">Reject</button>
+                                            <button type="button" id="rejectButton3" class="btn btn-danger" style="display:flex;">Reject</button>
                                         </div>
                                     </div>
                                 </div>
@@ -2019,6 +2019,16 @@ textarea{
 
   </script>
 
+
+  <script>
+    function showalert1(){
+        mydiv = document.getElementById("schedule_form");
+        accept = document.getElementById('acceptModal');
+        mydiv.style.display = (mydiv.style.display !== "block") ? "block" : "none";
+        alert('Candidate has been accept Successfully, please fill the schedule interview details');
+        accept.style.display = (accept.style.display !== "block") ? "block" : "none";
+    }
+    </script>
 
   <script>
     function showalert3(){
