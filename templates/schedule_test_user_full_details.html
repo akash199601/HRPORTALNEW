@@ -1389,11 +1389,24 @@ textarea{
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-
+                                                <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                    {% csrf_token %}
+                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="aadhar_doc" id="aadhar_doc" value="" placeHolder="" required> 
+                                                    <input type="hidden" value="{% if document_obj.aadhar_doc %}{{ document_obj.aadhar_doc }} {% endif %}" id="aadhar_file_name">
+                                                    <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                        Update
+                                                    </button>
+                                                </form>
+                                                <hr>
+                                                {% if aadhar_doc == '.jpg' or aadhar_doc == '.jpeg' or aadhar_doc == '.png' %}
                                                 <div style="width: 100%; height: 100%; overflow: auto;">
                                                     <img src="{{aadhar_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
                                                 </div>
-                                               
+                                                {% else %}
+                                                <div style="width: 100%; height: 100%; overflow: auto;">
+                                                    <embed src="{{aadhar_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                </div>
+                                                {% endif %}
                                                 {% comment %} <div style="width: 100%; height: 500px; overflow: auto;">
                                                     <h3>This file type is not supported for preview or no resume uploaded.</h3>
                                                 </div> {% endcomment %}
@@ -1426,11 +1439,24 @@ textarea{
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-
+                                                <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                    {% csrf_token %}
+                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" > 
+                                                    <input type="hidden" value="{% if document_obj.pan_doc %}{{ document_obj.pan_doc }} {% endif %}" id="pan_file_name">
+                                                    <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                        Update
+                                                    </button>
+                                                </form>
+                                                <hr>
+                                                {% if pan_doc == '.jpg' or pan_doc == '.jpeg' or pan_doc == '.png' %}
                                                 <div style="width: 100%; height: 100%; overflow: auto;">
                                                     <img src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
                                                 </div>
-                                               
+                                               {% else %}
+                                                <div style="width: 100%; height: 100%; overflow: auto;">
+                                                    <embed src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                </div>
+                                            {% endif %}
                                                 {% comment %} <div style="width: 100%; height: 500px; overflow: auto;">
                                                     <h3>This file type is not supported for preview or no resume uploaded.</h3>
                                                 </div> {% endcomment %}
@@ -1460,10 +1486,24 @@ textarea{
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-
+                                                <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                    {% csrf_token %}
+                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="dl_doc" id="dl_doc" value="" placeHolder=""> 
+                                                    <input type="hidden" value="{% if document_obj.dl_doc %}{{ document_obj.dl_doc }} {% endif %}" id="dl_file_name">
+                                                    <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                        Update
+                                                    </button>
+                                                </form>
+                                                <hr>
+                                                {% if dl_doc == '.jpg' or dl_doc == '.jpeg' or dl_doc == '.png' %}
                                                 <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <img src="{{dl_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                    <img src="{{dl_doc.url}}" width="100%" alt="driving License"  width="100%" height="100%">
                                                 </div>
+                                                {% else %}
+                                                <div style="width: 100%; height: 100%; overflow: auto;">
+                                                    <embed src="{{dl_doc.url}}" width="100%" alt="driving License"  width="100%" height="100%">
+                                                </div>
+                                                {% endif %}
                                                
                                                 {% comment %} <div style="width: 100%; height: 500px; overflow: auto;">
                                                     <h3>This file type is not supported for preview or no resume uploaded.</h3>
@@ -1497,11 +1537,24 @@ textarea{
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-
+                                                <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                    {% csrf_token %}
+                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="ssc_doc" id="ssc_doc" value="" placeHolder="" > 
+                                                    <input type="hidden" value="{% if document_obj.ssc_doc %}{{ document_obj.ssc_doc }} {% endif %}" id="ssc_file_name" >
+                                                    <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                        Update
+                                                    </button>
+                                                </form>
+                                                <hr>
+                                                {% if ssc_doc == '.jpg' or ssc_doc == '.jpeg' or ssc_doc == '.png' %}
                                                 <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <img src="{{ssc_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                    <img src="{{ssc_doc.url}}" width="100%" alt="10th Marksheet"  width="100%" height="100%">
                                                 </div>
-                                               
+                                               {% else %}
+                                                <div style="width: 100%; height: 100%; overflow: auto;">
+                                                    <embed src="{{ssc_doc.url}}" width="100%" alt="10th Marksheet"  width="100%" height="100%">
+                                                </div>
+                                                {% endif %}
                                                 {% comment %} <div style="width: 100%; height: 500px; overflow: auto;">
                                                     <h3>This file type is not supported for preview or no resume uploaded.</h3>
                                                 </div> {% endcomment %}
@@ -1531,11 +1584,23 @@ textarea{
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-
+                                                <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                    {% csrf_token %}
+                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="hsc_doc" id="hsc_doc" value="" placeHolder="" required> 
+                                                    <input type="hidden" value="{% if document_obj.hsc_doc %}{{ document_obj.hsc_doc }} {% endif %}" id="hsc_file_name" >
+                                                    <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                        Update
+                                                    </button>
+                                                </form>
+                                                {% if hsc_doc == '.jpg' or hsc_doc == '.jpeg' or hsc_doc == '.png' %}
                                                 <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <img src="{{hsc_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                    <img src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
                                                 </div>
-                                               
+                                               {% else %}
+                                                <div style="width: 100%; height: 100%; overflow: auto;">
+                                                    <embed src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
+                                                </div>
+                                                {% endif %}
                                                 {% comment %} <div style="width: 100%; height: 500px; overflow: auto;">
                                                     <h3>This file type is not supported for preview or no resume uploaded.</h3>
                                                 </div> {% endcomment %}
@@ -1568,11 +1633,24 @@ textarea{
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-
+                                                <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                    {% csrf_token %}
+                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="graduate_doc" id="graduate_doc" value="" placeHolder=""> 
+                                                    <input type="hidden" value="{% if document_obj.graduate_doc %}{{ document_obj.graduate_doc }} {% endif %}" id="graduate_file_name" >
+                                                    <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                        Update
+                                                    </button>
+                                                </form>
+                                            <hr>
+                                                {% if graduate_doc == '.jpg' or graduate_doc == '.jpeg' or graduate_doc == '.png' %}
                                                 <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <img src="{{graduate_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                    <img src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
                                                 </div>
-                                               
+                                               {% else %}
+                                                <div style="width: 100%; height: 100%; overflow: auto;">
+                                                    <embed src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
+                                                </div>
+                                            {% endif%}
                                                 {% comment %} <div style="width: 100%; height: 500px; overflow: auto;">
                                                     <h3>This file type is not supported for preview or no resume uploaded.</h3>
                                                 </div> {% endcomment %}

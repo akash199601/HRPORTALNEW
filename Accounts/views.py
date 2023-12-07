@@ -1634,6 +1634,39 @@ def schedule_test_user_full_details(request,refId):
         formatted_dates = [d[0].strftime('%Y-%m-%d') for d in dates]
         print('formatted_dates',formatted_dates)
         today_date = datetime.today().strftime('%Y-%m-%d')
+        
+        # for upload the document 
+        try:
+            document_obj = Document_Candidate.objects.get(candidate_id = application.candidate_id)
+        except Exception as e:
+            print(e)
+            document_obj = Document_Candidate()
+            document_obj.candidate_id = application.candidate_id
+        
+        if 'aadhar_doc' in request.FILES:
+            document_obj.aadhar_doc = request.FILES['aadhar_doc']
+            print( 'aadhar',document_obj.aadhar_doc)
+            document_obj.save()
+        if 'pan_doc' in request.FILES:
+            document_obj.pan_doc = request.FILES['pan_doc']
+            print( 'pan_doc',document_obj.pan_doc)
+            document_obj.save()
+        if 'dl_doc' in request.FILES:
+            document_obj.dl_doc = request.FILES['dl_doc']
+            print( 'dl_doc',document_obj.dl_doc)
+            document_obj.save()
+        if 'ssc_doc' in request.FILES:
+            document_obj.ssc_doc = request.FILES['ssc_doc']
+            print( 'ssc_doc',document_obj.ssc_doc)
+            document_obj.save()
+        if 'hsc_doc' in request.FILES:
+            document_obj.hsc_doc = request.FILES['hsc_doc']
+            print( 'hsc_doc',document_obj.hsc_doc)
+            document_obj.save()
+        if 'graduate_doc' in request.FILES:
+            document_obj.graduate_doc = request.FILES['graduate_doc']
+            print( 'graduate_doc',document_obj.graduate_doc)
+            document_obj.save()
 
         try:
             testschedule_obj = TestScheduleDetails.objects.get(application_id = application.application_id)
@@ -1645,7 +1678,6 @@ def schedule_test_user_full_details(request,refId):
                 percetage = float((test_score/total)*100)
             else:
                 percetage = None
-            
         except TestScheduleDetails.DoesNotExist:
             percetage = None
             testschedule_obj = None
@@ -1707,9 +1739,8 @@ def schedule_test_user_full_details(request,refId):
         'percetage' : percetage,
         'resume_file':resume_file,
         'bypass' : application.bypass,
-        # 'resume_obj':resume_obj,
-  
-        
+        'document_obj':document_obj,
+        # 'resume_obj':resume_obj,        
     }
     return render(request,'schedule_test_user_full_details.html',context)
 
