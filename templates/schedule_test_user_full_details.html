@@ -1352,7 +1352,7 @@ textarea{
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Resume</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body" style="overflow-y: hidden;">
                                                 {% if mime_type == 'application/pdf' %}
                                                     <embed src="data:application/pdf;base64,{{ binary_data }}" type="application/pdf" width="100%" height="100%">      
                                                 {% elif mime_type|lower == 'image/jpg' or mime_type|lower == 'image/jpeg' or mime_type|lower == 'image/png' %}
@@ -1388,7 +1388,7 @@ textarea{
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Aadhar</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body" style="overflow-y: hidden;">
                                                 <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                                     {% csrf_token %}
                                                     <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="aadhar_doc" id="aadhar_doc" value="" placeHolder="" required> 
@@ -1438,7 +1438,7 @@ textarea{
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">PAN</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body" style="overflow-y: hidden;">
                                                 <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                                     {% csrf_token %}
                                                     <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" > 
@@ -1485,7 +1485,7 @@ textarea{
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Driving Licence</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body" style="overflow-y: hidden;">
                                                 <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                                     {% csrf_token %}
                                                     <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="dl_doc" id="dl_doc" value="" placeHolder=""> 
@@ -1536,7 +1536,7 @@ textarea{
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">High School</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body" style="overflow-y: hidden;">
                                                 <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                                     {% csrf_token %}
                                                     <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="ssc_doc" id="ssc_doc" value="" placeHolder="" > 
@@ -1583,7 +1583,7 @@ textarea{
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Intermediate</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body" style="overflow-y: hidden;">
                                                 <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                                     {% csrf_token %}
                                                     <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="hsc_doc" id="hsc_doc" value="" placeHolder="" required> 
@@ -1632,7 +1632,7 @@ textarea{
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Graduation</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body" style="overflow-y: hidden;">
                                                 <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                                     {% csrf_token %}
                                                     <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="graduate_doc" id="graduate_doc" value="" placeHolder=""> 

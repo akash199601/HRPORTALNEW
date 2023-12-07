@@ -6743,8 +6743,7 @@ a.close.disabled {
   .modal-dialog-scrollable .modal-footer {
     -ms-flex-negative: 0;
     flex-shrink: 0; }
-  .modal-dialog-scrollable .modal-body {
-    overflow-y: auto; }
+
 
 .modal-dialog-centered {
   display: -webkit-box;
