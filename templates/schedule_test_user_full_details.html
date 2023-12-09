@@ -180,7 +180,7 @@ textarea{
     margin: 10% auto;
     padding: 40px;
     border: 1px solid #888;
-    width: 100%;
+    width: 50%;
     }
 
     .content{
@@ -948,7 +948,7 @@ textarea{
                     
                                   {% comment %} </div> {% endcomment %}
                                    <!-- Reject Modal -->
-                                   <div id="rejectModal2" class="modal"  tabindex="-1" role="dialog" aria-hidden="true">
+                                <div id="rejectModal2" class="modal"  tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-content content" style="margin-top: 200px;">
                                         <span class="close1">&times;</span>
                                         <form id="rejectForm" method="POST" action="{% url 'reject_user' refId=application.application_id %}">
@@ -972,11 +972,11 @@ textarea{
                                           {% csrf_token %}
                                             <div>
                                                 <center>
-                                                    <label for="holdReason">Reason For Hold:</label>
-                                                    <textarea id="rejectReason" name="hold_reason" required></textarea>
-                                                    <label for="holdDate">Put Application On Hold Till Date:</label>
-                                                    <input type="date" id="holdDate" name="hold_date" required style="width: 50%;">
-                                                    <button type="submit" onclick="showalert4()" >Hold</button>
+                                                    {% comment %} <label for="holdReason">Reason For Hold:</label> {% endcomment %}
+                                                    <textarea id="rejectReason" name="hold_reason" placeHolder="Reason For Hold" style="width:50%;" required></textarea><br>
+                                                    {% comment %} <label for="holdDate">Put Application On Hold Till Date:</label> {% endcomment %}
+                                                    <input type="date" id="holdDate" name="hold_date" required style="width: 170px;"><br>
+                                                    <button type="submit" onclick="showalert4()" style="margin-top: 10px;">Hold</button>
                                                 </center>
                                             </div>
                                         </form>

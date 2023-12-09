@@ -6,6 +6,11 @@
     /* table,td,th{
         border: 1px solid red;
     } */
+
+    .resume-file {
+        height: 91%;
+        width: 100%;
+    }
     .row input,.row select{
         width: 95%;
         margin-left: 1%;
@@ -93,9 +98,11 @@
       }
 
       .resume-card{
-        height: 550px;
+        height: 495px;
         border-radius: 5px;
         border: 1px solid #b3aeaed1;
+        margin-bottom: 10px;
+        margin-top: 10px;
         
       }
 
@@ -227,7 +234,7 @@
                                                     <!-- <div class="clearfix"> -->
                                                     <div class="row">
                                                         <span class="panel-col panel-col1">Name</span>
-                                                        <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" maxlength="30" readonly> 
+                                                        <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }} {% endif %}" maxlength="30" readonly> 
                                                     </div>
                                                         <!-- </div> -->
                                 
