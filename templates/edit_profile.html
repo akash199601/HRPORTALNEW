@@ -3,7 +3,405 @@
 
 {% load static %}
 <style>
-    /* table,td,th{
+    .row input,.row select{
+        width: 95%;
+        margin-left: 1%;
+      }
+      input,select{
+        border: 1px solid rgb(187, 187, 246);
+        border-radius: 5px;
+        padding: 4px;
+        background-color: #e3e3ec;
+      }
+      input:hover,select:hover{
+        border: 2px solid rgb(137, 137, 190);
+      }
+      .row span{
+        font-size: 14px;
+        font-weight: 300;
+        margin-bottom: 8px;
+        margin-top: 15px;
+      }
+      .address_div,.education_div,.training_div,.current_emp_div,.family_div{
+        margin-top: 4%;
+      }
+      .address tr td input,.education tr td input,.training tr td input,.current_emp tr td input,.family tr td input{
+        /* padding: 10px; */
+        /* border: none; */
+        width: 88%;
+        margin-top: 14px;
+      }
+      .address tr,.education tr,.training tr,.current_emp tr,.family tr{
+        margin-left: 40px;
+        margin-top: 15px;
+      }
+      textarea{
+        border: 1px solid rgb(187, 187, 246);
+        border-radius: 15px;
+        margin-left: 3%;
+      }
+      
+      .dow_row{
+        width:30%; 
+      }
+      
+      @media(max-width:720px){
+        .dow_row{
+            width:100%;  
+        }
+      }
+      
+      .education_doc{
+        display:flex;
+        justify-content:space-between;  
+      }
+      
+      @media(max-width:720px){
+        .education_doc{
+            width:100%;  
+            display:block;
+        }
+      }
+      
+      .resume-file {
+        height: 89%;
+        width: 100%;
+      }
+      
+      @media (min-width: 720px){
+        .basic-details-card{
+          width:100%;
+          float:left; 
+          margin-right: 20px;
+        }
+      }
+      
+      .resume-card{
+        border-radius: 5px;
+        border: 1px solid #b3aeaed1;
+        height: 400px;
+        margin-bottom:10px;
+      }
+      
+      
+      @media(min-width:720px){
+        .resume-card {
+          width:48%;
+          float:right;
+          border-radius: 5px;
+          border: 1px solid #b3aeaed1;
+          margin-top: 20px;
+          height: 515px;
+        }
+      }
+      
+      .aadhar-documents{
+        border-radius: 5px;
+        border: 1px solid #b3aeaed1;
+        height: 400px;
+        margin-bottom:10px;
+      
+      }
+      
+      @media(min-width:720px){
+        .aadhar-documents {
+          width:48%;   
+          border-radius: 5px;
+          border: 1px solid #b3aeaed1;
+          margin-top: 20px;
+          height: 515px;
+          float: left;
+        }
+      }
+      
+      .ssc-documents{
+        border-radius: 5px;
+        border: 1px solid #b3aeaed1;
+        height: 400px;
+        margin-bottom:10px;
+      }
+      
+      @media(min-width:720px){
+        .ssc-documents {
+          width:48%;
+          border-radius: 5px;
+          border: 1px solid #b3aeaed1;
+          margin-top: 20px;
+          height: 515px;
+          float:right;
+        }
+      }
+      
+      .py-5 {
+        margin-top: 0px;
+      }
+      
+      
+      @media(max-width:640px){
+        .btn{
+            width:100%;
+        }
+      }
+      
+      @media (max-width: 1279px){
+        .mobile-nav-show {
+          color: rgba(73, 70, 70, 0.6);
+          font-size: 28px;
+          cursor: pointer;
+          line-height: 0;
+          transition: 0.5s;
+          z-index: 9999;
+          margin-right: 10px;
+        }
+      }
+      
+      
+      .modal {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        }
+      
+        .modal-content {
+        /*background-color: #fff;*/
+        margin: 10% auto;
+        padding: 40px;
+        border: 1px solid #888;
+        width: 50%;
+        }
+      
+        .content{
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 10px;
+            border: 1px solid #888;
+            width: 50%;
+        }
+      
+        .popup{
+            width:20%;
+        }
+      
+        .action-buttons{
+            width:30%;
+            margin-left:10px;
+        }
+      
+        @media(max-width: 640px){
+            .modal-content{
+                width: 90%;
+            }
+            .reject_reason{
+                width: 60%;
+            }
+            .popup{
+                width:45%;
+            }
+            .action-buttons{
+                width:45%;
+            }
+      
+        }
+      
+        .close {
+        color: #aaa;
+        float: right;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        }
+      
+        .close:hover,
+        .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+        } 
+      
+        .close1 {
+            color: #aaa;
+            float: right;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            }
+        
+            .close1:hover,
+            .close1:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+            } 
+        
+        .container-content{
+            width:80%;
+            margin-left:40px;
+         
+        }
+      
+        @media(max-width:640px){
+            .container-content{
+                display:block;
+                width:90%;
+                margin-left:20px;
+                margin-right:20px;
+                margin-bottom:10px;
+            }
+        }
+      
+        .containers{
+            width:75%;
+            margin-right:25px;
+        }
+      
+        @media(max-width:640px){
+            .containers{
+                width:100%;
+            }
+        }
+      
+        .item_list .info_title {
+            font-size: 26px;
+            font-family: 'DIN Bold';
+            line-height: 0.94;
+            letter-spacing: -0.5px;
+            color: #a8407f;
+            background-color: #e3e3e3;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-transform: capitalize;
+        }
+        
+        .item_list {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+            width:100%;
+        }
+      
+      
+        
+        ul {
+            font-weight: normal;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .item_list li.first_row_btn {
+            padding: 0px !important;
+            box-shadow: none !important;
+            background: none !important;
+        }
+        
+        .item_list_block {
+            width: 100%;
+            clear: both;
+            background-color: #fff;
+            margin-bottom: 10px;
+            box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            position: relative;
+        
+        }
+        
+        .count_Icon {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            position: relative;
+            border: solid 0.5px #a8407f;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 27px;
+            text-align: center;
+            letter-spacing: -0.5px;
+            color: #a8407f;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            z-index: 1;
+            margin-right: 10px;
+        }
+        
+        .step_open .form_outer {
+            display: block;
+        }
+        
+        .item_list .form_outer {
+            display: none;
+            padding: 15px;
+        }
+        
+        .panel-row {
+            margin-bottom: 5px;
+        }
+        
+        .material-icons {
+            cursor: pointer;
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 20px;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: 'liga';
+        }
+        
+        .panel-body {
+            padding: 13px 15px 15px 15px;
+        }
+        
+        .panel-body:before {
+            display: table;
+            content: "";
+        }
+        
+        .basic-details{
+            margin-bottom: 10px;
+            width: 25%;
+            margin-top: 15px;
+            display: flex;
+            margin-right: 0px;
+        }
+      
+        @media(max-width:640px){
+            .basic-details{
+                width: 98%;
+            }
+            .item_list{
+                width:100%;
+            }
+        }
+
+        .form{
+            display:flex;
+        }
+
+        @media(max-width:640px){
+            .form{
+                display:block;
+            }
+        }
+
+        .main-title{
+            text-align:center;
+        }
+    {% comment %} /* table,td,th{
         border: 1px solid red;
     } */
     .row input,.row select{
@@ -158,9 +556,9 @@
             width:100%;  
             display:block;
         }
-    }
+    } {% endcomment %}
 </style>
-<div class="layout-main candidate-portal myProfile-page" >
+{% comment %} <div class="layout-main candidate-portal myProfile-page" >
     <div class="site-width" style="min-height: 835px;">
         <div class="main-container" style="margin-top:100px;">
             <div class="container-inner">
@@ -180,503 +578,711 @@
                                 <div class="padding-t10 margin-topnone">
                                     <div>
                                        
-                                    </div>
+                                    </div> {% endcomment %}
+                            <div class="container-content py-5 wow fadeInUp" data-wow-delay="0.1s">
+                                    <h1 class="main-title">Edit Profile </h1>
+                                    <hr>
                                         
-                                    {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
-                                    {% comment %} {% for profile in user_profile%} {% endcomment %}
-                                     <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
-                                                    {% csrf_token %}
-
-                                        {% comment %} <div class="column-footer row2 text-right" style="margin-top: 10px;">
-                                            <button  type="submit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;">
-                                                 Update
-                                            </button>
-                                        </div>     {% endcomment %}
-                                        <div class="basic-details-card">
-                                            <ul class="item_list">
-                                                <!---->
-                                                <li class="item_list_block step_open">
-                                                    <div class="info_title theme-color">
-                                                        <span class="count_Icon theme-color">
-                                                            1
-                                                        </span>
-                                                        
-                                                        <!----><!---->
-                                                        <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Basic Details </span>
-                                                        <!---->
-                                                    </div>
-                                                        
-                                                <!-- {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
-                                                {% comment %} {% for profile in user_profile%} {% endcomment %}
-                                                <form method="POST" action="" enctype="multipart/form-data">
-                                                    {% csrf_token %} -->
-                                                    <div class="panel-body ng-star-inserted">
+                                    <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm" >
+                                        {% csrf_token %}
+                                        <div class="containers" >
+                                            <div class="basic-details-card" style="margin-bottom: 10px;margin-top:20px;">
+                                                <ul class="item_list">
+                                                    <!---->
+                                                    <li class="item_list_block step_open" >
+                                                        <div class="info_title theme-color" >
+                                                            <span class="count_Icon theme-color">
+                                                                1
+                                                            </span>
                                                             <!----><!---->
-                                                        {% comment %} <div class="row">
-                                                            <span class="panel-col panel-col1">Position Applied For</span>
-                                                            <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.position_applied_for %}{{ user_profile.position_applied_for }}{% endif %}" name="position_applied_for"> 
-                                                        </div> {% endcomment %}
-                                                        <!-- <div class="panel-row clearfix">
-                                                            <span class="panel-col panel-col1">Date Applied</span>
-                                                            <input type="date" class="panel-col text-bold-cell" name="applied_date" value="{% if user_profile.applied_date %}{{ user_profile.applied_date|date:'Y-m-d' }}{% endif %}"> 
-                                                        </div> -->
-                                                        <!-- <div class="clearfix"> -->
-                                                        <div class="row">
-                                                            <span class="panel-col panel-col1">Name(<span style="color:red;font-size:16px;">*</span>) </span>
-                                                            {% comment %} <input class="panel-col text-bold-cell" name="name" id="name" required value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" maxlength="30">  {% endcomment %}
-                                                            <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" name="name" id="name" maxlength="30" placeHolder="As a 10th Marksheet" required> 
+                                                            <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Basic Details </span>
+                                                            <!---->
+                                                        </div>
 
-                                                        </div>
-                                                            <!-- </div> -->
-                                    
-                                                        <!-- <div class="panel-row clearfix"> -->
-                                                        <div class="row">
-                                                            <span class="panel-col panel-col1">Primary Email(<span style="color:red;font-size:16px;">*</span>) </span>
-                                                            <input type="text" class="panel-col text-bold-cell" id="email" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" pattern=".+@gmail.com" size="30" maxlength="30" required> 
-                                                        </div>
-                                                            
-                                                        <!-- </div> -->
-                                                        <!-- <div class="panel-row clearfix"> -->
-                                                        <div class="row">
-                                                            <span class="panel-col panel-col1">Mobile Number(<span style="color:red;font-size:16px;">*</span>) </span>
-                                                            <input type="number" class="panel-col text-bold-cell" id="mobile_no"  name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" pattern="[0-9]{10}" maxlength="10" minlength="10" 
-                                                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required>
-                                                        </div>
-                                                            
-                                                        <!-- </div> -->
-                                                        <!---->
-                                                        <div class="row">
-                                                            <span class="panel-col panel-col1">Date Of Birth(<span style="color:red;font-size:16px;">*</span>) </span>
-                                                            <input type="date" class="panel-col text-bold-cell" required id="dob" name="dob" placeHolder="As a 10th Marksheet" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
-                                                        </div>
-                                                        <!-- <div class="row">
-                                                            <span class="panel-col panel-col1">Address</span>
-                                                            <input type="text" class="panel-col text-bold-cell" name="address" value="{% if user_profile.address %}{{ user_profile.address }}{% endif %}" required> 
-                                                        </div> -->
+                                                        <div id="panel6" class="panel-body ng-star-inserted" style="height: 90%;">
+                                                                <!----><!---->
 
-                                                        <div class="row">
-                                                            <span class="panel-col panel-col1">Gender(<span style="color:red">*</span>) </span>
-                                                            <select id="gender" name="gender" class="panel-col text-bold-cell" required>
-                                                                {% comment %} <option class="panel-col text-bold-cell" value="" disabled selected hidden>Select Gender</option> {% endcomment %}
-                                                                {% for choice in gender_choices %}
-                                                                <option class="panel-col text-bold-cell" value="{{ choice.0 }}" {% if choice.0 == user_profile.gender %}selected{% endif %}>{{ choice.1 }}</option>
-                                                                {% endfor %}
-                                                            </select>
+                                                            <div class="row">
+                                                                <span class="panel-col panel-col1">Name</span>
+                                                                <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" readonly> 
+                                                            </div>
+                                                        
+                                                            <div class="row">
+                                                                <span class="panel-col panel-col1">Primary Email</span>
+                                                                <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
+                                                            </div>
+
+                                                        
+                                                            <div class="row">
+                                                                <span class="panel-col panel-col1">Mobile Number</span>
+                                                                <input readonly type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
+                                                            </div>
+                                                        
+                                                            <div class="row">
+                                                                <span class="panel-col panel-col1">Date Of Birth</span>
+                                                                <input readonly type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
+                                                            </div>
+                                                        
+                                                            <div class="row">
+                                                                <span class="panel-col panel-col1">Gender</span>
+                                                                <select readonly id="gender" name="gender" class="panel-col text-bold-cell" required>
+                                                                    <option class="panel-col text-bold-cell" value="" disabled selected hidden>Select Gender</option>
+                                                                    {% for choice in gender_choices %}
+                                                                    <option class="panel-col text-bold-cell" value="{{ choice.0 }}" {% if choice.0 == user_profile.gender %}selected{% endif %}>{{ choice.1 }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <span class="panel-col panel-col1">Upload New Resume</span>
-                                                            <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs" name="resume_file" id="resume_file" value="" placeHolder="" onchange="return fileValidation()"> 
-                                                            <input type="hidden" value="{% if user_profile.resume_file %}{{user_profile.resume_file}} {% endif %}" id="resume_file_name">
-                                                        </div>
-                                                        <!-- <div class="column-footer row2 text-right">
-                                                            <button  href="javascript:void(0)" id="id" class="btn btn-primary">
-                                                                Update
-                                                            </button>
-                                                        </div>  -->
-                                                    </div>
-                                                <!-- </form> -->
-                                                </li>
-                                            </ul>
-                                        </div>
-                                   
-                                        <div class="resume-card">
-                                            <div style="height:100%;width:100%;">
-                                                <h1 class="Resume-font">Resume</h1>
-                                                <div class="resume-file" id="imagePreview">
-                                                    {% if mime_type == 'application/pdf' %}
-                                                        <embed src="data:application/pdf;base64,{{ binary_data }}" type="application/pdf" width="100%" height="100%">      
-                                                    {% elif mime_type|lower == 'image/jpg' or mime_type|lower == 'image/jpeg' or mime_type|lower == 'image/png' %}
-                                                    <div style="width: 100%; height: 100%; overflow: auto;">
-                                                        <img src="data:{{ mime_type }};base64,{{ binary_data }}" width="100%" alt="Resume Image">
-                                                    </div>
-                                                    {% else %}
-                                                    <div style="width: 100%; height: 570px; overflow: auto;box-shadow:0px 0px 5px 0px;">
-                                                 
-                                                        <h3 style="background:grey;padding: 5px;" required>This file type is not supported for preview or no resume uploaded.</h3>
-                                                    </div>
-                                                    {% endif %}
-                                                    <input type="hidden" value="{{binary_data}}" id="resume_data">
-                                                </div>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                        </div> 
-                                        <div>
-                                            <ul class="item_list">
-                                                <!---->
-                                                <li class="item_list_block step_open">
-                                                    <div class="info_title theme-color">
-                                                        <span class="count_Icon theme-color">
-                                                            2
-                                                        </span>
-                                                        
-                                                        <!----><!---->
-                                                        <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Personal Details </span>
-                                                        <!---->
-                                                    </div>
-                                                        
-                                                <!-- {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
-                                                {% comment %} {% for profile in user_profile%} {% endcomment %}
-                                                <form method="POST" action="" enctype="multipart/form-data">
-                                                    {% csrf_token %} -->
-                                                    <div class="panel-body ng-star-inserted" onload="resetSelection()">
-                                                        {% comment %} <div class="row">
-                                                            <span class="panel-col panel-col1">Full Name(<span style="color:red;font-size:16px;">*</span>) </span>
-                                                            <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" name="name" id="name" maxlength="30" required> 
-                                                        </div> {% endcomment %}
-                                                        
-                                                        <div style="display: flex; justify-content: space-between;">
 
-                                                            <div class="row" style="width: 50%">
-                                                                <span class="panel-col panel-col1">Identity Adadhar</span>
-                                                                <input type="number" class="panel-col text-bold-cell" style="text-transform: uppercase;" id="adhar" name="identity_Aadhar" value="{% if user_profile.identity_Aadhar %}{{ user_profile.identity_Aadhar }}{% endif %}" maxlength="12" minlength="12"> 
-                                                                <span id="lblErroradh" style="color: Red; visibility: hidden;" class="error">Invalid Aadhaar Number(<span style="color:red;font-size:16px;">*</span>)</span>
-                                                            </div>
-                                                            <div class="row" style="width: 50%">
-                                                                
-                                                                <span class="panel-col panel-col1">Upload Identity Adadhar(<span style="color:red;font-size:16px;">*</span>)</span>
-                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="aadhar_doc" id="aadhar_doc" value="" placeHolder="" required> 
-                                                                <input type="hidden" value="{% if document_obj.aadhar_doc %}{{ document_obj.aadhar_doc }} {% endif %}" id="aadhar_file_name">
-                                                            </div>
-                                                        </div>
-                                                        <div style="display: flex; justify-content: space-between;">
-                                                            <div class="row" style="width: 50%">
-                                                                <span class="panel-col panel-col1">Identity PAN</span>
-                                                                <input type="text" class="panel-col text-bold-cell" style="text-transform: uppercase;" id="pan" value="{% if user_profile.identity_PAN %}{{ user_profile.identity_PAN }}{% endif %}" name="identity_PAN"> 
-                                                                <span id="lblPANCard" style="color: Red; visibility: hidden;" class="error">Invalid PAN Number</span>      
-                                                            </div>
-                                                            <div class="row" style="width: 50%">
-                                                                {% comment %} {% if document_obj.pan_doc %}
-                                                                <img src="{{ document_obj.pan_doc.url }}" alt="image here">
-                                                                {% endif %} {% endcomment %}
-                                                                <span class="panel-col panel-col1">Upload Identity PAN</span>
-                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" > 
-                                                                <input type="hidden" value="{% if document_obj.pan_doc %}{{ document_obj.pan_doc }} {% endif %}" id="pan_file_name">
 
-                                                            </div>
+                                            <div class="basic-details-card" style="margin-bottom: 10px;margin-top:20px;">
+                                                <ul class="item_list">
+                                                    <!---->
+                                                    <li class="item_list_block step_open">
+                                                        <div class="info_title theme-color">
+                                                            <span class="count_Icon theme-color">
+                                                                2
+                                                            </span>
+
+                                                            <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Personal Details </span>
                                                         </div>
 
-                                                        <div style="display: flex; justify-content: space-between;">
-                                                            <div class="row" style="width: 50%">
-                                                                <span class="panel-col panel-col1">Identity Driving Licence</span>
-                                                                <input type="text" class="panel-col text-bold-cell" id="dl" value="{% if user_profile.identity_DL_No %}{{ user_profile.identity_DL_No }}{% endif %}" name="identity_DL_No"> 
-                                                                <span id="lblErrordl" style="color: Red; visibility: hidden;" class="error">Invalid DL Number</span>
-                                                            </div>
-                                                            <div class="row" style="width: 50%">
-                                                                {% comment %} {% if document_obj.dl_doc %}
-                                                                <img src="{{ document_obj.dl_doc.url }}" alt="image here">
-                                                                {% endif %} {% endcomment %}
-                                                                <span class="panel-col panel-col1">Upload Identity Driving Licence</span>
-                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="dl_doc" id="dl_doc" value="" placeHolder=""> 
-                                                                <input type="hidden" value="{% if document_obj.dl_doc %}{{ document_obj.dl_doc }} {% endif %}" id="dl_file_name">
+                                                        <div class="panel-body ng-star-inserted" onload="resetSelection()">
 
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        
-                                                        <!-- Extra Form -->
-                                                        <hr>
-                                                        <div class="address_div">
-                                                            <h4>Address
-                                                                {% comment %} {{profile_details}} {% endcomment %}
-                                                            </h4>
-                                                            <table class="address" style="width: 100%;">
-                                                                <tr>
-                                                                    <th></th>
-                                                                    <th class="state">State</th>
-                                                                    <th>City</th>
-                                                                    <th>PIN</th>
-                                                                </tr>
-                                                                <tr >
-                                                                    <th>Present(<span style="color:red;font-size:16px;">*</span>)</th>
-                                                                    <td class="present-row"><select class="present-state" onchange="print_city('state', this.selectedIndex);" id="sts" name ="present_state" required>{% if user_profile.present_state %}<option>{{ user_profile.present_state }}</option>{% endif %}</select></td>
-                                                                    <td class="present-row"><select class="present-city" id ="state" name="present_city" required>{% if user_profile.present_city %}<option>{{ user_profile.present_city }}</option>{% endif %}</select></td>
-                                                                    <td class="pin-row"><input type="number" value="{% if user_profile.present_pin %}{{ user_profile.present_pin }}{% endif %}" name="present_pin" id="present_pin" pattern="[0-9]{6}" maxlength="6" minlength="6"
-                                                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required> </td>
-                                                                    {% comment %} <td><select id ="state" name="present_city" class="form-control" required>{% if user_profile.present_city %}<option>{{ user_profile.present_city }}</option>{% endif %}</select></td>
-                                                                    <td><input type="number" value="{% if user_profile.present_pin %}{{ user_profile.present_pin }}{% endif %}" name="present_pin"  pattern="[0-9]{6}" maxlength="6" minlength="6" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required> </td> {% endcomment %}
-                                                                </tr>
-                                                                
-                                                                <tr id="permanent_row">
-                                                                    <div class="form-group">
-                                                                        <input type="checkbox" id="checkBox"  onclick="FillAddressInput()"> Same as present address in permanent address
-                                                                     </div>
-                                                                     
-                                                                    <th>Permanent(<span style="color:red;font-size:16px;">*</span>)</th>
-                                                                    <td><select class="present-state" onchange="print_city('state_2', this.selectedIndex);" id="sts_2" name ="permanent_state" required>{% if user_profile.permanent_state %}<option>{{ user_profile.permanent_state }}</option>{% endif %}</select></td>                                                                    
-                                                                    <td><select class="present-city" id ="state_2" name="permanent_city" required>{% if user_profile.permanent_city %}<option>{{ user_profile.permanent_city }}</option>{% endif %}</select></td>                                                                    
-                                                                    <td class="pin-row"><input type="number" value="{% if user_profile.permanent_pin %}{{ user_profile.permanent_pin }}{% endif %}" name="permanent_pin" id="permanent_pin"  pattern="[0-9]{6}" maxlength="6" minlength="6"
-                                                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required> </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <hr>
-                                                        <div class="address_div">
-                                                            <h4 style="font-size:15px;font-weight:350"><b>Upload Education Documents</b></h4>
-                                                            <div class="education_doc">
-                                                                <div class="row dow_row">
-                                                                    {% comment %} {% if document_obj.ssc_doc %}
-                                                                    <img src="{{ document_obj.ssc_doc.url }}" alt="image here">
-                                                                    {% endif %} {% endcomment %}
-                                                                    <span class="panel-col panel-col1">Upload High School Certificate</span>
-                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="ssc_doc" id="ssc_doc" value="" placeHolder="" > 
-                                                                    <input type="hidden" value="{% if document_obj.ssc_doc %}{{ document_obj.ssc_doc }} {% endif %}" id="ssc_file_name" >
+                                                            <div style="display: flex; justify-content: space-between;">
+
+                                                                <div class="row" style="width: 50%">
+                                                                    <span class="panel-col panel-col1">Identity Adadhar</span>
+                                                                    <input type="number" class="panel-col text-bold-cell" style="text-transform: uppercase;" id="adhar" name="identity_Aadhar" value="{% if user_profile.identity_Aadhar %}{{ user_profile.identity_Aadhar }}{% endif %}" maxlength="12" minlength="12"> 
+                                                                    <span id="lblErroradh" style="color: Red; visibility: hidden;" class="error">Invalid Aadhaar Number(<span style="color:red;font-size:16px;">*</span>)</span>
                                                                 </div>
-                                                                <div class="row dow_row">
-                                                                    {% comment %} {% if document_obj.hsc_doc %}
-                                                                    <img src="{{ document_obj.hsc_doc.url }}" alt="image here">
-                                                                    {% endif %} {% endcomment %}
-                                                                    <span class="panel-col panel-col1">Upload Intermediate Certificate</span>
-                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="hsc_doc" id="hsc_doc" value="" placeHolder="" required> 
-                                                                    <input type="hidden" value="{% if document_obj.hsc_doc %}{{ document_obj.hsc_doc }} {% endif %}" id="hsc_file_name" >
-                                                                </div>
-                                                                <div class="row dow_row">
-                                                                    {% comment %} {% if document_obj.graduate_doc %}
-                                                                    <img src="{{ document_obj.graduate_doc.url }}" alt="image here">
-                                                                    {% endif %} {% endcomment %}
-                                                                    <span class="panel-col panel-col1">Upload Graduation Certificate</span>
-                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="graduate_doc" id="graduate_doc" value="" placeHolder=""> 
-                                                                    <input type="hidden" value="{% if document_obj.graduate_doc %}{{ document_obj.graduate_doc }} {% endif %}" id="graduate_file_name" >
+                                                                <div class="row" style="width: 50%">
+
+                                                                    <span class="panel-col panel-col1">Upload Identity Adadhar(<span style="color:red;font-size:16px;">*</span>)</span>
+                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="aadhar_doc" id="aadhar_doc" value="" placeHolder="" required> 
+                                                                    <input type="hidden" value="{% if document_obj.aadhar_doc %}{{ document_obj.aadhar_doc }} {% endif %}" id="aadhar_file_name">
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                            <div style="display: flex; justify-content: space-between;">
+                                                                <div class="row" style="width: 50%">
+                                                                    <span class="panel-col panel-col1">Identity PAN</span>
+                                                                    <input type="text" class="panel-col text-bold-cell" style="text-transform: uppercase;" id="pan" value="{% if user_profile.identity_PAN %}{{ user_profile.identity_PAN }}{% endif %}" name="identity_PAN"> 
+                                                                    <span id="lblPANCard" style="color: Red; visibility: hidden;" class="error">Invalid PAN Number</span>      
+                                                                </div>
+                                                                <div class="row" style="width: 50%">
+                                                                    <span class="panel-col panel-col1">Upload Identity PAN</span>
+                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" > 
+                                                                    <input type="hidden" value="{% if document_obj.pan_doc %}{{ document_obj.pan_doc }} {% endif %}" id="pan_file_name">
 
-                                                        <hr>
-                                                        
-                                                        <div class="education_div">
-                                                            <h4>EDUCATION</h4>
-                                                            <table class="education" style="width: 100%;">
-                                                                <tr>
-                                                                    <th>  </th>
-                                                                    <th>Degree/
-                                                                        Diploma</th>
-                                                                    {% comment %} <th>Subjects</th> {% endcomment %}
-                                                                    <th>Name and Location of the
-                                                                        Institution</th>
-                                                                    <th>% obtained</th>
-                                                                    <th>Year of Passing</th>
-                                                                    
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>High School</th>
-                                                                    <td><input type="text" value="{% if user_profile.high_school_Degree_Diploma %}{{ user_profile.high_school_Degree_Diploma }}{% endif %}" name="high_school_Degree_Diploma"></td>
-                                                                    {% comment %} <td><input type="text" value="{% if user_profile.high_school_subjects %}{{ user_profile.high_school_subjects }}{% endif %}" name="high_school_subjects"></td> {% endcomment %}
-                                                                    <td><input type="text" value="{% if user_profile.high_school_name_location %}{{ user_profile.high_school_name_location }}{% endif %}" name="high_school_name_location"></td>
-                                                                    <td><input type="text" value="{% if user_profile.high_school_marks_obtained %}{{ user_profile.high_school_marks_obtained }}{% endif %}" name="high_school_marks_obtained"></td>
-                                                                    <td><input type="text" value="{% if user_profile.high_school_passing_year %}{{ user_profile.high_school_passing_year }}{% endif %}" name="high_school_passing_year"></td>
-                                                                    
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Intermediate</th>
-                                                                    <td><input type="text" value="{% if user_profile.intermediate_Degree_Diploma %}{{ user_profile.intermediate_Degree_Diploma }}{% endif %}" name="intermediate_Degree_Diploma"></td>
-                                                                    {% comment %} <td><input type="text" value="{% if user_profile.intermediate_subjects %}{{ user_profile.intermediate_subjects }}{% endif %}" name="intermediate_subjects"></td> {% endcomment %}
-                                                                    <td><input type="text" value="{% if user_profile.intermediate_name_location %}{{ user_profile.intermediate_name_location }}{% endif %}" name="intermediate_name_location"></td>
-                                                                    <td><input type="text" value="{% if user_profile.intermediate_marks_obtained %}{{ user_profile.intermediate_marks_obtained }}{% endif %}" name="intermediate_marks_obtained"></td>
-                                                                    <td><input type="text" value="{% if user_profile.intermediate_passing_year %}{{ user_profile.intermediate_passing_year }}{% endif %}" name="intermediate_passing_year"></td>
-
-                                                                    
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Graduation</th>
-                                                                    <td><input type="text" value="{% if user_profile.graduation_Degree_Diploma %}{{ user_profile.graduation_Degree_Diploma }}{% endif %}" name="graduation_Degree_Diploma"></td>
-                                                                    {% comment %} <td><input type="text" value="{% if user_profile.graduation_subjects %}{{ user_profile.graduation_subjects }}{% endif %}" name="graduation_subjects"></td> {% endcomment %}
-                                                                    <td><input type="text" value="{% if user_profile.graduation_name_location %}{{ user_profile.graduation_name_location }}{% endif %}" name="graduation_name_location"></td>
-                                                                    <td><input type="text" value="{% if user_profile.graduation_marks_obtained %}{{ user_profile.graduation_marks_obtained }}{% endif %}" name="graduation_marks_obtained"></td>
-                                                                    <td><input type="text" value="{% if user_profile.graduation_passing_year %}{{ user_profile.graduation_passing_year }}{% endif %}" name="graduation_passing_year"></td>
-
-                                                                    
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>PG</th>
-                                                                    <td><input type="text" value="{% if user_profile.pg_Degree_Diploma %}{{ user_profile.pg_Degree_Diploma }}{% endif %}" name="pg_Degree_Diploma"></td>
-                                                                    {% comment %} <td><input type="text" value="{% if user_profile.pg_subjects %}{{ user_profile.pg_subjects }}{% endif %}" name="pg_subjects"></td> {% endcomment %}
-                                                                    <td><input type="text" value="{% if user_profile.pg_name_location %}{{ user_profile.pg_name_location }}{% endif %}" name="pg_name_location"></td>
-                                                                    <td><input type="text" value="{% if user_profile.pg_marks_obtained %}{{ user_profile.pg_marks_obtained }}{% endif %}" name="pg_marks_obtained"></td>
-                                                                    <td><input type="text" value="{% if user_profile.pg_passing_year %}{{ user_profile.pg_passing_year }}{% endif %}" name="pg_passing_year"></td>
-                                                                
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Professional
-                                                                        Qualification</th>
-                                                                        <td><input type="text" value="{% if user_profile.professional_qualification_Degree_Diploma %}{{ user_profile.professional_qualification_Degree_Diploma }}{% endif %}" name="professional_qualification_Degree_Diploma"></td>
-                                                                        {% comment %} <td><input type="text" value="{% if user_profile.professional_qualification_subjects %}{{ user_profile.professional_qualification_subjects }}{% endif %}" name="professional_qualification_subjects"></td> {% endcomment %}
-                                                                        <td><input type="text" value="{% if user_profile.professional_qualification_name_location %}{{ user_profile.professional_qualification_name_location }}{% endif %}" name="professional_qualification_name_location"></td>
-                                                                        <td><input type="text" value="{% if user_profile.professional_qualification_marks_obtained %}{{ user_profile.professional_qualification_marks_obtained }}{% endif %}" name="professional_qualification_marks_obtained"></td>
-                                                                        <td><input type="text" value="{% if user_profile.professional_qualification_passing_year %}{{ user_profile.professional_qualification_passing_year }}{% endif %}" name="professional_qualification_passing_year"></td>
-                                                                    
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>others</th>
-                                                                    <td><input type="text" value="{% if user_profile.others_qualification_Degree_Diploma %}{{ user_profile.others_qualification_Degree_Diploma }}{% endif %}" name="others_qualification_Degree_Diploma"></td>
-                                                                    {% comment %} <td><input type="text" value="{% if user_profile.others_qualification_subjects %}{{ user_profile.others_qualification_subjects }}{% endif %}" name="others_qualification_subjects"></td> {% endcomment %}
-                                                                    <td><input type="text" value="{% if user_profile.others_qualification_name_location %}{{ user_profile.others_qualification_name_location }}{% endif %}" name="others_qualification_name_location"></td>
-                                                                    <td><input type="text" value="{% if user_profile.others_qualification_marks_obtained %}{{ user_profile.others_qualification_marks_obtained }}{% endif %}" name="others_qualification_marks_obtained"></td>
-                                                                    <td><input type="text" value="{% if user_profile.others_qualification_passing_year %}{{ user_profile.others_qualification_passing_year }}{% endif %}" name="others_qualification_passing_year"></td>
-
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-
-                                                        <div class="training_div">
-                                                            <h4>TRAINING PROGRAMS/WORKSHOP ATTENDED</h4>
-                                                            <table class="training" style="width: 100%;">
-                                                                <tr>
-                                                                    <th>Program Title</th>
-                                                                    <th>Institution &
-                                                                        Location</th>
-                                                                    <th>Skill Areas/Course Content</th>
-                                                                    <th>Start Date</th>
-                                                                    <th>Course
-                                                                        Duration</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td><input type="text" value="{% if user_profile.training_workshop_title %}{{ user_profile.training_workshop_title }}{% endif %}" name="training_workshop_title"></td>
-                                                                    <td><input type="text" value="{% if user_profile.training_workshop_Institution_location %}{{ user_profile.training_workshop_Institution_location }}{% endif %}" name="training_workshop_Institution_location"></td>
-                                                                    <td><input type="text" value="{% if user_profile.training_workshop_skill %}{{ user_profile.training_workshop_skill }}{% endif %}" name="training_workshop_skill"></td>
-                                                                    <td><input type="text" value="{% if user_profile.training_workshop_start_date %}{{ user_profile.training_workshop_start_date }}{% endif %}" name="training_workshop_start_date"></td>
-                                                                    <td><input type="text" value="{% if user_profile.training_workshop_duration %}{{ user_profile.training_workshop_duration }}{% endif %}" name="training_workshop_duration"></td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div class="current_emp_div">
-                                                            <h4>CURRENT EMPLOYMENT DETAILS</h4>
-                                                            <table class="current_emp" style="width: 100%;">
-                                                                <tr>
-                                                                    <td>Join date </td>
-                                                                    <td><input type="date" value="{% if user_profile.current_emp_start_date %}{{ user_profile.current_emp_start_date }}{% endif %}" name="current_emp_start_date"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Current Employer (Name and Address, Type of Business)</td>
-                                                                    <td><input type="text" value="{% if user_profile.current_employer %}{{ user_profile.current_employer }}{% endif %}" name="current_employer"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Current Salary</td>
-                                                                    <td><input type="text" value="{% if user_profile.current_emp_salary %}{{ user_profile.current_emp_salary }}{% endif %}" name="current_emp_salary"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Benefits like HRA, Fuels,
-                                                                        Medical etc.</td>
-                                                                    <td><input type="text" value="{% if user_profile.current_emp_benefits %}{{ user_profile.current_emp_benefits }}{% endif %}" name="current_emp_benefits"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Position</td>
-                                                                    <td><input type="text" value="{% if user_profile.current_emp_position %}{{ user_profile.current_emp_position }}{% endif %}" name="current_emp_position"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Reason For Leaving</td>
-                                                                    <td><input type="text" value="{% if user_profile.current_emp_reason_for_leaving %}{{ user_profile.current_emp_reason_for_leaving }}{% endif %}" name="current_emp_reason_for_leaving"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Expected Salary</td>
-                                                                    <td><input type="text" value="{% if user_profile.expected_salary %}{{ user_profile.expected_salary }}{% endif %}" name="expected_salary"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Brief Job Description</td>
-                                                                    <td><input type="text" value="{% if user_profile.current_emp_job_description %}{{ user_profile.current_emp_job_description }}{% endif %}" name="current_emp_job_description"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Supervisor’s Name</td>
-                                                                    <td><input type="text" value="{% if user_profile.current_emp_supervisor_name %}{{ user_profile.current_emp_supervisor_name }}{% endif %}" name="current_emp_supervisor_name"></td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                        <div class="family_div">
-                                                            <h4>FAMILY DETAILS </h4>
-                                                            <table class="family" style="width: 100%;">
-                                                                <tr>
-                                                                    <th>Relationship</th>
-                                                                    <th>Name</th>
-                                                                    <th>DOB</th>
-                                                                    <th>Profession</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Father</td>
-                                                                    <td><input type="text" value="{% if user_profile.father_name %}{{ user_profile.father_name }}{% endif %}" name="father_name" placeHolder="As a 10th Marksheet" maxlength="30"></td>
-                                                                    <td><input type="date" value="{% if user_profile.father_dob %}{{ user_profile.father_dob }}{% endif %}" name="father_dob"></td>
-                                                                    <td><input type="text" value="{% if user_profile.father_profession %}{{ user_profile.father_profession }}{% endif %}" name="father_profession" maxlength="40"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Mother</td>
-                                                                    <td><input type="text" value="{% if user_profile.mother_name %}{{ user_profile.mother_name }}{% endif %}" name="mother_name" maxlength="30"></td>
-                                                                    <td><input type="date" value="{% if user_profile.mother_dob %}{{ user_profile.mother_dob }}{% endif %}" name="mother_dob"></td>
-                                                                    <td><input type="text" value="{% if user_profile.mother_profession %}{{ user_profile.mother_profession }}{% endif %}" name="mother_profession" maxlength="40"></td>
-                                                                </tr><tr>
-                                                                    <td>Spouse</td>
-                                                                    <td><input type="text" value="{% if user_profile.spouse_name %}{{ user_profile.spouse_name }}{% endif %}" name="spouse_name" maxlength="30"></td>
-                                                                    <td><input type="date" value="{% if user_profile.spouse_dob %}{{ user_profile.spouse_dob }}{% endif %}" name="spouse_dob"></td>
-                                                                    <td><input type="text" value="{% if user_profile.spouse_profession %}{{ user_profile.spouse_profession }}{% endif %}" name="spouse_profession" maxlength="40"></td>
-                                                                </tr><tr>
-                                                                    <td>Children</td>
-                                                                    <td><input type="text" value="{% if user_profile.Children_name_1 %}{{ user_profile.Children_name_1 }}{% endif %}" name="Children_name_1" maxlength="30"></td>
-                                                                    <td><input type="date" value="{% if user_profile.Children_dob_1 %}{{ user_profile.Children_dob_1 }}{% endif %}" name="Children_dob_1"></td>
-                                                                    <td><input type="text" value="{% if user_profile.Children_1_profession %}{{ user_profile.Children_1_profession }}{% endif %}" name="Children_1_profession" maxlength="40"></td>
-                                                                </tr><tr>
-                                                                    <td>Children</td>
-                                                                    <td><input type="text" value="{% if user_profile.Children_name_2 %}{{ user_profile.Children_name_2 }}{% endif %}" name="Children_name_2" maxlength="30"></td>
-                                                                    <td><input type="date" value="{% if user_profile.Children_dob_2 %}{{ user_profile.Children_dob_2 }}{% endif %}" name="Children_dob_2"></td>
-                                                                    <td><input type="text" value="{% if user_profile.Children_2_profession %}{{ user_profile.Children_2_profession }}{% endif %}" name="Children_2_profession" maxlength="40"></td>
-                                                                </tr>
-
-                                                            </table>
-                                                        </div>
-                                                        <div class="row" style="width: 95%;">
-                                                            <span class="panel-col panel-col1">Why have you chosen to apply for a career with Sonata?</span>
-                                                            <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.reason_to_apply_sonata %}{{ user_profile.reason_to_apply_sonata }}{% endif %}" name="reason_to_apply_sonata">  -->
-                                                            <textarea name="reason_to_apply_sonata" id="" cols="10" rows="5" maxlength="1000" minlength="1000">{% if user_profile.reason_to_apply_sonata %}{{ user_profile.reason_to_apply_sonata }}{% endif %}</textarea>
-                                                        </div>
-                                                        <div style="display: flex; justify-content: space-between; margin-top: 41px;">
-                                                            <div class="panel-row clearfix" style="width: 40%">
-                                                                <span class="panel-col panel-col1" style="width: 90%;"> Are you willing to relocate anywhere in India</span>
-                                                                <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}" name="willing_to_relocate">  -->
-                                                                <select name="willing_to_relocate" id="" style="margin-left: 18%; margin-top: 15px;">
-                                                                    <option value="" selected>{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}</option>
-                                                                    <option value="True">Yes</option>
-                                                                    <option value="False">No</option>
-                                                                </select>
+                                                                </div>
                                                             </div>
-                                                            <div class="panel-row clearfix" style="width: 46%">
-                                                                <span class="panel-col panel-col1" style="width: 90%;">Have you been interviewed by Sonata before?</span>
-                                                                <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}" name="interviewed_by_Sonata_before">  -->
-                                                                <select name="interviewed_by_Sonata_before" id=""  style="margin-left: 18%; margin-top: 15px;">
-                                                                    <option value="" selected>{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}</option>
-                                                                    <option value="True">Yes</option>
-                                                                    <option value="False">No</option>
-                                                                </select>
+
+                                                            <div style="display: flex; justify-content: space-between;">
+                                                                <div class="row" style="width: 50%">
+                                                                    <span class="panel-col panel-col1">Identity Driving Licence</span>
+                                                                    <input type="text" class="panel-col text-bold-cell" id="dl" value="{% if user_profile.identity_DL_No %}{{ user_profile.identity_DL_No }}{% endif %}" name="identity_DL_No"> 
+                                                                    <span id="lblErrordl" style="color: Red; visibility: hidden;" class="error">Invalid DL Number</span>
+                                                                </div>
+                                                                <div class="row" style="width: 50%">
+                                                                    <span class="panel-col panel-col1">Upload Identity Driving Licence</span>
+                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="dl_doc" id="dl_doc" value="" placeHolder=""> 
+                                                                    <input type="hidden" value="{% if document_obj.dl_doc %}{{ document_obj.dl_doc }} {% endif %}" id="dl_file_name">
+
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row" style="width: 95%;">
-                                                            <span class="panel-col panel-col1">Locational Preference:</span>
-                                                            <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.locational_preferences %}{{ user_profile.locational_preferences }}{% endif %}" name="locational_preferences">  -->
-                                                            <textarea name="locational_preferences" id="" cols="10" rows="5" maxlength="1000" minlength="1000">{% if user_profile.locational_preferences %}{{ user_profile.locational_preferences }}{% endif %}</textarea>
-                                                        </div>
 
-                                                        
-                                                        <div class="column-footer row2 text-right" style="margin-top: 10px;">
-                                                            <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;">
-                                                                 Update
-                                                            </button>
-                                                        </div>    
-                                                            
+                                                            <hr>
+                                                            <div class="address_div">
+                                                                <h4>Address
+                                                                </h4>
+                                                                <table class="address" style="width: 100%;">
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th class="state">State</th>
+                                                                        <th>City</th>
+                                                                        <th>PIN</th>
+                                                                    </tr>
+                                                                    <tr >
+                                                                        <th>Present(<span style="color:red;font-size:16px;">*</span>)</th>
+                                                                        <td class="present-row"><select class="present-state" onchange="print_city('state', this.selectedIndex);" id="sts" name ="present_state" required>{% if user_profile.present_state %}<option>{{ user_profile.present_state }}</option>{% endif %}</select></td>
+                                                                        <td class="present-row"><select class="present-city" id ="state" name="present_city" required>{% if user_profile.present_city %}<option>{{ user_profile.present_city }}</option>{% endif %}</select></td>
+                                                                        <td class="pin-row"><input type="number" value="{% if user_profile.present_pin %}{{ user_profile.present_pin }}{% endif %}" name="present_pin" id="present_pin" pattern="[0-9]{6}" maxlength="6" minlength="6"
+                                                                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required> </td>
+                                                                    </tr>
 
-                                                        {% comment %} <form method="POST" action="" enctype="multipart/form-data" id="applicationForm">
-                                                            {% csrf_token %} {% endcomment %}
-                                                            {% comment %} <div class="column-footer row2 text-right" style="margin-top: 10px;">
-                                                                <button  type="submit" class="btn btn-primary" style="width:100px;">
+                                                                    <tr id="permanent_row">
+                                                                        <div class="form-group">
+                                                                            <input type="checkbox" id="checkBox"  onclick="FillAddressInput()"> Same as present address in permanent address
+                                                                         </div>
+
+                                                                        <th>Permanent(<span style="color:red;font-size:16px;">*</span>)</th>
+                                                                        <td><select class="present-state" onchange="print_city('state_2', this.selectedIndex);" id="sts_2" name ="permanent_state" required>{% if user_profile.permanent_state %}<option>{{ user_profile.permanent_state }}</option>{% endif %}</select></td>                                                                    
+                                                                        <td><select class="present-city" id ="state_2" name="permanent_city" required>{% if user_profile.permanent_city %}<option>{{ user_profile.permanent_city }}</option>{% endif %}</select></td>                                                                    
+                                                                        <td class="pin-row"><input type="number" value="{% if user_profile.permanent_pin %}{{ user_profile.permanent_pin }}{% endif %}" name="permanent_pin" id="permanent_pin"  pattern="[0-9]{6}" maxlength="6" minlength="6"
+                                                                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required> </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                            <hr>
+                                                            <div class="address_div">
+                                                                <h4 style="font-size:15px;font-weight:350"><b>Upload Education Documents</b></h4>
+                                                                <div class="education_doc">
+                                                                    <div class="row dow_row">
+                                                                        <span class="panel-col panel-col1">Upload High School Certificate</span>
+                                                                        <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="ssc_doc" id="ssc_doc" value="" placeHolder="" > 
+                                                                        <input type="hidden" value="{% if document_obj.ssc_doc %}{{ document_obj.ssc_doc }} {% endif %}" id="ssc_file_name" >
+                                                                    </div>
+                                                                    <div class="row dow_row">
+                                                                        <span class="panel-col panel-col1">Upload Intermediate Certificate</span>
+                                                                        <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="hsc_doc" id="hsc_doc" value="" placeHolder="" required> 
+                                                                        <input type="hidden" value="{% if document_obj.hsc_doc %}{{ document_obj.hsc_doc }} {% endif %}" id="hsc_file_name" >
+                                                                    </div>
+                                                                    <div class="row dow_row">
+                                                                        <span class="panel-col panel-col1">Upload Graduation Certificate</span>
+                                                                        <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="graduate_doc" id="graduate_doc" value="" placeHolder=""> 
+                                                                        <input type="hidden" value="{% if document_obj.graduate_doc %}{{ document_obj.graduate_doc }} {% endif %}" id="graduate_file_name" >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <hr>
+
+                                                            <div class="education_div">
+                                                                <h4>EDUCATION</h4>
+                                                                <table class="education" style="width: 100%;">
+                                                                    <tr>
+                                                                        <th>  </th>
+                                                                        <th>Degree/
+                                                                            Diploma</th>
+                                                                        <th>Name and Location of the
+                                                                            Institution</th>
+                                                                        <th>% obtained</th>
+                                                                        <th>Year of Passing</th>
+                                                                        
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>High School</th>
+                                                                        <td><input type="text" value="{% if user_profile.high_school_Degree_Diploma %}{{ user_profile.high_school_Degree_Diploma }}{% endif %}" name="high_school_Degree_Diploma"></td>
+                                                                        <td><input type="text" value="{% if user_profile.high_school_name_location %}{{ user_profile.high_school_name_location }}{% endif %}" name="high_school_name_location"></td>
+                                                                        <td><input type="text" value="{% if user_profile.high_school_marks_obtained %}{{ user_profile.high_school_marks_obtained }}{% endif %}" name="high_school_marks_obtained"></td>
+                                                                        <td><input type="text" value="{% if user_profile.high_school_passing_year %}{{ user_profile.high_school_passing_year }}{% endif %}" name="high_school_passing_year"></td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Intermediate</th>
+                                                                        <td><input type="text" value="{% if user_profile.intermediate_Degree_Diploma %}{{ user_profile.intermediate_Degree_Diploma }}{% endif %}" name="intermediate_Degree_Diploma"></td>
+                                                                        <td><input type="text" value="{% if user_profile.intermediate_name_location %}{{ user_profile.intermediate_name_location }}{% endif %}" name="intermediate_name_location"></td>
+                                                                        <td><input type="text" value="{% if user_profile.intermediate_marks_obtained %}{{ user_profile.intermediate_marks_obtained }}{% endif %}" name="intermediate_marks_obtained"></td>
+                                                                        <td><input type="text" value="{% if user_profile.intermediate_passing_year %}{{ user_profile.intermediate_passing_year }}{% endif %}" name="intermediate_passing_year"></td>
+
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Graduation</th>
+                                                                        <td><input type="text" value="{% if user_profile.graduation_Degree_Diploma %}{{ user_profile.graduation_Degree_Diploma }}{% endif %}" name="graduation_Degree_Diploma"></td>
+                                                                        <td><input type="text" value="{% if user_profile.graduation_name_location %}{{ user_profile.graduation_name_location }}{% endif %}" name="graduation_name_location"></td>
+                                                                        <td><input type="text" value="{% if user_profile.graduation_marks_obtained %}{{ user_profile.graduation_marks_obtained }}{% endif %}" name="graduation_marks_obtained"></td>
+                                                                        <td><input type="text" value="{% if user_profile.graduation_passing_year %}{{ user_profile.graduation_passing_year }}{% endif %}" name="graduation_passing_year"></td>
+
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>PG</th>
+                                                                        <td><input type="text" value="{% if user_profile.pg_Degree_Diploma %}{{ user_profile.pg_Degree_Diploma }}{% endif %}" name="pg_Degree_Diploma"></td>
+                                                                        <td><input type="text" value="{% if user_profile.pg_name_location %}{{ user_profile.pg_name_location }}{% endif %}" name="pg_name_location"></td>
+                                                                        <td><input type="text" value="{% if user_profile.pg_marks_obtained %}{{ user_profile.pg_marks_obtained }}{% endif %}" name="pg_marks_obtained"></td>
+                                                                        <td><input type="text" value="{% if user_profile.pg_passing_year %}{{ user_profile.pg_passing_year }}{% endif %}" name="pg_passing_year"></td>
+                                                                    
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Professional
+                                                                            Qualification</th>
+                                                                            <td><input type="text" value="{% if user_profile.professional_qualification_Degree_Diploma %}{{ user_profile.professional_qualification_Degree_Diploma }}{% endif %}" name="professional_qualification_Degree_Diploma"></td>
+                                                                            <td><input type="text" value="{% if user_profile.professional_qualification_name_location %}{{ user_profile.professional_qualification_name_location }}{% endif %}" name="professional_qualification_name_location"></td>
+                                                                            <td><input type="text" value="{% if user_profile.professional_qualification_marks_obtained %}{{ user_profile.professional_qualification_marks_obtained }}{% endif %}" name="professional_qualification_marks_obtained"></td>
+                                                                            <td><input type="text" value="{% if user_profile.professional_qualification_passing_year %}{{ user_profile.professional_qualification_passing_year }}{% endif %}" name="professional_qualification_passing_year"></td>
+                                                                        
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>others</th>
+                                                                        <td><input type="text" value="{% if user_profile.others_qualification_Degree_Diploma %}{{ user_profile.others_qualification_Degree_Diploma }}{% endif %}" name="others_qualification_Degree_Diploma"></td>
+                                                                        <td><input type="text" value="{% if user_profile.others_qualification_name_location %}{{ user_profile.others_qualification_name_location }}{% endif %}" name="others_qualification_name_location"></td>
+                                                                        <td><input type="text" value="{% if user_profile.others_qualification_marks_obtained %}{{ user_profile.others_qualification_marks_obtained }}{% endif %}" name="others_qualification_marks_obtained"></td>
+                                                                        <td><input type="text" value="{% if user_profile.others_qualification_passing_year %}{{ user_profile.others_qualification_passing_year }}{% endif %}" name="others_qualification_passing_year"></td>
+
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+
+                                                            <div class="training_div">
+                                                                <h4>TRAINING PROGRAMS/WORKSHOP ATTENDED</h4>
+                                                                <table class="training" style="width: 100%;">
+                                                                    <tr>
+                                                                        <th>Program Title</th>
+                                                                        <th>Institution &
+                                                                            Location</th>
+                                                                        <th>Skill Areas/Course Content</th>
+                                                                        <th>Start Date</th>
+                                                                        <th>Course
+                                                                            Duration</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><input type="text" value="{% if user_profile.training_workshop_title %}{{ user_profile.training_workshop_title }}{% endif %}" name="training_workshop_title"></td>
+                                                                        <td><input type="text" value="{% if user_profile.training_workshop_Institution_location %}{{ user_profile.training_workshop_Institution_location }}{% endif %}" name="training_workshop_Institution_location"></td>
+                                                                        <td><input type="text" value="{% if user_profile.training_workshop_skill %}{{ user_profile.training_workshop_skill }}{% endif %}" name="training_workshop_skill"></td>
+                                                                        <td><input type="text" value="{% if user_profile.training_workshop_start_date %}{{ user_profile.training_workshop_start_date }}{% endif %}" name="training_workshop_start_date"></td>
+                                                                        <td><input type="text" value="{% if user_profile.training_workshop_duration %}{{ user_profile.training_workshop_duration }}{% endif %}" name="training_workshop_duration"></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                            <div class="current_emp_div">
+                                                                <h4>CURRENT EMPLOYMENT DETAILS</h4>
+                                                                <table class="current_emp" style="width: 100%;">
+                                                                    <tr>
+                                                                        <td>Join date </td>
+                                                                        <td><input type="date" value="{% if user_profile.current_emp_start_date %}{{ user_profile.current_emp_start_date }}{% endif %}" name="current_emp_start_date"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Current Employer (Name and Address, Type of Business)</td>
+                                                                        <td><input type="text" value="{% if user_profile.current_employer %}{{ user_profile.current_employer }}{% endif %}" name="current_employer"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Current Salary</td>
+                                                                        <td><input type="text" value="{% if user_profile.current_emp_salary %}{{ user_profile.current_emp_salary }}{% endif %}" name="current_emp_salary"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Benefits like HRA, Fuels,
+                                                                            Medical etc.</td>
+                                                                        <td><input type="text" value="{% if user_profile.current_emp_benefits %}{{ user_profile.current_emp_benefits }}{% endif %}" name="current_emp_benefits"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Position</td>
+                                                                        <td><input type="text" value="{% if user_profile.current_emp_position %}{{ user_profile.current_emp_position }}{% endif %}" name="current_emp_position"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Reason For Leaving</td>
+                                                                        <td><input type="text" value="{% if user_profile.current_emp_reason_for_leaving %}{{ user_profile.current_emp_reason_for_leaving }}{% endif %}" name="current_emp_reason_for_leaving"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Expected Salary</td>
+                                                                        <td><input type="text" value="{% if user_profile.expected_salary %}{{ user_profile.expected_salary }}{% endif %}" name="expected_salary"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Brief Job Description</td>
+                                                                        <td><input type="text" value="{% if user_profile.current_emp_job_description %}{{ user_profile.current_emp_job_description }}{% endif %}" name="current_emp_job_description"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Supervisor’s Name</td>
+                                                                        <td><input type="text" value="{% if user_profile.current_emp_supervisor_name %}{{ user_profile.current_emp_supervisor_name }}{% endif %}" name="current_emp_supervisor_name"></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                            <div class="family_div">
+                                                                <h4>FAMILY DETAILS </h4>
+                                                                <table class="family" style="width: 100%;">
+                                                                    <tr>
+                                                                        <th>Relationship</th>
+                                                                        <th>Name</th>
+                                                                        <th>DOB</th>
+                                                                        <th>Profession</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Father</td>
+                                                                        <td><input type="text" value="{% if user_profile.father_name %}{{ user_profile.father_name }}{% endif %}" name="father_name" placeHolder="As a 10th Marksheet" maxlength="30"></td>
+                                                                        <td><input type="date" value="{% if user_profile.father_dob %}{{ user_profile.father_dob }}{% endif %}" name="father_dob"></td>
+                                                                        <td><input type="text" value="{% if user_profile.father_profession %}{{ user_profile.father_profession }}{% endif %}" name="father_profession" maxlength="40"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Mother</td>
+                                                                        <td><input type="text" value="{% if user_profile.mother_name %}{{ user_profile.mother_name }}{% endif %}" name="mother_name" maxlength="30"></td>
+                                                                        <td><input type="date" value="{% if user_profile.mother_dob %}{{ user_profile.mother_dob }}{% endif %}" name="mother_dob"></td>
+                                                                        <td><input type="text" value="{% if user_profile.mother_profession %}{{ user_profile.mother_profession }}{% endif %}" name="mother_profession" maxlength="40"></td>
+                                                                    </tr><tr>
+                                                                        <td>Spouse</td>
+                                                                        <td><input type="text" value="{% if user_profile.spouse_name %}{{ user_profile.spouse_name }}{% endif %}" name="spouse_name" maxlength="30"></td>
+                                                                        <td><input type="date" value="{% if user_profile.spouse_dob %}{{ user_profile.spouse_dob }}{% endif %}" name="spouse_dob"></td>
+                                                                        <td><input type="text" value="{% if user_profile.spouse_profession %}{{ user_profile.spouse_profession }}{% endif %}" name="spouse_profession" maxlength="40"></td>
+                                                                    </tr><tr>
+                                                                        <td>Children</td>
+                                                                        <td><input type="text" value="{% if user_profile.Children_name_1 %}{{ user_profile.Children_name_1 }}{% endif %}" name="Children_name_1" maxlength="30"></td>
+                                                                        <td><input type="date" value="{% if user_profile.Children_dob_1 %}{{ user_profile.Children_dob_1 }}{% endif %}" name="Children_dob_1"></td>
+                                                                        <td><input type="text" value="{% if user_profile.Children_1_profession %}{{ user_profile.Children_1_profession }}{% endif %}" name="Children_1_profession" maxlength="40"></td>
+                                                                    </tr><tr>
+                                                                        <td>Children</td>
+                                                                        <td><input type="text" value="{% if user_profile.Children_name_2 %}{{ user_profile.Children_name_2 }}{% endif %}" name="Children_name_2" maxlength="30"></td>
+                                                                        <td><input type="date" value="{% if user_profile.Children_dob_2 %}{{ user_profile.Children_dob_2 }}{% endif %}" name="Children_dob_2"></td>
+                                                                        <td><input type="text" value="{% if user_profile.Children_2_profession %}{{ user_profile.Children_2_profession }}{% endif %}" name="Children_2_profession" maxlength="40"></td>
+                                                                    </tr>
+
+                                                                </table>
+                                                            </div>
+                                                            <div class="row" style="width: 95%;">
+                                                                <span class="panel-col panel-col1">Why have you chosen to apply for a career with Sonata?</span>
+                                                                <textarea name="reason_to_apply_sonata" id="" cols="10" rows="5" maxlength="1000" minlength="1000">{% if user_profile.reason_to_apply_sonata %}{{ user_profile.reason_to_apply_sonata }}{% endif %}</textarea>
+                                                            </div>
+                                                            <div style="display: flex; justify-content: space-between; margin-top: 41px;">
+                                                                <div class="panel-row clearfix" style="width: 40%">
+                                                                    <span class="panel-col panel-col1" style="width: 90%;"> Are you willing to relocate anywhere in India</span>
+                                                                    <select name="willing_to_relocate" id="" style="margin-left: 18%; margin-top: 15px;">
+                                                                        <option value="" selected>{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}</option>
+                                                                        <option value="True">Yes</option>
+                                                                        <option value="False">No</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="panel-row clearfix" style="width: 46%">
+                                                                    <span class="panel-col panel-col1" style="width: 90%;">Have you been interviewed by Sonata before?</span>
+                                                                    <select name="interviewed_by_Sonata_before" id=""  style="margin-left: 18%; margin-top: 15px;">
+                                                                        <option value="" selected>{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}</option>
+                                                                        <option value="True">Yes</option>
+                                                                        <option value="False">No</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="width: 95%;">
+                                                                <span class="panel-col panel-col1">Locational Preference:</span>
+                                                                <textarea name="locational_preferences" id="" cols="10" rows="5" maxlength="1000" minlength="1000">{% if user_profile.locational_preferences %}{{ user_profile.locational_preferences }}{% endif %}</textarea>
+                                                            </div>
+
+
+                                                            <div class="column-footer row2 text-right" style="margin-top: 10px;">
+                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;">
                                                                      Update
                                                                 </button>
-                                                            </div>  {% endcomment %}
-                                                        
-                                                            {% comment %} <div class="column-footer row2 text-right" style="margin-top: 55px;">
-                                                            <button  href="javascript:void(0)" id="id" class="btn btn-primary">
-                                                                Update
-                                                            </button>
-                                                            </div>  {% endcomment %}
+                                                            </div>    
+
+
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="basic-details" >
+                                            <ul class="item_list">
+                                                <!---->
+                                                <li class="item_list_block step_open" style="overflow: auto;">
+                                                    <div class="info_title theme-color" >
+                                                        <span class="count_Icon theme-color">
+                                                          3
+                                                        </span>
+                                  
+                                                        <!----><!---->
+                                                        <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Documents </span>
+                                                        <!---->
                                                     </div>
-                                                        {% comment %} </form> {% endcomment %}
+                                  
+                                                    <div style="width:100%;height:120px;display:flex;">
+                                                        <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
+                                  
+                                                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#resumeBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                                                <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                                                <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Resume</figcaption>
+                                                            </button>
+                                                              
+                                                              <!-- Modal -->
+                                                            <div class="modal fade" id="resumeBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                                    <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Resume</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body" style="overflow-y: hidden;">
+                                                                            {% if mime_type == 'application/pdf' %}
+                                                                                <embed src="data:application/pdf;base64,{{ binary_data }}" type="application/pdf" width="100%" height="100%">      
+                                                                            {% elif mime_type|lower == 'image/jpg' or mime_type|lower == 'image/jpeg' or mime_type|lower == 'image/png' %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <img src="data:{{ mime_type }};base64,{{ binary_data }}" width="100%" alt="Resume Image">
+                                                                            </div>
+                                                                            {% else %}
+                                                                            <div style="width: 100%; height: 500px; overflow: auto;">
+                                                                                <h3>This file type is not supported for preview or no resume uploaded.</h3>
+                                                                            </div>
+                                                                            {% endif %}                                          
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
+                                  
+                                                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                                                <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                                                <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Aadhar</figcaption>
+                                                            </button>
+                                                              
+                                                              <!-- Modal -->
+                                                            <div class="modal fade" id="aadharBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                                    <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Aadhar</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body" style="overflow-y: hidden;">
+                                                                            <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                                                {% csrf_token %}
+                                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="aadhar_doc" id="aadhar_doc" value="" placeHolder="" required> 
+                                                                                <input type="hidden" value="{% if document_obj.aadhar_doc %}{{ document_obj.aadhar_doc }} {% endif %}" id="aadhar_file_name">
+                                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                                                    Update
+                                                                                </button>
+                                                                            </form>
+                                                                            <hr>
+                                                                            {% if aadhar_doc == '.jpg' or aadhar_doc == '.jpeg' or aadhar_doc == '.png' %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <img src="{{aadhar_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                                            </div>
+                                                                            {% else %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <embed src="{{aadhar_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                                            </div>
+                                                                            {% endif %}
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="width:100%;height:120px;display:flex;">
+                                                        
+                                                        <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
+                                  
+                                                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#panBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                                                <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                                                <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">PAN</figcaption>
+                                                            </button>
+                                                              
+                                                              <!-- Modal -->
+                                                            <div class="modal fade" id="panBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                                    <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">PAN</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body" style="overflow-y: hidden;">
+                                                                            <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                                                {% csrf_token %}
+                                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" > 
+                                                                                <input type="hidden" value="{% if document_obj.pan_doc %}{{ document_obj.pan_doc }} {% endif %}" id="pan_file_name">
+                                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                                                    Update
+                                                                                </button>
+                                                                            </form>
+                                                                            <hr>
+                                                                            {% if pan_doc == '.jpg' or pan_doc == '.jpeg' or pan_doc == '.png' %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <img src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                                            </div>
+                                                                           {% else %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <embed src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                                            </div>
+                                                                        {% endif %}
+                                                                    
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
+                                                            
+                                                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#dlBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                                                <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                                                <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">DL</figcaption>
+                                                            </button>
+                                                              
+                                                              <!-- Modal -->
+                                                            <div class="modal fade" id="dlBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                                    <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Driving Licence</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body" style="overflow-y: hidden;">
+                                                                            <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                                                {% csrf_token %}
+                                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="dl_doc" id="dl_doc" value="" placeHolder=""> 
+                                                                                <input type="hidden" value="{% if document_obj.dl_doc %}{{ document_obj.dl_doc }} {% endif %}" id="dl_file_name">
+                                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                                                    Update
+                                                                                </button>
+                                                                            </form>
+                                                                            <hr>
+                                                                            {% if dl_doc == '.jpg' or dl_doc == '.jpeg' or dl_doc == '.png' %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <img src="{{dl_doc.url}}" width="100%" alt="driving License"  width="100%" height="100%">
+                                                                            </div>
+                                                                            {% else %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <embed src="{{dl_doc.url}}" width="100%" alt="driving License"  width="100%" height="100%">
+                                                                            </div>
+                                                                            {% endif %}
+                                                                           
+                                                                    
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="width:100%;height:120px;display:flex;">
+                                                        
+                                                        <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
+                                                           
+                                                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#highschoolBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                                                <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                                                <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">High School</figcaption>
+                                                            </button>
+                                                              
+                                                              <!-- Modal -->
+                                                            <div class="modal fade" id="highschoolBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                                    <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">High School</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body" style="overflow-y: hidden;">
+                                                                            <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                                                {% csrf_token %}
+                                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="ssc_doc" id="ssc_doc" value="" placeHolder="" > 
+                                                                                <input type="hidden" value="{% if document_obj.ssc_doc %}{{ document_obj.ssc_doc }} {% endif %}" id="ssc_file_name" >
+                                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                                                    Update
+                                                                                </button>
+                                                                            </form>
+                                                                            <hr>
+                                                                            {% if ssc_doc == '.jpg' or ssc_doc == '.jpeg' or ssc_doc == '.png' %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <img src="{{ssc_doc.url}}" width="100%" alt="10th Marksheet"  width="100%" height="100%">
+                                                                            </div>
+                                                                           {% else %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <embed src="{{ssc_doc.url}}" width="100%" alt="10th Marksheet"  width="100%" height="100%">
+                                                                            </div>
+                                                                            {% endif %}
+                                                                    
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
+                                  
+                                                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#intermediateBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                                                <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                                                <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Intermediate</figcaption>
+                                                            </button>
+                                                              
+                                                              <!-- Modal -->
+                                                            <div class="modal fade" id="intermediateBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                                    <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Intermediate</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body" style="overflow-y: hidden;">
+                                                                            <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                                                {% csrf_token %}
+                                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="hsc_doc" id="hsc_doc" value="" placeHolder="" required> 
+                                                                                <input type="hidden" value="{% if document_obj.hsc_doc %}{{ document_obj.hsc_doc }} {% endif %}" id="hsc_file_name" >
+                                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                                                    Update
+                                                                                </button>
+                                                                            </form>
+                                                                            {% if hsc_doc == '.jpg' or hsc_doc == '.jpeg' or hsc_doc == '.png' %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <img src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
+                                                                            </div>
+                                                                           {% else %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <embed src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
+                                                                            </div>
+                                                                            {% endif %}
+                                                                    
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="width:100%;height:120px;display:flex;">
+                                                        
+                                                        <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
+                                  
+                                                            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#graduationBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                                                <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                                                <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Graduation</figcaption>
+                                                            </button>
+                                                              
+                                                              <!-- Modal -->
+                                                            <div class="modal fade" id="graduationBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-scrollable">
+                                                                    <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Graduation</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body" style="overflow-y: hidden;">
+                                                                            <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                                                {% csrf_token %}
+                                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="graduate_doc" id="graduate_doc" value="" placeHolder=""> 
+                                                                                <input type="hidden" value="{% if document_obj.graduate_doc %}{{ document_obj.graduate_doc }} {% endif %}" id="graduate_file_name" >
+                                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                                                    Update
+                                                                                </button>
+                                                                            </form>
+                                                                        <hr>
+                                                                            {% if graduate_doc == '.jpg' or graduate_doc == '.jpeg' or graduate_doc == '.png' %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <img src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
+                                                                            </div>
+                                                                           {% else %}
+                                                                            <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                <embed src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
+                                                                            </div>
+                                                                        {% endif%}
+                                                                    
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </li>
                                             </ul>
                                         </div>
                                     </form>
                 
-                                </div>
+                                {% comment %} </div> {% endcomment %}
                                 <div class="clearfix">
                                     &nbsp;
                                 </div>
