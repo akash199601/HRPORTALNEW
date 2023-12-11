@@ -416,7 +416,7 @@ textarea{
         <div class="container-xxl"><a href="{% url 'profile_update' user_profile.id %}"><button class="btn btn-primary" style="margin-left:20px">Update Profile</button></a></div>
         {% endif %}
 
-        {% comment %} {% if user_profile.status == 1 %}
+        {% if user_profile.status == 1 %}
         <div class="column-footer row2 text-right">
             <a  href="{% url 'profile_update' user_profile.id %}" id="id">
                 <button class="btn btn-primary" style="margin-left:20px;width:130px;height:35px;font-size:15px;">
@@ -424,7 +424,7 @@ textarea{
                 </button>
             </a>
         </div>  
-        {% endif %} {% endcomment %}
+        {% endif %}
 
         {% if user_profile.status == 4 %}
   <div style="border: 0.3px solid rgb(49, 49, 49); text-align: center;">
