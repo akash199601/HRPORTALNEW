@@ -549,33 +549,33 @@ textarea{
                       <div id="personal-details" style="height:100%;width:100%;display:none;">
                           <div class="panel-body ng-star-inserted">
                               <div style="display: flex; justify-content: space-between;">
-                                  <div class="row" style="width: 50%">
+                                  <div class="row" style="width: 100%">
                                       <span class="panel-col panel-col1">Identity Adadhar</span>
                                       <input readonly type="text" class="panel-col text-bold-cell" name="identity_Aadhar" value="{% if user_profile.identity_Aadhar %}{{ user_profile.identity_Aadhar }}{% endif %}"> 
                                   </div>
-                                  <div class="row" style="width: 50%">
+                                  {% comment %} <div class="row" style="width: 50%">
                                       <button type="button" download><a href="{{resume_obj.resumeFile.url}}">Document {{aadhar_doc}}</a></button>
-                                  </div>
+                                  </div> {% endcomment %}
                               </div>
                                   <!----><!---->
                               <div style="display: flex; justify-content: space-between;">
-                                  <div class="row" style="width: 50%">
+                                  <div class="row" style="width: 100%">
                                       <span class="panel-col panel-col1">Identity PAN</span>
                                       <input readonly type="text" class="panel-col text-bold-cell" value="{% if user_profile.identity_PAN %}{{ user_profile.identity_PAN }}{% endif %}" name="identity_PAN"> 
                                   </div>
-                                  <div class="row" style="width: 50%">
+                                  {% comment %} <div class="row" style="width: 50%">
                                       <button type="button" ><a href="{{pan_doc.url}}">Document {{pan_doc}}</a></button>
-                                  </div>
+                                  </div> {% endcomment %}
                               </div>
                           
                               <div style="display: flex; justify-content: space-between;">
-                                  <div class="row" style="width: 50%">
+                                  <div class="row" style="width: 100%">
                                       <span class="panel-col panel-col1">Identity Driving Licence</span>
                                       <input readonly type="text" class="panel-col text-bold-cell" value="{% if user_profile.identity_DL_No %}{{ user_profile.identity_DL_No }}{% endif %}" name="identity_DL_No"> 
                                   </div>
-                                  <div class="row" style="width: 50%">
+                                  {% comment %} <div class="row" style="width: 50%">
                                       <button type="button" download><a href="{{dl_doc.url}}">Document {{dl_doc}}</a></button>
-                                  </div>
+                                  </div> {% endcomment %}
                               </div>
 
                               <!-- Extra Form -->
