@@ -1988,7 +1988,39 @@ from .forms import CandidateBasicDetailsForm
 def accepted_user_full_details(request,refId):
     if refId is not None:
         print(refId)
-        profile = candidate_details.objects.get(id=refId)  
+        profile = candidate_details.objects.get(id=refId)
+        try:
+            document_obj = Document_Candidate.objects.get(candidate_id = profile.id)
+        except Exception as e:
+            print(e)
+            document_obj = Document_Candidate()
+            document_obj.candidate_id = profile.id
+        
+        if 'aadhar_doc' in request.FILES:
+            document_obj.aadhar_doc = request.FILES['aadhar_doc']
+            print( 'aadhar',document_obj.aadhar_doc)
+            document_obj.save()
+        if 'pan_doc' in request.FILES:
+            document_obj.pan_doc = request.FILES['pan_doc']
+            print( 'pan_doc',document_obj.pan_doc)
+            document_obj.save()
+        if 'dl_doc' in request.FILES:
+            document_obj.dl_doc = request.FILES['dl_doc']
+            print( 'dl_doc',document_obj.dl_doc)
+            document_obj.save()
+        if 'ssc_doc' in request.FILES:
+            document_obj.ssc_doc = request.FILES['ssc_doc']
+            print( 'ssc_doc',document_obj.ssc_doc)
+            document_obj.save()
+        if 'hsc_doc' in request.FILES:
+            document_obj.hsc_doc = request.FILES['hsc_doc']
+            print( 'hsc_doc',document_obj.hsc_doc)
+            document_obj.save()
+        if 'graduate_doc' in request.FILES:
+            document_obj.graduate_doc = request.FILES['graduate_doc']
+            print( 'graduate_doc',document_obj.graduate_doc)
+            document_obj.save()
+
         try:
             resume_obj = ResumeFiles.objects.get(candidate_id = profile.id)
             resume = resume_obj.resume
@@ -1998,6 +2030,22 @@ def accepted_user_full_details(request,refId):
             print(e)
             encoded_data = None
             mime_type = None
+        try:
+            document_obj = Document_Candidate.objects.get(candidate_id = profile.id)
+            aadhar_doc = document_obj.aadhar_doc if document_obj.aadhar_doc else None
+            ssc_doc = document_obj.ssc_doc if document_obj.ssc_doc else None
+            hsc_doc = document_obj.hsc_doc if document_obj.hsc_doc else None
+            graduate_doc = document_obj.graduate_doc if document_obj.graduate_doc else None
+            pan_doc = document_obj.pan_doc if document_obj.pan_doc else None
+            dl_doc = document_obj.dl_doc if document_obj.dl_doc else None
+        except Exception as e:
+            aadhar_doc = None
+            ssc_doc = None
+            hsc_doc = None
+            graduate_doc = None
+            pan_doc = None
+            dl_doc = None
+
     else:
         profile = None
 
@@ -2058,9 +2106,13 @@ def accepted_user_full_details(request,refId):
     else:
         print('form not valid')
         form = CandidateBasicDetailsForm(instance=profile)
-    
-
-    return render(request,'accepted_user_full_detail.html',{'mime_type':mime_type,'user_profile':profile,'form':form,'binary_data':encoded_data,'status':profile.status})
+    return render(request,'accepted_user_full_detail.html',{'mime_type':mime_type,'user_profile':profile,'form':form,'binary_data':encoded_data,'document_obj':document_obj,        'aadhar_doc' : aadhar_doc,
+        'pan_doc' : pan_doc,
+        'dl_doc' : dl_doc,
+        'ssc_doc': ssc_doc,
+        'hsc_doc': hsc_doc,
+        'graduate_doc': graduate_doc,
+        'status':profile.status})
 
 def rejected_user_full_details(request,refId):
     profile = candidate_details.objects.get(id=refId)
