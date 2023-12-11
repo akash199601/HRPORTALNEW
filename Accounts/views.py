@@ -1689,7 +1689,7 @@ def schedule_test_user_full_details(request,refId):
             encoded_data = base64.b64encode(resume).decode('utf-8')
             resume_file = resume_obj.resumeFile if resume_obj.resumeFile else None
         except ResumeFiles.DoesNotExist :
-            print(e)
+          
             encoded_data = None
             mime_type = None
             # resume_obj = None
