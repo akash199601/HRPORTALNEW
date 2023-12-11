@@ -403,13 +403,13 @@ textarea{
         {% include 'progress_bar.html' %}
 
 
-        <div class="column-footer row2 text-right">
+        {% comment %} <div class="column-footer row2 text-right">
             <a  href="{% url 'profile_update' user_profile.id %}" id="id">
                 <button class="btn btn-primary" style="margin-left:20px;width:130px;height:35px;font-size:15px;">
                 Edit
                 </button>
             </a>
-        </div>  
+        </div>   {% endcomment %}
 
 
        {% comment %} {% if user_profile.status == 0 %}
