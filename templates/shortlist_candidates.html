@@ -95,72 +95,11 @@
 </div> {% endcomment %}
 <!--end of Pagination-->
 <div class="data">
- {% comment %} <div class ="table-data">
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Job Title</th>
-            <th scope="col">Company Name</th>
-            <th scope="col">Published On</th>
-            <th scope="col">Total Vacancies</th>
-            <th scrope="col">Required Experience</th>
-            <th scope="col">Candidate Name</th>
-            <th scope="col">Candidate Email</th>
-            <th scope="col">Candidate Mobile No.</th>
-            <th scope="col">Cover Letter</th>
-            <th scope="col">Candidate Resume</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for x in ticket %}
-          <tr>
-            <td>{{x.id}}</td>
-            <td>{{x.joblisting.title}}</td>
-            <td>{{x.joblisting.company_name}}</td>
-            <td>{{x.joblisting.published_on}}</td>
-            <td>{{x.joblisting.vacancy}}</td>
-            <td>{{x.joblisting.minimum_exp.minimum}} - {{x.joblisting.maximum_exp.maximum}}</td>
-            <td>{{x.name}}</td>
-            <td>{{x.email}}</td>
-            <td>{{x.mobile_no}}</td>
-            <td>{{x.coverletter}}</td>
-            <td>
-              {% if x.file %}
-              <button type="button"><a href="{{x.file.url}}">Resume</a></button>
-              {% endif %}
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-    </table>
-  </div>  {% endcomment %}
-
- 
       <div class="container-xxl py-3" >
         <div class="container">
           <div class="row g-4">
             <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;margin-top:80px;">Candidate Shortlisting</h1>
             <hr>
-            {% comment %} <form id="filter-form">
-              {% csrf_token %}
-              <label for="positionFilter" class="form-label">Select a position:</label>
-              <select id="positionFilter" onchange="fetchBranchOptions(this.value)" class="form-control">
-                  <option value="None">All Positions</option>
-                  {% for position in distinct_positions %}
-                      <option value="{{ position }}">{{ position }}</option>
-                  {% endfor %}
-              </select>
-
-              <label for="branchFilter" class="form-label">Select a branch:</label>
-              <select id="branchFilter" class="form-control">
-                  <option value="None">All Branches</option>
-                  <!-- Options will be populated dynamically using JavaScript -->
-              </select>
-
-              <button type="button" id="filter-button" class="btn btn-primary">Filter</button>
-              <button id="filter-button" class="btn btn-primary" onclick="filterSelection('all')">Clear Filter</button>
-            </form> {% endcomment %}
 
             <div class="d-flex flex-wrap" style="gap:2rem 7.6rem;" id="filtered-results">
               {% if rows %}

@@ -50,52 +50,51 @@
   </style>
 
   <div class="main-panel">
-    <div class="content-wrapper" style="width:100%;display:flex;">
-      {% comment %} <div class="page-header">
-        <h6 class="page-title"> Uploaded Resume's </h6>
-      </div> {% endcomment %}
-      <div class="row" style="width:48%;">
-        <div class="col-lg-6 grid-margin stretch-card" style="height:650px;">
-          <div class="card">
-            <div class="card-body" style="overflow:auto;">
-              <div style="display:flex">
+    <div class="content-wrapper" >
+      <div class="row" >
+        <div class="col-lg-12 grid-margin stretch-card" >
+          <div class="card" style="height:500px;">
+              <div  class="card-heading" style="padding: 2.5rem 2.5rem;display:flex">
                 <h4 class="card-title">Basic Table</h4>
              
                 <a href="{% url 'upload_CV_render' %}" class="btn btn-primary" >Upload Candidate CV's</a>
               </div>
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Mobile No.</th>
-                    <th>More Details</th>
-                  </tr>
-                </thead>
-                {% for x in applicants %}
-                <tbody>
-                  <tr>
-                    <td>{{ x.name }}</td>
-                    <td>{{ x.email }}</td>
-                    <td>{{ x.mobile_no }}</td>
-                    <td><a href="{% url 'accepted_user_full_details' refId=x.id %}" style="text-decoration:none;"><label class="badge badge-danger">View</label></a></td>
-                  </tr>
-                </tbody>
-                {% endfor %}
-              </table>
-            </div>
+              <div class="card-content" style="overflow:auto;padding: 2.5rem 2.5rem">
+
+                <table class="table table-hover" style="margin-top:0px;">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Mobile No.</th>
+                      <th>More Details</th>
+                    </tr>
+                  </thead>
+                  {% for x in applicants %}
+                  <tbody>
+                    <tr>
+                      <td>{{ x.name }}</td>
+                      <td>{{ x.email }}</td>
+                      <td>{{ x.mobile_no }}</td>
+                      <td><a href="{% url 'accepted_user_full_details' refId=x.id %}" style="text-decoration:none;"><label class="badge badge-danger">View</label></a></td>
+                    </tr>
+                  </tbody>
+                  {% endfor %}
+                </table>
+              </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="row" style="width:48%;">
+      {% comment %} <div class="row" style="width:48%;">
         <div class="col-lg-6 grid-margin stretch-card" style="height:650px;">
           <div class="card">
             <div class="card-body" style="overflow:auto;">
               <div style="display:flex">
                 <h4 class="card-title">Schedule Online Test</h4>
              
-                {% comment %} <a href="{% url 'upload_CV_render' %}" class="btn btn-primary" >Upload Candidate CV's</a> {% endcomment %}
               </div>
               <table class="table table-hover">
                 <thead>
@@ -120,7 +119,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> {% endcomment %}
     {% comment %} </div>
   </div> {% endcomment %}
         {% comment %} <div class="col-lg-12 grid-margin stretch-card">

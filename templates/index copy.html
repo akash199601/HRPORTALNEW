@@ -44,7 +44,7 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
-                  <img src="{% static 'assets copy/images/faces/face28.png' %}" alt="image">
+                  <img src="{% static 'img/profile_logo.jpg' %}" alt="image">
                 </div>
                 <div class="nav-profile-text">
                   <p class="mb-1 text-black">{{request.user.username}}</p>
@@ -152,7 +152,7 @@
             <br><br>
             <li class="nav-item sidebar-user-actions">
               <div class="sidebar-user-menu">
-                <a href="#" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
+                <a href="{% url 'Logout' %}" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
                   <span class="menu-title">Log Out</span></a>
               </div>
             </li>
