@@ -1821,6 +1821,39 @@ def applied_user_full_details(request, refId):
         interview = InterviewDetails.objects.filter(interview_id=application.interview_id).first()
         
         try:
+            document_obj = Document_Candidate.objects.get(candidate_id = application.candidate_id)
+        except Exception as e:
+            print(e)
+            document_obj = Document_Candidate()
+            document_obj.candidate_id = application.candidate_id
+        
+        if 'aadhar_doc' in request.FILES:
+            document_obj.aadhar_doc = request.FILES['aadhar_doc']
+            print( 'aadhar',document_obj.aadhar_doc)
+            document_obj.save()
+        if 'pan_doc' in request.FILES:
+            document_obj.pan_doc = request.FILES['pan_doc']
+            print( 'pan_doc',document_obj.pan_doc)
+            document_obj.save()
+        if 'dl_doc' in request.FILES:
+            document_obj.dl_doc = request.FILES['dl_doc']
+            print( 'dl_doc',document_obj.dl_doc)
+            document_obj.save()
+        if 'ssc_doc' in request.FILES:
+            document_obj.ssc_doc = request.FILES['ssc_doc']
+            print( 'ssc_doc',document_obj.ssc_doc)
+            document_obj.save()
+        if 'hsc_doc' in request.FILES:
+            document_obj.hsc_doc = request.FILES['hsc_doc']
+            print( 'hsc_doc',document_obj.hsc_doc)
+            document_obj.save()
+        if 'graduate_doc' in request.FILES:
+            document_obj.graduate_doc = request.FILES['graduate_doc']
+            print( 'graduate_doc',document_obj.graduate_doc)
+            document_obj.save()
+
+        
+        try:
             resume_obj = ResumeFiles.objects.get(candidate_id=profile.id)
             resume = resume_obj.resume
             encoded_data = base64.b64encode(resume).decode('utf-8')
@@ -1866,7 +1899,7 @@ def applied_user_full_details(request, refId):
         'ssc_doc': ssc_doc,
         'hsc_doc': hsc_doc,
         'graduate_doc': graduate_doc,
-        
+        'document_obj':document_obj,
     }
 
     return render(request, 'applied_user_full_detail.html', context)
