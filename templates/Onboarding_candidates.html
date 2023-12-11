@@ -102,116 +102,63 @@
           }
         }
     </style>
-<!--Pagination-->
-{% comment %} <div style="margin-top:20px;">
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    {% if ticket.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ ticket.previous_page_number }}">Previous</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Previous</a>
-      </li>
-    {% endif %}
-    {% for i in ticket.paginator.page_range %}
-      {% if ticket.number == i %}
-        <li class="page-item active" aria-current="page">
-          <span class="page-link">
-            {{ i }}
-            <span class="sr-only">(current)</span>
-          </span>
-        </li>
-      {% else %}
-        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if ticket.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ ticket.next_page_number }}">Next</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Next</a>
-      </li>
-    {% endif %}
-  </ul>
-</nav>
-</div> {% endcomment %}
-<!--end of Pagination-->
-<div class="data">
- {% comment %} <div class ="table-data">
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Job Title</th>
-            <th scope="col">Company Name</th>
-            <th scope="col">Published On</th>
-            <th scope="col">Total Vacancies</th>
-            <th scrope="col">Required Experience</th>
-            <th scope="col">Candidate Name</th>
-            <th scope="col">Candidate Email</th>
-            <th scope="col">Candidate Mobile No.</th>
-            <th scope="col">Cover Letter</th>
-            <th scope="col">Candidate Resume</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for x in ticket %}
-          <tr>
-            <td>{{x.id}}</td>
-            <td>{{x.joblisting.title}}</td>
-            <td>{{x.joblisting.company_name}}</td>
-            <td>{{x.joblisting.published_on}}</td>
-            <td>{{x.joblisting.vacancy}}</td>
-            <td>{{x.joblisting.minimum_exp.minimum}} - {{x.joblisting.maximum_exp.maximum}}</td>
-            <td>{{x.name}}</td>
-            <td>{{x.email}}</td>
-            <td>{{x.mobile_no}}</td>
-            <td>{{x.coverletter}}</td>
-            <td>
-              {% if x.file %}
-              <button type="button"><a href="{{x.file.url}}">Resume</a></button>
-              {% endif %}
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-    </table>
-  </div>  {% endcomment %}
 
- 
+
+    <div class="main-panel">
+      <div class="content-wrapper">
+    
+        <div class="row">
+          <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card" style="height:500px;">
+              <div class="card-heading" style="padding: 2.5rem 2.5rem">
+                <h4 class="card-title" style="text-align:center;width:100%;">Candidates To Be Onboarded</h4>
+              </div>
+              <div class="card-content" style="overflow:auto;padding: 2.5rem 2.5rem">
+                <table class="table table-hover" style="margin-top:0px;">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Mobile No.</th>
+                      <th>Position Shortlisted For</th>
+                      <th>Branch Shortlisted For</th>
+                      <th>More Details</th>
+                    </tr>
+                  </thead>
+                  {% if applicants %}
+                {% for x in data_list %}
+                  <tbody>
+                    <tr>
+                      <td>{{ x.name }}</td>
+                      <td>{{x.email}}</td>
+                      <td>{{x.mobile_no}}</td>
+                      <td>{{ x.position_shortlisted_for }}</td>
+                      <td>{{ x.branch_shortlisted_for }}</td>
+                      <td><a href="{% url 'applied_user_full_details' refId=x.candidate_id %}" style="text-decoration:none;"><label class="badge badge-danger">View</label></a></td>
+                    </tr>
+                  </tbody>
+                  {% endfor %}
+                  {% else %}
+                    <h3> No candidates have been Onboarded. </h3>
+                  {% endif %}
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+{% comment %} <div class="data">
+
       <div class="container-xxl py-3" >
         <div class="container">
           <div class="row g-4">
             <h1 style="color: #000000ba;font-weight: 600;">Candidates To Be Onboarded</h1>
             <hr>
-            {% comment %} <form id="filter-form">
-              {% csrf_token %}
-              <label for="positionFilter" class="form-label">Select a position:</label>
-              <select id="positionFilter" onchange="fetchBranchOptions(this.value)" class="form-control">
-                  <option value="None">All Positions</option>
-                  {% for position in distinct_positions %}
-                      <option value="{{ position }}">{{ position }}</option>
-                  {% endfor %}
-              </select>
 
-              <label for="branchFilter" class="form-label">Select a branch:</label>
-              <select id="branchFilter" class="form-control">
-                  <option value="None">All Branches</option>
-                  <!-- Options will be populated dynamically using JavaScript -->
-              </select>
-
-              <button type="button" id="filter-button" class="btn btn-primary">Filter</button>
-              <button id="filter-button" class="btn btn-primary" onclick="filterSelection('all')">Clear Filter</button>
-
-            </form> {% endcomment %}
-
-
-            {% comment %} <div class="flex-wrap" style="gap:1rem 1.4rem;" id="filtered-results"> {% endcomment %}
-              
               {% if applicants %}
               <div class="row">
               
@@ -239,23 +186,6 @@
                 </div>
               </div>
 
-             {% comment %} <div class="wow fadeInUp" style="flex-basis: 25%; max-width: 23%;background-color:white; border: radius #FFFFFF; border-radius: 10px;" data-wow-delay="0.1s" id="received">
-                  <div class="card-item card-button">
-                    <a class="cat-item rounded " href="{% url 'applied_user_full_details' refId=x.candidate_id %}" style="text-decoration:none;">
-                        <h6 class="mb-3" style="color:#000000ba;font-weight: 600; margin: 0;">Name :- {{x.full_name}} </h6>
-                        <hr>
-                        <p class="mb-0" style="color:#000000ba;font-weight: 600;">Email :- {{x.email}}</p>
-                        <hr>
-                        <p class="mb-0" style="color:#000000ba;font-weight: 600;">Mobile No. :- {{x.mobile_no}}</p>
-                        <hr>
-                        <p class="mb-0" style="color:#000000ba;font-weight: 600;">Position Shortlisted For :- {{x.position_shortlisted_for}}</p>
-                        <hr>
-                        <p class="mb-0" style="color:#000000ba;font-weight: 600;">Branch Shortlisted For :- {{x.branch_shortlisted_for}}</p>
-                        <hr>
-                    </a>
-                  
-                </div>
-              </div> {% endcomment %}
               {% endfor %}
               {% else %}
               <h3 style="color: #000000ba;"> No candidates have been Onboarded. </h3>
@@ -265,7 +195,7 @@
         </div>
       </div>   
       
-</div>
+</div> {% endcomment %}
 
 <script>
 function fetchBranchOptions(selectedPosition) {
