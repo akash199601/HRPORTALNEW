@@ -372,8 +372,6 @@ textarea{
                 </a>
             </div>
             <div class="containers">
-            
-
                 <div class="basic-details-card">
                     <ul class="item_list">
                         <!---->
@@ -388,7 +386,6 @@ textarea{
                                 <!---->
                             </div>
                                 
-                
                             <div class="panel-body ng-star-inserted">
                                     <!----><!---->
                                 {% comment %} <div class="row">
@@ -419,7 +416,6 @@ textarea{
                                     <span class="panel-col panel-col1">Date Of Birth</span>
                                     <input readonly type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
                                 </div>
-                    
 
                                 <div class="row">
                                     <span class="panel-col panel-col1">Gender</span>
@@ -430,19 +426,12 @@ textarea{
                                         {% endfor %}
                                     </select>
                                 </div>
-                         
                             </div>
-                        
                         </li>
-                                <!---->
-                                <!---->
-                        
                     </ul>
-                    
                 </div>
                 <div class="resume-card">
                     <div style="height:100%;width:100%;">
-
                         <h1 class="Resume-font" style="background: #a9a9a985;">Resume</h1>
                         <div class="resume-file">
                             {% if mime_type == 'application/pdf' %}
@@ -457,7 +446,6 @@ textarea{
                             </div>
                             {% endif %}
                         </div>
-
                     </div>
                 </div>
                 <div style="margin-right:20px;">
@@ -468,7 +456,6 @@ textarea{
                                 <span class="count_Icon theme-color">
                                     2
                                 </span>
-                                
                                 <!----><!---->
                                 <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Personal Details </span>
                                 <!---->
@@ -479,7 +466,6 @@ textarea{
                         <form method="POST" action="" enctype="multipart/form-data">
                             {% csrf_token %} -->
                              <div class="panel-body ng-star-inserted">
-                               
                                 <div style="display: flex; justify-content: space-between;">
                                     <div class="row" style="width: 50%">
                                         <span class="panel-col panel-col1">Identity Adadhar</span>
@@ -509,7 +495,6 @@ textarea{
                                         <button type="button" download><a href="{{dl_doc.url}}">Document {{dl_doc}}</a></button>
                                     </div>
                                 </div>
-
                                 
                                 <hr style="margin-top: 50px;">
                                 <!-- Extra Form -->
@@ -527,44 +512,36 @@ textarea{
                                             <td><input readonly type="text" value="{% if user_profile.present_state %}{{ user_profile.present_state }}{% endif %}" name="present_state"> </td>
                                             <td><input readonly type="text" value="{% if user_profile.present_city %}{{ user_profile.present_city }}{% endif %}" name="present_city"> </td>
                                             <td><input readonly type="number" value="{% if user_profile.present_pin %}{{ user_profile.present_pin }}{% endif %}" name="present_pin"> </td>
-                                            
-
                                         </tr>
                                         <tr>
                                             <th>Permanent</th>
                                             <td><input readonly type="text" value="{% if user_profile.permanent_state %}{{ user_profile.permanent_state }}{% endif %}" name="permanent_state"> </td>
                                             <td><input readonly type="text" value="{% if user_profile.permanent_city %}{{ user_profile.permanent_city }}{% endif %}" name="permanent_city"> </td>
                                             <td><input readonly type="number" value="{% if user_profile.permanent_pin %}{{ user_profile.permanent_pin }}{% endif %}" name="permanent_pin"> </td>
-                                            
                                         </tr>
                                     </table>
                                 </div>
                                 
                                 <hr style="margin-top: 50px;">
-
                                 <div class="address_div">
                                     <h4 style="font-size:15px;font-weight:350"><b>Education Documents</b></h4>
                                     <div class="education_doc">
                                         <div class="row dow_row" >
                                             <span class="panel-col panel-col1" style="font-size:15px;font-weight:350"><b>High School Marksheet</b></span>
                                             <button type="button" download><a href="{{ssc_doc.url}}">Document {{ssc_doc}}</a></button>
-                                         
                                         </div>
                                         <div class="row dow_row">
                                             <span class="panel-col panel-col1" style="font-size:15px;font-weight:350"><b>Intermediate School Marksheet</b></span>
                                             <button type="button" download><a href="{{hsc_doc.url}}">Document {{hsc_doc}}</a></button>
-                                         
                                         </div>
                                         <div class="row dow_row">
                                             <span class="panel-col panel-col1" style="font-size:15px;font-weight:350"><b>Graduation Marksheet</b></span>
                                             <button type="button" download><a href="{{graduate_doc.url}}">Document {{graduate_doc}}</a></button>
-                                         
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <hr style="margin-top: 50px;">
-
                                 <div class="education_div">
                                     <h4>EDUCATION</h4>
                                     <table class="education" style="width: 100%;">
@@ -577,7 +554,6 @@ textarea{
                                                 Institution</th>
                                             <th>% obtained</th>
                                             <th>Year of Passing</th>
-                                            
                                         </tr>
                                         <tr>
                                             <th>High School</th>
@@ -586,7 +562,6 @@ textarea{
                                             <td><input readonly type="text" value="{% if user_profile.high_school_name_location %}{{ user_profile.high_school_name_location }}{% endif %}" name="high_school_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.high_school_marks_obtained %}{{ user_profile.high_school_marks_obtained }}{% endif %}" name="high_school_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if user_profile.high_school_passing_year %}{{ user_profile.high_school_passing_year }}{% endif %}" name="high_school_passing_year"></td>
-                                            
                                         </tr>
                                         <tr>
                                             <th>Intermediate</th>
@@ -594,9 +569,7 @@ textarea{
                                             {% comment %} <td><input readonly type="text" value="{% if user_profile.intermediate_subjects %}{{ user_profile.intermediate_subjects }}{% endif %}" name="intermediate_subjects"></td> {% endcomment %}
                                             <td><input readonly type="text" value="{% if user_profile.intermediate_name_location %}{{ user_profile.intermediate_name_location }}{% endif %}" name="intermediate_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.intermediate_marks_obtained %}{{ user_profile.intermediate_marks_obtained }}{% endif %}" name="intermediate_marks_obtained"></td>
-                                            <td><input readonly type="text" value="{% if user_profile.intermediate_passing_year %}{{ user_profile.intermediate_passing_year }}{% endif %}" name="intermediate_passing_year"></td>
-
-                                            
+                                            <td><input readonly type="text" value="{% if user_profile.intermediate_passing_year %}{{ user_profile.intermediate_passing_year }}{% endif %}" name="intermediate_passing_year"></td>                                            
                                         </tr>
                                         <tr>
                                             <th>Graduation</th>
@@ -605,8 +578,6 @@ textarea{
                                             <td><input readonly type="text" value="{% if user_profile.graduation_name_location %}{{ user_profile.graduation_name_location }}{% endif %}" name="graduation_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.graduation_marks_obtained %}{{ user_profile.graduation_marks_obtained }}{% endif %}" name="graduation_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if user_profile.graduation_passing_year %}{{ user_profile.graduation_passing_year }}{% endif %}" name="graduation_passing_year"></td>
-
-                                            
                                         </tr>
                                         <tr>
                                             <th>PG</th>
@@ -615,7 +586,6 @@ textarea{
                                             <td><input readonly type="text" value="{% if user_profile.pg_name_location %}{{ user_profile.pg_name_location }}{% endif %}" name="pg_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.pg_marks_obtained %}{{ user_profile.pg_marks_obtained }}{% endif %}" name="pg_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if user_profile.pg_passing_year %}{{ user_profile.pg_passing_year }}{% endif %}" name="pg_passing_year"></td>
-                                        
                                         </tr>
                                         <tr>
                                             <th>Professional
@@ -625,7 +595,6 @@ textarea{
                                                 <td><input readonly type="text" value="{% if user_profile.professional_qualification_name_location %}{{ user_profile.professional_qualification_name_location }}{% endif %}" name="professional_qualification_name_location"></td>
                                                 <td><input readonly type="text" value="{% if user_profile.professional_qualification_marks_obtained %}{{ user_profile.professional_qualification_marks_obtained }}{% endif %}" name="professional_qualification_marks_obtained"></td>
                                                 <td><input readonly type="text" value="{% if user_profile.professional_qualification_passing_year %}{{ user_profile.professional_qualification_passing_year }}{% endif %}" name="professional_qualification_passing_year"></td>
-                                            
                                         </tr>
                                         <tr>
                                             <th>others</th>
@@ -634,13 +603,11 @@ textarea{
                                             <td><input readonly type="text" value="{% if user_profile.others_qualification_name_location %}{{ user_profile.others_qualification_name_location }}{% endif %}" name="others_qualification_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.others_qualification_marks_obtained %}{{ user_profile.others_qualification_marks_obtained }}{% endif %}" name="others_qualification_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if user_profile.others_qualification_passing_year %}{{ user_profile.others_qualification_passing_year }}{% endif %}" name="others_qualification_passing_year"></td>
-
                                         </tr>
                                     </table>
                                 </div>
 
                                 <hr style="margin-top: 50px;">
-
                                 <div class="training_div">
                                     <h4>TRAINING PROGRAMS/WORKSHOP ATTENDED</h4>
                                     <table class="training" style="width: 100%;">
@@ -664,7 +631,6 @@ textarea{
                                 </div>
 
                                 <hr style="margin-top: 50px;">
-
                                 <div class="current_emp_div">
                                     <h4>CURRENT EMPLOYMENT DETAILS</h4>
                                     <table class="current_emp" style="width: 100%;">
@@ -746,7 +712,6 @@ textarea{
                                             <td><input readonly type="date" value="{% if user_profile.Children_dob_2 %}{{ user_profile.Children_dob_2 }}{% endif %}" name="Children_dob_2"></td>
                                             <td><input readonly type="text" value="{% if user_profile.Children_2_profession %}{{ user_profile.Children_2_profession }}{% endif %}" name="Children_2_profession"></td>
                                         </tr>
-
                                     </table>
                                 </div>
                                 <div class="row" style="width: 95%;">
@@ -760,7 +725,6 @@ textarea{
                                         <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}" name="willing_to_relocate">  -->
                                         <select readonly name="willing_to_relocate" id="" style="margin-left: 18%; margin-top: 15px;">
                                             <option value="" selected>{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}</option>
-                                            
                                         </select>
                                     </div>
                                     <div class="panel-row clearfix" style="width: 46%">
@@ -783,17 +747,10 @@ textarea{
                                     </button>
                                 </div>  -->
                             </div>
-                            
                             <!-- </form> -->
-                        
                         </li>
-                                
-                        
                     </ul>
-                    
                 </div>
-               
-        
             </div>
         </div>
     </div>
@@ -811,13 +768,10 @@ textarea{
 <script>
     function fetchDate() {
         var place = document.getElementById('place').value;
-        
         console.log(place);
-        
        
         var formData = new FormData();
         formData.append('place', place);
-    
         
         fetch("{% url 'fetch_interview_dates' %}", {
             method: 'POST',
@@ -847,7 +801,6 @@ textarea{
         var formData = new FormData();
         //formData.append('place', place);
         formData.append('date', date);
-    
         
         fetch("{% url 'fetch_interview_panel' %}", {
             method: 'POST',
