@@ -47,6 +47,17 @@
       overflow:scroll;
     }
   }
+
+  
+  body{
+    counter-reset: Serial;          
+}
+
+tr td:first-child:before
+{
+  counter-increment: Serial;      
+  content: counter(Serial); 
+}
   </style>
 
   <div class="main-panel">
@@ -64,6 +75,7 @@
                 <table class="table table-hover" style="margin-top:0px;">
                   <thead>
                     <tr>
+                      <th>S/No.</th>
                       <th>Name</th>
                       <th>Email</th>
                       <th>Mobile No.</th>
@@ -73,6 +85,7 @@
                   {% for x in applicants %}
                   <tbody>
                     <tr>
+                      <td></td>
                       <td>{{ x.name }}</td>
                       <td>{{ x.email }}</td>
                       <td>{{ x.mobile_no }}</td>

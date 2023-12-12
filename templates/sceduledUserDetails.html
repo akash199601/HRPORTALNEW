@@ -88,46 +88,18 @@
           margin : 0px;
         }
 
+        body{
+          counter-reset: Serial;          
+      }
+      
+      tr td:first-child:before
+      {
+        counter-increment: Serial;      
+        content: counter(Serial); 
+      }
     </style>
   
   
-{% comment %} <div class="data">
-    <div class="container-xxl py-3">
-    <div class="container">
-      <div class="row g-4">
-        <h1 style="color: #000000ba;font-weight: 600;">Schedule Interviews</h1>
-        <hr>
-
-        <div class="flex-wrap" style="gap: 1rem 1.4rem;" id="filtered-results">
-          {% for x in applicants %}
-
-          <div class="col-md-12 col-xl-4">
-            <div class="card" style="border-radius: 15px;">
-              <div class="card-body text-center">
-                <div class="mt-3 mb-4">
-                  <img src="static\img\profile_logo.jpg"
-                    class="rounded-circle img-fluid" style="width: 100px;" />
-                </div>
-                <h4 class="mb-2">{{ x.name }}</h4>
-                <p class="text-muted">{{x.email}}</p>
-                <p class="text-muted">{{x.mobile_no}}</p>
-                <a href="{% url 'sceduled_user_full_details' refId=x.id %}" style="text-decoration:none;"><button type="button" class="btn btn-primary btn-rounded btn-lg" style="height:35px;">
-                 More Details
-                </button></a>
-                <div class="d-flex justify-content-between text-center mt-3 mb-2">
-                  
-                </div> 
-              </div>
-            </div>
-          </div>
-          {% empty %}
-          <h3 style="color: #000000ba;"> No candidates have been scheduled for the interview. </h3>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
-</div> {% endcomment %}
 
 <div class="main-panel">
   <div class="content-wrapper">
@@ -144,6 +116,7 @@
             <table class="table table-hover">
               <thead>
                 <tr>
+                  <th>S/No.</th>
                   <th>Name</th>
                   <th>Email</th>
                   <th>Mobile No.</th>
@@ -153,6 +126,7 @@
               {% for x in applicants %}
               <tbody>
                 <tr>
+                  <td></td>
                   <td>{{ x.name }}</td>
                   <td>{{ x.email }}</td>
                   <td>{{ x.mobile_no }}</td>
