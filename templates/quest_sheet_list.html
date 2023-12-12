@@ -52,55 +52,42 @@
 
 
 <div class="data">
-    <div class="container-xxl py-3" >
-        <div class="container">
-          <div class="row g-4">
-            <div class='d-flex justify-content-between align-item-center'>
-
-              <div >
-
-              <h1 style="color: #000000ba;font-weight: 600;">Question Sheets</h1>
-
+  <div class="container-xxl py-3" >
+    <div class="container">
+      <div class="row g-4">
+        <div class='d-flex justify-content-between align-item-center'>
+          <div >
+            <h1 style="color: #000000ba;font-weight: 600;">Question Sheets</h1>
+          </div>
+        <div>
+        <r>
+        <iv class="flex-wrap" style="gap:1rem 1.4rem;">
+         {% for q in sheets %}
+          <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card" style="height:270px;border-radius:10px;">
+            <div class="card" style="border-radius: 10px;border: 1px solid lightblue;">
+              <div class="card-body text-center" style="box-shadow: 1px 1px 20px 1px;padding: 2rem 2rem;background-color: #FFDEE9;background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);border-radius: 10px;">
+                <a class="card-inner-cp card-cp-wt cursor" href="{% url 'quest_sheetlist_details' sheet_id=q.sheet_id %}" style="text-decoration:none;">
+                  {% for w in questions %}
+                  {% if w.sheet_id == q.sheet_id %}
+                  <div style="height:30%;">
+                    <h5 class="mb-2 text-dark font-weight-normal" style="margin-top: 1rem">Sheet Id</h5>
+                    <h2 class="mb-4 text-dark font-weight-bold">{{q.sheet_id}}</h2>                      
+                  </div>
+                  <div style="height:30%;">
+                    <h5 class="mb-2 text-dark font-weight-normal" style="margin-top: 3rem;">No.of Question </h5>
+                    <h2 class="mb-4 text-dark font-weight-bold">{{w.sheet_id__count}}</h2>
+                  </div>
+                  {% endif %}  
+                  {% endfor %}
+                </a>
               </div>
-
-              {% comment %} <div >
-                    <a  href="{% url 'postjob' %}"> 
-                      <button class="btn p-4  btn-primary btn-lg d-flex gap-3 justify-content-center align-items-center" type="button">Add Vacancy <i class="bi bi-plus-square-fill"></i>                      
-                      </button>
-                    </a>
-              </div> {% endcomment %}
-
-            </div>
-            <hr>
-
-            <div class="flex-wrap" style="gap:1rem 1.4rem;">
-             {% for q in sheets %}
-              <div class="wow fadeInUp" data-wow-delay="0.1s" id="received">
-                <div class="card-item card-button">
-                   <a class="cat-item rounded"href="{% url 'quest_sheetlist_details' sheet_id=q.sheet_id %}"> 
-                      {% for w in questions %}
-                      {% if w.sheet_id == q.sheet_id %}
-                       {% comment %} <div style="background-color: #00008B; padding: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin: -20px -20px 0;">          {% endcomment %}
-                        <h6 class="mb-3" style="color: #000000ba;font-weight: 600; margin: 0;text-align:center;">Sheet Id </h6>
-                        {% comment %} </div> {% endcomment %}
-                        <hr>
-                        <p class="mb-0" style="color:#000000ba;font-weight: 600;text-align:center;">{{q.sheet_id}} </p>
-                        <hr>
-                        <h6 class="mb-3" style="color: #000000ba;font-weight: 600; margin: 0; text-align:center;">No.of Question </h6>
-                        <hr>
-                        <p class="mb-0" style="color:#000000ba;font-weight: 600;text-align:center;">{{w.sheet_id__count}} </p>                      
-                        {% endif %}  
-                        {% endfor %}
-                    </a>
-                </div>
-              </div>
-           {% endfor %}
             </div>
           </div>
+         {% endfor %}
         </div>
-    </div>   
-
+      </div>
+    </div>
+  </div>   
 </div>
-
 
 {% endblock main_content%}
