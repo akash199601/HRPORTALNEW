@@ -78,12 +78,25 @@
       }
       }
 
+      .parent-container{
+        width: 80%;
+        margin : 40px;
+      }
+
+      @media(max-width:640px){
+        .parent-container{
+        margin-top:20px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        }
+      }
     </style>
     <link href="{% static 'css/vacancy_style.css' %}" rel="stylesheet">
 
 <div class="data" >
-    <div class="container-xxl py-3" >
-        <div class="container">
+    {% comment %} <div class="container-xxl" > {% endcomment %}
+        <div class="parent-container">
           <div class="row g-4">
             <div class='d-flex justify-content-between align-item-center'>
 
@@ -275,7 +288,7 @@
 
           </div>
         </div>
-    </div>   
+    {% comment %} </div>    {% endcomment %}
    
 </div>
 
