@@ -75,6 +75,16 @@
       margin-left:0px;
   }
   }
+
+  body{
+    counter-reset: Serial;          
+}
+
+tr td:first-child:before
+{
+  counter-increment: Serial;      
+  content: counter(Serial); 
+}
     </style>
 
 
@@ -91,6 +101,7 @@
             <table class="table table-hover" style="margin-top:0px;">
               <thead>
                 <tr>
+                  <th>S/No.</th>
                   <th>Name</th>
                   <th>Email</th>
                   <th>Mobile No.</th>
@@ -102,6 +113,7 @@
               {% for x in applicants %}
               <tbody>
                 <tr>
+                  <td></td>
                   <td>{{ x.name }}</td>
                   <td>{{ x.email }}</td>
                   <td>{{ x.mobile_no }}</td>
@@ -129,6 +141,7 @@
             <table class="table table-hover" style="margin-top:0px;">
               <thead>
                 <tr>
+                  <th>S/No.</th>
                   <th>Name</th>
                   <th>Email</th>
                   <th>Mobile No.</th>
@@ -140,6 +153,7 @@
               {% for x in applicants1 %}
               <tbody>
                 <tr>
+                  <td></td>
                   <td>{{ x.name }}</td>
                   <td>{{ x.email }}</td>
                   <td>{{ x.mobile_no }}</td>
