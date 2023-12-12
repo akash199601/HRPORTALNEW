@@ -424,6 +424,22 @@ def profile_update(request,candidate_id):
             print(e)
             encoded_data = None
             mime_type = None
+            
+        try:
+            document_obj = Document_Candidate.objects.get(candidate_id = candidate_profile.id)
+            aadhar_doc = document_obj.aadhar_doc if document_obj.aadhar_doc else None
+            ssc_doc = document_obj.ssc_doc if document_obj.ssc_doc else None
+            hsc_doc = document_obj.hsc_doc if document_obj.hsc_doc else None
+            graduate_doc = document_obj.graduate_doc if document_obj.graduate_doc else None
+            pan_doc = document_obj.pan_doc if document_obj.pan_doc else None
+            dl_doc = document_obj.dl_doc  if document_obj.dl_doc else None
+        except Exception as e:
+            aadhar_doc = None
+            ssc_doc = None
+            hsc_doc = None
+            graduate_doc = None     
+            pan_doc = None
+            dl_doc = None
     else:
         candidate_profile = None
     document_obj = Document_Candidate.objects.get(candidate_id = candidate_profile.id)
@@ -592,7 +608,12 @@ def profile_update(request,candidate_id):
                'mime_type':mime_type,
                'gender_choices': GENDER,
                'document_obj':document_obj,
-               
+               'ssc_doc': ssc_doc,
+               'hsc_doc': hsc_doc,
+               'graduate_doc': graduate_doc,
+               'aadhar_doc' : aadhar_doc,
+               'pan_doc' : pan_doc,
+               'dl_doc' : dl_doc,
                }
     return render(request, 'edit_profile.html', context) 
 
@@ -3271,9 +3292,6 @@ def view_candidate_profile(request, email):
         'aadhar_doc' : aadhar_doc,
         'pan_doc' : pan_doc,
         'dl_doc' : dl_doc,
-        'ssc_doc'  : ssc_doc,
-        'hsc_doc'  : hsc_doc,
-        'graduate_doc'  : graduate_doc,
         # 'document_obj':document_obj
     }
 
