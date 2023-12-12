@@ -6,15 +6,12 @@
   .row input,.row select{
   width: 95%;
   margin-left: 1%;
-  
-  
 }
 input,select{
   border: 1px solid rgb(187, 187, 246);
   border-radius: 5px;
   padding: 4px;
   background-color: #e3e3ec;
-  
 }
 input:hover,select:hover{
   border: 2px solid rgb(137, 137, 190);
@@ -55,9 +52,8 @@ textarea{
     margin-right: 10px;
   }
 }
-
-
 </style>
+
 <div class="container">
   {% if messages %}
   <ul class="messages">
@@ -68,8 +64,6 @@ textarea{
   {% endif %}
 
     <!-- <h2 style="text-align:center; margin-top: 60px;">Add Question</h2> -->
-
-
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
       <div class="container">
           <div style="width:100%;float:left">
@@ -80,12 +74,10 @@ textarea{
                           <span class="count_Icon theme-color">
                               1
                           </span>
-                          
                           <!----><!---->
                           <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host="">ADD Question</span>
                           <!---->
                       </div>
-                          
                     <form method="POST" action="" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="panel-body ng-star-inserted">
@@ -108,10 +100,8 @@ textarea{
                                   </div>
                                 </div>
                           
-                            
                                 <div class="row" style="width: 95%;">
                                   <span class="panel-col panel-col1">Question</span>
-                                  
                                   <textarea  name="question_text" id="question_text" cols="10" rows="5" required></textarea>
                               </div>
                             <div class="row">
@@ -139,7 +129,6 @@ textarea{
                                 <option value="d">D</option>
                               </select>
                             </div>
-                          
                         </div>
                         
                         <div style="align-items: center;">
@@ -148,12 +137,8 @@ textarea{
                         </div>
                     </form>
                   </li>
-                  
               </ul>
-              
-          </div>
-          
-          
+          </div>          
       </div>
   </div>
     <br><br><br>
@@ -186,7 +171,5 @@ textarea{
     }
     })
   }
-</script>
-    
-    
+</script>    
 {% endblock main_content %}
