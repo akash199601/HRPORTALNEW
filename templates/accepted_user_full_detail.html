@@ -499,13 +499,13 @@
                                                   <form method="POST" id="applicationForm"> 
                                                     {% csrf_token %} 
                                                   <div class="panel-body ng-star-inserted">
-                                                    <div class="form-group" style="display:flex;justify-content:end;">
+                                                    <div class="form-group" style="display:flex;justify-content:end;margin-bottom:1rem;">
                                                       <a id="add-vacancy-link" class="btn btn-sm btn-secondary">Add New Vacancy</a>
                                                     </div> 
                                                           <!----><!---->
                                                           {% for field in form %}
                                                            
-                                                              <div class="form-group">
+                                                              <div class="form-group" style="margin-bottom:1rem;">
                                                                 {{ field.label_tag }}
                                                                 {{ field }}
                                                                 {% if field.errors %}
