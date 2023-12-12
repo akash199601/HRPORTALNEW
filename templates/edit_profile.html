@@ -604,28 +604,28 @@
 
                                                             <div class="row">
                                                                 <span class="panel-col panel-col1">Name</span>
-                                                                <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" readonly> 
+                                                                <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" required> 
                                                             </div>
                                                         
                                                             <div class="row">
                                                                 <span class="panel-col panel-col1">Primary Email</span>
-                                                                <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
+                                                                <input type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
                                                             </div>
 
                                                         
                                                             <div class="row">
                                                                 <span class="panel-col panel-col1">Mobile Number</span>
-                                                                <input readonly type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
+                                                                <input  type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
                                                             </div>
                                                         
                                                             <div class="row">
                                                                 <span class="panel-col panel-col1">Date Of Birth</span>
-                                                                <input readonly type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
+                                                                <input  type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
                                                             </div>
                                                         
                                                             <div class="row">
                                                                 <span class="panel-col panel-col1">Gender</span>
-                                                                <select readonly id="gender" name="gender" class="panel-col text-bold-cell" required>
+                                                                <select id="gender" name="gender" class="panel-col text-bold-cell" required>
                                                                     <option class="panel-col text-bold-cell" value="" disabled selected hidden>Select Gender</option>
                                                                     {% for choice in gender_choices %}
                                                                     <option class="panel-col text-bold-cell" value="{{ choice.0 }}" {% if choice.0 == user_profile.gender %}selected{% endif %}>{{ choice.1 }}</option>
@@ -659,12 +659,12 @@
                                                                     <input type="number" class="panel-col text-bold-cell" style="text-transform: uppercase;" id="adhar" name="identity_Aadhar" value="{% if user_profile.identity_Aadhar %}{{ user_profile.identity_Aadhar }}{% endif %}" maxlength="12" minlength="12"> 
                                                                     <span id="lblErroradh" style="color: Red; visibility: hidden;" class="error">Invalid Aadhaar Number(<span style="color:red;font-size:16px;">*</span>)</span>
                                                                 </div>
-                                                                <div class="row" style="width: 50%">
+                                                                {% comment %} <div class="row" style="width: 50%">
 
                                                                     <span class="panel-col panel-col1">Upload Identity Adadhar(<span style="color:red;font-size:16px;">*</span>)</span>
                                                                     <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="aadhar_doc" id="aadhar_doc" value="" placeHolder="" required> 
                                                                     <input type="hidden" value="{% if document_obj.aadhar_doc %}{{ document_obj.aadhar_doc }} {% endif %}" id="aadhar_file_name">
-                                                                </div>
+                                                                </div> {% endcomment %}
                                                             </div>
                                                             <div style="display: flex; justify-content: space-between;">
                                                                 <div class="row" style="width: 50%">
@@ -672,12 +672,12 @@
                                                                     <input type="text" class="panel-col text-bold-cell" style="text-transform: uppercase;" id="pan" value="{% if user_profile.identity_PAN %}{{ user_profile.identity_PAN }}{% endif %}" name="identity_PAN"> 
                                                                     <span id="lblPANCard" style="color: Red; visibility: hidden;" class="error">Invalid PAN Number</span>      
                                                                 </div>
-                                                                <div class="row" style="width: 50%">
+                                                                {% comment %} <div class="row" style="width: 50%">
                                                                     <span class="panel-col panel-col1">Upload Identity PAN</span>
                                                                     <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" > 
                                                                     <input type="hidden" value="{% if document_obj.pan_doc %}{{ document_obj.pan_doc }} {% endif %}" id="pan_file_name">
 
-                                                                </div>
+                                                                </div> {% endcomment %}
                                                             </div>
 
                                                             <div style="display: flex; justify-content: space-between;">
@@ -686,12 +686,12 @@
                                                                     <input type="text" class="panel-col text-bold-cell" id="dl" value="{% if user_profile.identity_DL_No %}{{ user_profile.identity_DL_No }}{% endif %}" name="identity_DL_No"> 
                                                                     <span id="lblErrordl" style="color: Red; visibility: hidden;" class="error">Invalid DL Number</span>
                                                                 </div>
-                                                                <div class="row" style="width: 50%">
+                                                                {% comment %} <div class="row" style="width: 50%">
                                                                     <span class="panel-col panel-col1">Upload Identity Driving Licence</span>
                                                                     <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="dl_doc" id="dl_doc" value="" placeHolder=""> 
                                                                     <input type="hidden" value="{% if document_obj.dl_doc %}{{ document_obj.dl_doc }} {% endif %}" id="dl_file_name">
 
-                                                                </div>
+                                                                </div> {% endcomment %}
                                                             </div>
 
                                                             <hr>
@@ -727,7 +727,7 @@
                                                                 </table>
                                                             </div>
                                                             <hr>
-                                                            <div class="address_div">
+                                                            {% comment %} <div class="address_div">
                                                                 <h4 style="font-size:15px;font-weight:350"><b>Upload Education Documents</b></h4>
                                                                 <div class="education_doc">
                                                                     <div class="row dow_row">
@@ -746,7 +746,7 @@
                                                                         <input type="hidden" value="{% if document_obj.graduate_doc %}{{ document_obj.graduate_doc }} {% endif %}" id="graduate_file_name" >
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div> {% endcomment %}
 
                                                             <hr>
 
@@ -991,6 +991,11 @@
                                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                         </div>
                                                                         <div class="modal-body" style="overflow-y: hidden;">
+                                                                            <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs" name="resume_file" id="resume_file" value="" placeHolder="" onchange="return fileValidation()"> 
+                                                                                <input type="hidden" value="{% if user_profile.resume_file %}{{user_profile.resume_file}} {% endif %}" id="resume_file_name">                    
+                                                                            </form>
+
                                                                             {% if mime_type == 'application/pdf' %}
                                                                                 <embed src="data:application/pdf;base64,{{ binary_data }}" type="application/pdf" width="100%" height="100%">      
                                                                             {% elif mime_type|lower == 'image/jpg' or mime_type|lower == 'image/jpeg' or mime_type|lower == 'image/png' %}
@@ -1028,11 +1033,13 @@
                                                                         <div class="modal-body" style="overflow-y: hidden;">
                                                                             <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                                                                 {% csrf_token %}
+                                                                                
                                                                                 <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="aadhar_doc" id="aadhar_doc" value="" placeHolder="" required> 
                                                                                 <input type="hidden" value="{% if document_obj.aadhar_doc %}{{ document_obj.aadhar_doc }} {% endif %}" id="aadhar_file_name">
-                                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                                               
+                                                                                {% comment %} <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
                                                                                     Update
-                                                                                </button>
+                                                                                </button> {% endcomment %}
                                                                             </form>
                                                                             <hr>
                                                                             {% if aadhar_doc == '.jpg' or aadhar_doc == '.jpeg' or aadhar_doc == '.png' %}
@@ -1073,11 +1080,11 @@
                                                                         <div class="modal-body" style="overflow-y: hidden;">
                                                                             <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                                                                 {% csrf_token %}
-                                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" > 
+                                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" required> 
                                                                                 <input type="hidden" value="{% if document_obj.pan_doc %}{{ document_obj.pan_doc }} {% endif %}" id="pan_file_name">
-                                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                                                {% comment %} <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
                                                                                     Update
-                                                                                </button>
+                                                                                </button> {% endcomment %}
                                                                             </form>
                                                                             <hr>
                                                                             {% if pan_doc == '.jpg' or pan_doc == '.jpeg' or pan_doc == '.png' %}
@@ -1118,9 +1125,9 @@
                                                                                 {% csrf_token %}
                                                                                 <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="dl_doc" id="dl_doc" value="" placeHolder=""> 
                                                                                 <input type="hidden" value="{% if document_obj.dl_doc %}{{ document_obj.dl_doc }} {% endif %}" id="dl_file_name">
-                                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                                                {% comment %} <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
                                                                                     Update
-                                                                                </button>
+                                                                                </button> {% endcomment %}
                                                                             </form>
                                                                             <hr>
                                                                             {% if dl_doc == '.jpg' or dl_doc == '.jpeg' or dl_doc == '.png' %}
@@ -1163,11 +1170,16 @@
                                                                         <div class="modal-body" style="overflow-y: hidden;">
                                                                             <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                                                                 {% csrf_token %}
+                                                                                {% if ssc_doc == '.jpg' or ssc_doc == '.jpeg' or ssc_doc == '.png' or ssc_doc == '.PDF' %}
                                                                                 <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="ssc_doc" id="ssc_doc" value="" placeHolder="" > 
                                                                                 <input type="hidden" value="{% if document_obj.ssc_doc %}{{ document_obj.ssc_doc }} {% endif %}" id="ssc_file_name" >
-                                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                                                {% comment %} <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
                                                                                     Update
-                                                                                </button>
+                                                                                </button> {% endcomment %}
+                                                                                {% else %}
+                                                                                <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="ssc_doc" id="ssc_doc" value="" placeHolder=""  required> 
+                                                                                <input type="hidden" value="{% if document_obj.ssc_doc %}{{ document_obj.ssc_doc }} {% endif %}" id="ssc_file_name" >
+                                                                                {% endif %}
                                                                             </form>
                                                                             <hr>
                                                                             {% if ssc_doc == '.jpg' or ssc_doc == '.jpeg' or ssc_doc == '.png' %}
@@ -1208,9 +1220,9 @@
                                                                                 {% csrf_token %}
                                                                                 <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="hsc_doc" id="hsc_doc" value="" placeHolder="" required> 
                                                                                 <input type="hidden" value="{% if document_obj.hsc_doc %}{{ document_obj.hsc_doc }} {% endif %}" id="hsc_file_name" >
-                                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                                                {% comment %} <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
                                                                                     Update
-                                                                                </button>
+                                                                                </button> {% endcomment %}
                                                                             </form>
                                                                             {% if hsc_doc == '.jpg' or hsc_doc == '.jpeg' or hsc_doc == '.png' %}
                                                                             <div style="width: 100%; height: 100%; overflow: auto;">
@@ -1253,9 +1265,9 @@
                                                                                 {% csrf_token %}
                                                                                 <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="graduate_doc" id="graduate_doc" value="" placeHolder=""> 
                                                                                 <input type="hidden" value="{% if document_obj.graduate_doc %}{{ document_obj.graduate_doc }} {% endif %}" id="graduate_file_name" >
-                                                                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                                                                {% comment %} <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
                                                                                     Update
-                                                                                </button>
+                                                                                </button> {% endcomment %}
                                                                             </form>
                                                                         <hr>
                                                                             {% if graduate_doc == '.jpg' or graduate_doc == '.jpeg' or graduate_doc == '.png' %}
