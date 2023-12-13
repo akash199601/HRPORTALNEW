@@ -79,7 +79,7 @@
       }
 
       .parent-container{
-        width: 80%;
+        width: 70%;
         margin : 40px;
       }
 
@@ -91,6 +91,25 @@
         margin-right: auto;
         }
       }
+
+      @media (max-width: 640px){
+      .section-card {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+
+    .gap-3{
+      align-items: center;
+      height: 10px;
+      width: 180px;
+    }
+
+    @media(max-width:640px){
+      .gap-3{
+        width: 120px;
+      }
+    }
     </style>
     <link href="{% static 'css/vacancy_style.css' %}" rel="stylesheet">
 
@@ -98,31 +117,32 @@
     {% comment %} <div class="container-xxl" > {% endcomment %}
         <div class="parent-container">
           <div class="row g-4">
-            <div class='d-flex justify-content-between align-item-center'>
+            <div class='justify-content-between align-item-center'>
 
               <div style="color:#FFFFFF">
 
-              <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;">Vacancies</h1>
+              <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;text-align:center;">Vacancies</h1>
 
               </div>
-
-              <div >
+              <hr>
+              
+              <div style="float:right;">
                     <a  href="{% url 'postjob' %}"> 
-                      <button class="btn p-4  btn-primary btn-lg d-flex gap-3 justify-content-center" style="align-items:center;" type="button">Add a Vacancy <i class="bi bi-plus-square-fill"></i>                      
+                      <button class="btn p-4  btn-primary btn-lg d-flex gap-3 justify-content-center" type="button">Add a Vacancy <i class="bi bi-plus-square-fill"></i>                      
                       </button>
                     </a>
               </div>
 
             </div>
-            <hr>
+            
 
             <div style="color:#FFFFFF">
-              <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;">WalkIn Positions</h1>
+              <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;text-align: center;">WalkIn Positions</h1>
               </div>
             <div class="section-card clearfix ng-star-inserted" id="filtered-results" style="margin-bottom: 30px">
               {% for vac in vacancy1 %}             
               <div class="card-block card-3 card-height269" style="height: 297px; width:310px;margin-bottom:30px;" data-wow-delay="0.1s" id="received">
-                <div class="card-block-inner" style="height:100%;">
+                <div class="card-block-inner" style="height:100%;padding:1rem;">
                     <a class="cat-item rounded " href="{% url 'vacancy_card_details' vac.id %}"> 
                       <div class="card-row card-top-job">
                       <h2 class="title title_block text_inherit" style="color:#494949;font-weight: 600; margin-bottom: -0.5rem;font-size:21px;
@@ -174,12 +194,12 @@
 
 {% comment %} Open position {% endcomment %}
 <div style="color:#FFFFFF">
-  <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;">Open Positions</h1>
+  <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;text-align: center;">Open Positions</h1>
   </div>
 <div class="section-card clearfix ng-star-inserted" id="filtered-results" style="margin-bottom: 30px">
   {% for vac in vacancy %}
   <div class="card-block card-3 card-height269" style="height: 297px; width:310px;margin-bottom:30px;" data-wow-delay="0.1s" id="received">
-    <div class="card-block-inner" style="height:100%;">
+    <div class="card-block-inner" style="height:100%;padding:1rem;">
         <a class="cat-item rounded " href="{% url 'vacancy_card_details' vac.id %}"> 
           <div class="card-row card-top-job">
           <h2 class="title title_block text_inherit" style="color:#494949;font-weight: 600; margin-bottom: -0.5rem;font-size:21px;
@@ -230,12 +250,12 @@
 </div>
 
 <div style="color:#FFFFFF">
-  <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;">Closed Positions</h1>
+  <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;text-align: center;">Closed Positions</h1>
   </div>
 <div class="section-card clearfix ng-star-inserted" id="filtered-results" style="margin-bottom: 30px">
   {% for vac in vacancy2 %} 
   <div class="card-block card-3 card-height269" style="height: 297px; width:310px;margin-bottom:30px;" data-wow-delay="0.1s" id="received">
-    <div class="card-block-inner" style="height:100%;">
+    <div class="card-block-inner" style="height:100%;padding:1rem;">
         <a class="cat-item rounded " href="{% url 'vacancy_card_details' vac.id %}"> 
           <div class="card-row card-top-job">
           <h2 class="title title_block text_inherit" style="color:#494949;font-weight: 600; margin-bottom: -0.5rem;font-size:21px;

@@ -2418,8 +2418,8 @@ body {
 
 .section-card {
     padding-bottom: 30px;
-    margin-left: -20px;
-    margin-right: -20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .row {
@@ -10817,10 +10817,6 @@ textarea.form-control.jobDiscriptionTextarea {
     }
     .section-filter .main-title {
         padding: 0 0 0 15px;
-    }
-    .section-card {
-        margin-left: -15px;
-        margin-right: -15px;
     }
     .card-block {
         width: 100%;
