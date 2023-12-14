@@ -558,8 +558,21 @@
         }
     } {% endcomment %}
     #panel6{
-        height:90%;
         display:flex;
+    }
+
+    .basic-item{
+        height: 200px;
+    }
+
+    @media(max-width:640px){
+        .basic-item{
+            height:500px;
+        }
+
+        #panel6{
+            display:block;
+        }
     }
 </style>
 {% comment %} <div class="layout-main candidate-portal myProfile-page" >
@@ -591,9 +604,9 @@
                                         {% csrf_token %}
                                         <div class="containers" >
                                             <div class="basic-details-card" style="margin-bottom: 10px;margin-top:20px;">
-                                                <ul class="item_list">
+                                                <ul class="item_list basic-item">
                                                     <!---->
-                                                    <li class="item_list_block step_open" >
+                                                    <li class="item_list_block step_open" style="height: 100%;">
                                                         <div class="info_title theme-color" >
                                                             <span class="count_Icon theme-color">
                                                                 1
@@ -603,7 +616,7 @@
                                                             <!---->
                                                         </div>
 
-                                                        <div id="panel6" class="panel-body ng-star-inserted" style="height: 90%;">
+                                                        <div id="panel6" class="panel-body ng-star-inserted">
                                                                 <!----><!---->
 
                                                             <div class="row">
@@ -655,7 +668,7 @@
                                                             <!---->
                                                         </div>
                                                         <div style="display:flex;">
-                                                            <div style="width:30%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
+                                                            <div style="width:45%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
                                                                 <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
                                                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#resumeBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
                                                                         <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
@@ -702,7 +715,7 @@
                                                                 </div>
                                                             </div>
                                                             
-                                                            <div style="width:30%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
+                                                            <div style="width:45%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
                                                                 <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
                                                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
                                                                         <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
@@ -751,7 +764,7 @@
                                                                 </div>
                                                             </div>
                                                     
-                                                            <div style="width:30%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
+                                                            <div style="width:45%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
                                                                 <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
                                                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
                                                                         <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
@@ -801,11 +814,11 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        {% comment %} </div>
 
-                                                        <div style="display:flex;">
+                                                        <div style="display:flex;"> {% endcomment %}
 
-                                                            <div style="width:30%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
+                                                            <div style="width:45%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
                                                                 <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
                                                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
                                                                         <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
@@ -850,7 +863,7 @@
                                                                 </div>
                                                             </div>
                                                             
-                                                            <div style="width:30%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
+                                                            <div style="width:45%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
                                                                 <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
                                                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
                                                                         <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
@@ -896,7 +909,7 @@
                                                                 </div>
                                                             </div>
                                                             
-                                                            <div style="width:30%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
+                                                            <div style="width:45%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
                                                                 <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
                                                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
                                                                         <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
