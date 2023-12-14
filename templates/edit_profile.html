@@ -557,6 +557,10 @@
             display:block;
         }
     } {% endcomment %}
+    #panel6{
+        height:90%;
+        display:flex;
+    }
 </style>
 {% comment %} <div class="layout-main candidate-portal myProfile-page" >
     <div class="site-width" style="min-height: 835px;">
@@ -1006,48 +1010,28 @@
 
                                                         <div class="panel-body ng-star-inserted" onload="resetSelection()">
 
-                                                            <div style="display: flex; justify-content: space-between;">
-
-                                                                <div class="row" style="width: 50%">
-                                                                    <span class="panel-col panel-col1">Identity Adadhar</span>
-                                                                    <input type="number" class="panel-col text-bold-cell" style="text-transform: uppercase;" id="adhar" name="identity_Aadhar" value="{% if user_profile.identity_Aadhar %}{{ user_profile.identity_Aadhar }}{% endif %}" maxlength="12" minlength="12"> 
-                                                                    <span id="lblErroradh" style="color: Red; visibility: hidden;" class="error">Invalid Aadhaar Number(<span style="color:red;font-size:16px;">*</span>)</span>
-                                                                </div>
-                                                                {% comment %} <div class="row" style="width: 50%">
-
-                                                                    <span class="panel-col panel-col1">Upload Identity Adadhar(<span style="color:red;font-size:16px;">*</span>)</span>
-                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="aadhar_doc" id="aadhar_doc" value="" placeHolder="" required> 
-                                                                    <input type="hidden" value="{% if document_obj.aadhar_doc %}{{ document_obj.aadhar_doc }} {% endif %}" id="aadhar_file_name">
-                                                                </div> {% endcomment %}
-                                                            </div>
-                                                            <div style="display: flex; justify-content: space-between;">
-                                                                <div class="row" style="width: 50%">
-                                                                    <span class="panel-col panel-col1">Identity PAN</span>
-                                                                    <input type="text" class="panel-col text-bold-cell" style="text-transform: uppercase;" id="pan" value="{% if user_profile.identity_PAN %}{{ user_profile.identity_PAN }}{% endif %}" name="identity_PAN"> 
-                                                                    <span id="lblPANCard" style="color: Red; visibility: hidden;" class="error">Invalid PAN Number</span>      
-                                                                </div>
-                                                                {% comment %} <div class="row" style="width: 50%">
-                                                                    <span class="panel-col panel-col1">Upload Identity PAN</span>
-                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" > 
-                                                                    <input type="hidden" value="{% if document_obj.pan_doc %}{{ document_obj.pan_doc }} {% endif %}" id="pan_file_name">
-
-                                                                </div> {% endcomment %}
-                                                            </div>
-
-                                                            <div style="display: flex; justify-content: space-between;">
-                                                                <div class="row" style="width: 50%">
-                                                                    <span class="panel-col panel-col1">Identity Driving Licence</span>
-                                                                    <input type="text" class="panel-col text-bold-cell" id="dl" value="{% if user_profile.identity_DL_No %}{{ user_profile.identity_DL_No }}{% endif %}" name="identity_DL_No"> 
-                                                                    <span id="lblErrordl" style="color: Red; visibility: hidden;" class="error">Invalid DL Number</span>
-                                                                </div>
-                                                                {% comment %} <div class="row" style="width: 50%">
-                                                                    <span class="panel-col panel-col1">Upload Identity Driving Licence</span>
-                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="dl_doc" id="dl_doc" value="" placeHolder=""> 
-                                                                    <input type="hidden" value="{% if document_obj.dl_doc %}{{ document_obj.dl_doc }} {% endif %}" id="dl_file_name">
-
-                                                                </div> {% endcomment %}
-                                                            </div>
-
+                                                            <div class="training_div">
+                                                                <h4>Identity Details</h4>
+                                                                <table class="training" style="width: 100%;">
+                                                                    <tr>
+                                                                        <th>Adadhar No.</th>
+                                                                        <th>PAN No.</th>
+                                                                        <th>Driving Licence</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><input type="number" class="panel-col text-bold-cell" style="text-transform: uppercase;" id="adhar" name="identity_Aadhar" value="{% if user_profile.identity_Aadhar %}{{ user_profile.identity_Aadhar }}{% endif %}" maxlength="12" minlength="12">
+                                                                            <span id="lblErroradh" style="color: Red; visibility: hidden;" class="error">Invalid Aadhaar Number(<span style="color:red;font-size:16px;">*</span>)</span>
+                                                                        </td>
+                                                                        <td><input type="text" class="panel-col text-bold-cell" style="text-transform: uppercase;" id="pan" value="{% if user_profile.identity_PAN %}{{ user_profile.identity_PAN }}{% endif %}" name="identity_PAN">
+                                                                            <span id="lblPANCard" style="color: Red; visibility: hidden;" class="error">Invalid PAN Number</span> 
+                                                                        </td>
+                                                                        <td><input type="text" class="panel-col text-bold-cell" id="dl" value="{% if user_profile.identity_DL_No %}{{ user_profile.identity_DL_No }}{% endif %}" name="identity_DL_No">
+                                                                            <span id="lblErrordl" style="color: Red; visibility: hidden;" class="error">Invalid DL Number</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>    
+                
                                                             <hr>
                                                             <div class="address_div">
                                                                 <h4>Address
