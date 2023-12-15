@@ -574,6 +574,25 @@
             display:block;
         }
     }
+
+    .filedoc{
+        height:170px;
+        margin:20px;
+        border-radius:8px;
+        box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);
+    }
+
+    @media(max-width:640px){
+        .filedoc{
+            height:170px;
+            margin-top:10px;
+            margin-left:0px;
+            border-radius:8px;
+            box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);
+    
+        }
+    }
+
 </style>
 {% comment %} <div class="layout-main candidate-portal myProfile-page" >
     <div class="site-width" style="min-height: 835px;">
@@ -667,8 +686,8 @@
                                                             <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Documents </span>
                                                             <!---->
                                                         </div>
-                                                        <div style="display:flex;">
-                                                            <div style="width:45%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
+                                                        <div class="row">
+                                                            <div class="col-sm-2 filedoc" >
                                                                 <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
                                                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#resumeBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
                                                                         <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
@@ -715,7 +734,7 @@
                                                                 </div>
                                                             </div>
                                                             
-                                                            <div style="width:45%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
+                                                            <div class="col-sm-2 filedoc">
                                                                 <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
                                                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
                                                                         <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
@@ -764,7 +783,7 @@
                                                                 </div>
                                                             </div>
                                                     
-                                                            <div style="width:45%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
+                                                            <div class="col-sm-2 filedoc" >
                                                                 <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
                                                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
                                                                         <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
@@ -818,7 +837,7 @@
 
                                                         <div style="display:flex;"> {% endcomment %}
 
-                                                            <div style="width:45%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
+                                                            <div class="col-sm-2 filedoc" >
                                                                 <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
                                                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
                                                                         <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
@@ -863,102 +882,11 @@
                                                                 </div>
                                                             </div>
                                                             
-                                                            <div style="width:45%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
-                                                                <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
-                                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
-                                                                        <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
-                                                                        <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Graduation</figcaption>
-                                                                    </button>
-                                                                </div>  
+                                                        {% comment %} </div>
 
-                                                                <div>
-                                                                    <input type="file" class="panel-col text-bold-cell" style="width: 90%;margin-left: 5%;margin-right: 5%;margin-top: 15px;" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs" name="graduate_doc" id="graduate_doc" value="" placeHolder="" > 
-                                                                    <input type="hidden" value="{% if user_profile.graduate_doc %}{{user_profile.graduate_doc}} {% endif %}" id="graduate_file_name">                    
-                                                                
-                                                                      <!-- Modal -->
-                                                                    <div class="modal fade" id="graduationBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog modal-dialog-scrollable">
-                                                                            <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
-                                                                                <div class="modal-header">
-                                                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Graduation</h1>
-                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                </div>
-                                                                                <div class="modal-body" style="overflow-y: hidden;">
-                                                                                    
-                                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="graduate_doc" id="graduate_doc" value="" placeHolder=""> 
-                                                                                    <input type="hidden" value="{% if document_obj.graduate_doc %}{{ document_obj.graduate_doc }} {% endif %}" id="graduate_file_name" >
-                                                                                        
-                                                                                    <hr>
-                                                                                    {% if graduate_doc == '.jpg' or graduate_doc == '.jpeg' or graduate_doc == '.png' %}
-                                                                                    <div style="width: 100%; height: 100%; overflow: auto;">
-                                                                                        <img src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
-                                                                                    </div>
-                                                                                   {% else %}
-                                                                                    <div style="width: 100%; height: 100%; overflow: auto;">
-                                                                                        <embed src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
-                                                                                    </div>
-                                                                                {% endif%}
-                                                                                
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                            <div style="width:45%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
-                                                                <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
-                                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
-                                                                        <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
-                                                                        <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">PAN</figcaption>
-                                                                    </button>
-                                                                </div>  
+                                                        <div class="row">  {% endcomment %}
 
-                                                                <div>
-                                                                    <input type="file" class="panel-col text-bold-cell" style="width: 90%;margin-left: 5%;margin-right: 5%;margin-top: 15px;" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs" name="pan_doc" id="pan_doc" value="" placeHolder="" > 
-                                                                    <input type="hidden" value="{% if user_profile.pan_doc %}{{user_profile.pan_doc}} {% endif %}" id="pan_file_name">                    
-                                                                
-                                                                      <!-- Modal -->
-                                                                    <div class="modal fade" id="panBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog modal-dialog-scrollable">
-                                                                            <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
-                                                                                <div class="modal-header">
-                                                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">PAN</h1>
-                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                                </div>
-                                                                                <div class="modal-body" style="overflow-y: hidden;">
-                                                                                    
-                                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" required> 
-                                                                                    <input type="hidden" value="{% if document_obj.pan_doc %}{{ document_obj.pan_doc }} {% endif %}" id="pan_file_name">
-                                                                                        
-                                                                                    <hr>
-                                                                                    {% if pan_doc == '.jpg' or pan_doc == '.jpeg' or pan_doc == '.png' %}
-                                                                                    <div style="width: 100%; height: 100%; overflow: auto;">
-                                                                                        <img src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
-                                                                                    </div>
-                                                                                   {% else %}
-                                                                                    <div style="width: 100%; height: 100%; overflow: auto;">
-                                                                                        <embed src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
-                                                                                    </div>
-                                                                                {% endif %}
-                                                                                
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div style="display:flex;">
-
-                                                            <div style="width:30%;height:170px;margin:10px;border-radius:8px;box-shadow: 0px 1px 3px 1px rgb(12 176 218 / 69%);">
+                                                            <div class="col-sm-2 filedoc" >
                                                                 <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
                                                                     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
                                                                         <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
@@ -1004,6 +932,99 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+
+                                                            <div class="col-sm-2 filedoc" >
+                                                                <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
+                                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
+                                                                        <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                                                        <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Graduation</figcaption>
+                                                                    </button>
+                                                                </div>  
+
+                                                                <div>
+                                                                    <input type="file" class="panel-col text-bold-cell" style="width: 90%;margin-left: 5%;margin-right: 5%;margin-top: 15px;" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs" name="graduate_doc" id="graduate_doc" value="" placeHolder="" > 
+                                                                    <input type="hidden" value="{% if user_profile.graduate_doc %}{{user_profile.graduate_doc}} {% endif %}" id="graduate_file_name">                    
+                                                                
+                                                                      <!-- Modal -->
+                                                                    <div class="modal fade" id="graduationBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-scrollable">
+                                                                            <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                                                                <div class="modal-header">
+                                                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Graduation</h1>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body" style="overflow-y: hidden;">
+                                                                                    
+                                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="graduate_doc" id="graduate_doc" value="" placeHolder=""> 
+                                                                                    <input type="hidden" value="{% if document_obj.graduate_doc %}{{ document_obj.graduate_doc }} {% endif %}" id="graduate_file_name" >
+                                                                                        
+                                                                                    <hr>
+                                                                                    {% if graduate_doc == '.jpg' or graduate_doc == '.jpeg' or graduate_doc == '.png' %}
+                                                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                        <img src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
+                                                                                    </div>
+                                                                                   {% else %}
+                                                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                        <embed src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
+                                                                                    </div>
+                                                                                {% endif%}
+                                                                                
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-sm-2 filedoc" >
+                                                                <div class="doc" style="width: 100px;height: 100px;margin-right: auto;margin-left: auto;margin-top: 10px;">
+                                                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);margin-top: 10px;">
+                                                                        <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                                                        <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">PAN</figcaption>
+                                                                    </button>
+                                                                </div>  
+
+                                                                <div>
+                                                                    <input type="file" class="panel-col text-bold-cell" style="width: 90%;margin-left: 5%;margin-right: 5%;margin-top: 15px;" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs" name="pan_doc" id="pan_doc" value="" placeHolder="" > 
+                                                                    <input type="hidden" value="{% if user_profile.pan_doc %}{{user_profile.pan_doc}} {% endif %}" id="pan_file_name">                    
+                                                                
+                                                                      <!-- Modal -->
+                                                                    <div class="modal fade" id="panBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-scrollable">
+                                                                            <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                                                                <div class="modal-header">
+                                                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">PAN</h1>
+                                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                </div>
+                                                                                <div class="modal-body" style="overflow-y: hidden;">
+                                                                                    
+                                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" required> 
+                                                                                    <input type="hidden" value="{% if document_obj.pan_doc %}{{ document_obj.pan_doc }} {% endif %}" id="pan_file_name">
+                                                                                        
+                                                                                    <hr>
+                                                                                    {% if pan_doc == '.jpg' or pan_doc == '.jpeg' or pan_doc == '.png' %}
+                                                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                        <img src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                                                    </div>
+                                                                                   {% else %}
+                                                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                                                        <embed src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                                                    </div>
+                                                                                {% endif %}
+                                                                                
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                     </li>
                                                 </ul>
