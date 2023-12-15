@@ -1644,6 +1644,7 @@ def schedule_test_user_full_details(request,refId):
         print(refId)
         application = ApplicationDetails.objects.get(application_id=refId)
         profile = candidate_details.objects.get(id=application.candidate_id)
+
         # document_obj = Document_Candidate.objects.get(candidate_id = profile.id)
         position_shortlisted_for=application.position_shortlisted_for
         branch_shortlisted_for=application.branch_shortlisted_for
@@ -1655,7 +1656,12 @@ def schedule_test_user_full_details(request,refId):
         formatted_dates = [d[0].strftime('%Y-%m-%d') for d in dates]
         print('formatted_dates',formatted_dates)
         today_date = datetime.today().strftime('%Y-%m-%d')
-        
+        test_details = {}
+        try:
+            test_details=TestScheduleDetails.objects.get(candidate_id=profile.id,application_id = application.application_id)
+        except TestScheduleDetails.DoesNotExist:
+    # handle the case when the object does not exist, e.g., create a new object, show an error message, etc.
+            pass
         # for upload the document 
         try:
             document_obj = Document_Candidate.objects.get(candidate_id = application.candidate_id)
@@ -1702,6 +1708,7 @@ def schedule_test_user_full_details(request,refId):
         except TestScheduleDetails.DoesNotExist:
             percetage = None
             testschedule_obj = None
+            test_score = None
         
         try:
             resume_obj = ResumeFiles.objects.get(candidate_id = profile.id)
@@ -1761,6 +1768,8 @@ def schedule_test_user_full_details(request,refId):
         'resume_file':resume_file,
         'bypass' : application.bypass,
         'document_obj':document_obj,
+        'testschedule_obj': testschedule_obj,
+        'test_details':test_details,
         # 'resume_obj':resume_obj,        
     }
     return render(request,'schedule_test_user_full_details.html',context)
@@ -3559,11 +3568,11 @@ def update_test_score(request, refId=None):
                 application.application_status = 4
                 application.save()
                 messages.success(request, "Score updated successfully")
-                return redirect('offline_test_details')
+                return redirect('schedule_online_test')
             except Exception as e:
                 print(e)
                 messages.error(request, "Something went wrong")
-                return redirect('offline_test_details')
+                return redirect('schedule_online_test')
     else:
         candidate = candidate_details.objects.filter(id=instance.candidate_id).first()
         

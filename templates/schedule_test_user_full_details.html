@@ -537,8 +537,28 @@ textarea{
                                             ByPass
                                         </button>
                                     </div>
-      
+                                    {% if testschedule_obj.is_online == False %}
+                                    
+                                    <form method="POST" action="{% url 'update_test_score' refId=application.application_id %}" style="margin-top: 0px;" enctype="multipart/form-data">
+                                        {%csrf_token%}
+                                        <center>
+                                        <div class="form-group">
+                                          <label for="score">Candidate Test Score:</label>
+                                          <input type="number" class="form-control percent" name="score" min="0" max="100" step="1" placeholder="Enter percentage scored %" value="{% if test.test_score %}{{test.test_score}}{% endif %}" required/>
+                                        </div>   
+                                        <br> 
+                                        <div class="form-group">
+                                          <label for="offline_answersheet" >Upload Answersheet:</label>
+                                          <input type="file" class="form-control" style="width:20%" name="offline_answersheet" placeholder="upload answersheet of offline exam" value="" required/>
+                                        </div>   
+                                        <br>  
+                                        <button type="submit" class="btn btn-success score" >Submit Score</button>
+                                      </center>
+                                    </form>
+                                    
+                                    {% else %}
                                     <h2 style="color:green;">Yor are already apply for test and Haven't given the test yet.</h2>
+                                    {% endif %}
                                     <div class="modal-dialog modal-dialog-centered" role="document" style="min-width: None;" hidden>
                                         <div class="modal-content" style="margin: 2rem;">
 
@@ -599,7 +619,13 @@ textarea{
                                     </div>
                                     <h2 style="color:green;">Yor are applied for Direct Interview </h2>
                                     {% else %}
+                                    {% comment %} for offline  {% endcomment %}
+                                    {% if test_details.test_score %}
+                                    <h2 style="color:green;">You have completed Offline Test and Your test score is {{test_details.test_score}} </h2>
+                                    {% else %}
                                     <h2 style="color:green;">You have completed Test and Your test score is {{percetage}} % </h2>
+                                    {% endif %}
+
                                     {% endif %}
                                     <div class="modal-dialog modal-dialog-centered" role="document" style="min-width: None;" hidden>
                                         <div class="modal-content" style="margin: 2rem;">
