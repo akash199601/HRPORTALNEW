@@ -173,40 +173,15 @@
         }
       }
 
+      body{
+        color: #38393a;
+    }
     </style>
 {% endblock %}
 {% block main_content %}
 
 {% load static %}
 
-        <!------------PROGRESS BAR------------>
-
-        <!-- <div class="stepper-wrapper">
-            <div class="stepper-item {% if profile.status >= 1 and profile.status <= 6  %} completed {% endif %}">
-              <div class="step-counter"></div>
-              <div class="step-name">1.Profile Details</div>
-            </div>
-            <div class="stepper-item {% if profile.status >= 2 and profile.status <= 6 %} completed {% endif %}">
-              <div class="step-counter"></div>
-              <div class="step-name">2.Screening</div>
-            </div>
-            <div class="stepper-item {% if profile.status >= 3 and profile.status <= 6 %} completed {% endif %}">
-              <div class="step-counter"></div>
-              <div class="step-name">3.Online Test</div>
-            </div>
-            <div class="stepper-item {% if profile.status >= 4 and profile.status <= 6 %} completed {% endif %}">
-                <div class="step-counter"></div>
-                <div class="step-name">4.Interview Scheduled</div>
-            </div>
-            <div class="stepper-item {% if profile.status >= 5 and profile.status <= 6 %} completed {% endif %}">
-                <div class="step-counter"></div>
-                <div class="step-name">5.Interview Status</div>
-            </div>
-            <div class="stepper-item {% if profile.status == 6 and profile.status <= 6 %} completed {% endif %}">
-                <div class="step-counter"></div>
-                <div class="step-name">6.Onboarding</div>
-            </div>
-        </div> -->
         {% include 'progress_bar.html' %}
 
 
