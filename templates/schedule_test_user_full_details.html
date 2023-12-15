@@ -539,22 +539,22 @@ textarea{
                                     </div>
                                     {% if testschedule_obj.is_online == False %}
                                     
-                                    <form method="POST" action="{% url 'update_test_score' refId=application.application_id %}" style="margin-top: 0px;" enctype="multipart/form-data">
-                                        {%csrf_token%}
-                                        <center>
-                                        <div class="form-group">
-                                          <label for="score">Candidate Test Score:</label>
-                                          <input type="number" class="form-control percent" name="score" min="0" max="100" step="1" placeholder="Enter percentage scored %" value="{% if test.test_score %}{{test.test_score}}{% endif %}" required/>
-                                        </div>   
-                                        <br> 
-                                        <div class="form-group">
-                                          <label for="offline_answersheet" >Upload Answersheet:</label>
-                                          <input type="file" class="form-control" style="width:20%" name="offline_answersheet" placeholder="upload answersheet of offline exam" value="" required/>
-                                        </div>   
-                                        <br>  
-                                        <button type="submit" class="btn btn-success score" >Submit Score</button>
-                                      </center>
-                                    </form>
+                                        <form method="POST" action="{% url 'update_test_score' refId=application.application_id %}" style="margin-top: 0px;" enctype="multipart/form-data">
+                                            {%csrf_token%}
+                                            <center>
+                                            <div class="form-group">
+                                              <label for="score">Candidate Test Score:</label>
+                                              <input type="number" class="form-control percent" name="score" min="0" max="100" step="1" placeholder="Enter percentage scored %" value="{% if test.test_score %}{{test.test_score}}{% endif %}" required/>
+                                            </div>   
+                                            <br> 
+                                            <div class="form-group">
+                                              <label for="offline_answersheet" >Upload Answersheet:</label>
+                                              <input type="file" class="form-control" style="width:20%" name="offline_answersheet" placeholder="upload answersheet of offline exam" value="" required/>
+                                            </div>   
+                                            <br>  
+                                            <button type="submit" class="btn btn-success score" >Submit Score</button>
+                                          </center>
+                                        </form>
                                     
                                     {% else %}
                                     <h2 style="color:green;">Yor are already apply for test and Haven't given the test yet.</h2>
