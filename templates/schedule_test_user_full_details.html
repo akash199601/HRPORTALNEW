@@ -464,15 +464,20 @@ textarea{
                         <!---->
                         <li class="item_list_block step_open">
                             <div class="info_title theme-color" onclick="myFunction2()">
+                                {% if testschedule_obj.is_online == False %}
                                 <span class="count_Icon theme-color">
                                   3
                                 </span>
-
                                 <!----><!---->
-                                <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Schedule Test </span>
-                                <!---->
+                                <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host="">Upload Offline Test Score </span>
+                                {% else %}
+                                <span class="count_Icon theme-color">
+                                    3
+                                  </span>
+                                  <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Schedule Test </span>  
+                                {% endif %}
                             </div>
-                              
+                           
                             <div id="panel1" style="height:100%;width:100%;display:none;">
                                 {% if status == 2 %}
                                 <div class="panel-body ng-star-inserted" >
