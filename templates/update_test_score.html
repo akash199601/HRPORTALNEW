@@ -179,39 +179,7 @@
 
 {% load static %}
 
-        <!------------PROGRESS BAR------------>
-
-        <!-- <div class="stepper-wrapper">
-            <div class="stepper-item {% if profile.status >= 1 and profile.status <= 6  %} completed {% endif %}">
-              <div class="step-counter"></div>
-              <div class="step-name">1.Profile Details</div>
-            </div>
-            <div class="stepper-item {% if profile.status >= 2 and profile.status <= 6 %} completed {% endif %}">
-              <div class="step-counter"></div>
-              <div class="step-name">2.Screening</div>
-            </div>
-            <div class="stepper-item {% if profile.status >= 3 and profile.status <= 6 %} completed {% endif %}">
-              <div class="step-counter"></div>
-              <div class="step-name">3.Online Test</div>
-            </div>
-            <div class="stepper-item {% if profile.status >= 4 and profile.status <= 6 %} completed {% endif %}">
-                <div class="step-counter"></div>
-                <div class="step-name">4.Interview Scheduled</div>
-            </div>
-            <div class="stepper-item {% if profile.status >= 5 and profile.status <= 6 %} completed {% endif %}">
-                <div class="step-counter"></div>
-                <div class="step-name">5.Interview Status</div>
-            </div>
-            <div class="stepper-item {% if profile.status == 6 and profile.status <= 6 %} completed {% endif %}">
-                <div class="step-counter"></div>
-                <div class="step-name">6.Onboarding</div>
-            </div>
-        </div> -->
         {% include 'progress_bar.html' %}
-
-
-
-
         <!-----END PROGRESS BAR------>
         <div class="container">
           {% if messages %}
@@ -223,10 +191,10 @@
           {% endif %}
 
             <h2 style="text-align:center;">Update Score for {{ user_profile.name }}</h2>
-            <form method="POST" style="margin-top: 0px;" enctype="multipart/form-data">
+            {% comment %} <form method="POST" style="margin-top: 0px;" enctype="multipart/form-data">
                 {%csrf_token%}
                 <center>
-                <div class="form-group">
+                <div class="form-group" style="width:250px;">
                   <label for="score">Candidate Test Score:</label>
                   <input type="number" class="form-control percent" name="score" min="0" max="100" step="1" placeholder="Enter percentage scored %" value="{% if test.test_score %}{{test.test_score}}{% endif %}" required/>
                 </div>   
@@ -238,7 +206,7 @@
                 <br>  
                 <button type="submit" class="btn btn-success score" >Submit Score</button>
               </center>
-              </form>
+            </form> {% endcomment %}
         </div>
 
 
