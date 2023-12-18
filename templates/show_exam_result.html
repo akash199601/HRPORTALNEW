@@ -67,18 +67,12 @@
 
                 <tr>
                     <td><label  id="corans" class= "rb" style=" color : white; background-color: #000000;"><b> Correct Answer :- {{question.answer}}</b></label></td>
-                </tr>
-                
-                
-                
+                </tr>                
                 {% endif %}
                 {% endfor %}
-
-
             </table>
         <hr>
         {% endfor %}
-        
     </div>
 </div>
 
@@ -137,7 +131,5 @@
     // Cleanup: revoke the URL object after download
     URL.revokeObjectURL(pdfURL);
   }
-
 </script>
-
     {% endblock main_content%}

@@ -409,8 +409,7 @@
                 margin-top:10px;
                 float:right;
             }
-          }
-        
+          }        
 
           body{
             color: #38393a;
@@ -443,31 +442,24 @@
                         <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Basic Details </span>
                         <!---->
                     </div>
-                        
                     <div id="panel6" class="panel-body ng-star-inserted" style="height: 90%;display:none;">
                             <!----><!---->
-                        
                         <div class="row">
                             <span class="panel-col panel-col1">Name</span>
                             <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" readonly> 
                         </div>
-                     
                         <div class="row">
                             <span class="panel-col panel-col1">Primary Email</span>
                             <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
                         </div>
-                            
-                      
                         <div class="row">
                             <span class="panel-col panel-col1">Mobile Number</span>
                             <input readonly type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
                         </div>
-               
                         <div class="row">
                             <span class="panel-col panel-col1">Date Of Birth</span>
                             <input readonly type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
                         </div>
-
                         <div class="row">
                             <span class="panel-col panel-col1">Gender</span>
                             <select readonly id="gender" name="gender" class="panel-col text-bold-cell" required>
@@ -481,10 +473,8 @@
                 </li>
             </ul>
         </div>
-        
 
         <div class="basic-details-card" style="margin-bottom: 10px;">
-
             <ul class="item_list">
                 <!---->
                 <li class="item_list_block step_open">
@@ -496,7 +486,7 @@
                         <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Personal Details </span>
                         <!---->
                     </div>
-                        
+
                     <div id="personal-details" style="height:100%;width:100%;display:none;">
                         <div class="panel-body ng-star-inserted">
                             <div class="training_div">
@@ -531,15 +521,12 @@
                                         <td><input readonly type="text" value="{% if user_profile.present_state %}{{ user_profile.present_state }}{% endif %}" name="present_state"> </td>
                                         <td><input readonly type="text" value="{% if user_profile.present_city %}{{ user_profile.present_city }}{% endif %}" name="present_city"> </td>
                                         <td><input readonly type="number" value="{% if user_profile.present_pin %}{{ user_profile.present_pin }}{% endif %}" name="present_pin"> </td>
-
-
                                     </tr>
                                     <tr>
                                         <th>Permanent</th>
                                         <td><input readonly type="text" value="{% if user_profile.permanent_state %}{{ user_profile.permanent_state }}{% endif %}" name="permanent_state"> </td>
                                         <td><input readonly type="text" value="{% if user_profile.permanent_city %}{{ user_profile.permanent_city }}{% endif %}" name="permanent_city"> </td>
                                         <td><input readonly type="number" value="{% if user_profile.permanent_pin %}{{ user_profile.permanent_pin }}{% endif %}" name="permanent_pin"> </td>
-
                                     </tr>
                                 </table>
                             </div>
@@ -552,21 +539,17 @@
                                     <div class="row dow_row" >
                                         <span class="panel-col panel-col1" style="font-size:15px;font-weight:350"><b>High School Marksheet</b></span>
                                         <button type="button" download><a href="{{ssc_doc.url}}">Document {{ssc_doc}}</a></button>
-                                    
                                     </div>
                                     <div class="row dow_row">
                                         <span class="panel-col panel-col1" style="font-size:15px;font-weight:350"><b>Intermediate School Marksheet</b></span>
                                         <button type="button" download><a href="{{hsc_doc.url}}">Document {{hsc_doc}}</a></button>
-                                    
                                     </div>
                                     <div class="row dow_row">
                                         <span class="panel-col panel-col1" style="font-size:15px;font-weight:350"><b>Graduation Marksheet</b></span>
                                         <button type="button" download><a href="{{graduate_doc.url}}">Document {{graduate_doc}}</a></button>
-                                    
                                     </div>
                                 </div>
                             </div>
-
 
                             <hr style="margin-top: 50px;">
 
@@ -582,7 +565,6 @@
                                             Institution</th>
                                         <th>% obtained</th>
                                         <th>Year of Passing</th>
-                                        
                                     </tr>
                                     <tr>
                                         <th>High School</th>
@@ -591,7 +573,6 @@
                                         <td><input readonly type="text" value="{% if user_profile.high_school_name_location %}{{ user_profile.high_school_name_location }}{% endif %}" name="high_school_name_location"></td>
                                         <td><input readonly type="text" value="{% if user_profile.high_school_marks_obtained %}{{ user_profile.high_school_marks_obtained }}{% endif %}" name="high_school_marks_obtained"></td>
                                         <td><input readonly type="text" value="{% if user_profile.high_school_passing_year %}{{ user_profile.high_school_passing_year }}{% endif %}" name="high_school_passing_year"></td>
-
                                     </tr>
                                     <tr>
                                         <th>Intermediate</th>
@@ -600,8 +581,6 @@
                                         <td><input readonly type="text" value="{% if user_profile.intermediate_name_location %}{{ user_profile.intermediate_name_location }}{% endif %}" name="intermediate_name_location"></td>
                                         <td><input readonly type="text" value="{% if user_profile.intermediate_marks_obtained %}{{ user_profile.intermediate_marks_obtained }}{% endif %}" name="intermediate_marks_obtained"></td>
                                         <td><input readonly type="text" value="{% if user_profile.intermediate_passing_year %}{{ user_profile.intermediate_passing_year }}{% endif %}" name="intermediate_passing_year"></td>
-
-
                                     </tr>
                                     <tr>
                                         <th>Graduation</th>
@@ -610,8 +589,6 @@
                                         <td><input readonly type="text" value="{% if user_profile.graduation_name_location %}{{ user_profile.graduation_name_location }}{% endif %}" name="graduation_name_location"></td>
                                         <td><input readonly type="text" value="{% if user_profile.graduation_marks_obtained %}{{ user_profile.graduation_marks_obtained }}{% endif %}" name="graduation_marks_obtained"></td>
                                         <td><input readonly type="text" value="{% if user_profile.graduation_passing_year %}{{ user_profile.graduation_passing_year }}{% endif %}" name="graduation_passing_year"></td>
-
-
                                     </tr>
                                     <tr>
                                         <th>PG</th>
@@ -620,17 +597,14 @@
                                         <td><input readonly type="text" value="{% if user_profile.pg_name_location %}{{ user_profile.pg_name_location }}{% endif %}" name="pg_name_location"></td>
                                         <td><input readonly type="text" value="{% if user_profile.pg_marks_obtained %}{{ user_profile.pg_marks_obtained }}{% endif %}" name="pg_marks_obtained"></td>
                                         <td><input readonly type="text" value="{% if user_profile.pg_passing_year %}{{ user_profile.pg_passing_year }}{% endif %}" name="pg_passing_year"></td>
-                                    
                                     </tr>
                                     <tr>
-                                        <th>Professional
-                                            Qualification</th>
+                                        <th>Professional Qualification</th>
                                             <td><input readonly type="text" value="{% if user_profile.professional_qualification_Degree_Diploma %}{{ user_profile.professional_qualification_Degree_Diploma }}{% endif %}" name="professional_qualification_Degree_Diploma"></td>
                                             {% comment %} <td><input readonly type="text" value="{% if user_profile.professional_qualification_subjects %}{{ user_profile.professional_qualification_subjects }}{% endif %}" name="professional_qualification_subjects"></td> {% endcomment %}
                                             <td><input readonly type="text" value="{% if user_profile.professional_qualification_name_location %}{{ user_profile.professional_qualification_name_location }}{% endif %}" name="professional_qualification_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.professional_qualification_marks_obtained %}{{ user_profile.professional_qualification_marks_obtained }}{% endif %}" name="professional_qualification_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if user_profile.professional_qualification_passing_year %}{{ user_profile.professional_qualification_passing_year }}{% endif %}" name="professional_qualification_passing_year"></td>
-                                        
                                     </tr>
                                     <tr>
                                         <th>others</th>
@@ -639,7 +613,6 @@
                                         <td><input readonly type="text" value="{% if user_profile.others_qualification_name_location %}{{ user_profile.others_qualification_name_location }}{% endif %}" name="others_qualification_name_location"></td>
                                         <td><input readonly type="text" value="{% if user_profile.others_qualification_marks_obtained %}{{ user_profile.others_qualification_marks_obtained }}{% endif %}" name="others_qualification_marks_obtained"></td>
                                         <td><input readonly type="text" value="{% if user_profile.others_qualification_passing_year %}{{ user_profile.others_qualification_passing_year }}{% endif %}" name="others_qualification_passing_year"></td>
-
                                     </tr>
                                 </table>
                             </div>
@@ -655,8 +628,7 @@
                                             Location</th>
                                         <th>Skill Areas/Course Content</th>
                                         <th>Start Date</th>
-                                        <th>Course
-                                            Duration</th>
+                                        <th>Course Duration</th>
                                     </tr>
                                     <tr>
                                         <td><input readonly type="text" value="{% if user_profile.training_workshop_title %}{{ user_profile.training_workshop_title }}{% endif %}" name="training_workshop_title"></td>
@@ -751,7 +723,6 @@
                                         <td><input readonly type="date" value="{% if user_profile.Children_dob_2 %}{{ user_profile.Children_dob_2 }}{% endif %}" name="Children_dob_2"></td>
                                         <td><input readonly type="text" value="{% if user_profile.Children_2_profession %}{{ user_profile.Children_2_profession }}{% endif %}" name="Children_2_profession"></td>
                                     </tr>
-
                                 </table>
                             </div>
                             <div class="row" style="width: 95%;">
@@ -765,15 +736,13 @@
                                     <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}" name="willing_to_relocate">  -->
                                     <select readonly name="willing_to_relocate" id="" style="margin-left: 18%; margin-top: 15px;">
                                         <option value="" selected>{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}</option>
-
                                     </select>
                                 </div>
                                 <div class="panel-row clearfix" style="width: 46%">
                                     <span class="panel-col panel-col1" style="width: 90%;">Have you been interviewed by Sonata before?</span>
                                     <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}" name="interviewed_by_Sonata_before">  -->
                                     <select readonly name="interviewed_by_Sonata_before" id=""  style="margin-left: 18%; margin-top: 15px;">
-                                        <option value="" selected>{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}</option>
-                                    
+                                        <option value="" selected>{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}</option>                                    
                                     </select>
                                 </div>
                             </div>
@@ -781,8 +750,7 @@
                                 <span class="panel-col panel-col1">Locational Preference:</span>
                                 <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.locational_preferences %}{{ user_profile.locational_preferences }}{% endif %}" name="locational_preferences">  -->
                                 <textarea readonly name="locational_preferences" id="" cols="10" rows="5">{% if user_profile.locational_preferences %}{{ user_profile.locational_preferences }}{% endif %}</textarea>
-                            </div>
-                    
+                            </div>                   
                         </div>
                     </div>
                 <!-- </form> -->
@@ -790,7 +758,6 @@
             </ul>
         </div>
     </div>
-
 
     <div class="basic-details" >
         <ul class="item_list">
@@ -800,20 +767,17 @@
                     <span class="count_Icon theme-color">
                       3
                     </span>
-
                     <!----><!---->
                     <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Documents </span>
                     <!---->
                 </div>
-
                 <div style="width:100%;height:120px;display:flex;">
                     <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
 
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#resumeBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                             <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                             <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Resume</figcaption>
-                        </button>
-                          
+                        </button>                         
                           <!-- Modal -->
                         <div class="modal fade" id="resumeBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable">
@@ -843,7 +807,6 @@
                         </div>
                     </div>
                     <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                             <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                             <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Aadhar</figcaption>
@@ -892,8 +855,7 @@
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#panBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                             <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                             <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">PAN</figcaption>
-                        </button>
-                          
+                        </button>                          
                           <!-- Modal -->
                         <div class="modal fade" id="panBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable">
@@ -920,8 +882,7 @@
                                         <div style="width: 100%; height: 100%; overflow: auto;">
                                             <embed src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
                                         </div>
-                                    {% endif %}
-                                
+                                        {% endif %}                                
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -930,8 +891,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-                        
+                    <div class="doc" style="width: 100px;height: 100px;margin: 20px;">                        
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#dlBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                             <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                             <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">DL</figcaption>
@@ -963,9 +923,7 @@
                                         <div style="width: 100%; height: 100%; overflow: auto;">
                                             <embed src="{{dl_doc.url}}" width="100%" alt="driving License"  width="100%" height="100%">
                                         </div>
-                                        {% endif %}
-                                       
-                                
+                                        {% endif %}                                                                       
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -975,15 +933,12 @@
                         </div>
                     </div>
                 </div>
-                <div style="width:100%;height:120px;display:flex;">
-                    
-                    <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-                       
+                <div style="width:100%;height:120px;display:flex;">                    
+                    <div class="doc" style="width: 100px;height: 100px;margin: 20px;">                       
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#highschoolBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                             <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                             <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">High School</figcaption>
-                        </button>
-                          
+                        </button>                         
                           <!-- Modal -->
                         <div class="modal fade" id="highschoolBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable">
@@ -1021,12 +976,10 @@
                         </div>
                     </div>
                     <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#intermediateBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                             <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                             <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Intermediate</figcaption>
-                        </button>
-                          
+                        </button>                          
                           <!-- Modal -->
                         <div class="modal fade" id="intermediateBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable">
@@ -1052,8 +1005,7 @@
                                         <div style="width: 100%; height: 100%; overflow: auto;">
                                             <embed src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
                                         </div>
-                                        {% endif %}
-                                
+                                        {% endif %}                                
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -1063,10 +1015,8 @@
                         </div>
                     </div>
                 </div>
-                <div style="width:100%;height:120px;display:flex;">
-                    
+                <div style="width:100%;height:120px;display:flex;">                    
                     <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#graduationBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                             <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                             <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Graduation</figcaption>
@@ -1098,8 +1048,7 @@
                                         <div style="width: 100%; height: 100%; overflow: auto;">
                                             <embed src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
                                         </div>
-                                    {% endif%}
-                                
+                                        {% endif%}                                
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -1111,42 +1060,38 @@
                 </div>
             </li>
         </ul>
-    </div>
-                
+    </div>                
 </div>
 
-</div>
-</div>
-</div>
 
 <script>
-function myFunction() {
-var x = document.getElementById("panel");
-if (x.style.display === "block") {
-x.style.display = "none";
-} else {
-x.style.display = "block";
-}
-}
+    function myFunction() {
+    var x = document.getElementById("panel");
+    if (x.style.display === "block") {
+    x.style.display = "none";
+    } else {
+    x.style.display = "block";
+    }
+    }
 </script> 
 <script>
-function myFunction1() {
-var x = document.getElementById("personal-details");
-if (x.style.display === "none") {
-x.style.display = "block";
-} else {
-x.style.display = "none";
-}
-}
+    function myFunction1() {
+    var x = document.getElementById("personal-details");
+    if (x.style.display === "none") {
+    x.style.display = "block";
+    } else {
+    x.style.display = "none";
+    }
+    }
 </script>
 <script>
-function myFunction2() {
-var x = document.getElementById("panel1");
-if (x.style.display === "none") {
-x.style.display = "block";
-} else {
-x.style.display = "none";
-}
+    function myFunction2() {
+    var x = document.getElementById("panel1");
+    if (x.style.display === "none") {
+    x.style.display = "block";
+    } else {
+    x.style.display = "none";
+    }
 }
 </script>
 <script>
@@ -1180,9 +1125,5 @@ x.style.display = "none";
 }
 }
 </script>
-
-
-
-
 
 {% endblock main_content%}

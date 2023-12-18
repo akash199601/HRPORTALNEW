@@ -9,8 +9,7 @@
 
   .card-cp {
     width: 29%;
-    float: left;
-  
+    float: left;  
   }
   
   .cursor {
@@ -60,13 +59,11 @@
     text-transform: inherit;
   }
   
-  
   @media (min-width:720px){
     .mt-5{
       display:flex;
     }
   }
-  
   
   @media (max-width: 640px){
     .mt-5{
@@ -89,7 +86,6 @@
   .title20 {
     font-size: 15px;
   }
-  
   }
   
 .wow{
@@ -186,13 +182,9 @@
         <div class="container">
           <div class="row g-4">
             <div class='d-flex justify-content-between align-item-center'>
-
               <div style="color:#FFFFFF">
-
               <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;">Positions applied to</h1>
-
               </div>
-
             </div>
             <hr>
             <section class="vacancy">
@@ -204,7 +196,6 @@
         <div class="d-flex flex-wrap" style="gap:1.5rem 10rem;">
           {% if vacancies %}
           {% for vacancy in vacancies %}
-
           <div class=" wow fadeInUp card p-4 " style="background-color: #fff;box-shadow: 0px 3px 4px 2px rgba(0,0,0,0.3);border-radius: 6px;" data-wow-delay="0.1s" id="received">
             <div class="card-item card-button" style="min-height:260px;margin-bottom:px;">
                 <a class="cat-item rounded " href="{% url 'applied_vacancy_card_details' vacancy.id %}"> 
@@ -215,17 +206,11 @@
                     <li> Branch Name :- <span style="font-weight: 600;font-size: 13px"> {{ vacancy.branch_name }}  </span><li>
                     <li>Posted On:- <span style="font-weight: 600;font-size: 13px"> {{ vacancy.posted_on }} </span></li>
                   </ul> {% endcomment %}
-
                   <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 600;margin-top: 0.5rem">Branch Name:  <span style="font-weight: 800;font-size: 13px;"> {{ vacancy.branch_name }} </span> </p>
-
-                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Posted On:  <span style="color: #6da4d8;font-weight: 800;font-size: 13px;"> {{ vacancy.vacancy_date }} </span> </p>
-  
-                  {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">No. of Vacancies: <span style="font-weight: 800;font-size: 13px;"> {{ vacancy.no_of_vacancies }} </span> </p> {% endcomment %}
-                
-                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Qualification: <span style="font-weight: 800;font-size: 13px;">{{  vacancy.qualification_type }}</span> <br>
-                 
-                  {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Salary:<span style="font-weight: 800;font-size: 13px;"> &#x20b9; {{ vacancy.salary }} </span> </p> {% endcomment %}
-  
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Posted On:  <span style="color: #6da4d8;font-weight: 800;font-size: 13px;"> {{ vacancy.vacancy_date }} </span> </p>  
+                  {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">No. of Vacancies: <span style="font-weight: 800;font-size: 13px;"> {{ vacancy.no_of_vacancies }} </span> </p> {% endcomment %}                
+                  <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Qualification: <span style="font-weight: 800;font-size: 13px;">{{  vacancy.qualification_type }}</span> <br>                 
+                  {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Salary:<span style="font-weight: 800;font-size: 13px;"> &#x20b9; {{ vacancy.salary }} </span> </p> {% endcomment %}  
                   <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Experience:<span style="font-weight: 800;font-size: 13px;"> {{ vacancy.required_experience }} Years</span> </p>
                   
                   <div class="required-experience-row">

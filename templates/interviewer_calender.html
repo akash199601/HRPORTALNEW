@@ -56,8 +56,7 @@
     border-radius: 0.5rem;
     }
     
-    .event-count {
-     
+    .event-count {    
       color: #333;
       padding: 2px 5px;
       font-size: 12px;
@@ -65,8 +64,7 @@
     }
     
     .current-date {
-      background-color: #007bff;
-   
+      background-color: #007bff;   
     }
     
     .btn-container {
@@ -100,7 +98,6 @@
       color: #38393a;
   }
   </style>
-  
 
   <div class="container calendar-container">
     <div class="loader"></div>
@@ -110,7 +107,6 @@
       <button class="btn btn-primary" id="nextBtn">Next Week</button>
     </div>
     <div class="row">
-      
       <div class="col">
         <div class="row">
           <div class="col date-cell">
@@ -119,7 +115,6 @@
             <div class='time-slot'><span class='time-slot-text'>12-2</span></div>
             <div class='time-slot'><span class='time-slot-text'>2-4</span></div>
             <div class='time-slot'><span class='time-slot-text'>4-6</span></div>
-            
           </div>
           <div class="col date-cell"></div>
           <div class="col date-cell"></div>
@@ -129,14 +124,12 @@
           <div class="col date-cell"></div>
           <div class="col date-cell"></div>
         </div>
-       
       </div>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
-
   <script>
     $(document).ready(function() {
       var timeSlots = ['10-12', '12-2', '2-4', '4-6'];
@@ -151,7 +144,7 @@
     $('.loader').removeClass('show');
   }
 
-      function updateCalendar(data) {
+  function updateCalendar(data) {
         var countMatrix = data;
         var dateCells = $('.date-cell');
         dateCells= dateCells.slice(1);
@@ -167,9 +160,7 @@
             let currentdate = new Date();
             currentdate = currentdate.toISOString().split('T')[0];
             console.log(date, 'date')
-            console.log(currentdate, 'currentdate')
-
-           
+            console.log(currentdate, 'currentdate')           
             
           var dateCell = dateCells.eq(i);
           // remove current-date class from all date cells
@@ -195,7 +186,6 @@
           if (i===6){
               $('#currentWeekBtn').attr('data-date', date);
           }
-
         }
       }
 
@@ -239,7 +229,6 @@
     fetchCalendarData(interviewer_id, currentWeekDate);
 
   // Update the data-date attribute of the current week button
-
       
       // Function to get the date of the current week (Monday)
       function getCurrentWeekDate() {

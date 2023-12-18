@@ -81,8 +81,7 @@
     <div id="question_div">
         
         {% for question in question %}
-        <table>
-     
+        <table>     
             <tr>
                 <td class="text-primary"> {{question.question_id}} ). {{question.question_text}} ?</td>
             </tr>
@@ -102,18 +101,15 @@
             <!-- <tr>
                 <td><label  id="corans" class= "rb" style="display:none ; color : green"><b>{{question.answer}}</b></label></td>
             </tr> -->
-
         </table>
-<hr>
-
-        
+            <hr>
         {% endfor %}
-         <div style="display:flex;flex-align:center;">
-        <input type="submit" class="btn btn-success" value="Submit" id="b1" name="submit" style="margin-left:auto;margin-right:auto;" onclick="getanswers_1({{question_id_list}})">
+        <div style="display:flex;flex-align:center;">
+            <input type="submit" class="btn btn-success" value="Submit" id="b1" name="submit" style="margin-left:auto;margin-right:auto;" onclick="getanswers_1({{question_id_list}})">
         </div>
         <br>
         <b id="UserAnswers"></b>
-        </div>
+    </div>
 </div>
 
 <script>
@@ -128,10 +124,6 @@ q.addEventListener("click",(e)=>{
     console.log(d1)
 
     // console.log(d1)
-
-
-    
-
 });
 </script>
 <!-- <script>
@@ -186,7 +178,6 @@ q.addEventListener("click",(e)=>{
     $("#b1").click(function(){
         $(".rb").show();
         $(".rb").attr("disabled",true);
-
     });
     });
 
@@ -267,9 +258,6 @@ function getanswers_1(question_id_list){
             // }
         }
     })
-    
-
-    
 
     // document.getElementById("UserAnswers").innerHTML = "";
     // var e = document.getElementsByTagName("input");

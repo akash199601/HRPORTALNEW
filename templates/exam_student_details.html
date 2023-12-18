@@ -19,15 +19,12 @@
     .row input,.row select{
         width: 95%;
         margin-left: 1%;
-        
-        
     }
     input,select{
         border: 1px solid rgb(187, 187, 246);
         border-radius: 5px;
         padding: 4px;
         background-color: #e3e3ec;
-        
     }
     input:hover,select:hover{
         border: 2px solid rgb(137, 137, 190);
@@ -62,7 +59,6 @@
     .update_profile{
         margin-left: 33%;
         /* float: right; */
-        
     }
     /* .update_profile button{ */
     /* } */
@@ -100,7 +96,6 @@
                 <div class="content">
                     <app-notification>
                         <div class="position-rel container935">
-                            
                             <!---->
                         </div>
                     </app-notification>
@@ -112,16 +107,9 @@
                                     <div class="heading_div">
                                         <p class="" style="font-size: 30px;font-family: 'Inter';margin-top: 40px; text-align: center;">Student Details </p>
                                     </div>
-                                    
-                                    
                                 </div>
                                 <!-- <h1 class="main-title">My Profile </h1> -->
-                                
-                                
                                 <div class="padding-t10 margin-topnone">
-                                    
-
-
                                     <div style="margin-left: 26%;width: 50%; margin-top: 40px;" >
                                     <!-- style="width:48%;float:left;margin-top:2%"> -->
                                         <ul class="item_list">
@@ -129,14 +117,11 @@
                                             <li class="item_list_block step_open">
                                                 <div class="info_title theme-color">
                                                     <!-- <span class="count_Icon theme-color">
-                                                        
                                                     </span> -->
-                                                    
                                                     <!----><!---->
                                                     <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Details </span>
                                                     <!---->
                                                 </div>
-                                                    
                                             <!-- {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
                                             {% comment %} {% for profile in user_profile%} {% endcomment %}
                                             <form method="POST" action="" enctype="multipart/form-data">
@@ -157,20 +142,17 @@
                                                         <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" readonly> 
                                                     </div>
                                                         <!-- </div> -->
-                                
                                                     <!-- <div class="panel-row clearfix"> -->
                                                     <div class="row">
                                                         <span class="panel-col panel-col1">Primary Email</span>
                                                         <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
                                                     </div>
-                                                        
                                                     <!-- </div> -->
                                                     <!-- <div class="panel-row clearfix"> -->
                                                     <div class="row">
                                                         <span class="panel-col panel-col1">Mobile</span>
                                                         <input readonly type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
                                                     </div>
-                                                        
                                                     <!-- </div> -->
                                                     <!---->
                                                     <div class="row">
@@ -181,7 +163,6 @@
                                                         <span class="panel-col panel-col1">Address</span>
                                                         <input type="text" class="panel-col text-bold-cell" name="address" value="{% if user_profile.address %}{{ user_profile.address }}{% endif %}" required> 
                                                     </div> -->
-                    
                                                     <div class="row">
                                                         <span class="panel-col panel-col1">Gender </span>
                                                         <!-- <select readonly id="gender" name="gender" class="panel-col text-bold-cell" required> -->
@@ -190,9 +171,6 @@
                                                             <!-- <option class="panel-col text-bold-cell" value="{{ choice.0 }}" {% if choice.0 == user_profile.gender %}selected{% endif %}>{{ choice.1 }}</option> -->
                                                             <!-- {% endfor %} -->
                                                             <input readonly type="text" class="panel-col text-bold-cell" required name="dob" value="{{ user_profile.gender }}"> 
-
-                                                            
-
                                                         <!-- </select> -->
                                                     </div>
                                                     <!-- <div class="column-footer row2 text-right">
@@ -201,15 +179,9 @@
                                                         </button>
                                                     </div>  -->
                                                 </div>
-                                                
                                             <!-- </form> -->
-                                            
                                             </li>
-                                                    <!---->
-                                                    <!---->
-                                            
                                         </ul>
-                                        
                                     </div>
                                     <!-- <div style="width:48%;float:right">
                                         <div>
@@ -518,15 +490,9 @@
                                                         
                                                         <textarea readonly name="locational_preferences" id="" cols="10" rows="5">{% if user_profile.locational_preferences %}{{ user_profile.locational_preferences }}{% endif %}</textarea>
                                                     </div> -->
-                                                    
-                                                    
                                                 <!-- </div> -->
-                                                
                                             <!-- </form> -->
-                                            
                                             <!-- </li> -->
-                                                    
-                                            
                                         <!-- </ul> -->
                                         
                                     </div>
@@ -546,20 +512,14 @@
                                                 <!-- <button id="id" style="width: 100%;" class="btn btn-success" onclick="aadhar_varification()">
                                                     Next >> 
                                                 </button> -->
-                                                
                                                 <a data-toggle="modal" href='#susbc-form'>
                                                     <button style="border: none;float:right; width: 120px;" class="btn btn-success" id="next_button">
                                                     NEXT >> 
                                                     </button>
                                                 </a>
-
-                                                
-
                                             <!-- </form> -->
                                         </div>
                                     </div>
-                                    
-
                                     <!-- <div class="column-footer row2 text-center" style="margin-top: 55px;">
                                         <form method="POST">
                                             {% csrf_token %}
@@ -569,25 +529,16 @@
                                             </button>
                                             
                                         </form>
-
-                                            
-                                        
                                     </div> -->
-                                    
-
                                 </div>
-                                
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 
 <div class="verification_form" id="verification_form">
     <!-- interview assignment form  -->
@@ -605,14 +556,12 @@
                     <div class="row">
                         <div>
                             <div id="subs-form">
-                                
                                 <h3> A. OTP Verification<hr size="5px" color="red"> </h3>
                                 <div class="form-group row">
                                     <div>
                                         <label for="" class="lab">Please Enter the OTP to start the test</label>
                                         <input type="text" name="aadhar_no" id="aadhar_no" placeholder="Enter.....">
                                     </div> <br>
-
                                     <div>
                                         <button class="btn btn-success" style="margin-top: 10%; margin-left: 21%;" onclick="aadhar_varification()">
                                             Verify 
@@ -649,11 +598,7 @@
         $("#back_button").attr("disabled",true);
         $("#next_button").attr("disabled",true);
 
-
-
-
         formdata = new FormData();
-        
         formdata.append('step1', 'step1');
         formdata.append('aadharno', a);
         // var url = ;
@@ -681,10 +626,6 @@
            
         }
     })
-
-
-
-
     }
 </script>
 <script>

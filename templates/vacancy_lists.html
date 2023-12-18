@@ -46,7 +46,6 @@
             width:100%;    
           }
         }
-
         
         @media (max-width: 1279px){
           .mobile-nav-show {
@@ -122,27 +121,22 @@
         <div class="parent-container">
           <div class="row g-4">
             <div class='justify-content-between align-item-center'>
-
               <div style="color:#FFFFFF">
-
-              <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;text-align:center;">Vacancies</h1>
-
+                <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;text-align:center;">Vacancies</h1>
               </div>
               <hr>
               
               <div style="float:right;">
-                    <a  href="{% url 'postjob' %}"> 
-                      <button class="btn p-4  btn-primary btn-lg d-flex gap-3 justify-content-center" type="button">Add a Vacancy <i class="bi bi-plus-square-fill"></i>                      
-                      </button>
-                    </a>
+                <a  href="{% url 'postjob' %}"> 
+                  <button class="btn p-4  btn-primary btn-lg d-flex gap-3 justify-content-center" type="button">Add a Vacancy <i class="bi bi-plus-square-fill"></i>                      
+                  </button>
+                </a>
               </div>
-
-            </div>
-            
+            </div>            
 
             <div style="color:#FFFFFF">
               <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;text-align: center;">WalkIn Positions</h1>
-              </div>
+            </div>
             <div class="section-card clearfix ng-star-inserted" id="filtered-results" style="margin-bottom: 30px">
               {% for vac in vacancy1 %}             
               <div class="card-block card-3 card-height269" style="height: 297px; width:310px;margin-bottom:30px;" data-wow-delay="0.1s" id="received">
@@ -197,124 +191,121 @@
             </div>
 
 {% comment %} Open position {% endcomment %}
-<div style="color:#FFFFFF">
-  <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;text-align: center;">Open Positions</h1>
-  </div>
-<div class="section-card clearfix ng-star-inserted" id="filtered-results" style="margin-bottom: 30px">
-  {% for vac in vacancy %}
-  <div class="card-block card-3 card-height269" style="height: 297px; width:310px;margin-bottom:30px;" data-wow-delay="0.1s" id="received">
-    <div class="card-block-inner" style="height:100%;padding:1rem;">
-        <a class="cat-item rounded " href="{% url 'vacancy_card_details' vac.id %}"> 
-          <div class="card-row card-top-job">
-          <h2 class="title title_block text_inherit" style="color:#494949;font-weight: 600; margin-bottom: -0.5rem;font-size:21px;
-          margin-top: -0.5rem;">{{vac.job_role}}<span>..</span></h2>
-          </div>
-          <div class="card-row">
-            <ul class="list-reset clearfix listing-inline"> {# style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;"> #}             
-              <li> Branch Name  <span style="font-weight: 600;"> {{ vac.branch_name }}  </span><li>
-              <li class="last-child position-rel">Posted On <span class="link2" >{{ vac.vacancy_date }} </span></li>             
-            </ul>
-          </div>
-          <div class="card-row">
-          <p class="mb-0" style="color:#000000ba;">No. of Vacancies  <span style="font-weight: 800;"> {{ vac.no_of_vacancies }} </span> </p>
-          </div>
-          <div class="card-row">
-          <p class="mb-0" style="color:#000000ba;">Qualification 
-          {% if vac.qualification_type %}
-          <span style="color: #6da4d8;">{{  vac.qualification_type }}</span> <br>
-          {% else %}
-          <span style="color: #6da4d8;">None</span><br>
-          {% endif %}
-          </p>
-          </div>
-          {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;">Salary:-<span style="font-weight: 800;"> {{ vac.salary }} </span> </p> {% endcomment %}
-          <div class="card-row">
-          <span class="text-cell">Required Experience <span style="font-weight: 700;"> {{ vac.required_experience }}</span> </span>
-          </div>
-          <div class="required-experience-row">
-            <span class="required-cell">Required Skills</span> 
-            <div class="skill-row">
-              <div class="scroll-main scroll-h92 scrollCustome">
-                {% if vac.required_skills %}
-                {% for skill in vac.required_skills %}
-                <span class="tag-job">{{skill}}</span>
-               {% endfor %}
-               {% else %}
-               <span class="tag-job">-</span>
-               {% endif %}
-              </div>
+            <div style="color:#FFFFFF">
+            <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;text-align: center;">Open Positions</h1>
             </div>
-          </div> 
-          {% comment %} <input type="hidden" value="{{vac.interview_date}}" id="interview_date">
-          <p id="interview_status" style="margin-top: 15px;float:right;"></p> {% endcomment %} 
-        </a>      
-    </div>
-  </div>
-  {% endfor %} 
-</div>
-
-<div style="color:#FFFFFF">
-  <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;text-align: center;">Closed Positions</h1>
-  </div>
-<div class="section-card clearfix ng-star-inserted" id="filtered-results" style="margin-bottom: 30px">
-  {% for vac in vacancy2 %} 
-  <div class="card-block card-3 card-height269" style="height: 297px; width:310px;margin-bottom:30px;" data-wow-delay="0.1s" id="received">
-    <div class="card-block-inner" style="height:100%;padding:1rem;">
-        <a class="cat-item rounded " href="{% url 'vacancy_card_details' vac.id %}"> 
-          <div class="card-row card-top-job">
-          <h2 class="title title_block text_inherit" style="color:#494949;font-weight: 600; margin-bottom: -0.5rem;font-size:21px;
-          margin-top: -0.5rem;">{{vac.job_role}}<span>..</span></h2>
-          </div>
-          <div class="card-row">
-            <ul class="list-reset clearfix listing-inline"> {# style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;"> #}               
-              <li> Branch Name  <span style="font-weight: 600;"> {{ vac.branch_name }}  </span><li>
-              <li class="last-child position-rel">Posted On <span class="link2" >{{ vac.vacancy_date }} </span></li>             
-            </ul>
-          </div>
-          <div class="card-row">
-          <p class="mb-0" style="color:#000000ba;">No. of Vacancies  <span style="font-weight: 800;"> {{ vac.no_of_vacancies }} </span> </p>
-          </div>
-          <div class="card-row">
-          <p class="mb-0" style="color:#000000ba;">Qualification 
-          {% if vac.qualification_type %}
-          <span style="color: #6da4d8;">{{  vac.qualification_type }}</span> <br>
-          {% else %}
-          <span style="color: #6da4d8;">None</span><br>
-          {% endif %}
-          </p>
-          </div>
-          {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;">Salary:-<span style="font-weight: 800;"> {{ vac.salary }} </span> </p> {% endcomment %}
-          <div class="card-row">
-          <span class="text-cell">Required Experience <span style="font-weight: 700;"> {{ vac.required_experience }}</span> </span>
-          </div>
-          <div class="required-experience-row">
-            <span class="required-cell">Required Skills</span> 
-            <div class="skill-row">
-              <div class="scroll-main scroll-h92 scrollCustome">
-                {% if vac.required_skills %}
-                {% for skill in vac.required_skills %}
-                <span class="tag-job">{{skill}}</span>
-               {% endfor %}
-               {% else %}
-               <span class="tag-job">-</span>
-               {% endif %}
+            <div class="section-card clearfix ng-star-inserted" id="filtered-results" style="margin-bottom: 30px">
+              {% for vac in vacancy %}
+              <div class="card-block card-3 card-height269" style="height: 297px; width:310px;margin-bottom:30px;" data-wow-delay="0.1s" id="received">
+                <div class="card-block-inner" style="height:100%;padding:1rem;">
+                    <a class="cat-item rounded " href="{% url 'vacancy_card_details' vac.id %}"> 
+                      <div class="card-row card-top-job">
+                      <h2 class="title title_block text_inherit" style="color:#494949;font-weight: 600; margin-bottom: -0.5rem;font-size:21px;
+                      margin-top: -0.5rem;">{{vac.job_role}}<span>..</span></h2>
+                      </div>
+                      <div class="card-row">
+                        <ul class="list-reset clearfix listing-inline"> {# style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;"> #}             
+                          <li> Branch Name  <span style="font-weight: 600;"> {{ vac.branch_name }}  </span><li>
+                          <li class="last-child position-rel">Posted On <span class="link2" >{{ vac.vacancy_date }} </span></li>             
+                        </ul>
+                      </div>
+                      <div class="card-row">
+                      <p class="mb-0" style="color:#000000ba;">No. of Vacancies  <span style="font-weight: 800;"> {{ vac.no_of_vacancies }} </span> </p>
+                      </div>
+                      <div class="card-row">
+                      <p class="mb-0" style="color:#000000ba;">Qualification 
+                      {% if vac.qualification_type %}
+                      <span style="color: #6da4d8;">{{  vac.qualification_type }}</span> <br>
+                      {% else %}
+                      <span style="color: #6da4d8;">None</span><br>
+                      {% endif %}
+                      </p>
+                      </div>
+                      {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;">Salary:-<span style="font-weight: 800;"> {{ vac.salary }} </span> </p> {% endcomment %}
+                      <div class="card-row">
+                      <span class="text-cell">Required Experience <span style="font-weight: 700;"> {{ vac.required_experience }}</span> </span>
+                      </div>
+                      <div class="required-experience-row">
+                        <span class="required-cell">Required Skills</span> 
+                        <div class="skill-row">
+                          <div class="scroll-main scroll-h92 scrollCustome">
+                            {% if vac.required_skills %}
+                            {% for skill in vac.required_skills %}
+                            <span class="tag-job">{{skill}}</span>
+                          {% endfor %}
+                          {% else %}
+                          <span class="tag-job">-</span>
+                          {% endif %}
+                          </div>
+                        </div>
+                      </div> 
+                      {% comment %} <input type="hidden" value="{{vac.interview_date}}" id="interview_date">
+                      <p id="interview_status" style="margin-top: 15px;float:right;"></p> {% endcomment %} 
+                    </a>      
+                </div>
               </div>
+              {% endfor %} 
             </div>
-          </div> 
-          {% comment %} <input type="hidden" value="{{vac.interview_date}}" id="interview_date">
-          <p id="interview_status" style="margin-top: 15px;float:right;"></p> {% endcomment %} 
-        </a>      
-    </div>
-  </div> 
-  {% endfor %} 
-</div>
 
-
+            <div style="color:#FFFFFF">
+              <h1 id ="myDIV" style="color: #000000ba;font-weight: 600;text-align: center;">Closed Positions</h1>
+            </div>
+            <div class="section-card clearfix ng-star-inserted" id="filtered-results" style="margin-bottom: 30px">
+              {% for vac in vacancy2 %} 
+              <div class="card-block card-3 card-height269" style="height: 297px; width:310px;margin-bottom:30px;" data-wow-delay="0.1s" id="received">
+                <div class="card-block-inner" style="height:100%;padding:1rem;">
+                    <a class="cat-item rounded " href="{% url 'vacancy_card_details' vac.id %}"> 
+                      <div class="card-row card-top-job">
+                      <h2 class="title title_block text_inherit" style="color:#494949;font-weight: 600; margin-bottom: -0.5rem;font-size:21px;
+                      margin-top: -0.5rem;">{{vac.job_role}}<span>..</span></h2>
+                      </div>
+                      <div class="card-row">
+                        <ul class="list-reset clearfix listing-inline"> {# style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;"> #}               
+                          <li> Branch Name  <span style="font-weight: 600;"> {{ vac.branch_name }}  </span><li>
+                          <li class="last-child position-rel">Posted On <span class="link2" >{{ vac.vacancy_date }} </span></li>             
+                        </ul>
+                      </div>
+                      <div class="card-row">
+                      <p class="mb-0" style="color:#000000ba;">No. of Vacancies  <span style="font-weight: 800;"> {{ vac.no_of_vacancies }} </span> </p>
+                      </div>
+                      <div class="card-row">
+                      <p class="mb-0" style="color:#000000ba;">Qualification 
+                      {% if vac.qualification_type %}
+                      <span style="color: #6da4d8;">{{  vac.qualification_type }}</span> <br>
+                      {% else %}
+                      <span style="color: #6da4d8;">None</span><br>
+                      {% endif %}
+                      </p>
+                      </div>
+                      {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;">Salary:-<span style="font-weight: 800;"> {{ vac.salary }} </span> </p> {% endcomment %}
+                      <div class="card-row">
+                      <span class="text-cell">Required Experience <span style="font-weight: 700;"> {{ vac.required_experience }}</span> </span>
+                      </div>
+                      <div class="required-experience-row">
+                        <span class="required-cell">Required Skills</span> 
+                        <div class="skill-row">
+                          <div class="scroll-main scroll-h92 scrollCustome">
+                            {% if vac.required_skills %}
+                            {% for skill in vac.required_skills %}
+                            <span class="tag-job">{{skill}}</span>
+                           {% endfor %}
+                           {% else %}
+                           <span class="tag-job">-</span>
+                           {% endif %}
+                          </div>
+                        </div>
+                      </div> 
+                      {% comment %} <input type="hidden" value="{{vac.interview_date}}" id="interview_date">
+                      <p id="interview_status" style="margin-top: 15px;float:right;"></p> {% endcomment %} 
+                    </a>      
+                </div>
+              </div> 
+              {% endfor %} 
+            </div>
           </div>
         </div>
-    {% comment %} </div>    {% endcomment %}
-   
-</div>
+    {% comment %} </div>    {% endcomment %}   
+  </div>
 
 <script>
 function fetchBranchOptions(selectedPosition) {

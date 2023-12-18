@@ -60,7 +60,6 @@
       }
     </style>
 
-
 <div class="data">
       <div class="container-xxl py-3" >
         <div class="container">
@@ -72,18 +71,16 @@
               {% if rows %}
               {% for x in rows %}
               <div class=" wow fadeInUp card p-4 " style="background-color: #fff;box-shadow: 0px 3px 4px 2px rgba(0,0,0,0.3);border-radius: 6px;" data-wow-delay="0.1s" id="received">
-                <div class="card-item card-button" style="min-height:200px;margin-bottom:8px;">
-                  
+                <div class="card-item card-button" style="min-height:200px;margin-bottom:8px;">                  
                   <a class="cat-item rounded" href="{% url 'assessed_candidates_details' x.vacancy_id %}" style="text-decoration:none;"> 
-                        <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;"> <span style="font-weight: 600;font-size: 18px; color:dimgray;"> {{ x.role }} </span> </p>
-                        <br>
-                        <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Branch Name :- <span style="font-weight: 800;font-size: 13px;"> {{ x.branch }} </span> </p>
-                        <br>
-                        <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">No. of Vacancies :- <span style="font-weight: 800;font-size: 13px;"> {{ x.capacity }} </span> </p>
-                        <br>
+                    <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;"> <span style="font-weight: 600;font-size: 18px; color:dimgray;"> {{ x.role }} </span> </p>
+                    <br>
+                    <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Branch Name :- <span style="font-weight: 800;font-size: 13px;"> {{ x.branch }} </span> </p>
+                    <br>
+                    <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">No. of Vacancies :- <span style="font-weight: 800;font-size: 13px;"> {{ x.capacity }} </span> </p>
+                    <br>
                         {% comment %} <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">No Of Candidates Assessed :- <span style="font-weight: 800;font-size: 13px;"> {{ x.assessed_candidates_count }} </span> </p> {% endcomment %}
-                  </a>
-                  
+                  </a>                  
                 </div>
               </div>
               {% endfor %}

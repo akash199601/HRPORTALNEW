@@ -44,44 +44,34 @@ body{
 }
 </style>
 
-
 <div class="data" style="background-color: #f0f1f2;margin-top:100px;height:fit-content;">
     <div class="container-xxl py-3" >
         <div class="container">
           <div class="row g-4">
             <div class='d-flex justify-content-between align-item-center'>
-
               <div style="color:#FFFFFF">
-
               <h1 id="myDIV" style="color:#000000ba;font-weight: 600;">All Users</h1>
-
               </div>
-
               {% comment %} <div >
                     <a href=""> 
                       <button class="btn btn-primary btn-lg d-flex gap-3 justify-content-center" type="button">Add User <i class="bi bi-plus-square-fill"></i>                      
                       </button>
                     </a>
               </div> {% endcomment %}
-
             </div>
             <hr>
             <form id="filter-form" method="POST">
               {% csrf_token %}
-
               <label for="userFilter" class="form-label">Select a UserType:</label>
               <select name="roll_id" id="userFilter" class="form-control" >
-                
                 <option value="all">All User</option>
                 <option  value="0" {% if roll_id == '0' %} selected {% endif %} >Candidate</option>
                 <option  value="1" {% if roll_id == '1' %} selected {% endif %}>HR</option>
                 <option  value="2" {% if roll_id == '2' %} selected {% endif %} >iNTERVIEWER</option>
                 <!-- Options will be populated dynamically using JavaScript -->
               </select>
-
               {% comment %} <input type="submit" value="Search"> {% endcomment %}
               <button type="submit" id="filter-button" class="btn btn-primary">Filter</button>
-
             </form>
             {% comment %} <button id="filter-button" class="btn btn-primary" onclick="filterSelection('all')">Clear Filter</button> {% endcomment %}
 
@@ -124,16 +114,10 @@ body{
                             <p class="mb-0" style="color:#000000ba;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">Last Login :- <span style="font-weight: 800;font-size: 13px;">{{  u.last_login }}</span> </p>
                           </a>
                       </div>
-
                       <div class="buttons">
                         <a><button class="second_button" data-toggle="modal" onclick="assign_user_id({{u.id}})" data-target="#popupModal">Assign Role </button></a>
                       </div>
-
-                      
                     </div>
-          
-
-
                     {% comment %} <div class="col-md-12 col-xl-4">
                       <div class="card" style="border-radius: 15px;">
                         <div class="card-body text-center">
@@ -174,8 +158,6 @@ body{
               </div> {% endcomment %}
             
               {% comment %} {% endfor %} {% endcomment %}
-
-
               <div class="modal fade" id="popupModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -189,18 +171,16 @@ body{
                                 </button>
                             </div>
                             <div class="modal-body">
-                                
-                                    <div class="form-group">
+                                <div class="form-group">
                                     <label for="role_mode">Role</label>
-                                    <select name="role_id" id="role_mode" class="form-control" >
-                
-                                      <option value="all">All User</option>
-                                      <option  value="0" {% if roll_id == '0' %} selected {% endif %} >Candidate</option>
-                                      <option  value="1" {% if roll_id == '1' %} selected {% endif %}>HR</option>
-                                      <option  value="2" {% if roll_id == '2' %} selected {% endif %} >iNTERVIEWER</option>
+                                  <select name="role_id" id="role_mode" class="form-control" >
+                                    <option value="all">All User</option>
+                                    <option  value="0" {% if roll_id == '0' %} selected {% endif %} >Candidate</option>
+                                    <option  value="1" {% if roll_id == '1' %} selected {% endif %}>HR</option>
+                                    <option  value="2" {% if roll_id == '2' %} selected {% endif %} >iNTERVIEWER</option>
                                       <!-- Options will be populated dynamically using JavaScript -->
-                                    </select>
-                                    </div>   
+                                  </select>
+                                </div>   
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -222,7 +202,6 @@ function filterSelection(c) {
 }
 </script> 
 
-
 <script>
   function showalert(){
       console.log('Role has been assigned');
@@ -236,7 +215,6 @@ function filterSelection(c) {
     var userid_ele = document.getElementById('userid')
     userid_ele.value = userid
     console.log(userid_ele.value)
-
   }
 </script>
 

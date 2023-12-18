@@ -12,19 +12,15 @@
     }
 </style>
 {% load static %}
-
         
             <div class="container">    
-
-                <div class="container-xxl py-w">
-                  
+                <div class="container-xxl py-w">                  
                         <div class="section_half">
                             <ul class="item_list">
                                 <!---->
                                 <li class="item_list_block step_open">
                                     <div class="info_title theme-color">
-                                        {% comment %} <span class="count_Icon theme-color">
-                                            
+                                        {% comment %} <span class="count_Icon theme-color">                                            
                                         </span> {% endcomment %}
                                         Post A Vacancy
                                          <!----><!---->
@@ -178,8 +174,6 @@
                                                 {{form.job_responsibility}}
                                             </div>
                                         </div>
-                                    
-                                    
                                         <div class="row mt-3">
                                             <div class="form-group col-md-12">
                                                 <label>Job Description<span class="required-star" style="color:red;">*</span></label>
@@ -187,15 +181,12 @@
                                                 {{form.job_description}}
                                             </div>
                                         </div>
-                               
         
                                         {% if update %}
                                             <input type="submit" value="UPDATE" id="update" class="btn mt-3" style="background-color: #4f868c; color: white; font-size: larger; width: 8rem; padding-bottom: 25px;">
                                         {% else %}
                                             <input type="submit" value="CREATE" id="create" class="btn mt-3" style="background-color: #4f868c; color: white; font-size: larger; width: 8rem; padding-bottom: 25px;">
-                                        
                                         {% endif %}
-                                        
                                     </form>
                                 </li>
                             </ul>
@@ -312,8 +303,6 @@
                     }
                 });
             </script>
-
-          
 
             {% comment %} <script>
                 function showalert(){
