@@ -215,7 +215,7 @@ def dashboard(request):
         dash_dict = dash_df.to_dict(orient='records')[0]
         print(dash_dict)
         context['counts'] = dash_dict
-        return render(request, 'hr_dashboard.html',context)   
+        return render(request, 'index copy.html',context)   
     # context={
             
     #         'username' : username,
