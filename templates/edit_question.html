@@ -6,15 +6,12 @@
   .row input,.row select{
   width: 95%;
   margin-left: 1%;
-  
-  
 }
 input,select{
   border: 1px solid rgb(187, 187, 246);
   border-radius: 5px;
   padding: 4px;
   background-color: #e3e3ec;
-  
 }
 input:hover,select:hover{
   border: 2px solid rgb(137, 137, 190);
@@ -62,7 +59,6 @@ body{
 
 </style>
 <div class="container">
-
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
       <div class="container">
           <div style="width:100%;float:left">
@@ -73,7 +69,6 @@ body{
                           <span class="count_Icon theme-color">
                               1
                           </span>
-                          
                           <!----><!---->
                           <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host="">Edit Question</span>
                           <!---->
@@ -90,27 +85,19 @@ body{
                                 </div>
                             <div class="row">
                               <span class="panel-col panel-col1">Option A</span>
-                              
                               <input type="text" class="panel-col text-bold-cell" name="option_a" value="{% if edit_ques.option_a %}{{ edit_ques.option_a }}{% endif %}"  required>
-                            
                             </div>
                             <div class="row">
                               <span class="panel-col panel-col1">Option B</span>
-                             
                               <input type="text" class="panel-col text-bold-cell" name="option_b" value="{% if edit_ques.option_b %}{{ edit_ques.option_b }}{% endif %}" required>
-                             
                             </div>
                             <div class="row">
                               <span class="panel-col panel-col1">Option C</span>
-                            
                               <input type="text" class="panel-col text-bold-cell" name="option_c" value="{% if edit_ques.option_c %}{{ edit_ques.option_c }}{% endif %}" required>
-                              
                             </div>
                             <div class="row">
                               <span class="panel-col panel-col1">Option D</span>
-                             
                               <input type="text" class="panel-col text-bold-cell" name="option_d" value="{% if edit_ques.option_d %}{{ edit_ques.option_d }}{% endif %}" required>
-                            
                             </div>
                             <div class="row">
                               <span class="panel-col panel-col1">Answer</span>
@@ -121,7 +108,6 @@ body{
                                 <option value="d">D</option>
                               </select>
                             </div>
-                          
                         </div>
                         
                         <div style="align-items: center;">
@@ -130,7 +116,6 @@ body{
                         </div>
                     </form>
                   </li>
-                  
               </ul>             
           </div>          
       </div>

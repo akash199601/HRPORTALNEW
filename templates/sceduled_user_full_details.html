@@ -15,8 +15,7 @@ input,select{
     border: 1px solid rgb(187, 187, 246);
     border-radius: 5px;
     padding: 4px;
-    background-color: #e3e3ec;
-    
+    background-color: #e3e3ec;   
 }
 input:hover,select:hover{
     border: 2px solid rgb(137, 137, 190);
@@ -81,7 +80,6 @@ textarea{
       height: 515px;
     }
   }
-
 
   .dow_row{
     width:30%; 
@@ -235,7 +233,6 @@ body{
         {% include 'progress_bar.html' %}
         {% comment %} {% include 'calender.html' %} {% endcomment %}
 
-
         <div class="action-buttons" style="display: flex; justify-content: flex-end; width: 80%; margin-left: 15px;">
             <div style="display: flex;width: 300px;">
                 <div style="margin: 5%;">
@@ -253,7 +250,6 @@ body{
                     Reject
                   </button>
                 </div>
-
             </div>
         </div>
           
@@ -272,32 +268,27 @@ body{
                         <button type="button" id="accept_modal_close" class="btn btn-danger border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
                         NO
                     </div>
-
                 </div>
             </div>
             </div>
-        </div>
-          
-          
+        </div>          
           <!-- Reject Modal -->
-          <div id="rejectModal" class="modal">
-            <div class="modal-content" style="margin-top: 200px;">
-              <span class="close">&times;</span>
-              <form id="rejectForm" method="POST" action="{% url 'reject_user_initial' application.application_id %}">
-                {% csrf_token %}
-                <div>
-                  <center>
-                    <label for="rejectReason">Reason For Rejection:</label>
-                    <textarea id="rejectReason" name="reject_reason" required></textarea>
-                    <br />
-                    <button type="submit" onclick="showalert3()" >Reject</button>
-                  </center>
-                </div>
-              </form>
-            </div>
+        <div id="rejectModal" class="modal">
+          <div class="modal-content" style="margin-top: 200px;">
+            <span class="close">&times;</span>
+            <form id="rejectForm" method="POST" action="{% url 'reject_user_initial' application.application_id %}">
+              {% csrf_token %}
+              <div>
+                <center>
+                  <label for="rejectReason">Reason For Rejection:</label>
+                  <textarea id="rejectReason" name="reject_reason" required></textarea>
+                  <br />
+                  <button type="submit" onclick="showalert3()" >Reject</button>
+                </center>
+              </div>
+            </form>
           </div>
-
-
+        </div>
         <!-----END PROGRESS BAR------>
 
         <form class="row" method="post" id="schedule_form" style="display:none;" action="{% url 'scedule_interview' refId=application.application_id %}">
@@ -323,7 +314,6 @@ body{
                     <option value="12-02">12PM-02PM</option>
                     <option value="02-04">02PM-04PM</option>
                     <option value="04-06">04PM-06PM</option>
-
                   </select>
                 </div>
 
@@ -333,13 +323,11 @@ body{
                     <option>Select Panel</option>
                   </select>
                 </div>
-
                 <div class="form-group col-4 mt-4">
                   <input type="submit" onclick="showalert()" class="btn btn-success" value='submit'>
                 </div>
             </div>
         </form>
-          
 
         <!-- Job Detail Start -->
         <div class="container-content py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -383,44 +371,37 @@ body{
                             <div class="info_title theme-color">
                                 <span class="count_Icon theme-color">
                                     1
-                                </span>
-                                
+                                </span>                                
                                 <!----><!---->
                                 <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Basic Details </span>
                                 <!---->
-                            </div>
-                                
+                            </div>                               
                             <div class="panel-body ng-star-inserted">
                                     <!----><!---->
                                 {% comment %} <div class="row">
                                     <span class="panel-col panel-col1">Position Applied For</span>
                                     <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.position_applied_for %}{{ user_profile.position_applied_for }}{% endif %}" name="position_applied_for" readonly> 
-                                </div> {% endcomment %}
-                           
+                                </div> {% endcomment %}                          
                                 <div class="row">
                                     <span class="panel-col panel-col1">Name</span>
                                     <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" readonly> 
                                 </div>
-                                    <!-- </div> -->
-            
+                                    <!-- </div> -->            
                                 <!-- <div class="panel-row clearfix"> -->
                                 <div class="row">
                                     <span class="panel-col panel-col1">Primary Email</span>
                                     <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
-                                </div>
-                                    
+                                </div>                                   
                                 <!-- </div> -->
                                 <!-- <div class="panel-row clearfix"> -->
                                 <div class="row">
                                     <span class="panel-col panel-col1">Mobile Number</span>
                                     <input readonly type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
-                                </div>
-                            
+                                </div>                            
                                 <div class="row">
                                     <span class="panel-col panel-col1">Date Of Birth</span>
                                     <input readonly type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
                                 </div>
-
                                 <div class="row">
                                     <span class="panel-col panel-col1">Gender</span>
                                     <select readonly id="gender" name="gender" class="panel-col text-bold-cell" required>
@@ -463,8 +444,7 @@ body{
                                 <!----><!---->
                                 <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Personal Details </span>
                                 <!---->
-                            </div>
-                                
+                            </div>                                
                         <!-- {% comment %} {% if request.user.is_authenticated %} {% endcomment %}
                         {% comment %} {% for profile in user_profile%} {% endcomment %}
                         <form method="POST" action="" enctype="multipart/form-data">
@@ -551,18 +531,14 @@ body{
                                     <table class="education" style="width: 100%;">
                                         <tr>
                                             <th>  </th>
-                                            <th>Degree/
-                                                Diploma</th>
-                                            {% comment %} <th>Subjects</th> {% endcomment %}
-                                            <th>Name and Location of the
-                                                Institution</th>
+                                            <th>Degree/Diploma</th>
+                                            <th>Name and Location of the Institution</th>
                                             <th>% obtained</th>
                                             <th>Year of Passing</th>
                                         </tr>
                                         <tr>
                                             <th>High School</th>
                                             <td><input readonly type="text" value="{% if user_profile.high_school_Degree_Diploma %}{{ user_profile.high_school_Degree_Diploma }}{% endif %}" name="high_school_Degree_Diploma"></td>
-                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.high_school_subjects %}{{ user_profile.high_school_subjects }}{% endif %}" name="high_school_subjects"></td> {% endcomment %}
                                             <td><input readonly type="text" value="{% if user_profile.high_school_name_location %}{{ user_profile.high_school_name_location }}{% endif %}" name="high_school_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.high_school_marks_obtained %}{{ user_profile.high_school_marks_obtained }}{% endif %}" name="high_school_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if user_profile.high_school_passing_year %}{{ user_profile.high_school_passing_year }}{% endif %}" name="high_school_passing_year"></td>
@@ -570,7 +546,6 @@ body{
                                         <tr>
                                             <th>Intermediate</th>
                                             <td><input readonly type="text" value="{% if user_profile.intermediate_Degree_Diploma %}{{ user_profile.intermediate_Degree_Diploma }}{% endif %}" name="intermediate_Degree_Diploma"></td>
-                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.intermediate_subjects %}{{ user_profile.intermediate_subjects }}{% endif %}" name="intermediate_subjects"></td> {% endcomment %}
                                             <td><input readonly type="text" value="{% if user_profile.intermediate_name_location %}{{ user_profile.intermediate_name_location }}{% endif %}" name="intermediate_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.intermediate_marks_obtained %}{{ user_profile.intermediate_marks_obtained }}{% endif %}" name="intermediate_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if user_profile.intermediate_passing_year %}{{ user_profile.intermediate_passing_year }}{% endif %}" name="intermediate_passing_year"></td>                                            
@@ -578,7 +553,6 @@ body{
                                         <tr>
                                             <th>Graduation</th>
                                             <td><input readonly type="text" value="{% if user_profile.graduation_Degree_Diploma %}{{ user_profile.graduation_Degree_Diploma }}{% endif %}" name="graduation_Degree_Diploma"></td>
-                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.graduation_subjects %}{{ user_profile.graduation_subjects }}{% endif %}" name="graduation_subjects"></td> {% endcomment %}
                                             <td><input readonly type="text" value="{% if user_profile.graduation_name_location %}{{ user_profile.graduation_name_location }}{% endif %}" name="graduation_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.graduation_marks_obtained %}{{ user_profile.graduation_marks_obtained }}{% endif %}" name="graduation_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if user_profile.graduation_passing_year %}{{ user_profile.graduation_passing_year }}{% endif %}" name="graduation_passing_year"></td>
@@ -586,16 +560,13 @@ body{
                                         <tr>
                                             <th>PG</th>
                                             <td><input readonly type="text" value="{% if user_profile.pg_Degree_Diploma %}{{ user_profile.pg_Degree_Diploma }}{% endif %}" name="pg_Degree_Diploma"></td>
-                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.pg_subjects %}{{ user_profile.pg_subjects }}{% endif %}" name="pg_subjects"></td> {% endcomment %}
                                             <td><input readonly type="text" value="{% if user_profile.pg_name_location %}{{ user_profile.pg_name_location }}{% endif %}" name="pg_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.pg_marks_obtained %}{{ user_profile.pg_marks_obtained }}{% endif %}" name="pg_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if user_profile.pg_passing_year %}{{ user_profile.pg_passing_year }}{% endif %}" name="pg_passing_year"></td>
                                         </tr>
                                         <tr>
-                                            <th>Professional
-                                                Qualification</th>
+                                            <th>Professional Qualification</th>
                                                 <td><input readonly type="text" value="{% if user_profile.professional_qualification_Degree_Diploma %}{{ user_profile.professional_qualification_Degree_Diploma }}{% endif %}" name="professional_qualification_Degree_Diploma"></td>
-                                                {% comment %} <td><input readonly type="text" value="{% if user_profile.professional_qualification_subjects %}{{ user_profile.professional_qualification_subjects }}{% endif %}" name="professional_qualification_subjects"></td> {% endcomment %}
                                                 <td><input readonly type="text" value="{% if user_profile.professional_qualification_name_location %}{{ user_profile.professional_qualification_name_location }}{% endif %}" name="professional_qualification_name_location"></td>
                                                 <td><input readonly type="text" value="{% if user_profile.professional_qualification_marks_obtained %}{{ user_profile.professional_qualification_marks_obtained }}{% endif %}" name="professional_qualification_marks_obtained"></td>
                                                 <td><input readonly type="text" value="{% if user_profile.professional_qualification_passing_year %}{{ user_profile.professional_qualification_passing_year }}{% endif %}" name="professional_qualification_passing_year"></td>
@@ -603,7 +574,6 @@ body{
                                         <tr>
                                             <th>others</th>
                                             <td><input readonly type="text" value="{% if user_profile.others_qualification_Degree_Diploma %}{{ user_profile.others_qualification_Degree_Diploma }}{% endif %}" name="others_qualification_Degree_Diploma"></td>
-                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.others_qualification_subjects %}{{ user_profile.others_qualification_subjects }}{% endif %}" name="others_qualification_subjects"></td> {% endcomment %}
                                             <td><input readonly type="text" value="{% if user_profile.others_qualification_name_location %}{{ user_profile.others_qualification_name_location }}{% endif %}" name="others_qualification_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.others_qualification_marks_obtained %}{{ user_profile.others_qualification_marks_obtained }}{% endif %}" name="others_qualification_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if user_profile.others_qualification_passing_year %}{{ user_profile.others_qualification_passing_year }}{% endif %}" name="others_qualification_passing_year"></td>
@@ -617,12 +587,10 @@ body{
                                     <table class="training" style="width: 100%;">
                                         <tr>
                                             <th>Program Title</th>
-                                            <th>Institution &
-                                                Location</th>
+                                            <th>Institution & Location</th>
                                             <th>Skill Areas/Course Content</th>
                                             <th>Start Date</th>
-                                            <th>Course
-                                                Duration</th>
+                                            <th>Course Duration</th>
                                         </tr>
                                         <tr>
                                             <td><input readonly type="text" value="{% if user_profile.training_workshop_title %}{{ user_profile.training_workshop_title }}{% endif %}" name="training_workshop_title"></td>
@@ -735,8 +703,7 @@ body{
                                         <span class="panel-col panel-col1" style="width: 90%;">Have you been interviewed by Sonata before?</span>
                                         <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}" name="interviewed_by_Sonata_before">  -->
                                         <select readonly name="interviewed_by_Sonata_before" id=""  style="margin-left: 18%; margin-top: 15px;">
-                                            <option value="" selected>{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}</option>
-                                           
+                                            <option value="" selected>{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}</option>                                           
                                         </select>
                                     </div>
                                 </div>

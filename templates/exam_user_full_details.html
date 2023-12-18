@@ -5,15 +5,12 @@
     .row input,.row select{
     width: 95%;
     margin-left: 1%;
-    
-    
 }
 input,select{
     border: 1px solid rgb(187, 187, 246);
     border-radius: 5px;
     padding: 4px;
     background-color: #e3e3ec;
-    
 }
 input:hover,select:hover{
     border: 2px solid rgb(137, 137, 190);
@@ -42,9 +39,6 @@ textarea{
     border-radius: 15px;
     margin-left: 3%;
 }
-
-
-
 
   @media (min-width: 720px){
     .basic-details-card{
@@ -119,9 +113,6 @@ body{
 }
 </style>
 {% load static %}
-
-
-
         <div class="container">
         {% if messages %}
             <ul class="messages">
@@ -271,7 +262,6 @@ body{
                                 <span class="count_Icon theme-color">
                                     1
                                 </span>
-                                
                                 <!----><!---->
                                 <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Basic Details </span>
                                 <!---->
@@ -338,19 +328,12 @@ body{
                                     </button>
                                 </div>  -->
                             </div>
-                            
                         <!-- </form> -->
-                        
                         </li>
-                                <!---->
-                                <!---->
-                        
                     </ul>
-                    
                 </div>
                 <div class="resume-card">
                     <div style="height:100%;width:100%;">
-
                         <h1 class="Resume-font" style="background: #a9a9a985;">Resume</h1>
                         <div class="resume-file">
                             {% if mime_type == 'application/pdf' %}
@@ -365,7 +348,6 @@ body{
                             </div>
                             {% endif %}
                         </div>
-
                     </div>
                 </div>
                 <div>
@@ -376,7 +358,6 @@ body{
                                 <span class="count_Icon theme-color">
                                     2
                                 </span>
-                                
                                 <!----><!---->
                                 <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Personal Details </span>
                                 <!---->
@@ -414,11 +395,7 @@ body{
                                                         </div>
                                                         <div class="row" style="width: 50%">
                                                             <button type="button" download><a href="{{dl_doc.url}}">Document {{dl_doc}}</a></button>
-                                                        </div>
-                                                    </div>
-                                <!-- Extra Form -->
-                                
-                                
+                                                        </div>                                
                                 <hr style="margin-top: 50px;">
                                 <div class="address_div">
                                     <h4>Address</h4>
@@ -452,59 +429,44 @@ body{
                                             <th>Degree/
                                                 Diploma</th>
                                             {% comment %} <th>Subjects</th> {% endcomment %}
-                                            <th>Name and Location of the
-                                                Institution</th>
+                                            <th>Name and Location of the Institution</th>
                                             <th>% obtained</th>
                                             <th>Year of Passing</th>
-                                            
                                         </tr>
                                         <tr>
                                             <th>High School</th>
                                             <td><input readonly type="text" value="{% if candidate.high_school_Degree_Diploma %}{{ candidate.high_school_Degree_Diploma }}{% endif %}" name="high_school_Degree_Diploma"></td>
-                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.high_school_subjects %}{{ user_profile.high_school_subjects }}{% endif %}" name="high_school_subjects"></td> {% endcomment %}
                                             <td><input readonly type="text" value="{% if candidate.high_school_name_location %}{{ candidate.high_school_name_location }}{% endif %}" name="high_school_name_location"></td>
                                             <td><input readonly type="text" value="{% if candidate.high_school_marks_obtained %}{{ candidate.high_school_marks_obtained }}{% endif %}" name="high_school_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if candidate.high_school_passing_year %}{{ candidate.high_school_passing_year }}{% endif %}" name="high_school_passing_year"></td>
-                                            
                                         </tr>
                                         <tr>
                                             <th>Intermediate</th>
                                             <td><input readonly type="text" value="{% if candidate.intermediate_Degree_Diploma %}{{ candidate.intermediate_Degree_Diploma }}{% endif %}" name="intermediate_Degree_Diploma"></td>
-                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.intermediate_subjects %}{{ user_profile.intermediate_subjects }}{% endif %}" name="intermediate_subjects"></td> {% endcomment %}
                                             <td><input readonly type="text" value="{% if candidate.intermediate_name_location %}{{ candidate.intermediate_name_location }}{% endif %}" name="intermediate_name_location"></td>
                                             <td><input readonly type="text" value="{% if candidate.intermediate_marks_obtained %}{{ candidate.intermediate_marks_obtained }}{% endif %}" name="intermediate_marks_obtained"></td>
-                                            <td><input readonly type="text" value="{% if candidate.intermediate_passing_year %}{{ candidate.intermediate_passing_year }}{% endif %}" name="intermediate_passing_year"></td>
-
-                                            
+                                            <td><input readonly type="text" value="{% if candidate.intermediate_passing_year %}{{ candidate.intermediate_passing_year }}{% endif %}" name="intermediate_passing_year"></td>                                            
                                         </tr>
                                         <tr>
                                             <th>Graduation</th>
                                             <td><input readonly type="text" value="{% if candidate.graduation_Degree_Diploma %}{{ candidate.graduation_Degree_Diploma }}{% endif %}" name="graduation_Degree_Diploma"></td>
-                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.graduation_subjects %}{{ user_profile.graduation_subjects }}{% endif %}" name="graduation_subjects"></td> {% endcomment %}
                                             <td><input readonly type="text" value="{% if candidate.graduation_name_location %}{{ candidate.graduation_name_location }}{% endif %}" name="graduation_name_location"></td>
                                             <td><input readonly type="text" value="{% if candidate.graduation_marks_obtained %}{{ candidate.graduation_marks_obtained }}{% endif %}" name="graduation_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if candidate.graduation_passing_year %}{{ candidate.graduation_passing_year }}{% endif %}" name="graduation_passing_year"></td>
-
-                                            
                                         </tr>
                                         <tr>
                                             <th>PG</th>
                                             <td><input readonly type="text" value="{% if candidate.pg_Degree_Diploma %}{{ candidate.pg_Degree_Diploma }}{% endif %}" name="pg_Degree_Diploma"></td>
-                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.pg_subjects %}{{ user_profile.pg_subjects }}{% endif %}" name="pg_subjects"></td> {% endcomment %}
                                             <td><input readonly type="text" value="{% if candidate.pg_name_location %}{{ candidate.pg_name_location }}{% endif %}" name="pg_name_location"></td>
                                             <td><input readonly type="text" value="{% if candidate.pg_marks_obtained %}{{ candidate.pg_marks_obtained }}{% endif %}" name="pg_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if candidate.pg_passing_year %}{{ candidate.pg_passing_year }}{% endif %}" name="pg_passing_year"></td>
-                                        
                                         </tr>
                                         <tr>
-                                            <th>Professional
-                                                Qualification</th>
+                                            <th>Professional Qualification</th>
                                                 <td><input readonly type="text" value="{% if candidate.professional_qualification_Degree_Diploma %}{{ candidate.professional_qualification_Degree_Diploma }}{% endif %}" name="professional_qualification_Degree_Diploma"></td>
-                                                {% comment %} <td><input readonly type="text" value="{% if user_profile.professional_qualification_subjects %}{{ user_profile.professional_qualification_subjects }}{% endif %}" name="professional_qualification_subjects"></td> {% endcomment %}
                                                 <td><input readonly type="text" value="{% if candidate.professional_qualification_name_location %}{{ candidate.professional_qualification_name_location }}{% endif %}" name="professional_qualification_name_location"></td>
                                                 <td><input readonly type="text" value="{% if candidate.professional_qualification_marks_obtained %}{{ candidate.professional_qualification_marks_obtained }}{% endif %}" name="professional_qualification_marks_obtained"></td>
                                                 <td><input readonly type="text" value="{% if candidate.professional_qualification_passing_year %}{{ candidate.professional_qualification_passing_year }}{% endif %}" name="professional_qualification_passing_year"></td>
-                                            
                                         </tr>
                                         <tr>
                                             <th>others</th>
@@ -513,7 +475,6 @@ body{
                                             <td><input readonly type="text" value="{% if candidate.others_qualification_name_location %}{{ candidate.others_qualification_name_location }}{% endif %}" name="others_qualification_name_location"></td>
                                             <td><input readonly type="text" value="{% if candidate.others_qualification_marks_obtained %}{{ candidate.others_qualification_marks_obtained }}{% endif %}" name="others_qualification_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if candidate.others_qualification_passing_year %}{{ candidate.others_qualification_passing_year }}{% endif %}" name="others_qualification_passing_year"></td>
-
                                         </tr>
                                     </table>
                                 </div>
@@ -523,12 +484,10 @@ body{
                                     <table class="training" style="width: 100%;">
                                         <tr>
                                             <th>Program Title</th>
-                                            <th>Institution &
-                                                Location</th>
+                                            <th>Institution & Location</th>
                                             <th>Skill Areas/Course Content</th>
                                             <th>Start Date</th>
-                                            <th>Course
-                                                Duration</th>
+                                           <th>Course Duration</th>
                                         </tr>
                                         <tr>
                                             <td><input readonly type="text" value="{% if candidate.training_workshop_title %}{{ candidate.training_workshop_title }}{% endif %}" name="training_workshop_title"></td>
@@ -619,7 +578,6 @@ body{
                                             <td><input readonly type="date" value="{% if candidate.Children_dob_2 %}{{ candidate.Children_dob_2 }}{% endif %}" name="Children_dob_2"></td>
                                             <td><input readonly type="text" value="{% if candidate.Children_2_profession %}{{ candidate.Children_2_profession }}{% endif %}" name="Children_2_profession"></td>
                                         </tr>
-
                                     </table>
                                 </div>
                                 <div class="row" style="width: 95%;">
@@ -632,16 +590,14 @@ body{
                                         <span class="panel-col panel-col1" style="width: 90%;"> Are you willing to relocate anywhere in India</span>
                                         <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}" name="willing_to_relocate">  -->
                                         <select readonly name="willing_to_relocate" id="" style="margin-left: 18%; margin-top: 15px;">
-                                            <option value="" selected>{% if candidate.willing_to_relocate %}{{ candidate.willing_to_relocate }}{% endif %}</option>
-                                            
+                                            <option value="" selected>{% if candidate.willing_to_relocate %}{{ candidate.willing_to_relocate }}{% endif %}</option>                                            
                                         </select>
                                     </div>
                                     <div class="panel-row clearfix" style="width: 46%">
                                         <span class="panel-col panel-col1" style="width: 90%;">Have you been interviewed by Sonata before?</span>
                                         <!-- <input type="text" class="panel-col text-bold-cell" value="{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}" name="interviewed_by_Sonata_before">  -->
                                         <select readonly name="interviewed_by_Sonata_before" id=""  style="margin-left: 18%; margin-top: 15px;">
-                                            <option value="" selected>{% if candidate.interviewed_by_Sonata_before %}{{ candidate.interviewed_by_Sonata_before }}{% endif %}</option>
-                                           
+                                            <option value="" selected>{% if candidate.interviewed_by_Sonata_before %}{{ candidate.interviewed_by_Sonata_before }}{% endif %}</option>                                           
                                         </select>
                                     </div>
                                 </div>
@@ -659,26 +615,16 @@ body{
                                 </div>  
                                 {% endif %}
                             </div>
-                            
                         <!-- </form> -->
-                        
                         </li>
-                                
-                        
                     </ul>
-                    
                 </div>
-               
-        
             </div>
         </div>
     </div>
 </div>
 </div>
         <!-- Job Detail End -->
-
-
-
     {% comment %} <script>
 
     const progressBar = document.getElementById("progress-bar");
@@ -727,12 +673,8 @@ body{
         }
       };
 
-
-
     </script> {% endcomment %}
-
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     {% endblock main_content%}

@@ -71,15 +71,12 @@
         .row input,.row select{
         width: 95%;
         margin-left: 1%;
-        
-        
     }
     input,select{
         border: 1px solid rgb(187, 187, 246);
         border-radius: 5px;
         padding: 4px;
         background-color: #e3e3ec;
-        
     }
     input:hover,select:hover{
         border: 2px solid rgb(137, 137, 190);
@@ -120,7 +117,6 @@
           margin-right: 10px;
         }
       }
-    
 
     @media(max-width: 640px){
         .action-buttons{
@@ -223,9 +219,7 @@
 
 {% load static %}
 
-        
         {% include 'progress_bar.html' %}
-
         <!-----END PROGRESS BAR------>
 
         <div class="action-buttons" style="display: flex; justify-content: flex-end; margin-right: 5%;">
@@ -305,8 +299,6 @@
             </div>
         </div>
         
-
-        
         <div class="position-relative">
             <div class="container position-relative" style="margin-top: 0px;">
                 <div class="gy-4 mt-5" style="display: flex; justify-content: space-between;">
@@ -353,7 +345,6 @@
                                 <span class="count_Icon theme-color">
                                     1
                                 </span>
-                                
                                 <!----><!---->
                                 <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Basic Details </span>
                                 <!---->
@@ -365,27 +356,22 @@
                                     <span class="panel-col panel-col1">Position Applied For</span>
                                     <input type="text" class="panel-col text-bold-cell" value="{% if application.position_shortlisted_for %}{{ application.position_shortlisted_for }}{% endif %}" name="position_applied_for" readonly> 
                                 </div>
-    
                                 <div class="row">
                                     <span class="panel-col panel-col1">Name</span>
                                     <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" readonly> 
                                 </div>
-                             
                                 <div class="row">
                                     <span class="panel-col panel-col1">Primary Email</span>
                                     <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
                                 </div>
-                                    
                                 <div class="row">
                                     <span class="panel-col panel-col1">Mobile</span>
                                     <input readonly type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
                                 </div>
-                                    
                                 <div class="row">
                                     <span class="panel-col panel-col1">Date Of Birth</span>
                                     <input readonly type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
                                 </div>
-                         
                                 <div class="row">
                                     <span class="panel-col panel-col1">Gender</span>
                                     <select readonly id="gender" name="gender" class="panel-col text-bold-cell" required>
@@ -475,15 +461,12 @@
                                             <td><input readonly type="text" value="{% if user_profile.present_state %}{{ user_profile.present_state }}{% endif %}" name="present_state"> </td>
                                             <td><input readonly type="text" value="{% if user_profile.present_city %}{{ user_profile.present_city }}{% endif %}" name="present_city"> </td>
                                             <td><input readonly type="number" value="{% if user_profile.present_pin %}{{ user_profile.present_pin }}{% endif %}" name="present_pin"> </td>
-                                            
-
                                         </tr>
                                         <tr>
                                             <th>Permanent</th>
                                             <td><input readonly type="text" value="{% if user_profile.permanent_state %}{{ user_profile.permanent_state }}{% endif %}" name="permanent_state"> </td>
                                             <td><input readonly type="text" value="{% if user_profile.permanent_city %}{{ user_profile.permanent_city }}{% endif %}" name="permanent_city"> </td>
                                             <td><input readonly type="number" value="{% if user_profile.permanent_pin %}{{ user_profile.permanent_pin }}{% endif %}" name="permanent_pin"> </td>
-                                            
                                         </tr>
                                     </table>
                                 </div>
@@ -496,17 +479,14 @@
                                         <div class="row dow_row" >
                                             <span class="panel-col panel-col1" style="font-size:15px;font-weight:350"><b>High School Marksheet</b></span>
                                             <button type="button" download><a href="{{ssc_doc.url}}">Document {{ssc_doc}}</a></button>
-                                         
                                         </div>
                                         <div class="row dow_row">
                                             <span class="panel-col panel-col1" style="font-size:15px;font-weight:350"><b>Intermediate School Marksheet</b></span>
                                             <button type="button" download><a href="{{hsc_doc.url}}">Document {{hsc_doc}}</a></button>
-                                         
                                         </div>
                                         <div class="row dow_row">
                                             <span class="panel-col panel-col1" style="font-size:15px;font-weight:350"><b>Graduation Marksheet</b></span>
                                             <button type="button" download><a href="{{graduate_doc.url}}">Document {{graduate_doc}}</a></button>
-                                         
                                         </div>
                                     </div>
                                 </div>
@@ -529,7 +509,6 @@
                                             <td><input readonly type="text" value="{% if user_profile.high_school_name_location %}{{ user_profile.high_school_name_location }}{% endif %}" name="high_school_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.high_school_marks_obtained %}{{ user_profile.high_school_marks_obtained }}{% endif %}" name="high_school_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if user_profile.high_school_passing_year %}{{ user_profile.high_school_passing_year }}{% endif %}" name="high_school_passing_year"></td>
-                                            
                                         </tr>
                                         <tr>
                                             <th>Intermediate</th>
@@ -553,8 +532,7 @@
                                             <td><input readonly type="text" value="{% if user_profile.pg_passing_year %}{{ user_profile.pg_passing_year }}{% endif %}" name="pg_passing_year"></td>
                                         </tr>
                                         <tr>
-                                            <th>Professional
-                                                Qualification</th>
+                                            <th>Professional Qualification</th>
                                                 <td><input readonly type="text" value="{% if user_profile.professional_qualification_Degree_Diploma %}{{ user_profile.professional_qualification_Degree_Diploma }}{% endif %}" name="professional_qualification_Degree_Diploma"></td>
                                                 <td><input readonly type="text" value="{% if user_profile.professional_qualification_name_location %}{{ user_profile.professional_qualification_name_location }}{% endif %}" name="professional_qualification_name_location"></td>
                                                 <td><input readonly type="text" value="{% if user_profile.professional_qualification_marks_obtained %}{{ user_profile.professional_qualification_marks_obtained }}{% endif %}" name="professional_qualification_marks_obtained"></td>
@@ -577,12 +555,10 @@
                                     <table class="training" style="width: 100%;">
                                         <tr>
                                             <th>Program Title</th>
-                                            <th>Institution &
-                                                Location</th>
+                                            <th>Institution & Location</th>
                                             <th>Skill Areas/Course Content</th>
                                             <th>Start Date</th>
-                                            <th>Course
-                                                Duration</th>
+                                            <th>Course Duration</th>
                                         </tr>
                                         <tr>
                                             <td><input readonly type="text" value="{% if user_profile.training_workshop_title %}{{ user_profile.training_workshop_title }}{% endif %}" name="training_workshop_title"></td>

@@ -60,10 +60,8 @@
         <div>
             <h1 class="text">Sonata Online Test</h1>
         </div>
-    </div>
-    
-    <!-- <h1> {{question.sheet_id}}</h1> -->
-  
+    </div>   
+    <!-- <h1> {{question.sheet_id}}</h1> --> 
     <div >
         <a  href="{% url 'post_question' %}"> 
           <button class="btn btn-primary first" type="button">Add Question <i class="bi bi-plus-square-fill"></i>                      
@@ -75,8 +73,7 @@
     <div id="question_div">
         
         {% for question in quest_details %} 
-        <table>
-     
+        <table>     
             <tr>
                 <td class="text" style="color:black; font-size:15px;"> {{question.question_id}} ). {{question.question_text}} ?</td>
             </tr>
@@ -92,7 +89,6 @@
             <tr>
                 <td style="color:black; font-size:15px;"><input  class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_4_{{question.question_id}}">{{question.option_d}}</td>
             </tr>
-
             <tr>
                 <td><label  id="corans" class= "rb" style=" color : white; background-color: #000000;"><b> Correct Answer :- {{question.answer}}</b></label></td>
             </tr>
@@ -102,10 +98,8 @@
                Delete
               </button>
             {% comment %} <a href="{% url 'delete_question' id=question.id %}"><button style="float:right;" type="submit" class="btn btn-danger second" name="submit">Delete</button>  </a>  {% endcomment %}
-
-
         </table>  
-<hr>
+            <hr>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -129,10 +123,6 @@
         {% comment %} <input type="submit" class="btn btn-success" value="Submit" id="b1" name="submit" onclick="getanswers_1({{question_id_list}})">
         <br>
         <b id="UserAnswers"></b>
-        </div> {% endcomment %}
-   
+        </div> {% endcomment %}   
 </div>
-
-    
-
 {% endblock main_content%}

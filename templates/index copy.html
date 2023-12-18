@@ -21,9 +21,6 @@
     <link rel="stylesheet" href="{% static 'assets copy/css/style.css' %}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{% static 'assets copy/images/favicon.png' %}" />
-
-
-    
   </head>
   <body>
     <div class="container-scroller">
@@ -39,7 +36,6 @@
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
           </button>
-        
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -89,7 +85,7 @@
           <ul class="nav" style="position:fixed;">
             <li class="nav-item nav-category">Main</li>
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="{% url 'dashboard' %}">
                 <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
                 <span class="menu-title">Dashboard</span>
               </a>
@@ -190,7 +186,7 @@
                           <div class="card-body text-center" style="box-shadow: 1px 1px 20px 1px;padding: 2rem 2rem;background-color: #FFDEE9;background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);border-radius: 10px;">
                             <a class="card-inner-cp card-cp-wt cursor" href="{% url 'vacancy_lists' %}" style="text-decoration:none;">
                               <h5 class="mb-2 text-dark font-weight-normal" style="margin-top: 2rem;margin-bottom:2rem !important;">Vacancies</h5>
-                              <h2 class="mb-4 text-dark font-weight-bold" >0{{ counts.vacancy_count }}</h2>
+                              <h2 class="mb-4 text-dark font-weight-bold" >{{ counts.vacancy_count }}</h2>
                             </a>                           
                           </div>
                         </div>
@@ -201,13 +197,13 @@
                             <div style="height:30%;">
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'applied_user_details' %}" style="text-decoration:none;">
                                 <h5 class="mb-2 text-dark font-weight-normal" style="margin-top: 1rem">Candidate's CV</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold">0{{ counts.cv_count }}</h2>
+                                <h2 class="mb-4 text-dark font-weight-bold">{{ counts.cv_count }}</h2>
                               </a>
                             </div>
                             <div style="height:30%;">
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'rejected' %}" style="text-decoration:none;">
                                 <h5 class="mb-2 text-dark font-weight-normal" style="margin-top: 3rem;">Rejected CV</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold">0{{ counts.cv_count }}</h2>
+                                <h2 class="mb-4 text-dark font-weight-bold">{{ counts.reject_count }}</h2>
                               </a>
                             </div>
                           </div>
@@ -219,19 +215,19 @@
                             <div style="height:33%;padding: 20px;border: 1px solid lightblue;border-radius: 10px 10px 0px 0px;">
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'sceduled_user_details' %}" style="text-decoration:none;">
                                 <h5 class="mb-2 text-dark font-weight-normal" style="height: 30px;font-size: .9em;">Scheduled Online Test Completed</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold" style="margin-bottom: 0.5rem !important;">0{{ counts.cv_count }}</h2>
+                                <h2 class="mb-4 text-dark font-weight-bold" style="margin-bottom: 0.5rem !important;">{{ counts.sch_int }}</h2>
                               </a>
                             </div>
                             <div style="height:33%;padding: 20px;border: 1px solid lightblue;">
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'schedule_online_test' %}" style="text-decoration:none;">
                                 <h5 class="mb-2 text-dark font-weight-normal" style="height: 25px;font-size: .9em;">Pending Schedule Online Test</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold" style="margin-bottom: 0.5rem !important;">0{{ counts.cv_count }}</h2>
+                                <h2 class="mb-4 text-dark font-weight-bold" style="margin-bottom: 0.5rem !important;">{{ counts.sch_test }}</h2>
                               </a>
                             </div>
                             <div style="height:34%;padding: 20px;border: 1px solid lightblue;border-radius: 0px 0px 10px 10px;">
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'schedule_online_test' %}" style="text-decoration:none;">
                                 <h5 class="mb-2 text-dark font-weight-normal" style="height: 30px;font-size: .9em;">Test Scheduled But Not Completed</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold" style="margin-bottom: 0.5rem !important;">0{{ counts.cv_count }}</h2>
+                                <h2 class="mb-4 text-dark font-weight-bold" style="margin-bottom: 0.5rem !important;">{{ counts.test_sch_done }}</h2>
                               </a>
                             </div>
                           </div>
@@ -243,22 +239,22 @@
                             <div style="display:flex;height:50%;">
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'shortlist_candidates' %}" style="width:50%;padding-top: 30px;border-radius: 10px 0px 0px 0px;border: 1px solid lightblue;text-decoration:none;">
                                 <h5 class="mb-2 text-dark font-weight-normal" style="height: 30px;">Pending for Shortlisting</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold">0{{ counts.cv_count }}</h2>
+                                <h2 class="mb-4 text-dark font-weight-bold">{{ counts.shortlist }}</h2>
                               </a>
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'Onboarding_candidates' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 10px 0px 0px;text-decoration:none;">
                                 <h5 class="mb-2 text-dark font-weight-normal">Accept</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold">0{{ counts.cv_count }}</h2>
+                                <h2 class="mb-4 text-dark font-weight-bold">{{ counts.onboarding }}</h2>
                               </a>
                             </div>
 
                             <div style="display:flex;height:50%;">                             
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'hold_user_details' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 0px 0px 10px;text-decoration:none;">
                                 <h5 class="mb-2 text-dark font-weight-normal">Hold</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold">0{{ counts.cv_count }}</h2>
+                                <h2 class="mb-4 text-dark font-weight-bold">{{ counts.hold_count }}</h2>
                               </a>
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'rejected' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 0px 10px 0px;text-decoration:none;">
                                 <h5 class="mb-2 text-dark font-weight-normal">Reject</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold">0{{ counts.cv_count }}</h2>
+                                <h2 class="mb-4 text-dark font-weight-bold">{{ counts.reject_count }}</h2>
                               </a>
                             </div>
                           </div>

@@ -47,7 +47,6 @@
             margin-top: 80px;
         } {% endcomment %}
         
-        
         .dow_row{
             width:30%; 
         }
@@ -90,7 +89,6 @@
             margin-bottom:10px;
           }
         
-        
           @media(min-width:720px){
             .resume-card {
               width:48%;
@@ -107,7 +105,6 @@
             border: 1px solid #b3aeaed1;
             height: 400px;
             margin-bottom:10px;
-         
           }
         
           @media(min-width:720px){
@@ -143,7 +140,6 @@
             margin-top: 0px;
           }
         
-        
           @media(max-width:640px){
             .btn{
                 width:100%;
@@ -161,7 +157,6 @@
               margin-right: 10px;
             }
           }
-        
         
           .modal {
             display: none;
@@ -212,7 +207,6 @@
                 .action-buttons{
                     width:45%;
                 }
-        
             }
         
             .close {
@@ -289,8 +283,6 @@
                 padding: 0px;
                 list-style: none;
             }
-        
-        
             
             ul {
                 font-weight: normal;
@@ -312,7 +304,6 @@
                 box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
                 border-radius: 5px;
                 position: relative;
-            
             }
             
             .count_Icon {
@@ -371,7 +362,7 @@
             .panel-body {
                 padding: 13px 15px 15px 15px;
             }
-            
+
             .panel-body:before {
                 display: table;
                 content: "";
@@ -418,8 +409,6 @@
         }
     </style>
 
-
-
         <!-- Job Detail Start -->
         <h1 class="main-title" style="width: 80%;margin-left: 40px;text-align: center;margin-top: 20px;">Rejected Candidate Full Details To Review</h1>
         <hr style="width: 80%;margin-left: 40px;">
@@ -455,7 +444,6 @@
                                     <span class="panel-col panel-col1">Primary Email</span>
                                     <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
                                 </div>
-                                    
                               
                                 <div class="row">
                                     <span class="panel-col panel-col1">Mobile Number</span>
@@ -497,7 +485,6 @@
                                   
                             <div id="panel7" style="height:100%;width:100%;display:none;">
                               <div class="panel-body ng-star-inserted">
-                   
                                 <div class="action-buttons" style="justify-content: flex-end; width: 80%;">
                                     <div  style="font-size:20px; font-weight:300; color:black;">
                                     <span ><b>Reason for rejection -</b> {{application.reject_reason}}</span><br>
@@ -512,8 +499,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Reject Modal -->
 
+                                    <!-- Reject Modal -->
                                     <div id="allotModal" class="modal">
                                         <div class="modal-content">
                                             <span class="close">&times;</span>
@@ -534,7 +521,6 @@
                                             </form>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="form-group my-4">
                                   <div class='row'>
@@ -549,12 +535,9 @@
                 </div>
 
                 <div>
-
                     <!--Personal Details-->
                     <div class="basic-details-card" style="margin-bottom: 10px;">
-   
                         <ul class="item_list">
-                            <!---->
                             <li class="item_list_block step_open">
                                 <div class="info_title theme-color" onclick="myFunction1()">
                                     <span class="count_Icon theme-color">
@@ -616,13 +599,10 @@
                                             <table class="education" style="width: 100%;">
                                                 <tr>
                                                     <th>  </th>
-                                                    <th>Degree/
-                                                        Diploma</th>
-                                                    <th>Name and Location of the
-                                                        Institution</th>
+                                                    <th>Degree/Diploma</th>
+                                                    <th>Name and Location of the Institution</th>
                                                     <th>% obtained</th>
                                                     <th>Year of Passing</th>
-                                                    
                                                 </tr>
                                                 <tr>
                                                     <th>High School</th>
@@ -653,8 +633,7 @@
                                                     <td><input readonly type="text" value="{% if user_profile.pg_passing_year %}{{ user_profile.pg_passing_year }}{% endif %}" name="pg_passing_year"></td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Professional
-                                                        Qualification</th>
+                                                    <th>Professional Qualification</th>
                                                         <td><input readonly type="text" value="{% if user_profile.professional_qualification_Degree_Diploma %}{{ user_profile.professional_qualification_Degree_Diploma }}{% endif %}" name="professional_qualification_Degree_Diploma"></td>
                                                         <td><input readonly type="text" value="{% if user_profile.professional_qualification_name_location %}{{ user_profile.professional_qualification_name_location }}{% endif %}" name="professional_qualification_name_location"></td>
                                                         <td><input readonly type="text" value="{% if user_profile.professional_qualification_marks_obtained %}{{ user_profile.professional_qualification_marks_obtained }}{% endif %}" name="professional_qualification_marks_obtained"></td>
@@ -677,8 +656,7 @@
                                             <table class="training" style="width: 100%;">
                                                 <tr>
                                                     <th>Program Title</th>
-                                                    <th>Institution &
-                                                        Location</th>
+                                                    <th>Institution & Location</th>
                                                     <th>Skill Areas/Course Content</th>
                                                     <th>Start Date</th>
                                                     <th>Course Duration</th>
@@ -775,8 +753,7 @@
                                                     <td><input readonly type="text" value="{% if user_profile.Children_name_2 %}{{ user_profile.Children_name_2 }}{% endif %}" name="Children_name_2"></td>
                                                     <td><input readonly type="date" value="{% if user_profile.Children_dob_2 %}{{ user_profile.Children_dob_2 }}{% endif %}" name="Children_dob_2"></td>
                                                     <td><input readonly type="text" value="{% if user_profile.Children_2_profession %}{{ user_profile.Children_2_profession }}{% endif %}" name="Children_2_profession"></td>
-                                                </tr>
-    
+                                                </tr>    
                                             </table>
                                         </div>
                                         <div class="row" style="width: 95%;">
@@ -787,23 +764,20 @@
                                             <div class="panel-row clearfix" style="width: 40%">
                                                 <span class="panel-col panel-col1" style="width: 90%;"> Are you willing to relocate anywhere in India</span>
                                                 <select readonly name="willing_to_relocate" id="" style="margin-left: 18%; margin-top: 15px;">
-                                                    <option value="" selected>{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}</option>
-    
+                                                    <option value="" selected>{% if user_profile.willing_to_relocate %}{{ user_profile.willing_to_relocate }}{% endif %}</option>    
                                                 </select>
                                             </div>
                                             <div class="panel-row clearfix" style="width: 46%">
                                                 <span class="panel-col panel-col1" style="width: 90%;">Have you been interviewed by Sonata before?</span>
                                                 <select readonly name="interviewed_by_Sonata_before" id=""  style="margin-left: 18%; margin-top: 15px;">
-                                                    <option value="" selected>{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}</option>
-                                                
+                                                    <option value="" selected>{% if user_profile.interviewed_by_Sonata_before %}{{ user_profile.interviewed_by_Sonata_before }}{% endif %}</option>                                                
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="row" style="width: 95%;">
                                             <span class="panel-col panel-col1">Locational Preference:</span>
                                             <textarea readonly name="locational_preferences" id="" cols="10" rows="5">{% if user_profile.locational_preferences %}{{ user_profile.locational_preferences }}{% endif %}</textarea>
-                                        </div>
-                                
+                                        </div>                                
                                     </div>
                                 </div>
                             </li>
@@ -820,7 +794,6 @@
                             <span class="count_Icon theme-color">
                               4
                             </span>
-
                             <!----><!---->
                             <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Documents </span>
                             <!---->
@@ -828,7 +801,6 @@
 
                         <div style="width:100%;height:120px;display:flex;">
                             <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#resumeBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Resume</figcaption>
@@ -985,7 +957,6 @@
                                                     <embed src="{{dl_doc.url}}" width="100%" alt="driving License"  width="100%" height="100%">
                                                 </div>
                                                 {% endif %}
-                                        
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -996,9 +967,7 @@
                             </div>
                         </div>
                         <div style="width:100%;height:120px;display:flex;">
-                            
                             <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-                               
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#highschoolBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">High School</figcaption>
@@ -1031,7 +1000,6 @@
                                                     <embed src="{{ssc_doc.url}}" width="100%" alt="10th Marksheet"  width="100%" height="100%">
                                                 </div>
                                                 {% endif %}
-                                        
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -1041,7 +1009,6 @@
                                 </div>
                             </div>
                             <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#intermediateBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Intermediate</figcaption>
@@ -1073,7 +1040,6 @@
                                                     <embed src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
                                                 </div>
                                                 {% endif %}
-                                        
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -1084,9 +1050,7 @@
                             </div>
                         </div>
                         <div style="width:100%;height:120px;display:flex;">
-                            
                             <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#graduationBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Graduation</figcaption>
@@ -1119,7 +1083,6 @@
                                                     <embed src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
                                                 </div>
                                             {% endif%}
-                                        
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -1133,8 +1096,6 @@
                 </ul>
             </div>
         </div>
-
-
 
         {% comment %} <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="container">

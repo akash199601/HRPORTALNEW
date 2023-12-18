@@ -29,7 +29,6 @@
       display: flex!important;
     }
     }
-
 </style>
 
 <style>
@@ -192,7 +191,6 @@
 
               <button type="button" id="filter-button" class="btn btn-primary">Filter</button>
               <button id="filter-button" class="btn btn-primary" onclick="filterSelection('all')">Clear Filter</button>
-
             </form>
 
               <div class="flex-wrap" style="gap:1rem 1.4rem;" id="filtered-results">
@@ -218,8 +216,6 @@
                   </div>
                 </div>
               </div>
-
-
              {% comment %} <div class="wow fadeInUp" style="flex-basis: 25%; max-width: 23%;background-color:white; border: radius #FFFFFF; border-radius: 10px;" data-wow-delay="0.1s" id="received">
                   <div class="card-item card-button">
                     <a class="cat-item rounded" href="{% url 'rejected_user_full_details' refId=x.id %}" style="text-decoration:none;"> 
@@ -322,7 +318,6 @@ function fetchBranchOptions(selectedPosition) {
               </div>
             `;
             }
-
             // Update the content on the page
             filteredResults.innerHTML = html;
             },

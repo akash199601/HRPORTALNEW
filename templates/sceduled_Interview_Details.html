@@ -32,19 +32,15 @@
 }
 </style>
 
-<div class="data">
-  
+<div class="data"> 
       <div class="container-xxl py-3" >
         <div class="container">
           <div class="row g-4">
-            <h1 style="color:#000000ba;">Interview Date And Interview Place</h1>
-       
+            <h1 style="color:#000000ba;">Interview Date And Interview Place</h1>       
           <hr>
           {% if applicants %}
             <div class="d-flex flex-wrap" style="gap:1rem 1.4rem;">
               {% for x in applicants %}
-              
-
               <div class="col-md-12 col-xl-4" style="max-width: 23%;">
                 <div class="card" style="border-radius: 15px;">
                   <div class="card-body text-center">
@@ -58,8 +54,7 @@
                     <a href="{% url 'sceduled_interview_full_details' refId=x.application_id %}" style="text-decoration:none;"><button type="button" class="btn btn-primary btn-rounded btn-lg">
                      More Details
                     </button></a>
-                    <div class="d-flex justify-content-between text-center mt-3 mb-2">
-                      
+                    <div class="d-flex justify-content-between text-center mt-3 mb-2">                      
                     </div> 
                   </div>
                 </div>
@@ -72,8 +67,5 @@
           </div>
         </div>
       </div>   
-
 </div>
-
-
 {% endblock main_content%}

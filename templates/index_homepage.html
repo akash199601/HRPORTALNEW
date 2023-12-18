@@ -41,9 +41,7 @@
 
     .wow{
       width: 25%;
-    }
-
-   
+    }   
 
     @media (min-width: 720px){
     .d-flex{
@@ -253,14 +251,11 @@
         <div class="buttons">
           <a href="{% url 'vacancy_card_details' vacc.id %}"><button class="second_button">View Details</button></a>
         </div>
-
       </div>
-  
       {% endfor %}
        {% else %}
           <p>No vacancies are available right now. Please try again later.</p>
         {% endif %}
-       
     </div>       
   </div>
 
@@ -270,18 +265,13 @@
         <h1 class="section-title">Open Positions<span style="color: #f96f59;">.</span></h1>
       </div>
       <div class="d-flex flex-wrap" style="gap:1.5rem 8rem;">
-        
         {% if vacancy_list1 %}
         {% for vacc in vacancy_list1 %}
-       
         <div class=" wow fadeInUp card p-4 " style="background-color: #fff;box-shadow: 0px 3px 4px 2px rgba(0,0,0,0.3);border-radius: 6px;" data-wow-delay="0.1s" id="received">
           <div class="card-item card-button" style="min-height:260px;margin-bottom:8px;">
               <a class="cat-item rounded " href="{% url 'vacancy_card_details' vacc.id %}"> 
-
                 <p class="mb-0" style="color:#494949;font-weight: 800; margin-bottom: -0.5rem;font-size:21px;
                 margin-top: -0.5rem;">{{vacc.job_role}}</p>
-                
-              
                 {% comment %} <ul class="mb-0" style="color:#000000ba;list-style:none;padding-left:0rem;border-bottom: solid 1px #e3e3e3;font-size: 13px;font-weight: 500;">
                   <li> Branch Name :- <span style="font-weight: 600;font-size: 13px;"> {{ vacc.branch_name }}  </span><li>
                   
@@ -303,7 +293,6 @@
                 <div class="required-experience-row">
                   <span class="required-cell" style="font-weight: 500;font-size: 13px;">Required Skills </span> 
                   <div class="skill-row"> 
-                    
                     <div class="scroll-main scroll-h92 scrollCustome">
                       {% for skill in vacc.required_skills  %}
                       <span class="tag-job">{{skill}}</span>
@@ -316,17 +305,13 @@
           <div class="buttons">
             <a href="{% url 'vacancy_card_details' vacc.id %}"><button class="second_button">Apply</button></a>
           </div>
-
         </div>
-    
         {% endfor %}
          {% else %}
             <p>No vacancies are available right now. Please try again later.</p>
           {% endif %}
-         
       </div>       
     </div>
-    
   </div>
 </div>
 
