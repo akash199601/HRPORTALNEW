@@ -370,7 +370,7 @@ textarea{
     }
     
     .panel-body {
-        padding: 13px 15px 15px 15px;
+        padding: 13px 15px 30px 15px;
     }
     
     .panel-body:before {
@@ -398,6 +398,26 @@ textarea{
     body{
         color: #38393a;
     }
+
+    .score{
+        float: right;
+        margin-right: 43px;
+        margin-top: 10px;
+    }
+
+    @media(max-width:640px){
+        .score{
+            width: 110px;
+            margin-right: 50px;
+        }
+    }
+
+    #rejectButton{
+        float: right;
+        margin: 10px;
+        width: 100px;
+    }
+
 </style>
         <!------------PROGRESS BAR------------>
 
@@ -509,7 +529,7 @@ textarea{
 
                                                 <div class="modal-footer" style="border-top:0px;width:35%;padding-top:27px;">
                                                     <button type="submit" class="btn btn-success" style="width: 80px;">Submit</button>
-                                                    <button type="button" id="rejectButton" class="btn btn-danger" style="display:flex;">Reject</button>
+                                                    <button type="button" id="rejectButton" class="btn btn-danger" >Reject</button>
                                                 </div>
                                                 
                                             </form>
@@ -545,20 +565,20 @@ textarea{
                                     {% if testschedule_obj.is_online == False %}
                                     
                                         <form method="POST" action="{% url 'update_test_score' refId=application.application_id %}" style="margin-top: 0px;" enctype="multipart/form-data">
-                                            {%csrf_token%}
-                                            <center>
-                                            <div class="form-group">
-                                              <label for="score">Candidate Test Score:</label>
-                                              <input type="number" class="form-control percent" name="score" min="0" max="100" step="1" placeholder="Enter percentage scored %" value="{% if test.test_score %}{{test.test_score}}{% endif %}" required/>
-                                            </div>   
-                                            <br> 
-                                            <div class="form-group">
-                                              <label for="offline_answersheet" >Upload Answersheet:</label>
-                                              <input type="file" class="form-control" style="width:20%" name="offline_answersheet" placeholder="upload answersheet of offline exam" value="" required/>
-                                            </div>   
-                                            <br>  
+                                                {%csrf_token%}
+                                            <table class="training" style="width: 100%;">
+                                                <tr>
+                                                    <th>Candidate Test Score:</th>
+                                                    <th>Upload Answersheet:</th>
+                                                    {% comment %} <th></th> {% endcomment %}
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 30%"><input type="number" class="form-control percent" name="score" min="0" max="100" step="1" placeholder="Enter percentage scored %" value="{% if test.test_score %}{{test.test_score}}{% endif %}" required/></td>
+                                                    <td style="width: 30%"><input type="file" class="form-control"  name="offline_answersheet" placeholder="upload answersheet of offline exam" value="" required/></td>
+                                                    {% comment %} <td style="width: 30%;text-align: center;"><button type="submit" class="btn btn-success score" >Submit Score</button></td> {% endcomment %}
+                                                </tr>
+                                            </table>
                                             <button type="submit" class="btn btn-success score" >Submit Score</button>
-                                          </center>
                                         </form>
                                     
                                     {% else %}
@@ -593,7 +613,7 @@ textarea{
                                             </form>
                                         </div>
                                     </div>
-                                    <button type="button" id="rejectButton" class="btn btn-danger" style="display:flex;">Reject</button>
+                                    <button type="button" id="rejectButton" class="btn btn-danger" >Reject</button>
                                     <div class="form-group my-4" style="display: flex;width: 300px;">
                                         <div style="margin: 5%;" hidden>
                                             <button type="button" class="btn btn-primary">
@@ -687,7 +707,7 @@ textarea{
                                             </button>
                                         </div>
                                         <div style="margin:5%;">
-                                            <button type="button" id="rejectButton" class="btn btn-danger" style="display:flex;">Reject</button>
+                                            <button type="button" id="rejectButton" class="btn btn-danger" >Reject</button>
                                         </div>
                                           {% endif %}
                                         <div class='row'>
