@@ -43,7 +43,8 @@
         </div>
     </div>
 
-    <div style="margin-top: 10px">
+    <div style="margin-top: 10px;height:800px;">
+        {% if test_details.is_online == "true"  %}
             {% for question in question %}
             <table style="color:#000;width:100%;max-width: 400px;border-collapse: collapse;height:20%">
                 <td style="font-size: 12px;padding: 2px;border: 1px solid #000;">
@@ -71,8 +72,26 @@
                 {% endif %}
                 {% endfor %}
             </table>
+<<<<<<< HEAD
+            <hr>
+            {% endfor %}
+        {% else %}
+            {% comment %} {% if mime_type == 'application/pdf' %}
+                <embed src="data:application/pdf;base64,{{ binary_data }}" type="application/pdf" width="100%" height="100%">       {% endcomment %}
+                {% if mime_type|lower == 'image/jpg' or mime_type|lower == 'image/jpeg' or mime_type|lower == 'image/png' or mime_type|lower == 'application/pdf'%}
+                <div style="width: 100%; height: 100%; overflow: auto;">
+                    <img src="data:{{ mime_type }};base64,{{ binary_data }}" width="100%" alt="Resume Image">
+                </div>
+                {% else %}
+                <div style="width: 100%; height: 500px; overflow: auto;">
+                    <h3>This file type is not supported for preview or no resume uploaded.</h3>
+                </div>
+            {% endif %}    
+        {% endif %}
+=======
         <hr>
         {% endfor %}
+>>>>>>> 48d2ad8009526493a7658ddc3772b38068d620bd
     </div>
 </div>
 

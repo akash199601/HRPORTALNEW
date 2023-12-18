@@ -420,11 +420,10 @@ class TestScheduleDetails(models.Model):
     is_online = models.BooleanField(default=False)
     candidate_id = models.IntegerField(null=True, blank=True)
     sheet_id = models.IntegerField(null=True, blank=True)
-    # start_time = models.DateTimeField(null=True, blank=True)
-    # end_time = models.DateTimeField(null=True, blank=True)
     start_time = models.TimeField(null=True, blank=True)
     end_time = models.TimeField(null=True, blank=True)
     offline_answersheet = models.BinaryField(null=True, blank=True)
+    mime_type = models.CharField(max_length=100, null=True, blank=True)
 
     class Meta:
         db_table = 'test_schedule'

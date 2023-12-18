@@ -1521,8 +1521,17 @@ def show_exam_result(request,id,application_id):
     user_profile = candidate_details.objects.get(id=id)
     context['profile'] = user_profile
     # test_schedule_id=2
-    test_details=TestScheduleDetails.objects.get(candidate_id=user_profile.id, application_id = application_id)
-
+    try:
+        test_details=TestScheduleDetails.objects.get(candidate_id=user_profile.id, application_id = application_id)
+        resume = test_details.offline_answersheet
+        mime_type = test_details.mime_type
+        encoded_data = base64.b64encode(resume).decode('utf-8')
+    except Exception as e :
+        print(e)
+        encoded_data = None
+        mime_type = None
+    
+    
     question=question_sheet.objects.filter(sheet_id=test_details.sheet_id)
     print(question)
  
@@ -1530,8 +1539,11 @@ def show_exam_result(request,id,application_id):
     print(response)
     
     context['score']=test_details.test_score
-    context['question']=question
-    context['responses']=response
+    context['question']= question
+    context['responses']= response
+    context['binary_data'] = encoded_data
+    context['mime_type'] = mime_type
+
     
     return render(request,'show_exam_result.html',context)
     # return HttpResponse('exam')
