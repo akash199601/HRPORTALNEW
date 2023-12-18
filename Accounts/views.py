@@ -667,7 +667,8 @@ def schedule_online_test(request):
                         ad.branch_shortlisted_for 
             FROM application_details ad 
             LEFT JOIN candidate_details cd ON ad.candidate_id = cd.id 
-            WHERE ad.application_status = 2 or ad.application_status = 4 or ad.application_status = 5 or ad.application_status = 6"""
+            WHERE ad.application_status = 5 or ad.application_status = 6"""
+    # or ad.application_status = 4
     
     df = pd.read_sql(query, engine)
 
@@ -689,11 +690,33 @@ def schedule_online_test(request):
                         ad.branch_shortlisted_for 
             FROM application_details ad 
             LEFT JOIN candidate_details cd ON ad.candidate_id = cd.id 
+            WHERE ad.application_status = 2"""
+                
+    df2 = pd.read_sql(query, engine)
+    
+    print(df2, "data2")	
+    candidate = candidate_details.objects.filter()
+    distinct_positions_queryset = candidate.values_list("position_applied_for", flat=True).distinct()
+    distinct_positions = [position for position in distinct_positions_queryset if position is not None]
+    print(distinct_positions)
+
+    print(applicants)
+    data2 = df2.to_dict('records')
+
+    
+    query = f"""SELECT cd.name,
+                        cd.email, 
+                        cd.mobile_no,
+                        cd.id as candidate_id, 
+                        ad.application_id,
+                        ad.position_shortlisted_for,
+                        ad.branch_shortlisted_for 
+            FROM application_details ad 
+            LEFT JOIN candidate_details cd ON ad.candidate_id = cd.id 
             WHERE ad.application_status = 3"""
                 
     df1 = pd.read_sql(query, engine)
     
-
     print(df1, "data1")	
     candidate = candidate_details.objects.filter()
     distinct_positions_queryset = candidate.values_list("position_applied_for", flat=True).distinct()
@@ -703,8 +726,7 @@ def schedule_online_test(request):
     print(applicants)
     data1 = df1.to_dict('records')
 
-
-    return render(request, 'schedule_test_userdetails.html',{'applicants':data, 'distinct_positions':distinct_positions,'applicants1':data1,})
+    return render(request, 'schedule_test_userdetails.html',{'applicants':data, 'distinct_positions':distinct_positions,'applicants1':data1, 'applicants2':data2,})
 
 @csrf_exempt
 def api_exam_filter(request):
