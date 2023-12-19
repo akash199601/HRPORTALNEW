@@ -1523,14 +1523,13 @@ def show_exam_result(request,id,application_id):
     # test_schedule_id=2
     try:
         test_details=TestScheduleDetails.objects.get(candidate_id=user_profile.id, application_id = application_id)
-        resume = test_details.offline_answersheet
+        offline_answersheet = test_details.offline_answersheet
         mime_type = test_details.mime_type
-        encoded_data = base64.b64encode(resume).decode('utf-8')
+        encoded_data = base64.b64encode(offline_answersheet).decode('utf-8')
     except Exception as e :
         print(e)
         encoded_data = None
         mime_type = None
-    
     
     question=question_sheet.objects.filter(sheet_id=test_details.sheet_id)
     print(question)
@@ -1543,8 +1542,7 @@ def show_exam_result(request,id,application_id):
     context['responses']= response
     context['binary_data'] = encoded_data
     context['mime_type'] = mime_type
-
-    
+    context['is_online']=test_details.is_online
     return render(request,'show_exam_result.html',context)
     # return HttpResponse('exam')
     
@@ -3113,7 +3111,7 @@ def sceduled_interview_full_details(request,refId):
     return render(request,'sceduled_Interview_full_Details.html',{'application':application,'user_profile':profile,'interveiw_places':places,
                                                                   'test_schedule':test_schedule,'binary_data':encoded_data,'status':application.application_status,
                                                                   'mime_type':mime_type, 'data_num': data_num, 'application_id': refId,'gender_choices':GENDER,'candidate_id': profile.id,'aadhar_doc' : aadhar_doc,'pan_doc' : pan_doc,'dl_doc' : dl_doc, 
-                                                                  'ssc_doc': ssc_doc,'hsc_doc': hsc_doc,'graduate_doc': graduate_doc,})
+                                                                  'ssc_doc': ssc_doc,'hsc_doc': hsc_doc,'graduate_doc': graduate_doc,'bypass' : application.bypass,})
 
 # @csrf_exempt
 # class interview_Api(View):
