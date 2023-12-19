@@ -257,9 +257,16 @@ body{
 <div class="text-center jumbo" style="margin-bottom:20px;">
     <a class="btn btn-primary" data-toggle="modal" href='#susbc-form' style="float:right; margin-right:18%;">Interview Assessment Form</a>
 </div>
+{% if bypass %}
+<div class="text-center jumbo" style="margin-bottom:0px;" hidden>
+    <a class="btn btn-primary" style="float:right; margin-right:30px;" href="{% url 'show_exam_result' id=user_profile.id application_id=application.application_id %}">Exam Result</a>
+</div>
+    {% else %}
 <div class="text-center jumbo" style="margin-bottom:0px;">
     <a class="btn btn-primary" style="float:right; margin-right:30px;" href="{% url 'show_exam_result' id=user_profile.id application_id=application.application_id %}">Exam Result</a>
 </div>
+    {% endif %}
+
 
 <div class="assignment_form">
     <!-- interview assignment form  -->
@@ -555,8 +562,19 @@ body{
                     <div class="panel-body ng-star-inserted">
                             <!----><!---->
                         <div class="row">
-                            <span class="panel-col panel-col1">Online Test Score</span>
-                            <input type="text" class="panel-col text-bold-cell" value="{% if test_schedule.test_score %}{{ test_schedule.test_score }}{% endif %}" name="score" readonly> 
+                            {% if bypass %}
+                            <span class="panel-col panel-col1" hidden>Online Test Score</span>
+                            <input type="text" class="panel-col text-bold-cell" value="{% if test_schedule.test_score %}{{ test_schedule.test_score }}{% endif %}" name="score" readonly hidden>
+                          
+                            {% else %}
+                            {% if test_schedule.is_online == False %}
+                            <span class="panel-col panel-col1" >Offline Test Score</span>
+                            <input type="text" class="panel-col text-bold-cell" value="{% if test_schedule.test_score %}{{ test_schedule.test_score }}{% endif %}" name="score" readonly>
+                            {% else%}
+                            <span class="panel-col panel-col1" >Online Test Score</span>
+                            <input type="text" class="panel-col text-bold-cell" value="{% if test_schedule.test_score %}{{ test_schedule.test_score }}{% endif %}" name="score" readonly>
+                            {% endif %}
+                            {% endif %}
                         </div>
                         <div class="row">
                             <span class="panel-col panel-col1">Position Applied For</span>

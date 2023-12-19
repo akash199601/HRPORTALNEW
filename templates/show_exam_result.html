@@ -23,9 +23,13 @@
       body{
         color: #38393a;
     }
+    .resume-file {
+        height: 89%;
+        width: 100%;
+    }    
 </style> 
 
-<div id="question_div" style="margin-top: 100px;">
+<div id="question_div" style="margin-top: 100px; margin-left:20px;">
     <div>
         <h1 class="text-black mt-3">Sonata Online Test</h1>
     </div>
@@ -42,43 +46,13 @@
             </div>
         </div>
     </div>
-
-    <div style="margin-top: 10px;height:800px;">
-        {% if test_details.is_online == "true"  %}
-            {% for question in question %}
-            <table style="color:#000;width:100%;max-width: 400px;border-collapse: collapse;height:20%">
-                <td style="font-size: 12px;padding: 2px;border: 1px solid #000;">
-                {% for res in responses %}
-                {% if res.question_id == question.question_id %}
-                <tr>
-                    <td class="text-black"> {{question.question_id}} ). {{question.question_text}} ?</td>
-                </tr>
-                <tr>
-                    <td><input disabled class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_1_{{question.question_id}}" value="{{question.option_a}}" {% if res.answer == 'a' %}checked{% endif %} >{{question.option_a}}</td>
-                </tr>
-                <tr>
-                    <td><input disabled class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_2_{{question.question_id}}" value="{{question.option_b}}" {% if res.answer == 'b' %}checked{% endif %} >{{question.option_b}}</td>
-                </tr>
-                <tr>
-                    <td><input disabled class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_3_{{question.question_id}}" value="{{question.option_c}}" {% if res.answer == 'c' %}checked{% endif %} >{{question.option_c}}</td>
-                </tr>
-                <tr>
-                    <td><input disabled class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_4_{{question.question_id}}" value="{{question.option_d}}" {% if res.answer == 'd' %}checked{% endif %} >{{question.option_d}}</td>
-                </tr>
-
-                <tr>
-                    <td><label  id="corans" class= "rb" style=" color : white; background-color: #000000;"><b> Correct Answer :- {{question.answer}}</b></label></td>
-                </tr>                
-                {% endif %}
-                {% endfor %}
-            </table>
-<<<<<<< HEAD
-            <hr>
-            {% endfor %}
-        {% else %}
-            {% comment %} {% if mime_type == 'application/pdf' %}
-                <embed src="data:application/pdf;base64,{{ binary_data }}" type="application/pdf" width="100%" height="100%">       {% endcomment %}
-                {% if mime_type|lower == 'image/jpg' or mime_type|lower == 'image/jpeg' or mime_type|lower == 'image/png' or mime_type|lower == 'application/pdf'%}
+    {% if is_online == False %}
+        <div style="margin-top: 10px; height:700px; width:75%; margin-left:12.5%; margin-right:12.5%;">
+           
+            <div class="resume-file">
+                {% if mime_type == 'application/pdf' %}
+                    <embed src="data:application/pdf;base64,{{ binary_data }}" type="application/pdf" width="100%" height="100%" value="hello">      
+                    {% elif mime_type|lower == 'image/jpg' or mime_type|lower == 'image/jpeg' or mime_type|lower == 'image/png' %}
                 <div style="width: 100%; height: 100%; overflow: auto;">
                     <img src="data:{{ mime_type }};base64,{{ binary_data }}" width="100%" alt="Resume Image">
                 </div>
@@ -86,15 +60,44 @@
                 <div style="width: 100%; height: 500px; overflow: auto;">
                     <h3>This file type is not supported for preview or no resume uploaded.</h3>
                 </div>
-            {% endif %}    
-        {% endif %}
-=======
-        <hr>
-        {% endfor %}
->>>>>>> 48d2ad8009526493a7658ddc3772b38068d620bd
-    </div>
-</div>
+                {% endif %}
+            </div>
+        </div>
+                {% else %}
+                <div style="margin-top: 10px;">
+                {% for question in question %}
+                <table style="color:#000;width:100%;max-width: 400px;border-collapse: collapse;height:20%">
+                    <td style="font-size: 12px;padding: 2px;border: 1px solid #000;">
+                    {% for res in responses %}
+                    {% if res.question_id == question.question_id %}
+                    <tr>
+                        <td class="text-black"> {{question.question_id}} ). {{question.question_text}} ?</td>
+                    </tr>
+                    <tr>
+                        <td><input disabled class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_1_{{question.question_id}}" value="{{question.option_a}}" {% if res.answer == 'a' %}checked{% endif %} >{{question.option_a}}</td>
+                    </tr>
+                    <tr>
+                        <td><input disabled class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_2_{{question.question_id}}" value="{{question.option_b}}" {% if res.answer == 'b' %}checked{% endif %} >{{question.option_b}}</td>
+                    </tr>
+                    <tr>
+                        <td><input disabled class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_3_{{question.question_id}}" value="{{question.option_c}}" {% if res.answer == 'c' %}checked{% endif %} >{{question.option_c}}</td>
+                    </tr>
+                    <tr>
+                        <td><input disabled class="options" type = "radio" class="rb" name = {{question.question_id}} id="option_4_{{question.question_id}}" value="{{question.option_d}}" {% if res.answer == 'd' %}checked{% endif %} >{{question.option_d}}</td>
+                    </tr>
 
+                    <tr>
+                        <td><label  id="corans" class= "rb" style=" color : white; background-color: #000000;"><b> Correct Answer :- {{question.answer}}</b></label></td>
+                    </tr>                
+                    {% endif %}
+                    {% endfor %}
+                </table>
+                <hr>
+                {% endfor %}
+            
+            </div>
+            {% endif %}
+</div>
 <div style="margin-left: 33%">
     <button class="btn btn-success" onclick="generatePDF()">Download as PDF</button>
 </div>

@@ -264,7 +264,6 @@ class User_Rolls(models.Model):
     user_id = models.IntegerField(blank=True,null=True)
     roll_id = models.IntegerField(blank=True,null=True, default=0)
     
-
 class rejected_review_allotment(models.Model):
     candidate_id = models.IntegerField(blank=True,null=True)
     hr_id = models.IntegerField(blank=True,null=True)
@@ -287,7 +286,6 @@ class exam_response(models.Model):
     sheet_id = models.IntegerField(blank=True,null=True)
     question_id  = models.IntegerField(blank=True,null=True)
     response = models.CharField(max_length=500, blank=True, null=True)
-    
 class TestSchedule(models.Model):
     sheet_id = models.IntegerField(blank=True,null=True)
     candidate_id = models.IntegerField(blank=True,null=True)
