@@ -13482,10 +13482,10 @@ dl {
   .navbar.navbar-dark .navbar-menu-wrapper .search-field .input-group i {
     color: #ffffff; }
 
-/* Sidebar */
+/* Sidebar */    /*background-image: linear-gradient(0deg, #002f19 0%, #001612 100%); */
 .sidebar {
   min-height: calc(100vh - 64px);
-  background-image: linear-gradient(0deg, #33865f 0%, #111116 100%);
+  background-image: linear-gradient(0deg, #002f19 0%, #001612 100%);
   font-family: "nunito-medium", sans-serif;
   padding: 0;
   width: 12%;
@@ -13549,17 +13549,17 @@ dl {
             margin-left: 1rem;
             margin-right: 0; }
           .sidebar .nav .nav-item .nav-link .icon-bg .menu-icon {
-            color: #33c92d; }
+            color: aqua; }
             .sidebar .nav .nav-item .nav-link .icon-bg .menu-icon:after, .sidebar .nav .nav-item .nav-link .icon-bg .menu-icon:before {
               font-size: 1rem;
-              color: inherit; }
+              color: aqua; }
         .sidebar .nav .nav-item .nav-link i {
           color: inherit; }
           .sidebar .nav .nav-item .nav-link i.menu-icon {
             font-size: 1.125rem;
             line-height: 1;
             margin-right: 0;
-            color: #8e94a9; }
+            color: aqua; }
             .rtl .sidebar .nav .nav-item .nav-link i.menu-icon {
               margin-left: 0;
               margin-right: 0; }
@@ -13584,7 +13584,7 @@ dl {
                 margin-left: 0;
                 margin-right: .25rem; }
         .sidebar .nav .nav-item .nav-link .menu-title {
-          color: inherit;
+          color: white;
           display: inline-block;
           font-size: 0.937rem;
           line-height: 1;
@@ -13649,16 +13649,16 @@ dl {
           .sidebar .nav .nav-item.sidebar-actions:hover .nav-link {
             color: initial; }
       .sidebar .nav .nav-item.nav-category {
-        color: #001737;
+        color: white;
         font-size: 0.8125rem;
         line-height: 16px;
         margin: 25px 0px 10px 0px;
-        color: #8e94a9;
+        color: white;
         font-family: "nunito-bold", sans-serif; }
         .sidebar .nav .nav-item.nav-category .nav-link {
           padding: 1.2rem 2rem 0.2rem; }
           .sidebar .nav .nav-item.nav-category .nav-link:hover {
-            color: #001737; }
+            color: black; }
       .sidebar .nav .nav-item.documentation-link {
         margin: 2.5rem 0 !important; }
         .sidebar .nav .nav-item.documentation-link .nav-link {
