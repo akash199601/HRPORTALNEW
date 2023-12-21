@@ -213,7 +213,6 @@ textarea{
         .action-buttons{
             width:45%;
         }
-
     }
 
     .close {
@@ -290,8 +289,6 @@ textarea{
         padding: 0px;
         list-style: none;
     }
-
-
     
     ul {
         font-weight: normal;
@@ -313,7 +310,6 @@ textarea{
         box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
         border-radius: 5px;
         position: relative;
-    
     }
     
     .count_Icon {
@@ -420,13 +416,11 @@ textarea{
 
 </style>
         <!------------PROGRESS BAR------------>
-
         {% include 'progress_bar.html' %}
 
         <!-- Job Detail Start -->
         <div class="container-content py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="containers" >
-
                 <div class="basic-details-card" style="margin-bottom: 10px;margin-top:20px;">
                     <ul class="item_list">
                         <!---->
@@ -439,31 +433,23 @@ textarea{
                                 <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Basic Details </span>
                                 <!---->
                             </div>
-                                
                             <div id="panel6" class="panel-body ng-star-inserted" style="height: 90%;display:none;">
-                                    <!----><!---->
-                                
                                 <div class="row">
                                     <span class="panel-col panel-col1">Name</span>
                                     <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" readonly> 
                                 </div>
-                             
                                 <div class="row">
                                     <span class="panel-col panel-col1">Primary Email</span>
                                     <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
                                 </div>
-                                    
-                              
                                 <div class="row">
                                     <span class="panel-col panel-col1">Mobile Number</span>
                                     <input readonly type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
                                 </div>
-                       
                                 <div class="row">
                                     <span class="panel-col panel-col1">Date Of Birth</span>
                                     <input readonly type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
                                 </div>
-
                                 <div class="row">
                                     <span class="panel-col panel-col1">Gender</span>
                                     <select readonly id="gender" name="gender" class="panel-col text-bold-cell" required>
@@ -1318,7 +1304,6 @@ textarea{
                     </ul>
                 </div>
             </div>
-
 
             <div class="basic-details" >
                 <ul class="item_list">
