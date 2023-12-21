@@ -4015,9 +4015,6 @@ def get_calender(request):
 
     return JsonResponse(count_matrix, safe=False)
 
-
-
-
 def heading(request):
     if request.user.is_authenticated:
         print("redirect to dashboard")
@@ -4777,21 +4774,23 @@ def indexCopy(request):
     return render(request, 'index copy.html',context)
 
 
-
-
-def verifyDocument(request,refId):
-    if refId is not None:
-        print(refId)
-        profile = ApplicationDetails.objects.get(application_id=refId)
+from django.shortcuts import redirect, get_object_or_404
+from django.http import Http404
+def verifyDocument(request, refId):
+    if refId:
         try:
-            document_obj = Document_Candidate.objects.get(candidate_id = profile.candidate_id)
-        except Exception as e:
-            print(e)
-            document_obj = Document_Candidate()
-            document_obj.candidate_id = profile.id
+            application = ApplicationDetails.objects.get(application_id=refId)
+        except ApplicationDetails.DoesNotExist:
+            raise Http404("ApplicationDetails not found")
+        profile = get_object_or_404(ApplicationDetails, application_id=refId)
+        document_obj, created = Document_Candidate.objects.get_or_create(candidate_id=application.candidate_id)
         
-        if 'verify' in request.POST:
-            document_obj.verify = request.POST('verify')
-            print( 'verify',document_obj.verify)
-            document_obj.save()
-    return redirect('schedule_test_user_full_details')
+        if request.method == 'POST' and 'verify' in request.POST:
+            verify = request.POST.get('verify', None)
+            print('verify', verify)
+            
+            if verify:
+                document_obj.verify = verify
+                document_obj.save()
+            
+    return redirect('schedule_test_user_full_details', refId=refId)

@@ -1354,10 +1354,22 @@ textarea{
                                 </div>
                             </div>
                             <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
+                                {% if document_obj.verify == 1 %}
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:green;">
+                                    <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                    <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Aadhar</figcaption>
+                                </button>
+                                {% elif document_obj.verify == 2 %}
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:red;">
+                                    <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                    <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Aadhar</figcaption>
+                                </button>
+                                {% else %}
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Aadhar</figcaption>
                                 </button>
+                                {% endif %}
                                   <!-- Modal -->
                                 <div class="modal fade" id="aadharBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
@@ -1490,10 +1502,22 @@ textarea{
                         </div>
                         <div style="width:100%;height:120px;display:flex;">
                             <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
+                                {% if document_obj.verify == 1 %}
+                                <button type="button" class="btn"  data-bs-toggle="modal" data-bs-target="#highschoolBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:green;">
+                                    <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                    <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">High School</figcaption>
+                                </button>
+                                {% elif document_obj.verify == 2 %}
+                                <button type="button" class="btn"  data-bs-toggle="modal" data-bs-target="#highschoolBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:red;">
+                                    <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
+                                    <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">High School</figcaption>
+                                </button>
+                                {% else %}
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#highschoolBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">High School</figcaption>
                                 </button>
+                                {% endif %}
                                   <!-- Modal -->
                                 <div class="modal fade" id="highschoolBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
@@ -1623,6 +1647,28 @@ textarea{
                                 </div>
                             </div>
                         </div>
+                        <div style="width:100%;height:120px;display:flex;">
+                            <form id="filter-form" method="POST" action="{% url 'verifyDocument' refId=application.application_id %}" class="form" enctype="multipart/form-data">
+                                {% csrf_token %} 
+                            <div class="form-group">
+                            <label for="verify" >Document Verification:</label>      
+                            {% if document_obj.verify == 1 %}      
+                            <select name="verify" id="verify" class="form-control" style="background-color:green; color:white;margin-bottom: 10px; margin-left: 50%;">
+                                {% elif document_obj.verify == 2 %}
+                                <select name="verify" id="verify" class="form-control" style="background-color:red; color:white;margin-bottom: 10px; margin-left: 50%;">
+                                    {% else %}
+                                    <select name="verify" id="verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin-bottom: 10px; margin-left: 50%;" >
+                                        {% endif %}
+                                <option value="0" {% if 0 == document_obj.verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue  ;">Not Verify</option>
+                                <option  value="1" {% if 1 == document_obj.verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
+                                <option  value="2" {% if 2 == document_obj.verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
+                              </select>
+                            </div>
+                              <div class="form-group">
+                                <button type="submit" onclick="changeColor()" id="filter-button" class="btn btn-primary" style="margin-bottom: 10px; margin-left: 70%;">Submit</button>
+                              </div>
+                            </form>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -1630,6 +1676,22 @@ textarea{
     </div>
 </div>
 </div>
+
+{% comment %} <script>
+    function changeColor(){
+        el = document.getElementById("fa-wave-square");
+     if(document_obj.verify === '0'){
+         el.style.backgroundColor = 'white';
+     } else if(document_obj.verify === '1') {
+         el.style.backgroundColor = 'Green';
+     }
+         else{
+            el.style.backgroundColor = 'Red';
+         }
+     }
+    
+</script> {% endcomment %}
+
 
  <script>
     function myFunction() {
