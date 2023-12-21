@@ -21,6 +21,27 @@
     <link rel="stylesheet" href="{% static 'assets copy/css/style.css' %}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{% static 'assets copy/images/favicon.png' %}" />
+
+  <style>
+
+    .sidebar .nav .nav-item .nav-link .icon-bg .menu-icon {
+      color: aqua;
+    }
+
+    .sidebar .nav .nav-item .nav-link .menu-title{
+      color: white;
+    }
+
+    .sidebar .nav.sub-menu .nav-item .nav-link:before{
+      color:aqua;
+    }
+
+    .sidebar .nav.sub-menu .nav-item .nav-link{
+      color:white;
+    }
+  </style>
+
+
   </head>
   <body>
     <div class="container-scroller">
@@ -80,9 +101,9 @@
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_sidebar.html -->
-        <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-image: linear-gradient(0deg, #33865f 0%, #04685e 100%);">
+        <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-image: linear-gradient(0deg, #002f19 0%, #001612 100%);">
           <ul class="nav" style="position:fixed;">
-            <li class="nav-item nav-category">Main</li>
+            <li class="nav-item nav-category" style="color:white;">Main</li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'dashboard' %}">
                 <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
@@ -171,7 +192,7 @@
             <br><br>
             <li class="nav-item sidebar-user-actions">
               <div class="sidebar-user-menu">
-                <a href="{% url 'Logout' %}" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
+                <a href="{% url 'Logout' %}" class="nav-link"><i class="mdi mdi-logout menu-icon" style="color:aqua;"></i>
                   <span class="menu-title">Log Out</span></a>
               </div>
             </li>

@@ -4775,3 +4775,23 @@ def indexCopy(request):
     username=request.user.username
     context['username']=username
     return render(request, 'index copy.html',context)
+
+
+
+
+def verifyDocument(request,refId):
+    if refId is not None:
+        print(refId)
+        profile = ApplicationDetails.objects.get(application_id=refId)
+        try:
+            document_obj = Document_Candidate.objects.get(candidate_id = profile.candidate_id)
+        except Exception as e:
+            print(e)
+            document_obj = Document_Candidate()
+            document_obj.candidate_id = profile.id
+        
+        if 'verify' in request.POST:
+            document_obj.verify = request.POST('verify')
+            print( 'verify',document_obj.verify)
+            document_obj.save()
+    return redirect('schedule_test_user_full_details')
