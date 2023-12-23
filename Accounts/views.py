@@ -593,9 +593,7 @@ def profile_update(request,candidate_id):
         # # except Exception as e:
         #     print(e)
         #     print("form not valid")
-        #     messages.error(request, 'Something went wrong. Please try again.')
-            
-           
+        #     messages.error(request, 'Something went wrong. Please try again.')           
     GENDER = (
         ('Male', 'Male'),
         ('Female', 'Female'),
@@ -616,8 +614,6 @@ def profile_update(request,candidate_id):
                'dl_doc' : dl_doc,
                }
     return render(request, 'edit_profile.html', context) 
-
-
 
 def all_user_list(request):
     if request.method == "POST":
