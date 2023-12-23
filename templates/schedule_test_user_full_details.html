@@ -1648,7 +1648,7 @@ textarea{
                             </div>
                         </div>
                         <div style="width:100%;height:120px;display:flex;">
-                            <form id="filter-form" method="POST" action="{% url 'verifyDocument' refId=application.application_id %}" class="form" enctype="multipart/form-data">
+                             <form id="filter-form" method="POST" action="{% url 'verifyDocument' refId=application.application_id %}"  class="form" enctype="multipart/form-data"> 
                                 {% csrf_token %} 
                             <div class="form-group">
                             <label for="verify" >Document Verification:</label>      

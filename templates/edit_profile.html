@@ -470,28 +470,22 @@
 
                                                         <div id="panel6" class="panel-body ng-star-inserted">
                                                                 <!----><!---->
-
                                                             <div class="row">
                                                                 <span class="panel-col panel-col1">Name</span>
                                                                 <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" required> 
                                                             </div>
-                                                        
                                                             <div class="row">
                                                                 <span class="panel-col panel-col1">Primary Email</span>
                                                                 <input type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
-                                                            </div>
-
-                                                        
+                                                            </div>                                                        
                                                             <div class="row">
                                                                 <span class="panel-col panel-col1">Mobile Number</span>
                                                                 <input  type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
                                                             </div>
-                                                        
                                                             <div class="row">
                                                                 <span class="panel-col panel-col1">Date Of Birth</span>
                                                                 <input  type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
                                                             </div>
-                                                        
                                                             <div class="row">
                                                                 <span class="panel-col panel-col1">Gender</span>
                                                                 <select id="gender" name="gender" class="panel-col text-bold-cell" required>
@@ -513,9 +507,7 @@
                                                             <span class="count_Icon theme-color">
                                                               2
                                                             </span>
-                                                            <!----><!---->
                                                             <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Documents </span>
-                                                            <!---->
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-2 filedoc" >
@@ -537,10 +529,8 @@
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body" style="overflow-y: hidden;">
-                                                                                    <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                                                                         <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs" name="resume_file" id="resume_file" value="" placeHolder="" onchange="return fileValidation()"> 
                                                                                         <input type="hidden" value="{% if user_profile.resume_file %}{{user_profile.resume_file}} {% endif %}" id="resume_file_name">                    
-                                                                                    </form>
                                                                                 
                                                                                     {% if mime_type == 'application/pdf' %}
                                                                                         <embed src="data:application/pdf;base64,{{ binary_data }}" type="application/pdf" width="100%" height="100%">      
@@ -683,7 +673,7 @@
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body" style="overflow-y: hidden;">
-                                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="hsc_doc" id="hsc_doc" value="" placeHolder="" required> 
+                                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="hsc_doc" id="hsc_doc" value="" placeHolder=""> 
                                                                                     <input type="hidden" value="{% if document_obj.hsc_doc %}{{ document_obj.hsc_doc }} {% endif %}" id="hsc_file_name" >
                                                                                         
                                                                                     {% if hsc_doc == '.jpg' or hsc_doc == '.jpeg' or hsc_doc == '.png' %}
@@ -818,7 +808,7 @@
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body" style="overflow-y: hidden;">
-                                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" required> 
+                                                                                    <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder=""> 
                                                                                     <input type="hidden" value="{% if document_obj.pan_doc %}{{ document_obj.pan_doc }} {% endif %}" id="pan_file_name">
                                                                                         
                                                                                     <hr>
@@ -1094,7 +1084,6 @@
                                                                 <span class="panel-col panel-col1">Locational Preference:</span>
                                                                 <textarea name="locational_preferences" id="" cols="10" rows="5" maxlength="1000" minlength="1000">{% if user_profile.locational_preferences %}{{ user_profile.locational_preferences }}{% endif %}</textarea>
                                                             </div>
-
 
                                                             <div class="column-footer row2 text-right" style="margin-top: 10px;">
                                                                 <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;">
