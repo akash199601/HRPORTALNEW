@@ -767,7 +767,9 @@ def sceduled_user_details(request):
     query = f"""SELECT cd.name, cd.email, cd.mobile_no, cd.id as candidate_id, ad.application_id as id, ad.position_shortlisted_for FROM application_details ad 
                 LEFT JOIN candidate_details cd 
                 ON ad.candidate_id = cd.id 
-                WHERE ad.application_status = 4"""
+                LEFT JOIN INTERVIEW_DETAILS ID 
+				ON ID.interview_id = ad.interview_id
+                WHERE ad.application_status = 4 AND ID.interview_date >= CAST(CURRENT_TIMESTAMP AS DATE)"""
     
     applicants = pd.read_sql(query, engine)
     
@@ -777,7 +779,25 @@ def sceduled_user_details(request):
     distinct_positions = distinct_positions_queryset['position_shortlisted_for'].tolist()
     print(distinct_positions)
     applicants=applicants.to_dict('records')
-    return render(request, 'sceduledUserDetails.html',{'applicants':applicants,'distinct_positions':distinct_positions})
+    
+    
+    query = f"""SELECT cd.name, cd.email, cd.mobile_no, cd.id as candidate_id, ad.application_id as id, ad.position_shortlisted_for FROM application_details ad 
+            LEFT JOIN candidate_details cd 
+            ON ad.candidate_id = cd.id 
+            LEFT JOIN INTERVIEW_DETAILS ID 
+			ON ID.interview_id = ad.interview_id
+            WHERE ad.application_status = 5 AND ID.interview_date >= CAST(CURRENT_TIMESTAMP AS DATE)"""
+    
+    applicants1 = pd.read_sql(query, engine)
+    
+    print(applicants)
+    distinct_positions_queryset = applicants1[['position_shortlisted_for']].drop_duplicates(keep='first')
+    distinct_positions_queryset.dropna(inplace=True)
+    distinct_positions1 = distinct_positions_queryset['position_shortlisted_for'].tolist()
+    print(distinct_positions1)
+    applicants1=applicants1.to_dict('records')
+    
+    return render(request, 'sceduledUserDetails.html',{'applicants':applicants,'distinct_positions':distinct_positions,'distinct_positions1':distinct_positions1,'applicants1':applicants1 })
 
 @csrf_exempt
 def api_interview_filter(request):
@@ -2922,6 +2942,12 @@ def application_status(request):
         return redirect(redirect_url)
   
 def applied_vacancy_card_details(request,pk):
+    
+    user_id=request.user.id
+    email=request.user.email
+    user_roll=User_Rolls.objects.get(user_id=user_id)
+
+
     candidate = candidate_details.objects.filter(email = request.user.email).values('id')
     print('candidate',candidate)
     int = InterviewDetails.objects.filter(vacancy_id = pk).values('interview_id')
@@ -2948,7 +2974,7 @@ def applied_vacancy_card_details(request,pk):
     # print('interview', interview)
     
     application = ApplicationDetails.objects.filter(candidate_id=candidate).first()
-    return render(request,'applied_vacancy_card_details.html',{'vacancy':vacancy_obj,'application':application,'status': application.application_status})
+    return render(request,'applied_vacancy_card_details.html',{'vacancy':vacancy_obj,'application':application,'status': application.application_status,'user_roll':user_roll,'email':email})
 
 def new_form(request,refId):
     user_profile_obj = User_Details.objects.get(id=refId)

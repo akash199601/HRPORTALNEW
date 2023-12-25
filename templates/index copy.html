@@ -165,7 +165,19 @@
                 </ul>
               </div>
             </li>
-  
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic6">
+                <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
+                <span class="menu-title">Question Sheet</span>
+                <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="ui-basic6">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'quest_sheet_list' %}">All Question Sheets</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'post_question' %}">Add Question Sheet</a></li>
+                </ul>
+              </div>
+            </li>
               {% comment %} <li class="nav-item">
               <a class="nav-link" href="pages/icons/mdi.html">
                 <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
@@ -288,19 +300,19 @@
                               </a>
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'sceduled_user_details' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 10px 0px 0px;text-decoration:none;">
                                 <h5 class="mb-2 text-dark font-weight-normal">Scheduled Test Completed</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold">{{ counts.onboarding }}</h2>
+                                <h2 class="mb-4 text-dark font-weight-bold">{{ counts.sch_int }}</h2>
                               </a>
                             </div>
 
                             <div style="display:flex;height:50%;">                             
-                              <a class="card-inner-cp card-cp-wt cursor" href="{% url 'schedule_online_test' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 0px 0px 10px;text-decoration:none;">
-                                <h5 class="mb-2 text-dark font-weight-normal">Test Scheduled But Not Completed</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold">{{ counts.test_sch_done }}</h2>
+                              <a class="card-inner-cp card-cp-wt cursor" href="{% url 'reschedule_interview_user' %}" style="width:50%;padding-top: 30px;border-radius: 0px 0px 0px 10px;text-decoration:none;">
+                                <h5 class="mb-2 text-dark font-weight-normal">Re-Schedule Interview</h5>
+                                <h2 class="mb-4 text-dark font-weight-bold">{{ counts.reschedule }}</h2>
                               </a>
-                              <a class="card-inner-cp card-cp-wt cursor" href="{% url 'rejected' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 0px 10px 0px;text-decoration:none;">
+                              {% comment %} <a class="card-inner-cp card-cp-wt cursor" href="{% url 'rejected' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 0px 10px 0px;text-decoration:none;">
                                 <h5 class="mb-2 text-dark font-weight-normal">Reject</h5>
                                 <h2 class="mb-4 text-dark font-weight-bold">{{ counts.reject_count }}</h2>
-                              </a>
+                              </a> {% endcomment %}
                             </div>
                           </div>
                         </div>
@@ -335,7 +347,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="row">
+                    {% comment %} <div class="row">
                       <div class="col-12 grid-margin">
                         <div class="card">
                           <div class="card-body">
@@ -425,7 +437,7 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> {% endcomment %}
                   </div>
                 </div>
               </div>
@@ -436,8 +448,8 @@
           <footer class="footer">
             <div class="footer-inner-wraper">
               <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span>
+                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">© 2023 Sonata Finance Pvt. Ltd. All rights reserved</span>
+                {% comment %} <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span> {% endcomment %}
               </div>
             </div>
           </footer>
