@@ -763,9 +763,7 @@ def sceduled_user_details(request):
     query = f"""SELECT cd.name, cd.email, cd.mobile_no, cd.id as candidate_id, ad.application_id as id, ad.position_shortlisted_for FROM application_details ad 
                 LEFT JOIN candidate_details cd 
                 ON ad.candidate_id = cd.id 
-                LEFT JOIN INTERVIEW_DETAILS ID 
-				ON ID.interview_id = ad.interview_id
-                WHERE ad.application_status = 4 AND ID.interview_date >= CAST(CURRENT_TIMESTAMP AS DATE)"""
+                WHERE ad.application_status = 4 """
     
     applicants = pd.read_sql(query, engine)
     
@@ -780,9 +778,7 @@ def sceduled_user_details(request):
     query = f"""SELECT cd.name, cd.email, cd.mobile_no, cd.id as candidate_id, ad.application_id as id, ad.position_shortlisted_for FROM application_details ad 
             LEFT JOIN candidate_details cd 
             ON ad.candidate_id = cd.id 
-            LEFT JOIN INTERVIEW_DETAILS ID 
-			ON ID.interview_id = ad.interview_id
-            WHERE ad.application_status = 5 AND ID.interview_date >= CAST(CURRENT_TIMESTAMP AS DATE)"""
+            WHERE ad.application_status = 5"""
     
     applicants1 = pd.read_sql(query, engine)
     
