@@ -3351,7 +3351,7 @@ def view_candidate_profile(request, email):
         'aadhar_doc' : aadhar_doc,
         'pan_doc' : pan_doc,
         'dl_doc' : dl_doc,
-        # 'document_obj':document_obj
+        'document_obj':document_obj,
     }
 
     # Check if the user has access; the can_access_candidate_profile decorator
