@@ -240,19 +240,18 @@
               </div>
             </a>
             <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
-              <div class="p-3 text-center bg-primary">
+              {% comment %} <div class="p-3 text-center bg-primary">
                 <img class="img-avatar img-avatar48 img-avatar-thumb" src="{% static 'assets copy/images/faces/face28.png' %}" alt="">
-              </div>
+              </div> {% endcomment %}
               <div class="p-2">
-                <h5 class="dropdown-header text-uppercase pl-2 text-dark">User Options</h5>
+                {% comment %} <h5 class="dropdown-header text-uppercase pl-2 text-dark">User Options</h5>
                 <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#">
                   <span>Profile</span>
                   <span class="p-0">
-                    {% comment %} <span class="badge badge-success">1</span> {% endcomment %}
                     <i class="mdi mdi-account-outline ml-1"></i>
                   </span>
                 </a>
-                <div role="separator" class="dropdown-divider"></div>
+                <div role="separator" class="dropdown-divider"></div> {% endcomment %}
                 <h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Actions</h5>
                 <a class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="{% url 'change_password' %}">
                   <span>Change Password</span>
@@ -335,6 +334,19 @@
                 <li class="nav-item"> <a class="nav-link" href="{% url 'Onboarding_candidates' %}">Accept</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{% url 'hold_user_details' %}">Hold</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{% url 'rejected' %}">Reject</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic6" aria-expanded="false" aria-controls="ui-basic6">
+              <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
+              <span class="menu-title">Question Sheet</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic6">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{% url 'quest_sheet_list' %}">All Question Sheets</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'post_question' %}">Add Question Sheet</a></li>
               </ul>
             </div>
           </li>
