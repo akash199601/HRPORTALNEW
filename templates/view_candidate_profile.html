@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'candidateBase.html' %}
 {% block main_content %}
 
 {% load static %}
@@ -155,7 +155,6 @@
         }
       }
       
-      
       .modal {
         display: none;
         position: fixed;
@@ -205,7 +204,6 @@
             .action-buttons{
                 width:45%;
             }
-      
         }
       
         .close {
@@ -429,21 +427,16 @@
     </div>
 <div class="container-content py-5 wow fadeInUp" data-wow-delay="0.1s" style="margin-top:10px;">
     <div class="containers" >
-
         <div class="basic-details-card" style="margin-bottom: 10px;margin-top:20px;">
             <ul class="item_list">
-                <!---->
                 <li class="item_list_block step_open" >
                     <div class="info_title theme-color" onclick="myFunction5()">
                         <span class="count_Icon theme-color">
                             1
                         </span>
-                        <!----><!---->
                         <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Basic Details </span>
-                        <!---->
                     </div>
                     <div id="panel6" class="panel-body ng-star-inserted" style="height: 90%;display:none;">
-                            <!----><!---->
                         <div class="row">
                             <span class="panel-col panel-col1">Name</span>
                             <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" readonly> 
@@ -482,9 +475,7 @@
                         <span class="count_Icon theme-color">
                          2
                         </span>
-                        <!----><!---->
                         <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Personal Details </span>
-                        <!---->
                     </div>
 
                     <div id="personal-details" style="height:100%;width:100%;display:none;">
@@ -569,7 +560,6 @@
                                     <tr>
                                         <th>High School</th>
                                         <td><input readonly type="text" value="{% if user_profile.high_school_Degree_Diploma %}{{ user_profile.high_school_Degree_Diploma }}{% endif %}" name="high_school_Degree_Diploma"></td>
-                                        {% comment %} <td><input readonly type="text" value="{% if user_profile.high_school_subjects %}{{ user_profile.high_school_subjects }}{% endif %}" name="high_school_subjects"></td> {% endcomment %}
                                         <td><input readonly type="text" value="{% if user_profile.high_school_name_location %}{{ user_profile.high_school_name_location }}{% endif %}" name="high_school_name_location"></td>
                                         <td><input readonly type="text" value="{% if user_profile.high_school_marks_obtained %}{{ user_profile.high_school_marks_obtained }}{% endif %}" name="high_school_marks_obtained"></td>
                                         <td><input readonly type="text" value="{% if user_profile.high_school_passing_year %}{{ user_profile.high_school_passing_year }}{% endif %}" name="high_school_passing_year"></td>
@@ -577,7 +567,6 @@
                                     <tr>
                                         <th>Intermediate</th>
                                         <td><input readonly type="text" value="{% if user_profile.intermediate_Degree_Diploma %}{{ user_profile.intermediate_Degree_Diploma }}{% endif %}" name="intermediate_Degree_Diploma"></td>
-                                        {% comment %} <td><input readonly type="text" value="{% if user_profile.intermediate_subjects %}{{ user_profile.intermediate_subjects }}{% endif %}" name="intermediate_subjects"></td> {% endcomment %}
                                         <td><input readonly type="text" value="{% if user_profile.intermediate_name_location %}{{ user_profile.intermediate_name_location }}{% endif %}" name="intermediate_name_location"></td>
                                         <td><input readonly type="text" value="{% if user_profile.intermediate_marks_obtained %}{{ user_profile.intermediate_marks_obtained }}{% endif %}" name="intermediate_marks_obtained"></td>
                                         <td><input readonly type="text" value="{% if user_profile.intermediate_passing_year %}{{ user_profile.intermediate_passing_year }}{% endif %}" name="intermediate_passing_year"></td>
@@ -585,7 +574,6 @@
                                     <tr>
                                         <th>Graduation</th>
                                         <td><input readonly type="text" value="{% if user_profile.graduation_Degree_Diploma %}{{ user_profile.graduation_Degree_Diploma }}{% endif %}" name="graduation_Degree_Diploma"></td>
-                                        {% comment %} <td><input readonly type="text" value="{% if user_profile.graduation_subjects %}{{ user_profile.graduation_subjects }}{% endif %}" name="graduation_subjects"></td> {% endcomment %}
                                         <td><input readonly type="text" value="{% if user_profile.graduation_name_location %}{{ user_profile.graduation_name_location }}{% endif %}" name="graduation_name_location"></td>
                                         <td><input readonly type="text" value="{% if user_profile.graduation_marks_obtained %}{{ user_profile.graduation_marks_obtained }}{% endif %}" name="graduation_marks_obtained"></td>
                                         <td><input readonly type="text" value="{% if user_profile.graduation_passing_year %}{{ user_profile.graduation_passing_year }}{% endif %}" name="graduation_passing_year"></td>
@@ -601,7 +589,6 @@
                                     <tr>
                                         <th>Professional Qualification</th>
                                             <td><input readonly type="text" value="{% if user_profile.professional_qualification_Degree_Diploma %}{{ user_profile.professional_qualification_Degree_Diploma }}{% endif %}" name="professional_qualification_Degree_Diploma"></td>
-                                            {% comment %} <td><input readonly type="text" value="{% if user_profile.professional_qualification_subjects %}{{ user_profile.professional_qualification_subjects }}{% endif %}" name="professional_qualification_subjects"></td> {% endcomment %}
                                             <td><input readonly type="text" value="{% if user_profile.professional_qualification_name_location %}{{ user_profile.professional_qualification_name_location }}{% endif %}" name="professional_qualification_name_location"></td>
                                             <td><input readonly type="text" value="{% if user_profile.professional_qualification_marks_obtained %}{{ user_profile.professional_qualification_marks_obtained }}{% endif %}" name="professional_qualification_marks_obtained"></td>
                                             <td><input readonly type="text" value="{% if user_profile.professional_qualification_passing_year %}{{ user_profile.professional_qualification_passing_year }}{% endif %}" name="professional_qualification_passing_year"></td>
@@ -609,7 +596,6 @@
                                     <tr>
                                         <th>others</th>
                                         <td><input readonly type="text" value="{% if user_profile.others_qualification_Degree_Diploma %}{{ user_profile.others_qualification_Degree_Diploma }}{% endif %}" name="others_qualification_Degree_Diploma"></td>
-                                        {% comment %} <td><input readonly type="text" value="{% if user_profile.others_qualification_subjects %}{{ user_profile.others_qualification_subjects }}{% endif %}" name="others_qualification_subjects"></td> {% endcomment %}
                                         <td><input readonly type="text" value="{% if user_profile.others_qualification_name_location %}{{ user_profile.others_qualification_name_location }}{% endif %}" name="others_qualification_name_location"></td>
                                         <td><input readonly type="text" value="{% if user_profile.others_qualification_marks_obtained %}{{ user_profile.others_qualification_marks_obtained }}{% endif %}" name="others_qualification_marks_obtained"></td>
                                         <td><input readonly type="text" value="{% if user_profile.others_qualification_passing_year %}{{ user_profile.others_qualification_passing_year }}{% endif %}" name="others_qualification_passing_year"></td>
@@ -624,8 +610,7 @@
                                 <table class="training" style="width: 100%;">
                                     <tr>
                                         <th>Program Title</th>
-                                        <th>Institution &
-                                            Location</th>
+                                        <th>Institution & Location</th>
                                         <th>Skill Areas/Course Content</th>
                                         <th>Start Date</th>
                                         <th>Course Duration</th>
@@ -821,14 +806,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" style="overflow-y: hidden;">
-                                        <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                        {% comment %} <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                             {% csrf_token %}
                                             <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="aadhar_doc" id="aadhar_doc" value="" placeHolder="" required> 
                                             <input type="hidden" value="{% if document_obj.aadhar_doc %}{{ document_obj.aadhar_doc }} {% endif %}" id="aadhar_file_name">
                                             <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
                                                 Update
                                             </button>
-                                        </form>
+                                        </form> {% endcomment %}
                                         <hr>
                                         {% if aadhar_doc == '.jpg' or aadhar_doc == '.jpeg' or aadhar_doc == '.png' %}
                                         <div style="width: 100%; height: 100%; overflow: auto;">
@@ -865,14 +850,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" style="overflow-y: hidden;">
-                                        <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                        {% comment %} <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                             {% csrf_token %}
                                             <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="pan_doc" id="pan_doc" value="" placeHolder="" > 
                                             <input type="hidden" value="{% if document_obj.pan_doc %}{{ document_obj.pan_doc }} {% endif %}" id="pan_file_name">
                                             <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
                                                 Update
                                             </button>
-                                        </form>
+                                        </form> {% endcomment %}
                                         <hr>
                                         {% if pan_doc == '.jpg' or pan_doc == '.jpeg' or pan_doc == '.png' %}
                                         <div style="width: 100%; height: 100%; overflow: auto;">
@@ -906,14 +891,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" style="overflow-y: hidden;">
-                                        <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                        {% comment %} <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                             {% csrf_token %}
                                             <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="dl_doc" id="dl_doc" value="" placeHolder=""> 
                                             <input type="hidden" value="{% if document_obj.dl_doc %}{{ document_obj.dl_doc }} {% endif %}" id="dl_file_name">
                                             <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
                                                 Update
                                             </button>
-                                        </form>
+                                        </form> {% endcomment %}
                                         <hr>
                                         {% if dl_doc == '.jpg' or dl_doc == '.jpeg' or dl_doc == '.png' %}
                                         <div style="width: 100%; height: 100%; overflow: auto;">
@@ -948,14 +933,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" style="overflow-y: hidden;">
-                                        <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                        {% comment %} <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                             {% csrf_token %}
                                             <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="ssc_doc" id="ssc_doc" value="" placeHolder="" > 
                                             <input type="hidden" value="{% if document_obj.ssc_doc %}{{ document_obj.ssc_doc }} {% endif %}" id="ssc_file_name" >
                                             <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
                                                 Update
                                             </button>
-                                        </form>
+                                        </form> {% endcomment %}
                                         <hr>
                                         {% if ssc_doc == '.jpg' or ssc_doc == '.jpeg' or ssc_doc == '.png' %}
                                         <div style="width: 100%; height: 100%; overflow: auto;">
@@ -989,14 +974,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" style="overflow-y: hidden;">
-                                        <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                        {% comment %} <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                             {% csrf_token %}
                                             <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="hsc_doc" id="hsc_doc" value="" placeHolder="" required> 
                                             <input type="hidden" value="{% if document_obj.hsc_doc %}{{ document_obj.hsc_doc }} {% endif %}" id="hsc_file_name" >
                                             <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
                                                 Update
                                             </button>
-                                        </form>
+                                        </form> {% endcomment %}
                                         {% if hsc_doc == '.jpg' or hsc_doc == '.jpeg' or hsc_doc == '.png' %}
                                         <div style="width: 100%; height: 100%; overflow: auto;">
                                             <img src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
@@ -1031,14 +1016,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" style="overflow-y: hidden;">
-                                        <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                        {% comment %} <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                             {% csrf_token %}
                                             <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="graduate_doc" id="graduate_doc" value="" placeHolder=""> 
                                             <input type="hidden" value="{% if document_obj.graduate_doc %}{{ document_obj.graduate_doc }} {% endif %}" id="graduate_file_name" >
                                             <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
                                                 Update
                                             </button>
-                                        </form>
+                                        </form> {% endcomment %}
                                     <hr>
                                         {% if graduate_doc == '.jpg' or graduate_doc == '.jpeg' or graduate_doc == '.png' %}
                                         <div style="width: 100%; height: 100%; overflow: auto;">
