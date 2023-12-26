@@ -448,9 +448,9 @@ textarea{
                                         <span class="panel-col panel-col1">Name</span> 
                                         <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" readonly> 
                                     </div>
-                                    {% if document_obj.verify == 1 %} 
+                                    {% if basicdetails_verify == 1 %} 
                                         <span class="check" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10004</span>
-                                    {% elif document_obj.verify == 2 %} 
+                                    {% elif basicdetails_verify == 2 %} 
                                         <span class="cross" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10006</span>
                                     {% else %}
                                         <span style="display:flex;width:15px;font-size: large;padding-top: 10px;">                                      
@@ -463,9 +463,9 @@ textarea{
                                         <span class="panel-col panel-col1">Primary Email</span>
                                         <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
                                     </div>
-                                    {% if document_obj.verify == 1 %} 
+                                    {% if basicdetails_verify == 1 %} 
                                         <span class="check" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10004</span>
-                                    {% elif document_obj.verify == 2 %} 
+                                    {% elif basicdetails_verify == 2 %} 
                                         <span class="cross" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10006</span>
                                     {% else %}
                                         <span style="display:flex;width:15px;font-size: large;padding-top: 10px;">                                      
@@ -478,9 +478,9 @@ textarea{
                                         <span class="panel-col panel-col1">Mobile Number</span>
                                         <input readonly type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
                                     </div>
-                                    {% if document_obj.verify == 1 %} 
+                                    {% if basicdetails_verify == 1 %} 
                                         <span class="check" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10004</span>
-                                    {% elif document_obj.verify == 2 %} 
+                                    {% elif basicdetails_verify == 2 %} 
                                         <span class="cross" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10006</span>
                                     {% else %}
                                         <span style="display:flex;width:15px;font-size: large;padding-top: 10px;">                                      
@@ -493,9 +493,9 @@ textarea{
                                         <span class="panel-col panel-col1">Date Of Birth</span>
                                         <input readonly type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
                                     </div>
-                                    {% if document_obj.verify == 1 %} 
+                                    {% if basicdetails_verify == 1 %} 
                                         <span class="check" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10004</span>
-                                    {% elif document_obj.verify == 2 %} 
+                                    {% elif basicdetails_verify == 2 %} 
                                         <span class="cross" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10006</span>
                                     {% else %}
                                         <span style="display:flex;width:15px;font-size: large;padding-top: 10px;">                                      
@@ -513,9 +513,9 @@ textarea{
                                             {% endfor %}
                                         </select>
                                     </div>
-                                    {% if document_obj.verify == 1 %} 
+                                    {% if basicdetails_verify == 1 %} 
                                     <span class="check" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10004</span>
-                                    {% elif document_obj.verify == 2 %} 
+                                    {% elif basicdetails_verify == 2 %} 
                                         <span class="cross" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10006</span>
                                     {% else %}
                                         <span style="display:flex;width:15px;font-size: large;padding-top: 10px;">                                      
@@ -523,6 +523,28 @@ textarea{
                                         </span>
                                     {% endif %}
                                 </div>
+                                <div class="row">
+                                    <div style="width:90%;">
+                                        <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                            {% csrf_token %} 
+                                        <div class="form-group" style="text-align: center;margin-left: 20%;height: 80%;margin-right: 20%;padding: 5px;">
+                                        <label for="basicdetails_verify" style="font-weight: bold;" > Verify</label>      
+                                        {% if basicdetails_verify == 1 %}      
+                                        <select name="basicdetails_verify" id="basicdetails_verify" class="form-control" style="background-color:green; color:white;margin-bottom: 10px;margin-top: 10px;">
+                                            {% elif basicdetails_verify == 2 %}
+                                            <select name="basicdetails_verify" id="basicdetails_verify" class="form-control" style="background-color:red; color:white;margin-bottom: 10px;margin-top: 10px;">
+                                                {% else %}
+                                                <select name="basicdetails_verify" id="basicdetails_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin-bottom: 10px;margin-top: 10px; " >
+                                                    {% endif %}
+                                            <option value="0" {% if 0 == basicdetails_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
+                                            <option  value="1" {% if 1 == basicdetails_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
+                                            <option  value="2" {% if 2 == basicdetails_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
+                                          </select>
+                                        </div>
+                                        </form>    
+                                    </div>
+                                </div>
+
                             </div>
                         </li>
                     </ul>
@@ -1974,6 +1996,12 @@ textarea{
 </script>
 <script>
     document.getElementById('pan_verify').addEventListener('change', function() {
+     this.form.submit();
+    });
+</script>
+
+<script>
+    document.getElementById('basicdetails_verify').addEventListener('change', function() {
      this.form.submit();
     });
 </script>
