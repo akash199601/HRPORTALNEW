@@ -122,6 +122,8 @@ def signUp(request):
                 doc = Document_Candidate()
                 doc.candidate_id = candidate_profile.id
                 
+                verify = Verification_Document()
+                verify.candidate_id = candidate_profile.id
             else:
                 candidate_profile = candidate_details()
                 candidate_profile.name=name
@@ -133,11 +135,14 @@ def signUp(request):
                 user_roll=User_Rolls(user_id=myuser.id,roll_id=0)
                 doc = Document_Candidate()
                 doc.candidate_id = candidate_profile.id
-              
+                
+                verify = Verification_Document()
+                verify.candidate_id = candidate_profile.id
+
             myuser.save()
             user_roll.save()
             doc.save()
-           
+            verify.save()
             #print(user_profile)
             print("account_created")
             messages.success(request, " Your account has been successfully created")
