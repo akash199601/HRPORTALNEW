@@ -414,6 +414,15 @@ textarea{
         width: 100px;
     }
 
+
+
+    .cross {
+        color: #ff0000;
+    }
+      
+    .check {
+        color: #00ff00;
+    }
 </style>
         <!------------PROGRESS BAR------------>
         {% include 'progress_bar.html' %}
@@ -435,29 +444,84 @@ textarea{
                             </div>
                             <div id="panel6" class="panel-body ng-star-inserted" style="height: 90%;display:none;">
                                 <div class="row">
-                                    <span class="panel-col panel-col1">Name</span>
-                                    <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" readonly> 
+                                    <div style="width:90%;">
+                                        <span class="panel-col panel-col1">Name</span> 
+                                        <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" readonly> 
+                                    </div>
+                                    {% if document_obj.verify == 1 %} 
+                                        <span class="check" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10004</span>
+                                    {% elif document_obj.verify == 2 %} 
+                                        <span class="cross" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10006</span>
+                                    {% else %}
+                                        <span style="display:flex;width:15px;font-size: large;padding-top: 10px;">                                      
+                                            <i class="fas fa-exclamation"></i>
+                                        </span>
+                                    {% endif %}
                                 </div>
                                 <div class="row">
-                                    <span class="panel-col panel-col1">Primary Email</span>
-                                    <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
+                                    <div style="width:90%;">
+                                        <span class="panel-col panel-col1">Primary Email</span>
+                                        <input readonly type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
+                                    </div>
+                                    {% if document_obj.verify == 1 %} 
+                                        <span class="check" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10004</span>
+                                    {% elif document_obj.verify == 2 %} 
+                                        <span class="cross" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10006</span>
+                                    {% else %}
+                                        <span style="display:flex;width:15px;font-size: large;padding-top: 10px;">                                      
+                                            <i class="fas fa-exclamation"></i>
+                                        </span>
+                                    {% endif %}
                                 </div>
                                 <div class="row">
-                                    <span class="panel-col panel-col1">Mobile Number</span>
-                                    <input readonly type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
+                                    <div style="width:90%;">
+                                        <span class="panel-col panel-col1">Mobile Number</span>
+                                        <input readonly type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
+                                    </div>
+                                    {% if document_obj.verify == 1 %} 
+                                        <span class="check" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10004</span>
+                                    {% elif document_obj.verify == 2 %} 
+                                        <span class="cross" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10006</span>
+                                    {% else %}
+                                        <span style="display:flex;width:15px;font-size: large;padding-top: 10px;">                                      
+                                            <i class="fas fa-exclamation"></i>
+                                        </span>
+                                    {% endif %}
                                 </div>
                                 <div class="row">
-                                    <span class="panel-col panel-col1">Date Of Birth</span>
-                                    <input readonly type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
+                                    <div style="width:90%;">
+                                        <span class="panel-col panel-col1">Date Of Birth</span>
+                                        <input readonly type="date" class="panel-col text-bold-cell" required name="dob" value="{% if user_profile.dob %}{{ user_profile.dob|date:'Y-m-d' }}{% endif %}"> 
+                                    </div>
+                                    {% if document_obj.verify == 1 %} 
+                                        <span class="check" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10004</span>
+                                    {% elif document_obj.verify == 2 %} 
+                                        <span class="cross" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10006</span>
+                                    {% else %}
+                                        <span style="display:flex;width:15px;font-size: large;padding-top: 10px;">                                      
+                                            <i class="fas fa-exclamation"></i>
+                                        </span>
+                                    {% endif %}
                                 </div>
                                 <div class="row">
-                                    <span class="panel-col panel-col1">Gender</span>
-                                    <select readonly id="gender" name="gender" class="panel-col text-bold-cell" required>
-                                        <option class="panel-col text-bold-cell" value="" disabled selected hidden>Select Gender</option>
-                                        {% for choice in gender_choices %}
-                                        <option class="panel-col text-bold-cell" value="{{ choice.0 }}" {% if choice.0 == user_profile.gender %}selected{% endif %}>{{ choice.1 }}</option>
-                                        {% endfor %}
-                                    </select>
+                                    <div style="width:90%;">
+                                        <span class="panel-col panel-col1">Gender</span>
+                                        <select readonly id="gender" name="gender" class="panel-col text-bold-cell" required>
+                                            <option class="panel-col text-bold-cell" value="" disabled selected hidden>Select Gender</option>
+                                            {% for choice in gender_choices %}
+                                            <option class="panel-col text-bold-cell" value="{{ choice.0 }}" {% if choice.0 == user_profile.gender %}selected{% endif %}>{{ choice.1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    {% if document_obj.verify == 1 %} 
+                                    <span class="check" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10004</span>
+                                    {% elif document_obj.verify == 2 %} 
+                                        <span class="cross" style="display:flex;width:15px;font-size: large;padding-top: 10px;">&#10006</span>
+                                    {% else %}
+                                        <span style="display:flex;width:15px;font-size: large;padding-top: 10px;">                                      
+                                            <i class="fas fa-exclamation"></i>
+                                        </span>
+                                    {% endif %}
                                 </div>
                             </div>
                         </li>
