@@ -4812,3 +4812,23 @@ def verifyDocument(request, refId):
                 document_obj.save()
             
     return redirect('schedule_test_user_full_details', refId=refId)
+
+
+def verifySSC(request, refId):
+    if refId:
+        try:
+            application = ApplicationDetails.objects.get(application_id=refId)
+        except ApplicationDetails.DoesNotExist:
+            raise Http404("ApplicationDetails not found")
+        profile = get_object_or_404(ApplicationDetails, application_id=refId)
+        document_obj, created = Document_Candidate.objects.get_or_create(candidate_id=application.candidate_id)
+        
+        if request.method == 'POST' and 'ssc_verify' in request.POST:
+            ssc_verify = request.POST.get('ssc_verify', None)
+            print('ssc_verify', ssc_verify)
+            
+            if ssc_verify:
+                document_obj.ssc_verify = ssc_verify
+                document_obj.save()
+            
+    return redirect('schedule_test_user_full_details', refId=refId)

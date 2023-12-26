@@ -159,4 +159,6 @@ urlpatterns = [
     path('indexCopy',views.indexCopy,name="indexCopy"),
     
     path('verifyDocument/<int:refId>/',views.verifyDocument, name="verifyDocument"),
+    
+    path('verifySSC/<int:refId>/',views.verifySSC, name="verifySSC"),
 ]
