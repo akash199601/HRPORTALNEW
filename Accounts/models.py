@@ -550,4 +550,20 @@ class Document_Candidate(models.Model):
 
     class Meta:
         db_table = 'UPLOAD_DOCUMENTS'
+<<<<<<< HEAD
         
+=======
+
+
+class Verification_Document(models.Model):
+    id = models.AutoField(primary_key = True)
+    candidate_id = models.IntegerField(null=True, blank=True,default = 0)
+    aadhar_verify = models.IntegerField(null=True, blank=True,default = 0)
+    pan_verify = models.IntegerField(null=True, blank=True,default = 0)
+    dl_verify = models.IntegerField(null=True, blank=True,default = 0)
+    hsc_verify = models.IntegerField(null=True, blank=True,default = 0)
+    ssc_verify = models.IntegerField(null=True, blank=True,default = 0)
+    graduate_verify = models.IntegerField(null=True, blank=True,default = 0)
+    class Meta:
+        db_table = 'Verify_Documents'
+>>>>>>> 9b693d39681164d940627da97eec378e2931bcd2
