@@ -1711,6 +1711,40 @@ def schedule_test_user_full_details(request,refId):
         except TestScheduleDetails.DoesNotExist:
     # handle the case when the object does not exist, e.g., create a new object, show an error message, etc.
             pass
+        
+        # for verification 
+        try:
+            verify_obj = Verification_Document.objects.get(candidate_id = application.candidate_id)
+        except Exception as e:
+            print(e)
+            verify_obj = Verification_Document()
+            verify_obj.candidate_id = application.candidate_id
+        
+        if 'aadhar_verify' in request.POST:
+            verify_obj.aadhar_verify = request.POST.get('aadhar_verify',None)
+            print( 'aadhar_verify',verify_obj.aadhar_verify)
+            verify_obj.save()
+        if 'ssc_verify' in request.POST:
+            verify_obj.ssc_verify = request.POST.get('ssc_verify',None)
+            print( 'ssc_verify',verify_obj.ssc_verify)
+            verify_obj.save()
+        if 'hsc_verify' in request.POST:
+            verify_obj.hsc_verify = request.POST.get('hsc_verify',None)
+            print( 'hsc_verify',verify_obj.hsc_verify)
+            verify_obj.save()
+        if 'graduate_verify' in request.POST:
+            verify_obj.graduate_verify = request.POST.get('graduate_verify',None)
+            print( 'graduate_verify',verify_obj.graduate_verify)
+            verify_obj.save()
+        if 'pan_verify' in request.POST:
+            verify_obj.pan_verify = request.POST.get('pan_verify',None)
+            print( 'pan_verify',verify_obj.pan_verify)
+            verify_obj.save()
+        if 'dl_verify' in request.POST:
+            verify_obj.dl_verify = request.POST.get('dl_verify',None)
+            print( 'dl_verify',verify_obj.dl_verify)
+            verify_obj.save()
+
         # for upload the document 
         try:
             document_obj = Document_Candidate.objects.get(candidate_id = application.candidate_id)
@@ -1787,7 +1821,23 @@ def schedule_test_user_full_details(request,refId):
             graduate_doc = None
             pan_doc = None
             dl_doc = None
+            
+        try:
+            verify_obj = Verification_Document.objects.get(candidate_id = profile.id)
+            aadhar_verify = verify_obj.aadhar_verify if verify_obj.aadhar_verify else None
+            ssc_verify = verify_obj.ssc_verify if verify_obj.ssc_verify else None
+            hsc_verify = verify_obj.hsc_verify if verify_obj.hsc_verify else None
+            graduate_verify = verify_obj.graduate_verify if verify_obj.graduate_verify else None
+            dl_verify = verify_obj.dl_verify if verify_obj.dl_verify else None
+            pan_verify = verify_obj.pan_verify if verify_obj.pan_verify else None
 
+        except Exception as e:
+            aadhar_verify = None
+            ssc_verify = None
+            hsc_verify = None
+            pan_verify = None
+            dl_verify = None
+            graduate_verify = None
         GENDER = (
         ('Male', 'Male'),
         ('Female', 'Female'),
@@ -1819,6 +1869,12 @@ def schedule_test_user_full_details(request,refId):
         'document_obj':document_obj,
         'testschedule_obj': testschedule_obj,
         'test_details':test_details,
+        'aadhar_verify':aadhar_verify,
+        'ssc_verify' : ssc_verify,
+        'hsc_verify' : hsc_verify,
+        'pan_verify' : pan_verify,
+        'dl_verify' : dl_verify,
+        'graduate_verify' : graduate_verify,
         # 'resume_obj':resume_obj,        
     }
     return render(request,'schedule_test_user_full_details.html',context)
@@ -4817,4 +4873,3 @@ def verifyDocument(request, refId):
                 document_obj.save()
             
     return redirect('schedule_test_user_full_details', refId=refId)
-
