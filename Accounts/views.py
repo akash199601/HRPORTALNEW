@@ -121,7 +121,7 @@ def signUp(request):
                 user_roll=User_Rolls(user_id=myuser.id,roll_id=0)
                 doc = Document_Candidate()
                 doc.candidate_id = candidate_profile.id
-                
+               
             else:
                 candidate_profile = candidate_details()
                 candidate_profile.name=name
@@ -133,11 +133,11 @@ def signUp(request):
                 user_roll=User_Rolls(user_id=myuser.id,roll_id=0)
                 doc = Document_Candidate()
                 doc.candidate_id = candidate_profile.id
-              
+                
             myuser.save()
             user_roll.save()
             doc.save()
-           
+          
             #print(user_profile)
             print("account_created")
             messages.success(request, " Your account has been successfully created")
@@ -4813,40 +4813,5 @@ def verifyDocument(request, refId):
             
     return redirect('schedule_test_user_full_details', refId=refId)
 
-<<<<<<< HEAD
-def verifyAadhar(request, refId):
-=======
-
-def verifySSC(request, refId):
->>>>>>> 18e4b8c2c3105d762d6860841fbda29c61e1a575
-    if refId:
-        try:
-            application = ApplicationDetails.objects.get(application_id=refId)
-        except ApplicationDetails.DoesNotExist:
-            raise Http404("ApplicationDetails not found")
-        profile = get_object_or_404(ApplicationDetails, application_id=refId)
-        document_obj, created = Document_Candidate.objects.get_or_create(candidate_id=application.candidate_id)
-        
-<<<<<<< HEAD
-        if request.method == 'POST' and 'aadhar_verify' in request.POST:
-            aadhar_verify = request.POST.get('aadhar_verify', None)
-            print('aadhar_verify', aadhar_verify)
-            
-            if aadhar_verify:
-                document_obj.aadhar_verify = aadhar_verify
-                document_obj.save()
-            
-    return redirect('schedule_test_user_full_details', refId=refId)
 
 
-=======
-        if request.method == 'POST' and 'ssc_verify' in request.POST:
-            ssc_verify = request.POST.get('ssc_verify', None)
-            print('ssc_verify', ssc_verify)
-            
-            if ssc_verify:
-                document_obj.ssc_verify = ssc_verify
-                document_obj.save()
-            
-    return redirect('schedule_test_user_full_details', refId=refId)
->>>>>>> 18e4b8c2c3105d762d6860841fbda29c61e1a575
