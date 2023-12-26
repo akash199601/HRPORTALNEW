@@ -548,5 +548,7 @@ class Document_Candidate(models.Model):
     graduate_doc = models.FileField(upload_to='media/',null=True, blank=True)
     aadhar_verify = models.IntegerField(null=True, blank=True,default=0)
     verify = models.IntegerField(null=True, blank=True,default=0)
+    ssc_verify = models.IntegerField(null=True, blank=True,default=0)
+
     class Meta:
         db_table = 'UPLOAD_DOCUMENTS'
