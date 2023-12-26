@@ -4812,3 +4812,24 @@ def verifyDocument(request, refId):
                 document_obj.save()
             
     return redirect('schedule_test_user_full_details', refId=refId)
+
+def verifyAadhar(request, refId):
+    if refId:
+        try:
+            application = ApplicationDetails.objects.get(application_id=refId)
+        except ApplicationDetails.DoesNotExist:
+            raise Http404("ApplicationDetails not found")
+        profile = get_object_or_404(ApplicationDetails, application_id=refId)
+        document_obj, created = Document_Candidate.objects.get_or_create(candidate_id=application.candidate_id)
+        
+        if request.method == 'POST' and 'aadhar_verify' in request.POST:
+            aadhar_verify = request.POST.get('aadhar_verify', None)
+            print('aadhar_verify', aadhar_verify)
+            
+            if aadhar_verify:
+                document_obj.aadhar_verify = aadhar_verify
+                document_obj.save()
+            
+    return redirect('schedule_test_user_full_details', refId=refId)
+
+
