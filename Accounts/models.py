@@ -550,9 +550,6 @@ class Document_Candidate(models.Model):
 
     class Meta:
         db_table = 'UPLOAD_DOCUMENTS'
-<<<<<<< HEAD
-        
-=======
 
 
 class Verification_Document(models.Model):
@@ -566,4 +563,3 @@ class Verification_Document(models.Model):
     graduate_verify = models.IntegerField(null=True, blank=True,default = 0)
     class Meta:
         db_table = 'Verify_Documents'
->>>>>>> 9b693d39681164d940627da97eec378e2931bcd2
