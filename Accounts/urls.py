@@ -158,6 +158,7 @@ urlpatterns = [
     path('upload_documents/<int:candidate_id>',views.upload_documents,name="upload_documents"),
     path('indexCopy',views.indexCopy,name="indexCopy"),
     
+    path('verifyAadhar/<int:refId>/',views.verifyAadhar, name="verifyAadhar"),
     path('verifyDocument/<int:refId>/',views.verifyDocument, name="verifyDocument"),
     
 ]
