@@ -373,7 +373,7 @@ def dashboard(request):
         dash_dict = dash_df.to_dict(orient='records')[0]
         print(dash_dict)
         context['counts'] = dash_dict
-        return render(request,'hr_admin_dashboard.html',context)
+        return render(request,'HEADHR.html',context)
     context['id']=user_id
     context['candidate_id']=candidate_details.objects.get(email = email).id
     print('candid', context['candidate_id'])
@@ -416,6 +416,16 @@ import pytesseract
 import re
 # from Accounts.aadhaar_read import front_data
 def profile_update(request,candidate_id):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     print('profile updaate hit')
     if candidate_id is not None:
         candidate_profile = candidate_details.objects.get(id=candidate_id)
@@ -617,10 +627,21 @@ def profile_update(request,candidate_id):
                'aadhar_doc' : aadhar_doc,
                'pan_doc' : pan_doc,
                'dl_doc' : dl_doc,
+               'is_hr':is_hr ,'is_hrhead':is_hrhead,
                }
     return render(request, 'edit_profile.html', context) 
 
 def all_user_list(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     if request.method == "POST":
         roll_id = request.POST.get('roll_id',None)
         if roll_id != 'all':
@@ -629,7 +650,7 @@ def all_user_list(request):
             return render(request,'all_user_list.html',{'userlist':userlist,"roll_id":roll_id})
                
     userlist = User.objects.all()
-    return render(request,'all_user_list.html',{'userlist':userlist})
+    return render(request,'all_user_list.html',{'userlist':userlist,'is_hr':is_hr ,'is_hrhead':is_hrhead})
 
 
 def roll_assign(request):
@@ -651,14 +672,33 @@ def roll_assign(request):
 # @login_required(login_url='signIn')
 def applied_user_details(request):
     # userroll = User_Rolls.objects.filter(roll_id=0).values('user_id')
-
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     applicants = candidate_details.objects.filter(status=0, is_user=False, reviewed_by__isnull=True)
     
     print(applicants)
-    return render(request, 'appliedUserDetails.html',{'applicants':applicants})
+    return render(request, 'appliedUserDetails.html',{'applicants':applicants,'is_hr':is_hr ,'is_hrhead':is_hrhead})
 
 @login_required(login_url='signIn')
 def schedule_online_test(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     query = f"""SELECT cd.name,
                         cd.email, 
                         cd.mobile_no,
@@ -727,7 +767,7 @@ def schedule_online_test(request):
     print(applicants)
     data1 = df1.to_dict('records')
 
-    return render(request, 'schedule_test_userdetails.html',{'applicants':data, 'distinct_positions':distinct_positions,'applicants1':data1, 'applicants2':data2,})
+    return render(request, 'schedule_test_userdetails.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'applicants':data, 'distinct_positions':distinct_positions,'applicants1':data1, 'applicants2':data2,})
 
 @csrf_exempt
 def api_exam_filter(request):
@@ -765,6 +805,16 @@ def get_branch_exam_options(request):
 
 @login_required(login_url='signIn')
 def sceduled_user_details(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     query = f"""SELECT cd.name, cd.email, cd.mobile_no, cd.id as candidate_id, ad.application_id as id, ad.position_shortlisted_for FROM application_details ad 
                 LEFT JOIN candidate_details cd 
                 ON ad.candidate_id = cd.id 
@@ -794,7 +844,7 @@ def sceduled_user_details(request):
     print(distinct_positions1)
     applicants1=applicants1.to_dict('records')
     
-    return render(request, 'sceduledUserDetails.html',{'applicants':applicants,'distinct_positions':distinct_positions,'distinct_positions1':distinct_positions1,'applicants1':applicants1 })
+    return render(request, 'sceduledUserDetails.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'applicants':applicants,'distinct_positions':distinct_positions,'distinct_positions1':distinct_positions1,'applicants1':applicants1 })
 
 @csrf_exempt
 def api_interview_filter(request):
@@ -832,7 +882,16 @@ def get_branch_interview_options(request):
 
 @login_required(login_url='signIn')
 def hold_user_details(request):
-    
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
         query = """
         SELECT 
             cd.name, 
@@ -864,10 +923,9 @@ def hold_user_details(request):
             'candidates': candidate,
             'distinct_positions': distinct_positions,
             'data_list': data_list,
+            'is_hr':is_hr ,'is_hrhead':is_hrhead,
         }
         return render(request, 'holdUserDetails.html', context)
-
-    
         
 @csrf_exempt
 def api_hold_filter(request):
@@ -905,6 +963,16 @@ def get_branch_hold_options(request):
 
 @login_required(login_url='signIn')
 def rejected_user_details(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     user_id=request.user.id
     alloted_applicants_ids = rejected_review_allotment.objects.filter(hr_id=user_id).values_list('candidate_id', flat=True)
 
@@ -916,7 +984,7 @@ def rejected_user_details(request):
         print(distinct_positions)
     
  
-    return render(request, 'rejectedUserDetails.html',{'applicants':applicants, 'distinct_positions':distinct_positions})
+    return render(request, 'rejectedUserDetails.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'applicants':applicants, 'distinct_positions':distinct_positions})
 
 
 
@@ -976,6 +1044,7 @@ def validate_inputs(data):
 
 @transaction.atomic
 def scedule_interview(request,refId):
+    
     try:
         application = ApplicationDetails.objects.get(pk=refId)
     except ApplicationDetails.DoesNotExist:
@@ -1100,6 +1169,16 @@ from datetime import date as date
 
 @csrf_exempt
 def exam(request,slug):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     context={}
     print('slug: ', slug)
     refId=decode_id(slug)
@@ -1197,6 +1276,8 @@ def exam(request,slug):
                     context['time_in_secs'] = calculate_time_difference(start_time_obj,end_time_obj)      
                     print(question_id_list)
                     # livefe(request)
+                    context['is_hr'] = is_hr
+                    context['is_hrhead'] = is_hrhead
                     return render(request,'question_sheet.html',context)
         if 'final_step' in request.POST:
             print('final step')
@@ -1533,6 +1614,16 @@ def calculate_time_difference(start_time, end_time):
     return time_diff_seconds
 
 def show_exam_result(request,id,application_id):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     context={}
     # candidate_id=id
     user_profile = candidate_details.objects.get(id=id)
@@ -1560,6 +1651,8 @@ def show_exam_result(request,id,application_id):
     context['binary_data'] = encoded_data
     context['mime_type'] = mime_type
     context['is_online']=test_details.is_online
+    context['is_hr'] = is_hr
+    context['is_hrhead'] = is_hrhead
     return render(request,'show_exam_result.html',context)
     # return HttpResponse('exam')
     
@@ -1603,6 +1696,16 @@ def get_exam_sheet(request):
     return JsonResponse(list(sheets),safe=False)
 
 def sceduled_user_full_details(request,refId):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     application = ApplicationDetails.objects.get(pk=refId)
     
     position_shortlisted_for=application.position_shortlisted_for
@@ -1682,6 +1785,7 @@ def sceduled_user_full_details(request,refId):
         'ssc_doc': ssc_doc,
         'hsc_doc': hsc_doc,
         'graduate_doc': graduate_doc,
+        'is_hr':is_hr ,'is_hrhead':is_hrhead,
         # 'document_obj': document_obj,
     }
     return render(request,'sceduled_user_full_details.html',context)
@@ -1689,6 +1793,16 @@ def sceduled_user_full_details(request,refId):
 # from urllib.parse import parse
 
 def schedule_test_user_full_details(request,refId):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     if refId is not None:
         print(refId)
         application = ApplicationDetails.objects.get(application_id=refId)
@@ -1896,6 +2010,7 @@ def schedule_test_user_full_details(request,refId):
         'graduate_verify' : graduate_verify,
         'basicdetails_verify' : basicdetails_verify,
         'camshot':row,'pics': pics,
+        'is_hr':is_hr ,'is_hrhead':is_hrhead,
         # 'resume_obj':resume_obj,        
     }
     return render(request,'schedule_test_user_full_details.html',context)
@@ -1969,6 +2084,16 @@ def fetch_interview_panel(request):
     
     
 def applied_user_full_details(request, refId):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     if refId is not None:
         # application = ApplicationDetails.objects.get(application_id=refId)
         profile = candidate_details.objects.get(id=refId)
@@ -2007,7 +2132,6 @@ def applied_user_full_details(request, refId):
             document_obj.graduate_doc = request.FILES['graduate_doc']
             print( 'graduate_doc',document_obj.graduate_doc)
             document_obj.save()
-
         
         try:
             resume_obj = ResumeFiles.objects.get(candidate_id=profile.id)
@@ -2056,6 +2180,7 @@ def applied_user_full_details(request, refId):
         'hsc_doc': hsc_doc,
         'graduate_doc': graduate_doc,
         'document_obj':document_obj,
+        'is_hr':is_hr ,'is_hrhead':is_hrhead,
     }
 
     return render(request, 'applied_user_full_detail.html', context)
@@ -2142,6 +2267,16 @@ from .forms import CandidateBasicDetailsForm
 
 
 def accepted_user_full_details(request,refId):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     if refId is not None:
         print(refId)
         profile = candidate_details.objects.get(id=refId)
@@ -2268,9 +2403,20 @@ def accepted_user_full_details(request,refId):
         'ssc_doc': ssc_doc,
         'hsc_doc': hsc_doc,
         'graduate_doc': graduate_doc,
-        'status':profile.status})
+        'status':profile.status,
+        'is_hr':is_hr ,'is_hrhead':is_hrhead,})
 
 def rejected_user_full_details(request,refId):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     profile = candidate_details.objects.get(id=refId)
     hr_users = User_Rolls.objects.filter(roll_id=1).values_list('user_id', flat=True)
     hr_users_names = User.objects.filter(id__in=hr_users).values_list('username', flat=True)
@@ -2308,7 +2454,8 @@ def rejected_user_full_details(request,refId):
                'candidate_id': profile.id,
                 'aadhar_doc' : aadhar_doc,
                 'pan_doc' : pan_doc,
-                'dl_doc' : dl_doc
+                'dl_doc' : dl_doc,
+                'is_hr':is_hr ,'is_hrhead':is_hrhead,
                }
     return render(request,'rejected_user_full_detail.html', context)
 
@@ -2332,6 +2479,16 @@ def review_allotment(request):
 
 @login_required(login_url='signIn')
 def alloted_user_details(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     user_id=request.user.id
     alloted_applicants_ids = rejected_review_allotment.objects.filter(hr_id=user_id, review_status = False).values_list('candidate_id', flat=True)
     applicants = None
@@ -2343,7 +2500,7 @@ def alloted_user_details(request):
         distinct_positions = [position for position in distinct_positions_queryset if position is not None]
         print(distinct_positions)
     # print(applicants[0].name)    
-    return render(request, 'alloted_user_details.html',{'applicants':applicants, 'distinct_positions':distinct_positions})
+    return render(request, 'alloted_user_details.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'applicants':applicants, 'distinct_positions':distinct_positions})
 
 def api_alloted_filter(request):
     if request.method == 'POST':
@@ -2397,6 +2554,16 @@ def reviewed_user_details(request):
     return render(request, 'reviewed_user_details.html',{'applicants':applicants})
 
 def alloted_user_full_details(request,refId):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     if request.method == 'POST':
         applicant_id = request.POST.get('applicant_id')
         remarks = request.POST.get('remarks')
@@ -2449,11 +2616,22 @@ def alloted_user_full_details(request,refId):
                'candidate_id': profile.id,
                'aadhar_doc' : aadhar_doc,
                'pan_doc' : pan_doc,
-               'dl_doc' : dl_doc
+               'dl_doc' : dl_doc,
+               'is_hr':is_hr ,'is_hrhead':is_hrhead,
         }
     return render(request,'alloted_user_full_detail.html',context)
 
 def hold_user_full_details(request,refId):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     if refId is not None:
         print(refId)
         profile = candidate_details.objects.get(id=refId)
@@ -2502,7 +2680,8 @@ def hold_user_full_details(request,refId):
         'candidate_id': profile.id,
         'aadhar_doc' : aadhar_doc,
         'pan_doc' : pan_doc,
-        'dl_doc' : dl_doc
+        'dl_doc' : dl_doc,
+        'is_hr':is_hr ,'is_hrhead':is_hrhead
     }
     return render(request,'hold_user_full_detail.html',context)
 
@@ -2608,6 +2787,16 @@ def reject_user_initial(request,application_id):
 
 
 def vacancy_lists(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     # Open Vacancies
     sql_query = f"""
     SELECT * FROM VACANCY_DETAILS vd 
@@ -2744,7 +2933,7 @@ def vacancy_lists(request):
         distinct_positions = []
    
     pprint.pprint(data)
-    context = {'vacancy':data,'vacancy1':data1,'vacancy2':data2, 'distinct_positions':distinct_positions}    
+    context = {'vacancy':data,'vacancy1':data1,'vacancy2':data2, 'distinct_positions':distinct_positions,'is_hr':is_hr ,'is_hrhead':is_hrhead}    
     return render(request,'vacancy_lists.html',context)
 
 def get_branch_vacancy_options(request):
@@ -2785,6 +2974,16 @@ def vacancy_card_details(request,pk):
 from dateutil.relativedelta import relativedelta
 
 def home_page(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     d = datetime.now()
     print('date', d)
     today = datetime.today().date()
@@ -2824,7 +3023,7 @@ def home_page(request):
         e['salary']=int(i.salary) if int(i.salary) else "-"
         e['vacancy_date']=i.vacancy_date if i.vacancy_date else "-"
         data1.append(e)
-    return render(request,'index_homepage.html',{'vacancy_list1':data1,'vacancy_list':data})
+    return render(request,'index_homepage.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'vacancy_list1':data1,'vacancy_list':data})
 
 def candidate_login(request):
     return render(request,'candidate_login.html')
@@ -2837,6 +3036,16 @@ def interviewer_login(request):
 
 @transaction.atomic
 def postjob(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     query = User_Rolls.objects.filter(roll_id=2).values_list('user_id', flat=True)
     queryset1 = User.objects.filter(id__in=query).values_list('username', flat=True)
     print(queryset1)
@@ -2916,13 +3125,23 @@ def postjob(request):
         else:
             messages.error(request, "Something went wrong")
             print("form not valid")
-            return render(request,'postjob.html',{'form':form, 'queryset': queryset})
+            return render(request,'postjob.html',{'form':form, 'queryset': queryset,'is_hr':is_hr ,'is_hrhead':is_hrhead})
     else:
         form = VacancyForm()
-    return render(request,'postjob.html',{'form':form, 'queryset': queryset})
+    return render(request,'postjob.html',{'form':form, 'queryset': queryset,'is_hr':is_hr ,'is_hrhead':is_hrhead})
 
 @transaction.atomic
 def update_job(request, vacancy_id=None):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     # Get the existing VacancyDetails instance
     vacancy = get_object_or_404(VacancyDetails, pk=vacancy_id)
     # Get the existing InterviewDetails instance associated with the VacancyDetails
@@ -2988,7 +3207,9 @@ def update_job(request, vacancy_id=None):
             'interview_date': interview_details.interview_date,
             'interview_time': interview_details.interview_time,
             'job_description': vacancy.job_description,
-            'job_responsibility': vacancy.job_responsibility,            
+            'job_responsibility': vacancy.job_responsibility,  
+            'is_hr':is_hr ,
+            'is_hrhead':is_hrhead,          
         }
         form = VacancyForm(initial=initial_data)
 
@@ -3018,7 +3239,16 @@ def application_status(request):
         return redirect(redirect_url)
   
 def applied_vacancy_card_details(request,pk):
-    
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     user_id=request.user.id
     email=request.user.email
     user_roll=User_Rolls.objects.get(user_id=user_id)
@@ -3050,7 +3280,7 @@ def applied_vacancy_card_details(request,pk):
     # print('interview', interview)
     
     application = ApplicationDetails.objects.filter(candidate_id=candidate).first()
-    return render(request,'applied_vacancy_card_details.html',{'vacancy':vacancy_obj,'application':application,'status': application.application_status,'user_roll':user_roll,'email':email})
+    return render(request,'applied_vacancy_card_details.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'vacancy':vacancy_obj,'application':application,'status': application.application_status,'user_roll':user_roll,'email':email})
 
 def new_form(request,refId):
     user_profile_obj = User_Details.objects.get(id=refId)
@@ -3065,6 +3295,16 @@ from datetime import datetime
 
 @login_required(login_url='signIn')
 def sceduled_interview_details(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     context={}
     #------
     # extracts panel member user ids from panel_list column
@@ -3135,29 +3375,61 @@ def sceduled_interview_details(request):
         context['applicants']=applicants.to_dict(orient='records')
         print('dwaaaaaaa')
         print(context['applicants'])
+        context['is_hr'] = is_hr
+        context['is_hrhead'] = is_hrhead
         return render(request, 'sceduled_Interview_Details.html',context)
     except Exception as e:
         print('error', e)
-        return render(request, 'sceduled_Interview_Details.html')
+        return render(request, 'sceduled_Interview_Details.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead})
     
-def search_exam(request):   
+def search_exam(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass  
     if request.method == "POST":
         searched = request.POST['searched']        
         applicants = User_Details.objects.filter(Q(name__contains=searched),status__gte=4)
         print(applicants)
-        return render(request, 'exam_user_details.html',{'searched':searched,'applicants':applicants})
+        return render(request, 'exam_user_details.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'searched':searched,'applicants':applicants})
     else:
-        return render(request, 'exam_user_details.html',{'applicants':applicants})
+        return render(request, 'exam_user_details.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'applicants':applicants})
 
-def search(request):   
+def search(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass   
     if request.method == "POST":
         searched = request.POST['searched']       
         applicants = User_Details.objects.filter(Q(name__contains=searched),status=5)
-        return render(request, 'sceduled_Interview_Details.html',{'searched':searched,'applicants':applicants})
+        return render(request, 'sceduled_Interview_Details.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'searched':searched,'applicants':applicants})
     else:
-        return render(request, 'sceduled_Interview_Details.html',{'applicants':applicants})
+        return render(request, 'sceduled_Interview_Details.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'applicants':applicants})
 
 def sceduled_interview_full_details(request,refId):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     if refId is not None:
         print(refId)
         # profile = User_Details.objects.get(id=refId)
@@ -3213,7 +3485,7 @@ def sceduled_interview_full_details(request,refId):
     return render(request,'sceduled_Interview_full_Details.html',{'application':application,'user_profile':profile,'interveiw_places':places,
                                                                   'test_schedule':test_schedule,'binary_data':encoded_data,'status':application.application_status,
                                                                   'mime_type':mime_type, 'data_num': data_num, 'application_id': refId,'gender_choices':GENDER,'candidate_id': profile.id,'aadhar_doc' : aadhar_doc,'pan_doc' : pan_doc,'dl_doc' : dl_doc, 
-                                                                  'ssc_doc': ssc_doc,'hsc_doc': hsc_doc,'graduate_doc': graduate_doc,'bypass' : application.bypass,})
+                                                                  'ssc_doc': ssc_doc,'hsc_doc': hsc_doc,'graduate_doc': graduate_doc,'bypass' : application.bypass,'is_hr':is_hr ,'is_hrhead':is_hrhead})
 
 # @csrf_exempt
 # class interview_Api(View):
@@ -3289,6 +3561,16 @@ def number_of_interviewer(request):
 
 @csrf_exempt
 def post_question(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     context={}
     if request.method == 'POST':
         if 'step1' in request.POST:
@@ -3311,27 +3593,68 @@ def post_question(request):
             question_sheet_obj.answer=request.POST.get('answer')
             question_sheet_obj.save()
         return redirect(quest_sheet_list)
+    context['is_hr'] = is_hr
+    context['is_hrhead'] = is_hrhead
     return render(request,'post_question.html',context)
             
 def ques_sheet(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     question = question_sheet.objects.filter()
-    return render(request, 'question_sheet.html',{'question':question})
-
+    return render(request, 'question_sheet.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'question':question})
 
 from django.db.models import Count
 # show cards for question sheet list
 
 def quest_sheet_list(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     sheets = question_sheet.objects.all().values('sheet_id').distinct()
     questions = question_sheet.objects.values('sheet_id').annotate(Count('sheet_id')) 
-    return render(request, 'quest_sheet_list.html',{'sheets':sheets,'questions':questions})
+    return render(request, 'quest_sheet_list.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'sheets':sheets,'questions':questions})
 
 def quest_sheetlist_details(request,sheet_id):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     quest_details = question_sheet.objects.filter(sheet_id=sheet_id)
     print(quest_details)
-    return render(request, 'quest_sheetlist_details.html',{'quest_details':quest_details})
+    return render(request, 'quest_sheetlist_details.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'quest_details':quest_details})
 
 def edit_question(request,id):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     print(id)
     error = ""
     edit_ques = question_sheet.objects.get(id=id)
@@ -3362,7 +3685,7 @@ def edit_question(request,id):
             return redirect(redirect_url)
         except:
             error="yes"
-    return render(request, 'edit_question.html',{'edit_ques':edit_ques})
+    return render(request, 'edit_question.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'edit_ques':edit_ques})
 
 def delete_question(request,id):
     del_quest = question_sheet.objects.get(id=id)
@@ -3380,6 +3703,17 @@ def delete_question(request,id):
     
 # @can_access_candidate_profile
 def view_candidate_profile(request, email):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
+        
     print("Email:", email)
     
     context = {}
@@ -3462,6 +3796,7 @@ def view_candidate_profile(request, email):
         'dl_verify' : dl_verify,
         'graduate_verify' : graduate_verify,
         'basicdetails_verify' : basicdetails_verify,
+        'is_hr':is_hr ,'is_hrhead':is_hrhead,
     }
 
     # Check if the user has access; the can_access_candidate_profile decorator
@@ -3470,6 +3805,16 @@ def view_candidate_profile(request, email):
     return render(request, 'view_candidate_profile.html', context)
 
 def upload_documents(request,candidate_id):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     context = {}
     if candidate_id is not None:
         candidate_profile = candidate_details.objects.get(id=candidate_id)
@@ -3487,7 +3832,8 @@ def upload_documents(request,candidate_id):
         
         document_obj.save()   
         context = {
-            'document_obj':document_obj
+            'document_obj':document_obj,
+            'is_hr':is_hr ,'is_hrhead':is_hrhead,
         }
     return render(request, 'upload_documents.html', context)
     # context = {}
@@ -3652,6 +3998,16 @@ def start_online_exam(request,refId,tbl_id):
 
 @login_required(login_url='signIn')
 def offline_test_details(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     query = """
         SELECT 
             cd.name, 
@@ -3687,13 +4043,25 @@ def offline_test_details(request):
         'applicants': applicants,
         'candidates': candidate,
         'data_list': data_list,
+        'is_hr':is_hr ,'is_hrhead':is_hrhead,
     }
     
     return render(request, 'offline_test_details.html',context)
 
 
 @login_required(login_url='signIn')
-def update_test_score(request, refId=None):  
+def update_test_score(request, refId=None):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
+        
     id=refId
     if id:
         instance = TestScheduleDetails.objects.filter(application_id=id, is_online=False).first()
@@ -3705,7 +4073,6 @@ def update_test_score(request, refId=None):
     if request.method == 'POST':
         if instance is not None:
             try:
-                
                 instance.test_score = request.POST['score']
                 print('score',instance.test_score)
                             
@@ -3770,13 +4137,24 @@ def update_test_score(request, refId=None):
                 'candidate_id': candidate.id,
                 'aadhar_doc' : aadhar_doc,
                 'pan_doc' : pan_doc,
-                'dl_doc' : dl_doc
+                'dl_doc' : dl_doc,
+                'is_hr':is_hr ,'is_hrhead':is_hrhead,
                 }
     return render(request, 'update_test_score.html',context)
 
 from django.db.models import Sum
 @login_required(login_url='signIn')
 def Onboarding_candidates(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     query = """
         SELECT 
             cd.name, 
@@ -3825,7 +4203,7 @@ def Onboarding_candidates(request):
         'candidates': candidate,
         'distinct_positions': distinct_positions,
         'data_list': data_list,
-        
+        'is_hr':is_hr ,'is_hrhead':is_hrhead,
     }
    
     return render(request, 'Onboarding_candidates.html', context)
@@ -3866,7 +4244,16 @@ def get_branch_onboarding_options(request):
 
 @login_required(login_url='signIn')
 def shortlist_candidates(request):
-
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     sql_query = """
                 SELECT vacancy_id FROM "APPLICATION_DETAILS" AD  
             LEFT JOIN "INTERVIEW_DETAILS" ID 
@@ -3880,7 +4267,7 @@ def shortlist_candidates(request):
     distinct_positions_queryset = vacancies.values_list("role", flat=True).distinct()
     distinct_positions = [position for position in distinct_positions_queryset if position is not None]
 
-    return render(request, 'shortlist_candidates.html',{'rows':vacancies, 'distinct_positions':distinct_positions})
+    return render(request, 'shortlist_candidates.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'rows':vacancies, 'distinct_positions':distinct_positions})
 
 def get_branch_shortlist_options(request):
     if request.method == 'GET':
@@ -3925,6 +4312,16 @@ def api_shortlist_filter(request):
 
 @login_required(login_url='signIn')
 def assessed_candidates_details(request,id=None):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     sql_query= """
                 SELECT * FROM "candidate_details" CD
             LEFT JOIN "APPLICATION_DETAILS" AD
@@ -3955,10 +4352,20 @@ def assessed_candidates_details(request,id=None):
         }
         rows.append(row)
     # print(rows)
-    return render(request, 'assessed_candidates_details.html',{'applicants':rows,'interview_score':interview_score})
+    return render(request, 'assessed_candidates_details.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'applicants':rows,'interview_score':interview_score})
 
 @login_required(login_url='signIn')
 def assessed_candidate_full_details(request,application_id):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     if application_id is not None:
         print(application_id)
         application = ApplicationDetails.objects.get(application_id=application_id)
@@ -4017,6 +4424,7 @@ def assessed_candidate_full_details(request,application_id):
         'ssc_doc': ssc_doc,
         'hsc_doc': hsc_doc,
         'graduate_doc': graduate_doc,
+        'is_hr':is_hr ,'is_hrhead':is_hrhead,
     }  
     return render(request,'assessed_candidate_full_details.html',context)
 
@@ -4227,7 +4635,16 @@ def success_page(request):
 
 @login_required(login_url='signIn')
 def rejected(request):
-    
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     user_id = request.user.id
     
     sql_query = f'''
@@ -4263,13 +4680,24 @@ def rejected(request):
         'username': request.user.username,
         'rejected_review_allotment_count':rejected_review_allotment,
         'reviewed_rejected_candidates_count':reviewed_rejected_candidates,
-        'counts' :dash_dict
+        'counts' :dash_dict,
+        'is_hr':is_hr ,'is_hrhead':is_hrhead,
     }
     
     return render(request, "rejected_hr_dashboard.html", context)
 
 @login_required(login_url='signIn')
 def exam_snapshot_dashboard(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     query = """
         SELECT 
             cd.name, 
@@ -4300,17 +4728,26 @@ def exam_snapshot_dashboard(request):
 
     print("Generated URLs:", generated_urls)
     
-    
     context = {
         'applicants': applicants,
         'candidates': candidate,
         'data_list': data_list,
+        'is_hr':is_hr ,'is_hrhead':is_hrhead,
     }
     return render(request, "exam_user_details.html",context)
 
 @login_required(login_url="signIn")
 def exam_user_full_details(request, refId):
-    
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     print(refId)
     profile = ApplicationDetails.objects.get(application_id=refId)
     print(profile)
@@ -4369,7 +4806,8 @@ def exam_user_full_details(request, refId):
         # 'candidate_id': profile.id,
         'aadhar_doc' : aadhar_doc,
         'pan_doc' : pan_doc,
-        'dl_doc' : dl_doc
+        'dl_doc' : dl_doc,
+        'is_hr':is_hr ,'is_hrhead':is_hrhead,
         }
     return render(request, "exam_user_full_details.html", context)
 
@@ -4436,6 +4874,16 @@ def forget_password_verify_otp(request,reset_key):
     return render(request,"forget_password_verify_otp.html")
 
 def reschedule_interview_user(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     sql_query = f'''SELECT a.*, c.name, c.email, c.mobile_no, i.interview_date, c.id 
     FROM Sonata_ConnectHR.dbo.APPLICATION_DETAILS a
     JOIN Sonata_ConnectHR.dbo.INTERVIEW_DETAILS i ON a.interview_id = i.interview_id
@@ -4443,7 +4891,7 @@ def reschedule_interview_user(request):
     WHERE CAST(i.interview_date AS DATE) < CAST(GETDATE() AS DATE);'''
     df = pd.read_sql_query(sql_query, engine)
     applicants = df.to_dict(orient='records')
-    return render(request, 'reschedule_user_details.html',{'applicants':applicants})
+    return render(request, 'reschedule_user_details.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'applicants':applicants})
 
 @csrf_exempt
 def api_reschedule_interviews(request):
@@ -4551,6 +4999,16 @@ def api_vacancy_filter(request):
 
 @login_required(login_url='signIn')
 def applied_vacancy(request, email):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     candidates_details = candidate_details.objects.get(email=email)
     data=[]
     
@@ -4577,7 +5035,7 @@ def applied_vacancy(request, email):
     
     print(vacancy)
     print('---------------------', data)
-    return render(request, 'application_status.html', {"vacancies": data})
+    return render(request, 'application_status.html', {"vacancies": data,'is_hr':is_hr ,'is_hrhead':is_hrhead})
 
 @login_required(login_url='signIn')
 def apply_for_vacancy(request, id):
@@ -4614,15 +5072,35 @@ def apply_for_vacancy(request, id):
 
 @login_required(login_url='signIn')
 def view_application(request, id):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     vacancy = VacancyDetails.objects.get(vacancy_id = id)
     interview = InterviewDetails.objects.get(vacancy_id=id)
     user_id=request.user.email
     candidate = candidate_details.objects.get(email=user_id)
     application = ApplicationDetails.objects.get(candidate_id=candidate.id, interview_id=interview.interview_id)
-    return render(request, 'view_application.html', {'vacancy': vacancy, 'candidate':candidate, 'status':application.application_status})
+    return render(request, 'view_application.html', {'is_hr':is_hr ,'is_hrhead':is_hrhead,'vacancy': vacancy, 'candidate':candidate, 'status':application.application_status})
 
 
 def rejected_applications(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     sql_query = """
         select * from "APPLICATION_DETAILS" AD 
         LEFT JOIN "CANDIDATE_DETAILS" CD ON CD.id= AD.candidate_id
@@ -4649,9 +5127,19 @@ def rejected_applications(request):
             }
         rows.append(row)
 
-    return render(request, 'rejected_applications.html', {'data':rejected_application_dict, 'count':len(rejected_application_dict),'applicant':rows})
+    return render(request, 'rejected_applications.html', {'is_hr':is_hr ,'is_hrhead':is_hrhead,'data':rejected_application_dict, 'count':len(rejected_application_dict),'applicant':rows})
 
 def rejected_application(request,application_id):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     print ("application_id---------",application_id )
     
     application = ApplicationDetails.objects.get(application_id=application_id)
@@ -4715,13 +5203,24 @@ def rejected_application(request,application_id):
                'candidate_id': profile.id,
                'aadhar_doc' : aadhar_doc,
                'pan_doc' : pan_doc,
-               'dl_doc' : dl_doc
+               'dl_doc' : dl_doc,
+               'is_hr':is_hr ,'is_hrhead':is_hrhead,
                }
     return render(request,'rejected_user_full_detail.html', context)
 
 
 @login_required(login_url='signIn')
 def alloted_applications(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     sql_query = f"""
         select * from "APPLICATION_DETAILS" AD 
         RIGHT JOIN "REJECT_REVIEW_ALLOTMENT" RRA ON AD.application_id = RRA.application_id
@@ -4733,12 +5232,21 @@ def alloted_applications(request):
     rejected_application_df = pd.read_sql_query(sql_query, connection)
 
     rejected_application_dict= rejected_application_df.to_dict('records')
-    return render(request, 'review_alloted_applications.html', {'data':rejected_application_dict, 'count':len(rejected_application_dict)})
+    return render(request, 'review_alloted_applications.html', {'is_hr':is_hr ,'is_hrhead':is_hrhead,'data':rejected_application_dict, 'count':len(rejected_application_dict)})
 
 
 @login_required(login_url='signIn')
 def alloted_application(request,application_id):
-
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     if request.method == 'POST':
         result = request.POST.get('review')
         remarks = request.POST.get('remarks')
@@ -4807,11 +5315,22 @@ def alloted_application(request,application_id):
                'ssc_doc': ssc_doc,
                'hsc_doc': hsc_doc,
                'graduate_doc': graduate_doc,
+               'is_hr':is_hr ,'is_hrhead':is_hrhead,
                }
     return render(request,'alloted_user_full_detail.html', context)
 
 @login_required(login_url='signIn')
 def reviewed_applications(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     sql_query = f"""
         select * from "APPLICATION_DETAILS" AD 
         RIGHT JOIN "REJECT_REVIEW_ALLOTMENT" RRA ON AD.application_id = RRA.application_id
@@ -4822,10 +5341,20 @@ def reviewed_applications(request):
     print(request.user.id,"request.user.id")
     rejected_application_df = pd.read_sql_query(sql_query, connection)
     rejected_application_dict= rejected_application_df.to_dict('records')
-    return render(request, 'reviewed_applications.html', {'data':rejected_application_dict, 'count':len(rejected_application_dict)})
+    return render(request, 'reviewed_applications.html', {'is_hr':is_hr ,'is_hrhead':is_hrhead,'data':rejected_application_dict, 'count':len(rejected_application_dict)})
 
 @login_required(login_url='signIn')
 def reviewed_application(request,application_id):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     application = ApplicationDetails.objects.get(application_id=application_id)
     profile = candidate_details.objects.get(id=application.candidate_id)
     RRA = RejectReviewAllotment.objects.get(application_id=application_id)
@@ -4870,11 +5399,22 @@ def reviewed_application(request,application_id):
                'candidate_id': profile.id,
                'aadhar_doc' : aadhar_doc,
                'pan_doc' : pan_doc,
-               'dl_doc' : dl_doc
+               'dl_doc' : dl_doc,
+               'is_hr':is_hr ,'is_hrhead':is_hrhead,
                }
     return render(request,'reviewed_user_full_details.html', context)
 
 def Contact_Us_Page(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
@@ -4886,19 +5426,41 @@ def Contact_Us_Page(request):
         
         return redirect('home_page')
     else:
-        return render(request,'contact_us_page.html')
+        return render(request,'contact_us_page.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead})
 
 
 def show_contact(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     contact = ContactUsTable.objects.all()
     print("contact", contact)
-    return render(request,'contact_us_full_details.html',{'contact':contact})
+    return render(request,'contact_us_full_details.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'contact':contact})
 
 
 def indexCopy(request):
+    is_hr=False
+    is_hrhead = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+        except:
+            pass
     context={}
     username=request.user.username
     context['username']=username
+    context['is_hr'] = is_hr
+    context['is_hrhead'] = is_hrhead
     return render(request, 'index copy.html',context)
 
 
