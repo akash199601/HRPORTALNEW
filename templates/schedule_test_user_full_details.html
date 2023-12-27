@@ -423,6 +423,18 @@ textarea{
     .check {
         color: #00ff00;
     }
+
+    .modal-content{
+        width: 50%;
+        height: 90%;
+        margin: 2% auto;
+    }
+
+    @media(max-width:640px){
+        .modal-content{
+        width:100%;
+        }
+    }
 </style>
         <!------------PROGRESS BAR------------>
         {% include 'progress_bar.html' %}
@@ -524,7 +536,7 @@ textarea{
                                     {% endif %}
                                 </div>
                                 <div class="row">
-                                    <div style="width:90%;">
+                                    <div style="width:90%;margin-top: 20px;">
                                         <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                             {% csrf_token %} 
                                         <div class="form-group" style="text-align: center;margin-left: 20%;height: 80%;margin-right: 20%;padding: 5px;">
@@ -1413,7 +1425,7 @@ textarea{
                                   <!-- Modal -->
                                 <div class="modal fade" id="resumeBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                        <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Resume</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1458,7 +1470,7 @@ textarea{
                                   <!-- Modal -->
                                 <div class="modal fade" id="aadharBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                        <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Aadhar</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1477,14 +1489,11 @@ textarea{
                                                     <div style="width: 100%; height: 100%; overflow: auto;">
                                                         <img src="{{aadhar_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
                                                     </div>
-                                                {% elif aadhar_doc == '.pdf' or aadhar_doc == '.PDF' %}
+                                                {% else %}
                                                     <div style="width: 100%; height: 100%; overflow: auto;">
                                                         <embed src="{{aadhar_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
                                                     </div>
-                                                {% else %}
-                                                    <div style="width: 100%; height: 500px; overflow: auto;">
-                                                        <h3>This file type is not supported for preview or no resume uploaded.</h3>
-                                                    </div>
+                                          
                                                 {% endif %}
                                             
                                             </div>
@@ -1538,7 +1547,7 @@ textarea{
                                   <!-- Modal -->
                                 <div class="modal fade" id="panBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                        <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">PAN</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1557,14 +1566,11 @@ textarea{
                                                     <div style="width: 100%; height: 100%; overflow: auto;">
                                                         <img src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
                                                     </div>
-                                                {% elif pan_doc == '.pdf' or pan_doc == '.PDF'%}
+                                                {% else %}
                                                     <div style="width: 100%; height: 100%; overflow: auto;">
                                                         <embed src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
                                                     </div>
-                                                {% else %}
-                                                    <div style="width: 100%; height: 500px; overflow: auto;">
-                                                        <h3>This file type is not supported for preview or no resume uploaded.</h3>
-                                                    </div>
+                                           
                                                 {% endif %}
                                          
                                             </div>
@@ -1614,7 +1620,7 @@ textarea{
                                   <!-- Modal -->
                                 <div class="modal fade" id="dlBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                        <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Driving Licence</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1633,14 +1639,11 @@ textarea{
                                                     <div style="width: 100%; height: 100%; overflow: auto;">
                                                         <img src="{{dl_doc.url}}" width="100%" alt="driving License"  width="100%" height="100%">
                                                     </div>
-                                                {% elif dl_doc == '.pdf' or dl_doc == '.PDF'%}
+                                                {% else %}
                                                     <div style="width: 100%; height: 100%; overflow: auto;">
                                                         <embed src="{{dl_doc.url}}" width="100%" alt="driving License"  width="100%" height="100%">
                                                     </div>
-                                                {% else %}
-                                                    <div style="width: 100%; height: 500px; overflow: auto;">
-                                                        <h3>This file type is not supported for preview or no resume uploaded.</h3>
-                                                    </div>
+                                              
                                                 {% endif %}
                                           
                                             </div>
@@ -1692,7 +1695,7 @@ textarea{
                                   <!-- Modal -->
                                 <div class="modal fade" id="highschoolBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                        <div class="modal-content" >
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">High School</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1711,14 +1714,11 @@ textarea{
                                                     <div style="width: 100%; height: 100%; overflow: auto;">
                                                         <img src="{{ssc_doc.url}}" width="100%" alt="10th Marksheet"  width="100%" height="100%">
                                                     </div>
-                                                {% elif ssc_doc == '.pdf' or ssc_doc == '.PDF'%}
+                                                {% else %}
                                                     <div style="width: 100%; height: 100%; overflow: auto;">
                                                         <embed src="{{ssc_doc.url}}" width="100%" alt="10th Marksheet"  width="100%" height="100%">
                                                     </div>
-                                                {% else %}
-                                                    <div style="width: 100%; height: 500px; overflow: auto;">
-                                                        <h3>This file type is not supported for preview or no resume uploaded.</h3>
-                                                    </div>
+                                          
                                                 {% endif %}
                                           
                                             </div>
@@ -1768,7 +1768,7 @@ textarea{
                                   <!-- Modal -->
                                 <div class="modal fade" id="intermediateBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                        <div class="modal-content" >
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Intermediate</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1787,14 +1787,11 @@ textarea{
                                                     <div style="width: 100%; height: 100%; overflow: auto;">
                                                         <img src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
                                                     </div>
-                                                {% elif hsc_doc == '.pdf' or hsc_doc == '.PDF'%}
+                                                {% else%}
                                                     <div style="width: 100%; height: 100%; overflow: auto;">
                                                         <embed src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
                                                     </div>
-                                                {% else %}
-                                                    <div style="width: 100%; height: 500px; overflow: auto;">
-                                                        <h3>This file type is not supported for preview or no resume uploaded.</h3>
-                                                    </div>
+                                    
                                                 {% endif %}
                                                 
                                             </div>
@@ -1846,7 +1843,7 @@ textarea{
                                   <!-- Modal -->
                                 <div class="modal fade" id="graduationBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-scrollable">
-                                        <div class="modal-content" style="width: 50%;height: 90%;margin: 2% auto;">
+                                        <div class="modal-content" >
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Graduation</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1865,14 +1862,11 @@ textarea{
                                                     <div style="width: 100%; height: 100%; overflow: auto;">
                                                         <img src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
                                                     </div>
-                                                {% elif graduate_doc == '.pdf' or graduate_doc == '.PDF' %}
+                                                {% else %}
                                                     <div style="width: 100%; height: 100%; overflow: auto;">
                                                         <embed src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
                                                     </div>
-                                                {% else %}
-                                                    <div style="width: 100%; height: 500px; overflow: auto;">
-                                                        <h3>This file type is not supported for preview or no resume uploaded.</h3>
-                                                    </div>
+                                          
                                                 {% endif%}
                                          
                                             </div>
