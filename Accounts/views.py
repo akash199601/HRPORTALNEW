@@ -1706,6 +1706,18 @@ def schedule_test_user_full_details(request,refId):
         print('formatted_dates',formatted_dates)
         today_date = datetime.today().strftime('%Y-%m-%d')
         test_details = {}
+        
+        camshots = Candidate_Camshot.objects.filter(application_id=application.application_id)
+        print(camshots)
+        pics = []
+        row=[]
+        for picture in camshots:
+            picture.camshot_base64 = base64.b64encode(picture.camshot).decode('utf-8')
+            row.append(picture.camshot_base64)
+            print(row)
+            pics.append(row[0])
+            row.pop(0)
+        
         try:
             test_details=TestScheduleDetails.objects.get(candidate_id=profile.id,application_id = application.application_id)
         except TestScheduleDetails.DoesNotExist:
@@ -1883,6 +1895,7 @@ def schedule_test_user_full_details(request,refId):
         'dl_verify' : dl_verify,
         'graduate_verify' : graduate_verify,
         'basicdetails_verify' : basicdetails_verify,
+        'camshot':row,'pics': pics,
         # 'resume_obj':resume_obj,        
     }
     return render(request,'schedule_test_user_full_details.html',context)
@@ -2748,11 +2761,13 @@ def get_branch_vacancy_options(request):
 
 def vacancy_card_details(request,pk):
     is_hr=False
+    is_hrhead = False
     if str(request.user) != 'AnonymousUser':
         user_id=request.user.id
         try:
             user_roll=User_Rolls.objects.get(user_id=user_id)
             is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
         except:
             pass
     
@@ -2765,7 +2780,7 @@ def vacancy_card_details(request,pk):
 
     vacancy_df.fillna("-", inplace=True)
     vacancy_obj = vacancy_df.to_dict("records")[0]  
-    return render(request,'vacancy_card_details.html',{'vacancy':vacancy_obj,'is_hr':is_hr})
+    return render(request,'vacancy_card_details.html',{'vacancy':vacancy_obj,'is_hr':is_hr ,'is_hrhead':is_hrhead})
 
 from dateutil.relativedelta import relativedelta
 

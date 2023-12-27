@@ -3,7 +3,7 @@
 {% load static %}
 
 <style>
-  @media(max-width:640px){
+  {% comment %} @media(max-width:640px){
     .stepper-wrapper{
       height:120px;
       margin-left:8px;
@@ -19,10 +19,159 @@
       padding:1px;
       margin-right:5px;
     }
-  }
+  } {% endcomment %}
 
   body{
     color: #38393a;
+}
+
+.bg-white{
+  margin-left:35px;
+  width:80%;
+  margin-top:40px;
+}
+
+/* PROGRESS BAR CSS */
+
+.stepper-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  box-shadow: 0px 0px 5px 0px;
+  border-radius: 5px;
+  height: 80px;
+  padding-top: 10px;
+  margin-top: 20px;
+}
+
+@media(max-width:640px){
+.stepper-wrapper{
+  height:100px;
+  margin-left:1%;
+  margin-right:1%;
+}
+
+.stepper-item{
+  width:10%;
+}
+
+.step-name{
+  font-size:.6rem!important;
+  padding:1px;
+  margin-right:5px;
+}
+
+.bg-white{
+  width:98%;
+}
+}
+
+.stepper-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  @media (max-width: 768px) {
+      font-size: 12px;
+  }
+}
+
+.stepper-item::before {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  top: 20px;
+  left: -50%;
+  z-index: 2;
+}
+
+.stepper-item::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  top: 20px;
+  left: 50%;
+  z-index: 2;
+}
+
+.stepper-item .step-counter {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ccc;
+  margin-bottom: 6px;
+}
+
+.stepper-item.active {
+  font-weight: bold;
+}
+
+.stepper-item.completed .step-counter {
+  background-color: #4bb543;
+}
+
+.stepper-item.completed::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #4bb543;
+  width: 100%;
+  top: 20px;
+  left: 50%;
+  z-index: 3;
+}
+
+.stepper-item:first-child::before {
+  content: none;
+}
+
+.stepper-item:last-child::after {
+  content: none;
+}
+
+#google_element{
+  padding-top: 18px;
+  padding-left: 5px;
+}
+#google_element span{
+  display:none;
+}
+iframe{
+  display:none;
+}
+.goog-te-gadget .goog-te-combo {
+  margin: 4px 0;
+  height: 25px;
+  border-radius: 5px;
+  font-weight: 700;
+}
+.translated-ltr{
+  margin-top: -40px;
+}
+.translated-ltr{
+  margin-top : -40px;
+}
+.goog-te-banner-frame{
+  display: none;
+  margin-top : -20px;
+}
+.goog-logo-link{
+  display: none !important;
+}
+.goog-te-gadget{
+  color: transparent !important;
+}
+
+body{
+  color: #38393a;
 }
 </style>
 

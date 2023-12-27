@@ -40,7 +40,7 @@
       }
 
       .item_list_block {
-        min-height:580px;
+        min-height:500px;
       }
       
       .containerh1{
@@ -69,13 +69,26 @@
     body{
       color: #38393a;
   }
+
+  .child-container{
+    width:85%;
+    margin-left:20px;
+
+  }
+
+  @media(max-width:640px){
+    .child-container{
+      width:100%;
+      margin-left:0px;
+    }
+  }
   </style>
 
   {% include 'candidate_progress_bar.html' %}
 
 <div class="data" style="margin-top:70px;">
-    <div class="container-xxl py-3" >
-        <div class="container">
+    <div class="containers py-3" >
+        <div class="child-container">
           <div class="row g-4">
             <div class="containerh1">
               <h1 style="color: #000000ba;font-weight: 600;">Vacancy Details </h1>

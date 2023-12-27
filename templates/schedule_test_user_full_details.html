@@ -435,6 +435,17 @@ textarea{
         width:100%;
         }
     }
+
+    .cam-shot{
+        margin-bottom: 70px;
+        width:330px;
+      }
+    
+      @media(max-width:640px){
+        .cam-shot{
+            width:100%;
+        }
+      }
 </style>
         <!------------PROGRESS BAR------------>
         {% include 'progress_bar.html' %}
@@ -792,6 +803,40 @@ textarea{
                                         <div style="margin:5%;">
                                             <button type="button" id="rejectButton" class="btn btn-danger" >Reject</button>
                                         </div>
+
+                                        {% comment %} <div class="cam-shot" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#carouselExampleIndicators" class="active"></li>
+                                                {% for pic in camshot %}
+                                                <li data-target="#carouselExampleIndicators"></li>
+                                                {% endfor %}
+                                            </ol>
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                    {% for pic in pics %}
+                                                    <div class="d-flex justify-content-center">
+                                                        <img class="d-block w-100" src="data:image/png;base64,{{ pic }}" style="margin:auto;height:300px;">
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                                {% for pic in camshot %}
+                                                <div class="carousel-item">
+                                                    <div class="d-flex justify-content-center">
+                                                        <img class="d-block w-100" src="data:image/png;base64,{{ pic }}" style="margin:auto;height:300px;">
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+ {% endcomment %}
                                           {% endif %}
                                         <div class='row'>
                                           <div class='col-md'>
@@ -1401,6 +1446,59 @@ textarea{
                         </li>
                     </ul>
                 </div>
+
+                {% if status >= 4 %}
+                <div class="basic-details-card" style="margin-bottom: 10px;">
+                    <ul class="item_list">
+                        <!---->
+                        <li class="item_list_block step_open" >
+                            <div class="info_title theme-color" onclick="myFunction8()">
+                                <span class="count_Icon theme-color">
+                                    7
+                                </span>
+                                <!----><!---->
+                                <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Camshot </span>
+                                <!---->
+                            </div>
+
+                            <div id = "panel8" class="cam-shot" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="display:none;padding:20px;">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carouselExampleIndicators" class="active"></li>
+                                    {% for pic in camshot %}
+                                    <li data-target="#carouselExampleIndicators"></li>
+                                    {% endfor %}
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        {% for pic in pics %}
+                                        <div class="d-flex justify-content-center">
+                                            <img class="d-block w-100" src="data:image/png;base64,{{ pic }}" style="margin:auto;height:300px;">
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% for pic in camshot %}
+                                    <div class="carousel-item">
+                                        <div class="d-flex justify-content-center">
+                                            <img class="d-block w-100" src="data:image/png;base64,{{ pic }}" style="margin:auto;height:300px;">
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>    
+                {% endif %}
+
             </div>
 
             <div class="basic-details" >
@@ -2019,6 +2117,16 @@ textarea{
     }
 </script>
 
+<script>
+    function myFunction8() {
+      var x = document.getElementById("panel8");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+</script>
     {% comment %} <script>
         function showalert(){
             console.log('exam has been scheduled');

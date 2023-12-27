@@ -97,7 +97,7 @@
             <div class="containerh1">
               <h1 style="color: #000000ba;font-weight: 600;">Vacancy Details </h1>
               <div class="btn-container">
-                {% if is_hr %}
+                {% if is_hr or is_hrhead %}
                   <a class="m-4 btn btn-primary" href="{% url 'update_job' vacancy.vacancy_id %}">Edit Vacancy</a>
                 {% elif user.is_authenticated and vacancy.walk_in_id == 0 %}
                   <a href="{% url 'apply_for_vacancy' vacancy.vacancy_id %}" class="m-4 btn btn-success" style="width:200px">Apply </a>
