@@ -1744,6 +1744,11 @@ def schedule_test_user_full_details(request,refId):
             verify_obj.dl_verify = request.POST.get('dl_verify',None)
             print( 'dl_verify',verify_obj.dl_verify)
             verify_obj.save()
+            
+        if 'basicdetails_verify' in request.POST:
+            verify_obj.basicdetails_verify = request.POST.get('basicdetails_verify',None)
+            print( 'basicdetails_verify',verify_obj.basicdetails_verify)
+            verify_obj.save()
 
         # for upload the document 
         try:
@@ -1830,6 +1835,7 @@ def schedule_test_user_full_details(request,refId):
             graduate_verify = verify_obj.graduate_verify if verify_obj.graduate_verify else None
             dl_verify = verify_obj.dl_verify if verify_obj.dl_verify else None
             pan_verify = verify_obj.pan_verify if verify_obj.pan_verify else None
+            basicdetails_verify = verify_obj.basicdetails_verify if verify_obj.basicdetails_verify else None
 
         except Exception as e:
             aadhar_verify = None
@@ -1838,6 +1844,7 @@ def schedule_test_user_full_details(request,refId):
             pan_verify = None
             dl_verify = None
             graduate_verify = None
+            basicdetails_verify =None
         GENDER = (
         ('Male', 'Male'),
         ('Female', 'Female'),
@@ -1875,6 +1882,7 @@ def schedule_test_user_full_details(request,refId):
         'pan_verify' : pan_verify,
         'dl_verify' : dl_verify,
         'graduate_verify' : graduate_verify,
+        'basicdetails_verify' : basicdetails_verify,
         # 'resume_obj':resume_obj,        
     }
     return render(request,'schedule_test_user_full_details.html',context)

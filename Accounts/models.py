@@ -561,5 +561,6 @@ class Verification_Document(models.Model):
     hsc_verify = models.IntegerField(null=True, blank=True,default = 0)
     ssc_verify = models.IntegerField(null=True, blank=True,default = 0)
     graduate_verify = models.IntegerField(null=True, blank=True,default = 0)
+    basicdetails_verify = models.IntegerField(null=True, blank=True,default = 0)
     class Meta:
         db_table = 'Verify_Documents'
