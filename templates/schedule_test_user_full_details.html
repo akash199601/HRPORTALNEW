@@ -1411,7 +1411,6 @@ textarea{
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                {% comment %} <button type="button" class="btn btn-primary">Understood</button> {% endcomment %}
                                             </div>
                                         </div>
                                     </div>
@@ -1443,7 +1442,7 @@ textarea{
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body" style="overflow-y: hidden;">
-                                                 <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                                                <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
                                                     {% csrf_token %}
                                                     <input type="file" class="panel-col text-bold-cell" accept="image/*, .doc, .docx, .pdf, .txt, .xlxs, .jpg, .jpeg, .png" name="aadhar_doc" id="aadhar_doc" value="" placeHolder="" required> 
                                                     <input type="hidden" value="{% if document_obj.aadhar_doc %}{{ document_obj.aadhar_doc }} {% endif %}" id="aadhar_file_name">
@@ -1453,66 +1452,63 @@ textarea{
                                                 </form>
                                                 <hr>
                                                 {% if aadhar_doc == '.jpg' or aadhar_doc == '.jpeg' or aadhar_doc == '.png' %}
-                                                <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <img src="{{aadhar_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
-                                                </div>
+                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                        <img src="{{aadhar_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                    </div>
+                                                {% elif aadhar_doc == '.pdf' or aadhar_doc == '.PDF' %}
+                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                        <embed src="{{aadhar_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                    </div>
                                                 {% else %}
-                                                <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <embed src="{{aadhar_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
-                                                </div>
+                                                    <div style="width: 100%; height: 500px; overflow: auto;">
+                                                        <h3>This file type is not supported for preview or no resume uploaded.</h3>
+                                                    </div>
                                                 {% endif %}
-                                                {% comment %} <div style="width: 100%; height: 500px; overflow: auto;">
-                                                    <h3>This file type is not supported for preview or no resume uploaded.</h3>
-                                                </div> {% endcomment %}
+                                            
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                {% comment %} <button type="button" class="btn btn-primary">Understood</button> {% endcomment %}
+                                            <div class="modal-footer" style="display:block;">
+                                               
+                                                <!--for aasdhar verify -->
+                                                <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm" style="float:left;width: 200px;display:flex;">
+                                                    {% csrf_token %} 
+                                                        <p for="aadhar_verify" style="font-weight: bold;margin: 10px;width:70%;padding-top: 10px;font-size: 1.035rem;" > Verify :- </p>
+                                                        {% if aadhar_verify == 1 %}      
+                                                        <select name="aadhar_verify" id="aadhar_verify" class="form-control" style="background-color:green; color:white;margin:10px;height: 40px;">
+                                                            {% elif aadhar_verify == 2 %}
+                                                            <select name="aadhar_verify" id="aadhar_verify" class="form-control" style="background-color:red; color:white;margin:10px;">
+                                                                {% else %}
+                                                                <select name="aadhar_verify" id="aadhar_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin:10px;" >
+                                                                    {% endif %}
+                                                            <option value="0" {% if 0 == aadhar_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
+                                                            <option  value="1" {% if 1 == aadhar_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
+                                                            <option  value="2" {% if 2 == aadhar_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
+                                                        </select>
+                                                </form>
+                                                
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="float:right;">Close</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                                
+                            </div>  
                         </div>
-                        <!--for aasdhar verify -->
-                        <div style="width:100%;height:120px;display:flex;">
-                            <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-                            </div>
-                            <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-                                <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
-                                    {% csrf_token %} 
-                                <div class="form-group" style="text-align: center;margin-left: 20%;height: 80%;margin-right: 20%;padding: 5px;">
-                                <label for="aadhar_verify" style="font-weight: bold;" > AAdhar Verify</label>      
-                                {% if aadhar_verify == 1 %}      
-                                <select name="aadhar_verify" id="aadhar_verify" class="form-control" style="background-color:green; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                    {% elif aadhar_verify == 2 %}
-                                    <select name="aadhar_verify" id="aadhar_verify" class="form-control" style="background-color:red; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                        {% else %}
-                                        <select name="aadhar_verify" id="aadhar_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin-bottom: 10px;margin-top: 10px; " >
-                                            {% endif %}
-                                    <option value="0" {% if 0 == aadhar_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
-                                    <option  value="1" {% if 1 == aadhar_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
-                                    <option  value="2" {% if 2 == aadhar_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
-                                  </select>
-                                </div>
-                                </form>    
-                            </div>
-                        </div>
+                        
 
                         <div style="width:100%;height:120px;display:flex;">
                             <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
                                 {% if pan_verify == 1 %}
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:green;">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#panBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:green;">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
-                                    <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Aadhar</figcaption>
+                                    <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">PAN</figcaption>
                                 </button>
                                 {% elif pan_verify == 2 %}
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:red;">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#panBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:red;">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">PAN</figcaption>
                                 </button>
                                 {% else %}
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#panBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">PAN</figcaption>
                                 </button>
@@ -1536,21 +1532,40 @@ textarea{
                                                 </form>
                                                 <hr> 
                                                 {% if pan_doc == '.jpg' or pan_doc == '.jpeg' or pan_doc == '.png' %}
-                                                <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <img src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
-                                                </div>
-                                               {% else %}
-                                                <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <embed src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
-                                                </div>
-                                            {% endif %}
-                                                {% comment %} <div style="width: 100%; height: 500px; overflow: auto;">
-                                                    <h3>This file type is not supported for preview or no resume uploaded.</h3>
-                                                </div> {% endcomment %}
+                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                        <img src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                    </div>
+                                                {% elif pan_doc == '.pdf' or pan_doc == '.PDF'%}
+                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                        <embed src="{{pan_doc.url}}" width="100%" alt="Resume Image"  width="100%" height="100%">
+                                                    </div>
+                                                {% else %}
+                                                    <div style="width: 100%; height: 500px; overflow: auto;">
+                                                        <h3>This file type is not supported for preview or no resume uploaded.</h3>
+                                                    </div>
+                                                {% endif %}
+                                         
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                {% comment %} <button type="button" class="btn btn-primary">Understood</button> {% endcomment %}
+                                            <div class="modal-footer" style="display:block;">
+
+                                                <!--for PAN verify -->
+                                                <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm" style="float:left;width: 200px;display:flex;">
+                                                    {% csrf_token %} 
+                                                        <p for="pan_verify" style="font-weight: bold;margin: 10px;width:70%;padding-top: 10px;font-size: 1.035rem;" > Verify :- </p>
+                                                        {% if pan_verify == 1 %}      
+                                                        <select name="pan_verify" id="pan_verify" class="form-control" style="background-color:green; color:white;margin:10px;height: 40px;">
+                                                            {% elif pan_verify == 2 %}
+                                                            <select name="pan_verify" id="pan_verify" class="form-control" style="background-color:red; color:white;margin:10px;">
+                                                                {% else %}
+                                                                <select name="pan_verify" id="pan_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin:10px;" >
+                                                                    {% endif %}
+                                                            <option value="0" {% if 0 == pan_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
+                                                            <option  value="1" {% if 1 == pan_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
+                                                            <option  value="2" {% if 2 == pan_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
+                                                        </select>
+                                                </form>
+
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="float:right;">Close</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1558,19 +1573,19 @@ textarea{
                             </div>
                             <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
                                 {% if dl_verify == 1 %}
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#dlBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#dlBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:green;">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">DL</figcaption>
                                 </button>
                                 {% elif dl_verify == 2 %}
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:red;">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#dlBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:red;">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
-                                    <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Aadhar</figcaption>
+                                    <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">DL</figcaption>
                                 </button>
                                 {% else %}
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#dlBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
-                                    <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Aadhar</figcaption>
+                                    <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">DL</figcaption>
                                 </button>
                                 {% endif %}
 
@@ -1593,67 +1608,44 @@ textarea{
                                                 </form>
                                                 <hr> 
                                                 {% if dl_doc == '.jpg' or dl_doc == '.jpeg' or dl_doc == '.png' %}
-                                                <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <img src="{{dl_doc.url}}" width="100%" alt="driving License"  width="100%" height="100%">
-                                                </div>
+                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                        <img src="{{dl_doc.url}}" width="100%" alt="driving License"  width="100%" height="100%">
+                                                    </div>
+                                                {% elif dl_doc == '.pdf' or dl_doc == '.PDF'%}
+                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                        <embed src="{{dl_doc.url}}" width="100%" alt="driving License"  width="100%" height="100%">
+                                                    </div>
                                                 {% else %}
-                                                <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <embed src="{{dl_doc.url}}" width="100%" alt="driving License"  width="100%" height="100%">
-                                                </div>
+                                                    <div style="width: 100%; height: 500px; overflow: auto;">
+                                                        <h3>This file type is not supported for preview or no resume uploaded.</h3>
+                                                    </div>
                                                 {% endif %}
-                                                {% comment %} <div style="width: 100%; height: 500px; overflow: auto;">
-                                                    <h3>This file type is not supported for preview or no resume uploaded.</h3>
-                                                </div> {% endcomment %}
+                                          
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                {% comment %} <button type="button" class="btn btn-primary">Understood</button> {% endcomment %}
+                                            <div class="modal-footer" style="display:block;">
+
+                                                <!--for DL verify -->
+                                                <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm" style="float:left;width: 200px;display:flex;">
+                                                    {% csrf_token %} 
+                                                        <p for="dl_verify" style="font-weight: bold;margin: 10px;width:70%;padding-top: 10px;font-size: 1.035rem;" > Verify :- </p>
+                                                        {% if dl_verify == 1 %}      
+                                                        <select name="dl_verify" id="dl_verify" class="form-control" style="background-color:green; color:white;margin:10px;height: 40px;">
+                                                            {% elif dl_verify == 2 %}
+                                                            <select name="dl_verify" id="dl_verify" class="form-control" style="background-color:red; color:white;margin:10px;">
+                                                                {% else %}
+                                                                <select name="dl_verify" id="dl_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin:10px;" >
+                                                                    {% endif %}
+                                                            <option value="0" {% if 0 == dl_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
+                                                            <option  value="1" {% if 1 == dl_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
+                                                            <option  value="2" {% if 2 == dl_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
+                                                        </select>
+                                                </form>
+
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="float:right;">Close</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!--for PAN DL  verify -->
-                        <div style="width:100%;height:120px;display:flex;">
-                            <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-                                <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
-                                    {% csrf_token %} 
-                                <div class="form-group" style="text-align: center;margin-left: 20%;height: 80%;margin-right: 20%;padding: 5px;">
-                                <label for="pan_verify" style="font-weight: bold;" > PAN Verify</label>      
-                                {% if pan_verify == 1 %}      
-                                <select name="pan_verify" id="pan_verify" class="form-control" style="background-color:green; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                    {% elif pan_verify == 2 %}
-                                    <select name="pan_verify" id="pan_verify" class="form-control" style="background-color:red; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                        {% else %}
-                                        <select name="pan_verify" id="pan_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin-bottom: 10px;margin-top: 10px; " >
-                                            {% endif %}
-                                    <option value="0" {% if 0 == pan_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
-                                    <option  value="1" {% if 1 == pan_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
-                                    <option  value="2" {% if 2 == pan_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
-                                  </select>
-                                </div>
-                                </form>    
-                            </div>
-                       
-                            <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-                                <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
-                                    {% csrf_token %} 
-                                <div class="form-group" style="text-align: center;margin-left: 20%;height: 80%;margin-right: 20%;padding: 5px;">
-                                <label for="dl_verify" style="font-weight: bold;" >  Verify</label>      
-                                {% if dl_verify == 1 %}      
-                                <select name="dl_verify" id="dl_verify" class="form-control" style="background-color:green; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                    {% elif dl_verify == 2 %}
-                                    <select name="dl_verify" id="dl_verify" class="form-control" style="background-color:red; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                        {% else %}
-                                        <select name="dl_verify" id="dl_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin-bottom: 10px;margin-top: 10px; " >
-                                            {% endif %}
-                                    <option value="0" {% if 0 == dl_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
-                                    <option  value="1" {% if 1 == dl_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
-                                    <option  value="2" {% if 2 == dl_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
-                                  </select>
-                                </div>
-                                </form>    
                             </div>
                         </div>
 
@@ -1694,21 +1686,40 @@ textarea{
                                                 </form>
                                                 <hr>
                                                 {% if ssc_doc == '.jpg' or ssc_doc == '.jpeg' or ssc_doc == '.png' %}
-                                                <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <img src="{{ssc_doc.url}}" width="100%" alt="10th Marksheet"  width="100%" height="100%">
-                                                </div>
-                                               {% else %}
-                                                <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <embed src="{{ssc_doc.url}}" width="100%" alt="10th Marksheet"  width="100%" height="100%">
-                                                </div>
+                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                        <img src="{{ssc_doc.url}}" width="100%" alt="10th Marksheet"  width="100%" height="100%">
+                                                    </div>
+                                                {% elif ssc_doc == '.pdf' or ssc_doc == '.PDF'%}
+                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                        <embed src="{{ssc_doc.url}}" width="100%" alt="10th Marksheet"  width="100%" height="100%">
+                                                    </div>
+                                                {% else %}
+                                                    <div style="width: 100%; height: 500px; overflow: auto;">
+                                                        <h3>This file type is not supported for preview or no resume uploaded.</h3>
+                                                    </div>
                                                 {% endif %}
-                                                {% comment %} <div style="width: 100%; height: 500px; overflow: auto;">
-                                                    <h3>This file type is not supported for preview or no resume uploaded.</h3>
-                                                </div> {% endcomment %}
+                                          
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                {% comment %} <button type="button" class="btn btn-primary">Understood</button> {% endcomment %}
+                                            <div class="modal-footer" style="display:block;">
+
+                                                <!--for SSC verify -->
+                                                <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm" style="float:left;width: 200px;display:flex;">
+                                                    {% csrf_token %} 
+                                                        <p for="ssc_verify" style="font-weight: bold;margin: 10px;width:70%;padding-top: 10px;font-size: 1.035rem;" > Verify :- </p>
+                                                        {% if ssc_verify == 1 %}      
+                                                        <select name="ssc_verify" id="ssc_verify" class="form-control" style="background-color:green; color:white;margin:10px;height: 40px;">
+                                                            {% elif ssc_verify == 2 %}
+                                                            <select name="ssc_verify" id="ssc_verify" class="form-control" style="background-color:red; color:white;margin:10px;">
+                                                                {% else %}
+                                                                <select name="ssc_verify" id="ssc_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin:10px;" >
+                                                                    {% endif %}
+                                                            <option value="0" {% if 0 == ssc_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
+                                                            <option  value="1" {% if 1 == ssc_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
+                                                            <option  value="2" {% if 2 == ssc_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
+                                                        </select>
+                                                </form>
+
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="float:right;">Close</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1717,17 +1728,17 @@ textarea{
 
                             <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
                                 {% if hsc_verify == 1 %}
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:green;">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#intermediateBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:green;">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
-                                    <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Aadhar</figcaption>
+                                    <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Intermediate</figcaption>
                                 </button>
                                 {% elif hsc_verify == 2 %}
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:red;">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#intermediateBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:red;">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Intermediate</figcaption>
                                 </button>
                                 {% else %}
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#intermediateBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Intermediate</figcaption>
                                 </button>
@@ -1751,83 +1762,61 @@ textarea{
                                                 </form>
                                                 <hr>
                                                 {% if hsc_doc == '.jpg' or hsc_doc == '.jpeg' or hsc_doc == '.png' %}
-                                                <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <img src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
-                                                </div>
-                                               {% else %}
-                                                <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <embed src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
-                                                </div>
+                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                        <img src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
+                                                    </div>
+                                                {% elif hsc_doc == '.pdf' or hsc_doc == '.PDF'%}
+                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                        <embed src="{{hsc_doc.url}}" width="100%" alt="12th Marksheet"  width="100%" height="100%">
+                                                    </div>
+                                                {% else %}
+                                                    <div style="width: 100%; height: 500px; overflow: auto;">
+                                                        <h3>This file type is not supported for preview or no resume uploaded.</h3>
+                                                    </div>
                                                 {% endif %}
-                                                {% comment %} <div style="width: 100%; height: 500px; overflow: auto;">
-                                                    <h3>This file type is not supported for preview or no resume uploaded.</h3>
-                                                </div> {% endcomment %}
+                                                
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                {% comment %} <button type="button" class="btn btn-primary">Understood</button> {% endcomment %}
+                                            <div class="modal-footer" style="display:block;">
+
+                                                <!--for HSC verify -->
+                                                <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm" style="float:left;width: 200px;display:flex;">
+                                                    {% csrf_token %} 
+                                                        <p for="hsc_verify" style="font-weight: bold;margin: 10px;width:70%;padding-top: 10px;font-size: 1.035rem;" > Verify :- </p>
+                                                        {% if hsc_verify == 1 %}      
+                                                        <select name="hsc_verify" id="hsc_verify" class="form-control" style="background-color:green; color:white;margin:10px;height: 40px;">
+                                                            {% elif hsc_verify == 2 %}
+                                                            <select name="hsc_verify" id="hsc_verify" class="form-control" style="background-color:red; color:white;margin:10px;">
+                                                                {% else %}
+                                                                <select name="hsc_verify" id="hsc_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin:10px;" >
+                                                                    {% endif %}
+                                                            <option value="0" {% if 0 == hsc_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
+                                                            <option  value="1" {% if 1 == hsc_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
+                                                            <option  value="2" {% if 2 == hsc_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
+                                                        </select>
+                                                </form>
+
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="float:right;">Close</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div style="width:100%;height:120px;display:flex;">
-                            <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-                                <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
-                                    {% csrf_token %} 
-                                <div class="form-group" style="text-align: center;margin-left: 20%;height: 80%;margin-right: 20%;padding: 5px;">
-                                <label for="ssc_verify" style="font-weight: bold;" > SSC Verification:</label>      
-                                {% if ssc_verify == 1 %}      
-                                <select name="ssc_verify" id="ssc_verify" class="form-control" style="background-color:green; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                    {% elif ssc_verify == 2 %}
-                                    <select name="ssc_verify" id="ssc_verify" class="form-control" style="background-color:red; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                        {% else %}
-                                        <select name="ssc_verify" id="ssc_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin-bottom: 10px;margin-top: 10px; " >
-                                            {% endif %}
-                                    <option value="0" {% if 0 == ssc_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
-                                    <option  value="1" {% if 1 == ssc_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
-                                    <option  value="2" {% if 2 == ssc_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
-                                  </select>
-                                </div>
-                                </form>    
-                            </div>
-
-                            <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-                                <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
-                                    {% csrf_token %} 
-                                <div class="form-group" style="text-align: center;margin-left: 20%;height: 80%;margin-right: 20%;padding: 5px;">
-                                <label for="hsc_verify" style="font-weight: bold;" > HSC Verification:</label>      
-                                {% if hsc_verify == 1 %}      
-                                <select name="hsc_verify" id="hsc_verify" class="form-control" style="background-color:green; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                    {% elif hsc_verify == 2 %}
-                                    <select name="hsc_verify" id="hsc_verify" class="form-control" style="background-color:red; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                        {% else %}
-                                        <select name="hsc_verify" id="hsc_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin-bottom: 10px;margin-top: 10px; " >
-                                            {% endif %}
-                                    <option value="0" {% if 0 == hsc_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
-                                    <option  value="1" {% if 1 == hsc_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
-                                    <option  value="2" {% if 2 == hsc_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
-                                  </select>
-                                </div>
-                                </form>    
-                            </div>
-                        </div>
 
                         <div style="width:100%;height:120px;display:flex;">
                             <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
                                 {% if graduate_verify == 1 %}
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#graduationBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#graduationBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);background-color:green;">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Graduation</figcaption>
                                 </button>
                                 {% elif graduate_verify == 2 %}
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:red;">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#graduationBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%); background-color:red;">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Graduation</figcaption>
                                 </button>
                                 {% else %}
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#aadharBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#graduationBackdrop" style="width: 100%;height: 90%;box-shadow: 0px 1px 3px 0px rgb(180 41 41 / 30%);">
                                     <img src="{% static 'img/image logo.webp' %}" alt="image" style="width:100%;height:90%;"> 
                                     <figcaption style="text-align: center;text-decoration: none;background: white;color:black;">Graduation</figcaption>
                                 </button>
@@ -1851,79 +1840,46 @@ textarea{
                                                 </form>
                                                 <hr>
                                                 {% if graduate_doc == '.jpg' or graduate_doc == '.jpeg' or graduate_doc == '.png' %}
-                                                <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <img src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
-                                                </div>
-                                               {% else %}
-                                                <div style="width: 100%; height: 100%; overflow: auto;">
-                                                    <embed src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
-                                                </div>
-                                            {% endif%}
-                                                {% comment %} <div style="width: 100%; height: 500px; overflow: auto;">
-                                                    <h3>This file type is not supported for preview or no resume uploaded.</h3>
-                                                </div> {% endcomment %}
+                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                        <img src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
+                                                    </div>
+                                                {% elif graduate_doc == '.pdf' or graduate_doc == '.PDF' %}
+                                                    <div style="width: 100%; height: 100%; overflow: auto;">
+                                                        <embed src="{{graduate_doc.url}}" width="100%" alt="Graduation"  width="100%" height="100%">
+                                                    </div>
+                                                {% else %}
+                                                    <div style="width: 100%; height: 500px; overflow: auto;">
+                                                        <h3>This file type is not supported for preview or no resume uploaded.</h3>
+                                                    </div>
+                                                {% endif%}
+                                         
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <div class="modal-footer" style="display:block;">
+
+                                                <!--for GRADUATE verify -->
+                                                <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm" style="float:left;width: 200px;display:flex;">
+                                                    {% csrf_token %} 
+                                                        <p for="graduate_verify" style="font-weight: bold;margin: 10px;width:70%;padding-top: 10px;font-size: 1.035rem;" > Verify :- </p>
+                                                        {% if graduate_verify == 1 %}      
+                                                        <select name="graduate_verify" id="graduate_verify" class="form-control" style="background-color:green; color:white;margin:10px;height: 40px;">
+                                                            {% elif graduate_verify == 2 %}
+                                                            <select name="graduate_verify" id="graduate_verify" class="form-control" style="background-color:red; color:white;margin:10px;">
+                                                                {% else %}
+                                                                <select name="graduate_verify" id="graduate_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin:10px;" >
+                                                                    {% endif %}
+                                                            <option value="0" {% if 0 == graduate_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
+                                                            <option  value="1" {% if 1 == graduate_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
+                                                            <option  value="2" {% if 2 == graduate_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
+                                                        </select>
+                                                </form>
+
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="float:right;">Close</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--FOR GRADUATE VERIFY -->
-                        <div style="width:100%;height:120px;display:flex;">
-                            <div class="doc" style="width: 100px;height: 100px;margin: 20px;">
-                                <form class="filter-form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
-                                    {% csrf_token %} 
-                                <div class="form-group" style="text-align: center;margin-left: 20%;height: 80%;margin-right: 20%;padding: 5px;">
-                                <label for="graduate_verify" style="font-weight: bold;" >  Verify</label>      
-                                {% if graduate_verify == 1 %}      
-                                <select name="graduate_verify" id="graduate_verify" class="form-control" style="background-color:green; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                    {% elif graduate_verify == 2 %}
-                                    <select name="graduate_verify" id="graduate_verify" class="form-control" style="background-color:red; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                        {% else %}
-                                        <select name="graduate_verify" id="graduate_verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin-bottom: 10px;margin-top: 10px; " >
-                                            {% endif %}
-                                    <option value="0" {% if 0 == graduate_verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
-                                    <option  value="1" {% if 1 == graduate_verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
-                                    <option  value="2" {% if 2 == graduate_verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
-                                  </select>
-                                </div>
-                                </form>    
-                            </div>
-                        </div>
-
-                        {% comment %} <hr> {% endcomment %}
-
-                        {% comment %} <div style="width:100%;height:100px;display:flex;">
-                             <form id="filter-form" method="POST" action="{% url 'verifyDocument' refId=application.application_id %}" class="form" enctype="multipart/form-data" style="width:100%;">
-                                {% csrf_token %} 
-                            <div class="form-group" style="text-align: center;margin-left: 20%;height: 80%;margin-right: 20%;padding: 5px;">
-                            <label for="verify" style="font-weight: bold;" >Document Verification:</label>      
-                            {% if document_obj.verify == 1 %}      
-                            <select name="verify" id="verify" class="form-control" style="background-color:green; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                {% elif document_obj.verify == 2 %}
-                                <select name="verify" id="verify" class="form-control" style="background-color:red; color:white;margin-bottom: 10px;margin-top: 10px;">
-                                    {% else %}
-                                    <select name="verify" id="verify" class="form-control" style="background-color:MediumSlateBlue ; color:white;margin-bottom: 10px;margin-top: 10px; " >
-                                        {% endif %}
-                                <option value="0" {% if 0 == document_obj.verify %} selected {% endif %} style="color:white; background-color: MediumSlateBlue;">Not Verify</option>
-                                <option  value="1" {% if 1 == document_obj.verify %} selected {% endif %} style="background-color:green; color:white;">Verify</option>
-                                <option  value="2" {% if 2 == document_obj.verify %} selected {% endif %} style="color:white; background-color:red;">Reject</option>
-                              </select>
-                            </div> {% endcomment %}
-                              {% comment %} <div class="form-group" style="text-align: center;">
-                                <button type="submit" onclick="changeColor()" id="filter-button" class="btn btn-primary" style="width: 80px;">Submit</button>
-                              </div> {% endcomment %}
-                             {% comment %} </form>  {% endcomment %}
-                            {% comment %} <form id="filter-form" method="POST" action="{% url 'verifyDocument' refId=application.application_id %}" class="form" enctype="multipart/form-data" style="width:100%;">
-                                {% csrf_token %} 
-                                <input type="checkbox" name="verify" value="0" id="notverify" style="background-color:blue; color:white;"> not verify
-                                <input type="checkbox" name="verify" value="1" id="verify" style="background-color:green; color:white;"> verify
-                                <input type="checkbox" name="verify" value="2" id="reject" style="background-color:red; color:white;"> reject
-                            </form> {% endcomment %}
-                        {% comment %} </div> {% endcomment %}
                     </li>
                 </ul>
             </div>
@@ -1932,20 +1888,6 @@ textarea{
 </div>
 </div>
 
-{% comment %} <script>
-    document.getElementById('notverify').addEventListener('click', function() {
-        document.getElementById('filter-form').submit();
-    
-    });
-    document.getElementById('verify').addEventListener('click', function() {
-        document.getElementById('filter-form').submit();
-    
-    });
-    document.getElementById('reject').addEventListener('click', function() {
-        document.getElementById('filter-form').submit();
-    
-    });
-</script> {% endcomment %}
 
  <script>
     document.getElementById('aadhar_verify').addEventListener('change', function() {
