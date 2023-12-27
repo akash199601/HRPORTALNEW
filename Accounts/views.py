@@ -3396,6 +3396,25 @@ def view_candidate_profile(request, email):
             graduate_doc = None     
             pan_doc = None
             dl_doc = None
+            
+        try:
+            verify_obj = Verification_Document.objects.get(candidate_id = user_profile.id)
+            aadhar_verify = verify_obj.aadhar_verify if verify_obj.aadhar_verify else None
+            ssc_verify = verify_obj.ssc_verify if verify_obj.ssc_verify else None
+            hsc_verify = verify_obj.hsc_verify if verify_obj.hsc_verify else None
+            graduate_verify = verify_obj.graduate_verify if verify_obj.graduate_verify else None
+            dl_verify = verify_obj.dl_verify if verify_obj.dl_verify else None
+            pan_verify = verify_obj.pan_verify if verify_obj.pan_verify else None
+            basicdetails_verify = verify_obj.basicdetails_verify if verify_obj.basicdetails_verify else None
+
+        except Exception as e:
+            aadhar_verify = None
+            ssc_verify = None
+            hsc_verify = None
+            pan_verify = None
+            dl_verify = None
+            graduate_verify = None
+            basicdetails_verify =None
                    
     except Exception as e:
         # Handle the case when the user profile does not exist.
@@ -3421,6 +3440,13 @@ def view_candidate_profile(request, email):
         'pan_doc' : pan_doc,
         'dl_doc' : dl_doc,
         'document_obj':document_obj,
+        'aadhar_verify':aadhar_verify,
+        'ssc_verify' : ssc_verify,
+        'hsc_verify' : hsc_verify,
+        'pan_verify' : pan_verify,
+        'dl_verify' : dl_verify,
+        'graduate_verify' : graduate_verify,
+        'basicdetails_verify' : basicdetails_verify,
     }
 
     # Check if the user has access; the can_access_candidate_profile decorator
