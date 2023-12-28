@@ -5540,11 +5540,16 @@ from xhtml2pdf import pisa
 
 def pdf(request ,refId):
     # products = Product.objects.all()
+    
     profile = candidate_details.objects.get(id = refId)
-
+    application_obj = ApplicationDetails.objects.get(candidate_id = profile.id)
+    interview_obj = InterviewDetails.objects.get(interview_id = application_obj.interview_id)
+    offerletter_obj =  OfferLetter.objects.get(candidate_id = application_obj.candidate_id)
     template_path = 'pdf.html'
 
-    context = {'profile':profile}
+    context = {'profile':profile,
+               'interview_obj':interview_obj,
+               'offerletter_obj': offerletter_obj}
 
     response = HttpResponse(content_type='application/pdf')
 

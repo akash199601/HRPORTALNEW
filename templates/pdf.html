@@ -37,7 +37,7 @@
 
         <hr> <br><br>
         
-        <h2 style="text-align:left;"><I>sonata/HRD/HO/Offer Letter</I></h2>  <h2 style="text-align:right;margin-right:30px;">Date:- MM/DD/YYYY</h2>
+        <h2 style="text-align:left;"><I>sonata/HRD/HO/Offer Letter</I></h2>  <h2 style="text-align:right;margin-right:30px;">Date:- {% now "d-m-Y" %}</h2>
         <h1><b>Mr. {{profile.name}}</b><br/>
         Candidate Address<br/>
         {{profile.present_city}},{{profile.present_state}},{{profile.present_pin}} </h1><br/>
@@ -45,11 +45,11 @@
         
         <h2>Dear Mr. <b>{{profile.name}},</h2></b><br/>
 
-        <h2 style="margin : 0px;">With reference to your application and interview held on 07 September 2022 for the captioned post of Probationary Manager-Ill (IT Department). It has been decided to post you at Head Office, Lucknow from 12^September 2022 on respective designation.</h2><br>
+        <h2 style="margin : 0px;">With reference to your application and interview held on {{ interview_obj.interview_date }} for the captioned post of {{ offerletter_obj.desgination }}({{ offerletter_obj.department }}). It has been decided to post you at Head Office, Lucknow from {{ offerletter_obj.joining_date }} on respective designation.</h2><br>
 
         <h2 style="margin : 0px;">Welcome to SONATA Finance Pvt Ltd. We would like to take this opportunity of sharing our Institution’s vision, which you are going to be part of. We inculcate a culture of empowerment and entrepreneurship, which attracts the brightest minds to ma ke our institution into a Global Indian Micro Financial Services Brand. Our primary business driver is Value Creation for our customers, stakeholders, and not just size of business. We offer real time world-class solutions to our customers, which are pragmatic and uniquely Indian.</h2><br>
 
-        <h2 style="margin : 0px;">We take pleasure in inviting you to join SONATA Finance Pvt Ltd as Probationary Manager-III (IT Department). We would appreciate your joining along with the documents mentioned in Annexure ’A’. Your overall remuneration and the benefits that would be applicable to you are attached for your perusal in Annexure ’B’.</h2><br>
+        <h2 style="margin : 0px;">We take pleasure in inviting you to join SONATA Finance Pvt Ltd as {{ offerletter_obj.desgination }}({{ offerletter_obj.department }}). We would appreciate your joining along with the documents mentioned in Annexure ’A’. Your overall remuneration and the benefits that would be applicable to you are attached for your perusal in Annexure ’B’.</h2><br>
 
         <h2 style="margin : 0px;">Kindly confirm your affirmation by signing on this letter. We look forward to working with you and would like you to participate in working with us to make our company a most preferred employer in micro financial services industry.</h2><br>
 
