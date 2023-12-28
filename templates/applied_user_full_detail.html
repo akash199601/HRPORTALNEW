@@ -822,6 +822,69 @@ textarea{
                   </li>
               </ul>
           </div>
+          <div class="basic-details-card" style="margin-bottom: 10px;margin-top:20px;">
+            <ul class="item_list">
+                <!---->
+                <li class="item_list_block step_open" >
+                    <div class="info_title theme-color" onclick="myFunction8()">
+                        <span class="count_Icon theme-color">
+                            4
+                        </span>
+                        <!----><!---->
+                        <span class="fl-right pan-icon material-icons" aria-describedby="cdk-describedby-message-0" cdk-describedby-host=""> Offer Letter submission form</span>
+                        <!---->
+                    </div>
+                    <form class="form" method="POST" action="" enctype="multipart/form-data" id="applicationForm">
+                        {% csrf_token %}
+                        <div id="panel8" class="panel-body ng-star-inserted" style="height: 90%;display:none;">
+                            <div class="row">
+                                <span class="panel-col panel-col1">Name</span>
+                                <input class="panel-col text-bold-cell" name="name" value="{% if user_profile.name %}{{ user_profile.name }}{% endif %}" > 
+                            </div>
+                            <div class="row">
+                                <span class="panel-col panel-col1">Designation</span>
+                                <input class="panel-col text-bold-cell" name="desgination" value="{% if desgination %} {{ desgination }} {% endif %}" > 
+                            </div>
+
+                            <div class="row">
+                                <span class="panel-col panel-col1">Department</span>
+                                <input class="panel-col text-bold-cell" name="department" value="{% if department %} {{ department }} {% endif %}" > 
+                            </div>
+
+                            <div class="row">
+                                <span class="panel-col panel-col1">Posting Place</span>
+                                <input class="panel-col text-bold-cell" name="posting_place" value="{% if posting_place %} {{ posting_place }} {% endif %}" > 
+                            </div>
+
+                            <div class="row">
+                                <span class="panel-col panel-col1">Joining Date</span>
+                                <input class="panel-col text-bold-cell" name="joining_date" value="{% if offerletter_obj.joining_date %} {{ offerletter_obj.joining_date|date:'Y-m-d' }} {% endif %}" type="date" > 
+                            </div>
+                            <div class="row">
+                                <span class="panel-col panel-col1">Address</span>
+                                <textarea style="width:90%;" name="address" cols="8" rows="5" >{% if address %} {{ address }} {% endif %}</textarea>
+                            </div>                     
+                            <div class="row">
+                                <span class="panel-col panel-col1">Primary Email</span>
+                                <input  type="text" class="panel-col text-bold-cell" name="email" value="{% if user_profile.email %}{{ user_profile.email }}{% endif %}" required> 
+                            </div>
+                        
+                            <div class="row">
+                                <span class="panel-col panel-col1">Mobile Number</span>
+                                <input  type="number" class="panel-col text-bold-cell" name="mobile_no" value="{% if user_profile.mobile_no %}{{ user_profile.mobile_no }}{% endif %}" maxlength ="10" minlength ="10" required>
+                            </div>
+                                <br>
+                            <div class="row">   
+                                <button type="submit" id="btnSubmit" class="btn btn-primary" style="width:150px;height:35px;font-size:15px;margin-left:20px;">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
       </div>
 
       <div class="basic-details" >
@@ -1152,6 +1215,16 @@ if (x.style.display === "none") {
 }
 }
 </script>
+<script>
+    function myFunction8() {
+    var x = document.getElementById("panel8");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+    }
+    </script>
 <script>
 function myFunction2() {
 var x = document.getElementById("panel1");
