@@ -425,7 +425,7 @@ textarea{
     }
 
     .modal-content{
-        width: 50%;
+        width: 90%;
         height: 90%;
         margin: 2% auto;
     }
@@ -602,7 +602,7 @@ textarea{
                                     </div>
     
                                     <div class="modal-dialog modal-dialog-centered" role="document" style="min-width: None;">
-                                        <div class="modal-content" style="margin: 2rem;">
+                                        <div class="modal-content">
                                             <form onSubmit="if(!confirm('exam has been scheduled?')){return false;}" action="{% url 'schedule_test' refId=application.application_id %}" method = "POST" style="display: flex;width: 90%;">
                                               {% csrf_token %}
                                                 <div class="form-group" style="width:20%;margin: 5px;">
@@ -679,7 +679,7 @@ textarea{
                                     <h2 style="color:green;">Yor are already apply for test and Haven't given the test yet.</h2>
                                     {% endif %}
                                     <div class="modal-dialog modal-dialog-centered" role="document" style="min-width: None;" hidden>
-                                        <div class="modal-content" style="margin: 2rem;">
+                                        <div class="modal-content" style="margin: 2rem;width:90%;">
 
                                             <form onSubmit="if(!confirm('exam has been scheduled?')){return false;}" action="{% url 'schedule_test' refId=application.application_id %}" method = "POST" style="display: flex;width: 90%;">
                                                 {% csrf_token %}
