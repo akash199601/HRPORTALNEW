@@ -162,4 +162,7 @@ urlpatterns = [
     
     path('pdf/<int:refId>/',views.pdf,name="pdf"),
     
+    path('candidate_list',views.candidate_list,name="candidate_list"),
+    path('create_candidates_excel',views.create_candidates_excel,name="create_candidates_excel"),
+    
 ]

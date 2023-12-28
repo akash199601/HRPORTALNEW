@@ -5513,3 +5513,147 @@ def pdf(request ,refId):
     if pisa_status.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from openpyxl import Workbook
+from openpyxl.styles import *
+import decimal
+
+def is_valid_queryparam(param):
+    return param != '' and param is not None
+
+def candidate_list(request):
+    # cd = candidate_details.objects.all().order_by('name')
+    
+    sql_query = f"""
+        SELECT CD.name,CD.email,CD.mobile_no,AD.branch_shortlisted_for,AD.position_shortlisted_for,AD.application_status FROM CANDIDATE_DETAILS AS CD
+        LEFT JOIN APPLICATION_DETAILS AS AD
+        ON AD.candidate_id = CD.id;
+        """
+    
+    df = pd.read_sql(sql_query, engine)
+    
+    data_list = df.to_dict(orient='records')
+    
+    application_status = request.POST.get('application_status')
+   
+    
+    request.session['application_status'] = application_status
+
+    
+    if is_valid_queryparam(application_status):
+        data_list = [data for data in data_list if data.get(application_status) == application_status]
+
+    
+        
+    page = request.POST.get('page',1)
+    paginator = Paginator(data_list,30)
+    
+    try:
+        data_list = paginator.page(page)
+    except PageNotAnInteger:
+        data_list = paginator.page(1)
+    except EmptyPage:
+        data_list = paginator.page(paginator.num_pages)
+        
+    context = {
+        'candidate_list' : data_list,
+        'application_status' : application_status,
+    }
+    return render(request, 'reports.html', context)
+
+def set_header_style(header):
+    header.fill = PatternFill("solid", fgColor="246ba1")
+    header.font = Font(bold=True, color="F7F6FA")
+    header.alignment = Alignment(horizontal="center", vertical="center")
+
+def create_candidates_excel(request):
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=All Candidates List.xlsx'
+
+
+    sql_query = f"""
+        SELECT CD.name,CD.email,CD.mobile_no,AD.branch_shortlisted_for,AD.position_shortlisted_for,AD.application_status FROM CANDIDATE_DETAILS AS CD
+        LEFT JOIN APPLICATION_DETAILS AS AD
+        ON AD.candidate_id = CD.id;
+        """
+
+    # # Get all candidates from the database
+    # columns = ['name','email','mobile_no',]
+    
+    # # Retrieve all candidate details from the database
+    # candidate_objects = candidate_details.objects.all().values(*columns)
+    df = pd.read_sql(sql_query, engine)
+    
+    data_list = df.to_dict(orient='records')
+    # Convert the QuerySet to a DataFrame
+    df = pd.DataFrame.from_records(data_list)
+
+    # Make sure all datetime values are timezone unaware
+    for column in df.columns:
+        if pd.api.types.is_datetime64tz_dtype(df[column]):
+            df[column] = df[column].apply(lambda x: x.replace(tzinfo=None))
+
+    # Create a new Excel writer object
+    writer = pd.ExcelWriter(response, engine='openpyxl')
+
+    # Write the DataFrame to the Excel writer
+    df.to_excel(writer, index=False, sheet_name='All Candidates List')
+
+    # Get the worksheet of the DataFrame
+    worksheet = writer.sheets['All Candidates List']
+
+    # Apply custom header style
+    set_header_style(worksheet.row_dimensions[0])
+
+    writer.close()
+    return response
+# def create_candidates_excel(request):
+#    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+#    response['Content-Disposition'] = 'attachment; filename=All Candidates List.xlsx'
+
+#    # Get all candidates from the database
+#    cd = candidate_details.objects.all()
+
+#    # Create a new Excel workbook and add a worksheet
+#    workbook = Workbook(write_only=True)
+#    worksheet = workbook.create_sheet()
+
+#    # Create a new first cell in the worksheet
+#    first_cell = worksheet['A1']
+#    first_cell.value = "All Candidates List"
+#    first_cell.fill = PatternFill("solid", fgColor="246ba1")
+#    first_cell.font = Font(bold=True, color="F7F6FA")
+#    first_cell.alignment = Alignment(horizontal="center", vertical="center")
+
+#    worksheet.title = 'All Candidates List'
+
+#    # Define the titles for columns
+#    columns = ['Candidate Name', 'Email', 'Mobile_No.']
+#    row_num = 2
+
+#    # Assign the titles for each cell of the header
+#    for col_num, column_title in enumerate(columns, 1):
+#        cell = worksheet.cell(row=row_num, column=col_num)
+#        cell.value = column_title
+#        cell.fill = PatternFill("solid", fgColor="50C878")
+#        cell.font = Font(bold=True, color="F7F6FA")
+#        third_cell = worksheet['D3']
+#        third_cell.alignment = Alignment(horizontal="right")
+
+#    for countries in cd:
+#        row_num += 1
+
+#        # Define the data for each cell in the row
+#        row = [countries.name, countries.email, countries.mobile_no]
+
+#        # Assign the data for each cell of the row
+#        for col_num, cell_value in enumerate(row, 1):
+#            cell = worksheet.cell(row=row_num, column=col_num)
+#            cell.value = cell_value
+#            if isinstance(cell_value, decimal.Decimal):
+#                cell.number_format = numbers.FORMAT_NUMBER_COMMA_SEPARATED1
+
+#    workbook.save(response)
+#    return response            
+  
