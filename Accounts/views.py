@@ -4896,3 +4896,32 @@ def verifyDocument(request, refId):
                 document_obj.save()
             
     return redirect('schedule_test_user_full_details', refId=refId)
+
+
+from django.template.loader import get_template
+
+from xhtml2pdf import pisa
+
+def pdf(request ,refId):
+    # products = Product.objects.all()
+    profile = candidate_details.objects.get(id = refId)
+
+    template_path = 'pdf.html'
+
+    context = {'profile':profile}
+
+    response = HttpResponse(content_type='application/pdf')
+
+    response['Content-Disposition'] = 'filename="products_report.pdf"'
+
+    template = get_template(template_path)
+
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funy view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
