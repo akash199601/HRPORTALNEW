@@ -124,6 +124,9 @@ def signUp(request):
                 
                 verify = Verification_Document()
                 verify.candidate_id = candidate_profile.id
+                
+                letter = OfferLetter()
+                letter.candidate_id = candidate_profile.id
             else:
                 candidate_profile = candidate_details()
                 candidate_profile.name=name
@@ -138,11 +141,14 @@ def signUp(request):
                 
                 verify = Verification_Document()
                 verify.candidate_id = candidate_profile.id
-
+                
+                letter = OfferLetter()
+                letter.candidate_id = candidate_profile.id
             myuser.save()
             user_roll.save()
             doc.save()
             verify.save()
+            letter.save()
             #print(user_profile)
             print("account_created")
             messages.success(request, " Your account has been successfully created")
@@ -2102,6 +2108,23 @@ def applied_user_full_details(request, refId):
         interview = InterviewDetails.objects.filter(interview_id=application.interview_id).first()
         
         try:
+            offerletter_obj = OfferLetter.objects.get(candidate_id = application.candidate_id)
+        except Exception as e:
+            print(e)
+            offerletter_obj = OfferLetter()
+            offerletter_obj.candidate_id = application.candidate_id
+
+        if  request.method == 'POST':
+            offerletter_obj.name = request.POST.get('name')
+            offerletter_obj.posting_place = request.POST.get('posting_place')
+            offerletter_obj.desgination = request.POST.get('desgination')
+            offerletter_obj.department = request.POST.get('department')
+            offerletter_obj.address = request.POST.get('address')
+            offerletter_obj.joining_date = datetime.strptime(request.POST.get('joining_date'),"%Y-%m-%d").replace(tzinfo=timezone.utc)
+            offerletter_obj.save()
+            print('offerletter_obj', offerletter_obj)
+        
+        try:
             document_obj = Document_Candidate.objects.get(candidate_id = application.candidate_id)
         except Exception as e:
             print(e)
@@ -2157,6 +2180,23 @@ def applied_user_full_details(request, refId):
             graduate_doc = None
             pan_doc = None
             dl_doc = None
+            
+        try:
+            offerletter_obj = OfferLetter.objects.get(candidate_id = profile.id)
+            name = offerletter_obj.name if offerletter_obj.name else None
+            posting_place = offerletter_obj.posting_place if offerletter_obj.posting_place else None
+            desgination = offerletter_obj.desgination if offerletter_obj.desgination else None
+            department = offerletter_obj.department if offerletter_obj.department else None
+            address = offerletter_obj.address if offerletter_obj.address else None
+            joining_date = offerletter_obj.joining_date if offerletter_obj.joining_date else None
+
+        except Exception as e:
+            name = None
+            posting_place = None
+            desgination = None
+            department = None
+            address = None 
+            joining_date = None
     else:
         profile = None
         test_schedule = None
@@ -2180,6 +2220,13 @@ def applied_user_full_details(request, refId):
         'hsc_doc': hsc_doc,
         'graduate_doc': graduate_doc,
         'document_obj':document_obj,
+        'posting_place': posting_place,
+        'desgination' : desgination,
+        'department' : department,
+        'address' : address,
+        'joining_date': joining_date,
+        'name' : name,
+        'offerletter_obj': offerletter_obj,
         'is_hr':is_hr ,'is_hrhead':is_hrhead,
     }
 
@@ -5484,3 +5531,4 @@ def verifyDocument(request, refId):
                 document_obj.save()
             
     return redirect('schedule_test_user_full_details', refId=refId)
+

@@ -564,3 +564,16 @@ class Verification_Document(models.Model):
     basicdetails_verify = models.IntegerField(null=True, blank=True,default = 0)
     class Meta:
         db_table = 'Verify_Documents'
+
+
+class OfferLetter(models.Model):
+    id = models.AutoField(primary_key = True)
+    name = models.CharField(max_length=255, null=True, blank=True)
+    posting_place = models.CharField(max_length=255, null=True, blank=True)
+    desgination = models.CharField(max_length=255, null=True, blank=True)
+    department = models.CharField(max_length=255, null=True, blank=True)
+    address = models.CharField(max_length=255, null=True, blank=True)
+    joining_date = models.DateTimeField(null=True, blank=True)
+    candidate_id = models.IntegerField(null=True, blank=True)
+    class Meta:
+        db_table = 'OFFER_LETTER'
