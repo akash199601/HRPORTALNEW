@@ -5600,7 +5600,7 @@ def candidate_list(request):
     
         
     page = request.POST.get('page',1)
-    paginator = Paginator(data_list,30)
+    paginator = Paginator(data_list,40)
     
     try:
         data_list = paginator.page(page)
