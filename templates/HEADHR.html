@@ -178,28 +178,18 @@
                 </ul>
               </div>
             </li>
-              {% comment %} <li class="nav-item">
-              <a class="nav-link" href="pages/icons/mdi.html">
-                <span class="icon-bg"><i class="mdi mdi-contacts menu-icon"></i></span>
-                <span class="menu-title">Icons</span>
-              </a>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'all_user_list' %}">
+                  <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
+                  <span class="menu-title">All User</span>
+                </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <span class="icon-bg"><i class="mdi mdi-lock menu-icon"></i></span>
-                <span class="menu-title">User Pages</span>
-                <i class="menu-arrow"></i>
-              </a>
-              <div class="collapse" id="auth">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-                </ul>
-              </div>
-            </li> {% endcomment %}
+                <a class="nav-link" href="{% url 'show_contact' %}">
+                  <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
+                  <span class="menu-title">Contact Users</span>
+                </a>
+            </li>
             
             <br><br>
             <li class="nav-item sidebar-user-actions">
@@ -214,26 +204,10 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="d-xl-flex justify-content-between align-items-start">
-              <h2 class="text-dark font-weight-bold mb-2"> Overview dashboard </h2>
+              <h2 class="text-dark font-weight-bold mb-2"> HR Admin Dashboard </h2>
             </div>
             <div class="row">
               <div class="col-md-12">
-                {% comment %} <div class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
-                  <ul class="nav nav-tabs tab-transparent" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link" id="home-tab" data-toggle="tab" href="{% url 'vacancy_lists' %}" role="tab" aria-selected="true">Users</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link active" id="business-tab" data-toggle="tab" href="#business-1" role="tab" aria-selected="false">Business</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="performance-tab" data-toggle="tab" href="#" role="tab" aria-selected="false">Performance</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="conversion-tab" data-toggle="tab" href="#" role="tab" aria-selected="false">Conversion</a>
-                    </li>
-                  </ul>
-                </div> {% endcomment %}
                 <div class="tab-content tab-transparent-content">
                   <div class="tab-pane fade show active" id="business-1" role="tabpanel" aria-labelledby="business-tab">
                     <div class="row">
@@ -265,30 +239,6 @@
                           </div>
                         </div>
                       </div>
-                      {% comment %} <div class="col-xl-3  col-lg-6 col-sm-6 grid-margin stretch-card" style="height:270px;border-radius:10px;">
-                        <div class="card" style="border-radius: 10px;border: 1px solid lightblue;">
-                          <div class="card-body text-center" style="box-shadow: 1px 1px 20px 1px;background-color: #FFDEE9;background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);border-radius: 10px;">
-                            <div style="height:33%;padding: 20px;border: 1px solid lightblue;border-radius: 10px 10px 0px 0px;">
-                              <a class="card-inner-cp card-cp-wt cursor" href="{% url 'sceduled_user_details' %}" style="text-decoration:none;">
-                                <h5 class="mb-2 text-dark font-weight-normal" style="height: 30px;font-size: .9em;">Scheduled Online Test Completed</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold" style="margin-bottom: 0.5rem !important;">{{ counts.sch_int }}</h2>
-                              </a>
-                            </div>
-                            <div style="height:33%;padding: 20px;border: 1px solid lightblue;">
-                              <a class="card-inner-cp card-cp-wt cursor" href="{% url 'schedule_online_test' %}" style="text-decoration:none;">
-                                <h5 class="mb-2 text-dark font-weight-normal" style="height: 25px;font-size: .9em;">Pending Schedule Online Test</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold" style="margin-bottom: 0.5rem !important;">{{ counts.sch_test }}</h2>
-                              </a>
-                            </div>
-                            <div style="height:34%;padding: 20px;border: 1px solid lightblue;border-radius: 0px 0px 10px 10px;">
-                              <a class="card-inner-cp card-cp-wt cursor" href="{% url 'schedule_online_test' %}" style="text-decoration:none;">
-                                <h5 class="mb-2 text-dark font-weight-normal" style="height: 30px;font-size: .9em;">Test Scheduled But Not Completed</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold" style="margin-bottom: 0.5rem !important;">{{ counts.test_sch_done }}</h2>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div> {% endcomment %}
 
                       <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card" style="height:270px;border-radius:10px;">
                         <div class="card" style="border-radius: 10px;">
@@ -309,15 +259,10 @@
                                 <h5 class="mb-2 text-dark font-weight-normal">Re-Schedule Interview</h5>
                                 <h2 class="mb-4 text-dark font-weight-bold">{{ counts.reschedule }}</h2>
                               </a>
-                              {% comment %} <a class="card-inner-cp card-cp-wt cursor" href="{% url 'rejected' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 0px 10px 0px;text-decoration:none;">
-                                <h5 class="mb-2 text-dark font-weight-normal">Reject</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold">{{ counts.reject_count }}</h2>
-                              </a> {% endcomment %}
                             </div>
                           </div>
                         </div>
                       </div>
-
                       
                       <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card" style="height:270px;border-radius:10px;">
                         <div class="card" style="border-radius: 10px;">
