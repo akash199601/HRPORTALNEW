@@ -160,4 +160,6 @@ urlpatterns = [
     
     path('verifyDocument/<int:refId>/',views.verifyDocument, name="verifyDocument"),
     
+    path('pdf/<int:refId>/',views.pdf,name="pdf"),
+    
 ]
