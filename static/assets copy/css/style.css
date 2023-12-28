@@ -13716,7 +13716,7 @@ dl {
       .sidebar .nav.sub-menu .nav-item {
         padding: 0; }
         .sidebar .nav.sub-menu .nav-item .nav-link {
-          color: #888;
+          color: white;
           padding: 0.75rem 2rem 0.75rem 2rem;
           position: relative;
           font-size: 0.8125rem;
@@ -13732,7 +13732,7 @@ dl {
             top: 50%;
             -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
-            color: #a2a2a2;
+            color: aqua;
             font-size: .75rem; }
             .rtl .sidebar .nav.sub-menu .nav-item .nav-link:before {
               left: auto;

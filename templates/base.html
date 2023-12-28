@@ -191,6 +191,14 @@
         body{
           color: #38393a;
       }
+
+      .sidebar .nav.sub-menu .nav-item .nav-link:before{
+        color:aqua;
+      }
+  
+      .sidebar .nav.sub-menu .nav-item .nav-link{
+        color:white;
+      } 
     </style>
     <style>
     </style>
@@ -298,7 +306,7 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
               <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
-              <span class="menu-title">Candidate's CV </span>
+              <span class="menu-title">Received New CV's </span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic1">
@@ -364,7 +372,7 @@
             </a>
         </li>
         {% endif %}
-        
+
         <li class="nav-item">
           <a class="nav-link" href="{% url 'candidate_list' %}">
             <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
