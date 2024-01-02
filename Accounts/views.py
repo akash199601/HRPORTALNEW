@@ -2120,7 +2120,7 @@ def applied_user_full_details(request, refId):
             offerletter_obj.desgination = request.POST.get('desgination')
             offerletter_obj.department = request.POST.get('department')
             offerletter_obj.address = request.POST.get('address')
-            offerletter_obj.joining_date = datetime.strptime(request.POST.get('joining_date'),"%Y-%m-%d").replace(tzinfo=timezone.utc)
+            offerletter_obj.joining_date = request.POST.get('joining_date')
             offerletter_obj.save()
             print('offerletter_obj', offerletter_obj)
         
@@ -2197,6 +2197,11 @@ def applied_user_full_details(request, refId):
             department = None
             address = None 
             joining_date = None
+            
+        GENDER = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+        )
     else:
         profile = None
         test_schedule = None
@@ -2212,6 +2217,7 @@ def applied_user_full_details(request, refId):
         'mime_type': mime_type,
         'status': application.application_status,
         'application':application,
+        'gender_choices': GENDER,
         'candidate_id': profile.id,
         'aadhar_doc' : aadhar_doc,
         'pan_doc' : pan_doc,
