@@ -126,7 +126,7 @@
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
                 <span class="icon-bg"><i class="mdi mdi-crosshairs-gps menu-icon"></i></span>
-                <span class="menu-title">Candidate's CV </span>
+                <span class="menu-title">Received New CV's </span>
                 <i class="menu-arrow"></i>
               </a>
               <div class="collapse" id="ui-basic1">
@@ -181,7 +181,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'candidate_list' %}">
                 <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
-                <span class="menu-title">Dashboard</span>
+                <span class="menu-title">Reports</span>
               </a>
             </li>
               {% comment %} <li class="nav-item">
@@ -258,13 +258,13 @@
                           <div class="card-body text-center" style="box-shadow: 1px 1px 20px 1px;padding: 2rem 2rem;background-color: #FFDEE9;background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);border-radius: 10px;">
                             <div style="height:30%;">
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'applied_user_details' %}" style="text-decoration:none;">
-                                <h5 class="mb-2 text-dark font-weight-normal" style="margin-top: 1rem">Candidate's CV</h5>
+                                <h5 class="mb-2 text-dark font-weight-normal" style="margin-top: 1rem">Received New CV's</h5>
                                 <h2 class="mb-4 text-dark font-weight-bold">{{ counts.cv_count }}</h2>
                               </a>
                             </div>
                             <div style="height:30%;">
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'rejected' %}" style="text-decoration:none;">
-                                <h5 class="mb-2 text-dark font-weight-normal" style="margin-top: 3rem;">Rejected CV</h5>
+                                <h5 class="mb-2 text-dark font-weight-normal" style="margin-top: 3rem;">Rejected CV's</h5>
                                 <h2 class="mb-4 text-dark font-weight-bold">{{ counts.reject_count }}</h2>
                               </a>
                             </div>
@@ -301,7 +301,7 @@
                           <div class="card-body text-center" style="box-shadow: 1px 1px 20px 1px;background-color: #FFDEE9;background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);border-radius: 10px;">
                             <div style="display:flex;height:50%;">
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'schedule_online_test' %}" style="width:50%;padding-top: 30px;border-radius: 10px 0px 0px 0px;border: 1px solid lightblue;text-decoration:none;">
-                                <h5 class="mb-2 text-dark font-weight-normal" style="height: 30px;">Pending Schedule Test</h5>
+                                <h5 class="mb-2 text-dark font-weight-normal" style="height: 30px;">Pending For Schedule Test</h5>
                                 <h2 class="mb-4 text-dark font-weight-bold">{{ counts.sch_test }}</h2>
                               </a>
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'sceduled_user_details' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 10px 0px 0px;text-decoration:none;">
@@ -311,14 +311,14 @@
                             </div>
 
                             <div style="display:flex;height:50%;">                             
-                              <a class="card-inner-cp card-cp-wt cursor" href="{% url 'reschedule_interview_user' %}" style="width:50%;padding-top: 30px;border-radius: 0px 0px 0px 10px;text-decoration:none;">
+                              <a class="card-inner-cp card-cp-wt cursor" href="{% url 'reschedule_interview_user' %}" style="width:50%;padding-top: 30px;border-radius: 0px 0px 0px 10px;text-decoration:none;border: 1px solid lightblue;">
                                 <h5 class="mb-2 text-dark font-weight-normal">Re-Schedule Interview</h5>
                                 <h2 class="mb-4 text-dark font-weight-bold">{{ counts.reschedule }}</h2>
                               </a>
-                              {% comment %} <a class="card-inner-cp card-cp-wt cursor" href="{% url 'rejected' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 0px 10px 0px;text-decoration:none;">
-                                <h5 class="mb-2 text-dark font-weight-normal">Reject</h5>
-                                <h2 class="mb-4 text-dark font-weight-bold">{{ counts.reject_count }}</h2>
-                              </a> {% endcomment %}
+                              <a class="card-inner-cp card-cp-wt cursor" href="#" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 0px 10px 0px;text-decoration:none;">
+                                <h5 class="mb-2 text-dark font-weight-normal"></h5>
+                                <h2 class="mb-4 text-dark font-weight-bold"></h2>
+                              </a> 
                             </div>
                           </div>
                         </div>
@@ -334,18 +334,18 @@
                                 <h2 class="mb-4 text-dark font-weight-bold">{{ counts.shortlist }}</h2>
                               </a>
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'Onboarding_candidates' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 10px 0px 0px;text-decoration:none;">
-                                <h5 class="mb-2 text-dark font-weight-normal">Accept</h5>
+                                <h5 class="mb-2 text-dark font-weight-normal">Onboarding Candidates</h5>
                                 <h2 class="mb-4 text-dark font-weight-bold">{{ counts.onboarding }}</h2>
                               </a>
                             </div>
 
                             <div style="display:flex;height:50%;">                             
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'hold_user_details' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 0px 0px 10px;text-decoration:none;">
-                                <h5 class="mb-2 text-dark font-weight-normal">Hold</h5>
+                                <h5 class="mb-2 text-dark font-weight-normal">Hold Candidates</h5>
                                 <h2 class="mb-4 text-dark font-weight-bold">{{ counts.hold_count }}</h2>
                               </a>
                               <a class="card-inner-cp card-cp-wt cursor" href="{% url 'rejected' %}" style="width:50%;padding-top: 30px;border: 1px solid lightblue;border-radius: 0px 0px 10px 0px;text-decoration:none;">
-                                <h5 class="mb-2 text-dark font-weight-normal">Reject</h5>
+                                <h5 class="mb-2 text-dark font-weight-normal">Rejected Candidates</h5>
                                 <h2 class="mb-4 text-dark font-weight-bold">{{ counts.reject_count }}</h2>
                               </a>
                             </div>

@@ -73,7 +73,7 @@
     <div class="form-container">
         <form action="{% url 'upload_CV' %}" method="POST" enctype="multipart/form-data" id="applicationForm">
             {% csrf_token %}
-            <h1 class="upload-cv-heading">Upload CV</h1>
+            <h1 class="upload-cv-heading" style="text-align: center;color: black;">Upload CV</h1>
             {% comment %} <div class="form-group">
                 <label for="candidate_full_name" class="required-label" style="background-color:transparent;">Candidate Full Name</label>
                 <input type="text" required class="form-control" placeholder="Enter Candidate's Full Name" name="candidate_full_name" id="candidate_full_name">
