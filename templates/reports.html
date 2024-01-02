@@ -27,7 +27,6 @@
                 <label>Seach Status</label>
                 <select class="form-control" name='application_status'>
                     <option value="" {% if application_status == '' %} selected {% endif %}>Select Status Type</option>
-                    <option value="NULL" {% if application_status == 'NULL' %} selected {% endif %}>New Recieved CV's</option>
                     <option value="7" {% if application_status == '7' %} selected {% endif %}>Onboarding Candidates</option>
                     <option value="11" {% if application_status == '11' %} selected {% endif %}>Hold Candidates</option>
                     <option value="12" {% if application_status == '12' %} selected {% endif %}>Reject Candidates</option>

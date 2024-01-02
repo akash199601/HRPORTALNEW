@@ -5577,28 +5577,24 @@ def is_valid_queryparam(param):
 
 def candidate_list(request):
     # cd = candidate_details.objects.all().order_by('name')
+    application_status = request.POST.get('application_status')
+    print('application_status',application_status)
     
     sql_query = f"""
-        SELECT CD.name,CD.email,CD.mobile_no,AD.branch_shortlisted_for,AD.position_shortlisted_for,AD.application_status FROM CANDIDATE_DETAILS AS CD
-        LEFT JOIN APPLICATION_DETAILS AS AD
-        ON AD.candidate_id = CD.id;
+        SELECT CD.name,CD.email,CD.mobile_no,AD.branch_shortlisted_for,AD.position_shortlisted_for,AD.application_status FROM APPLICATION_DETAILS AS AD
+        LEFT JOIN CANDIDATE_DETAILS AS CD
+        ON CD.id = AD.candidate_id
+        {f"WHERE AD.application_status = {application_status}" if is_valid_queryparam(application_status) else ''};
         """
     
     df = pd.read_sql(sql_query, engine)
+    print('df',df)
     
     data_list = df.to_dict(orient='records')
-    
-    application_status = request.POST.get('application_status')
-   
+    print('data_list',data_list)
     
     request.session['application_status'] = application_status
-
-    
-    if is_valid_queryparam(application_status):
-        data_list = [data for data in data_list if data.get(application_status) == application_status]
-
-    
-        
+      
     page = request.POST.get('page',1)
     paginator = Paginator(data_list,40)
     
