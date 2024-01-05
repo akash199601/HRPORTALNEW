@@ -47,8 +47,6 @@ engine = create_engine(f"mssql+pyodbc://{user1}:{password}@{server}/{db}?driver=
 cursor = connection.cursor()
 
 
-
-
 # Create your views here.
 def Login(request):
     if request.method == "POST":
@@ -408,7 +406,7 @@ def profile(request):
             if(user_profile.status==0):
           
                 messages.error(request, "Your profile is Incomplete.Kindly complete your profile for further processing.")
-            redirect_url = reverse('applied_user_full_details',args=[refId])
+            redirect_url = reverse('profile_update',args=[refId])
             return redirect(redirect_url)
         except Exception as e:
             print(e)
