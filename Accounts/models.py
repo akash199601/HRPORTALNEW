@@ -244,7 +244,6 @@ class candidate_details(models.Model):
     class Meta:
         db_table = 'CANDIDATE_DETAILS'
 
-
 class Interview(models.Model):
     INTERVIEW_STATUS=((0,'ShortlistedCV'),(1,'Scheduled'),(2,'Hold'),(3,'Rejected'),(4,'Attended'),(5,'Selected'),(6,'NotSelected'))
     candidate_id = models.IntegerField(blank=True,null=True)
@@ -254,7 +253,6 @@ class Interview(models.Model):
     interview_panel_list = models.CharField(max_length=200,blank=True,null=True)
     interview_status = models.CharField(max_length=200,blank=True,null=True)
     interview_score = models.DecimalField(blank=True,null=True,max_digits=5, decimal_places=2)
-
 
 class Rolls(models.Model):
     roll_name = models.CharField(max_length=255,blank=True,null=True)
@@ -551,7 +549,6 @@ class Document_Candidate(models.Model):
     class Meta:
         db_table = 'UPLOAD_DOCUMENTS'
 
-
 class Verification_Document(models.Model):
     id = models.AutoField(primary_key = True)
     candidate_id = models.IntegerField(null=True, blank=True,default = 0)
@@ -564,7 +561,6 @@ class Verification_Document(models.Model):
     basicdetails_verify = models.IntegerField(null=True, blank=True,default = 0)
     class Meta:
         db_table = 'Verify_Documents'
-
 
 class OfferLetter(models.Model):
     id = models.AutoField(primary_key = True)
