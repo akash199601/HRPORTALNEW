@@ -24,11 +24,6 @@ from django.views.static import serve
 # from django.conf.urls import url
 # from . views import upload_cv, success_page
 
-
-
-
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Accounts.urls')),

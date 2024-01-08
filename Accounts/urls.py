@@ -51,6 +51,8 @@ urlpatterns = [
     path('select_candidate/<int:refId>',views.select_candidate,name="select_candidate"),
     path('vacancy_lists/',views.vacancy_lists,name="vacancy_lists"),
     path('vacancy_card_details/<int:pk>',views.vacancy_card_details,name="vacancy_card_details"),
+    path('candidate_vacancy_card_details/<int:pk>',views.candidate_vacancy_card_details,name="candidate_vacancy_card_details"),
+
     path('applied_vacancy_card_details/<int:pk>',views.applied_vacancy_card_details,name="applied_vacancy_card_details"),
 
     # path('test/<slug>',views.test,name="test"),

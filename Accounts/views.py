@@ -2999,15 +2999,17 @@ def get_branch_vacancy_options(request):
             print(branch_options)
             return JsonResponse({'branch_options': list(branch_options)})
 
-def vacancy_card_details(request,pk):
+def candidate_vacancy_card_details(request,pk):
     is_hr=False
     is_hrhead = False
+    is_candidate = False
     if str(request.user) != 'AnonymousUser':
         user_id=request.user.id
         try:
             user_roll=User_Rolls.objects.get(user_id=user_id)
             is_hr=True if user_roll.roll_id==1 else False
             is_hrhead=True if user_roll.roll_id==3 else False
+            is_candidate=True if user_roll.roll_id==0 else False
         except:
             pass
     
@@ -3020,7 +3022,33 @@ def vacancy_card_details(request,pk):
 
     vacancy_df.fillna("-", inplace=True)
     vacancy_obj = vacancy_df.to_dict("records")[0]  
-    return render(request,'vacancy_card_details.html',{'vacancy':vacancy_obj,'is_hr':is_hr ,'is_hrhead':is_hrhead})
+    return render(request,'candidate_vacancy_card_details.html',{'vacancy':vacancy_obj,'is_hr':is_hr ,'is_hrhead':is_hrhead,'is_candidate':is_candidate})
+      
+
+def vacancy_card_details(request,pk):
+    is_hr=False
+    is_hrhead = False
+    is_candidate = False
+    if str(request.user) != 'AnonymousUser':
+        user_id=request.user.id
+        try:
+            user_roll=User_Rolls.objects.get(user_id=user_id)
+            is_hr=True if user_roll.roll_id==1 else False
+            is_hrhead=True if user_roll.roll_id==3 else False
+            is_candidate=True if user_roll.roll_id==0 else False
+        except:
+            pass
+    
+    sql_query = f"""
+    SELECT * FROM "VACANCY_DETAILS" VD LEFT JOIN "INTERVIEW_DETAILS" ID ON VD.vacancy_id = ID.vacancy_id WHERE VD.vacancy_id={pk};
+                """
+    vacancy_df = pd.read_sql_query(sql_query, engine)
+    # change the format of date to dd-mm-yyyy
+    vacancy_df['interview_date'] = vacancy_df['interview_date'].dt.strftime('%d-%m-%Y')
+
+    vacancy_df.fillna("-", inplace=True)
+    vacancy_obj = vacancy_df.to_dict("records")[0]  
+    return render(request,'vacancy_card_details.html',{'vacancy':vacancy_obj,'is_hr':is_hr ,'is_hrhead':is_hrhead,'is_candidate':is_candidate})
 
 from dateutil.relativedelta import relativedelta
 
