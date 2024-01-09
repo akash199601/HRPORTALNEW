@@ -5627,18 +5627,15 @@ def candidate_list(request):
     
     request.session['application_status'] = application_status
       
-    page = request.POST.get('page',1)
-    paginator = Paginator(data_list,40)
-    
-    try:
-        data_list = paginator.page(page)
-    except PageNotAnInteger:
-        data_list = paginator.page(1)
-    except EmptyPage:
-        data_list = paginator.page(paginator.num_pages)
+    paginator = Paginator(data_list,5)
+
+    page_number = request.GET.get('page')
+
+    page_obj = paginator.get_page(page_number)
         
     context = {
         'candidate_list' : data_list,
+        'page_obj':page_obj,
         'application_status' : application_status,
     }
     return render(request, 'reports.html', context)
