@@ -687,9 +687,15 @@ def applied_user_details(request):
         except:
             pass
     applicants = candidate_details.objects.filter(status=0, is_user=False, reviewed_by__isnull=True)
-    
     print(applicants)
-    return render(request, 'appliedUserDetails.html',{'applicants':applicants,'is_hr':is_hr ,'is_hrhead':is_hrhead})
+    
+    paginator = Paginator(applicants,5)
+
+    page_number = request.GET.get('page')
+
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'appliedUserDetails.html',{'applicants':applicants,'is_hr':is_hr ,'is_hrhead':is_hrhead,'page_obj':page_obj,})
 
 @login_required(login_url='signIn')
 def schedule_online_test(request):
@@ -703,28 +709,28 @@ def schedule_online_test(request):
             is_hrhead=True if user_roll.roll_id==3 else False
         except:
             pass
-    query = f"""SELECT cd.name,
-                        cd.email, 
-                        cd.mobile_no,
-                        cd.id as candidate_id, 
-                        ad.application_id,
-                        ad.position_shortlisted_for,
-                        ad.branch_shortlisted_for 
-            FROM application_details ad 
-            LEFT JOIN candidate_details cd ON ad.candidate_id = cd.id 
-            WHERE ad.application_status = 5 or ad.application_status = 6"""
-    # or ad.application_status = 4
+    # query = f"""SELECT cd.name,
+    #                     cd.email, 
+    #                     cd.mobile_no,
+    #                     cd.id as candidate_id, 
+    #                     ad.application_id,
+    #                     ad.position_shortlisted_for,
+    #                     ad.branch_shortlisted_for 
+    #         FROM application_details ad 
+    #         LEFT JOIN candidate_details cd ON ad.candidate_id = cd.id 
+    #         WHERE ad.application_status = 5 or ad.application_status = 6"""
+
     
-    df = pd.read_sql(query, engine)
+    # df = pd.read_sql(query, engine)
 
-    print(df, "data")	
-    applicants = candidate_details.objects.filter()
-    distinct_positions_queryset = applicants.values_list("position_applied_for", flat=True).distinct()
-    distinct_positions = [position for position in distinct_positions_queryset if position is not None]
-    print(distinct_positions)
+    # print(df, "data")	
+    # applicants = candidate_details.objects.filter()
+    # distinct_positions_queryset = applicants.values_list("position_applied_for", flat=True).distinct()
+    # distinct_positions = [position for position in distinct_positions_queryset if position is not None]
+    # print(distinct_positions)
 
-    print(applicants)
-    data = df.to_dict('records')
+    # print(applicants)
+    # data = df.to_dict('records')
     
     query = f"""SELECT cd.name,
                         cd.email, 
@@ -745,7 +751,7 @@ def schedule_online_test(request):
     distinct_positions = [position for position in distinct_positions_queryset if position is not None]
     print(distinct_positions)
 
-    print(applicants)
+
     data2 = df2.to_dict('records')
 
     
@@ -768,10 +774,9 @@ def schedule_online_test(request):
     distinct_positions = [position for position in distinct_positions_queryset if position is not None]
     print(distinct_positions)
 
-    print(applicants)
     data1 = df1.to_dict('records')
 
-    return render(request, 'schedule_test_userdetails.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'applicants':data, 'distinct_positions':distinct_positions,'applicants1':data1, 'applicants2':data2,})
+    return render(request, 'schedule_test_userdetails.html',{'is_hr':is_hr ,'is_hrhead':is_hrhead,'distinct_positions':distinct_positions,'applicants1':data1, 'applicants2':data2})
 
 @csrf_exempt
 def api_exam_filter(request):

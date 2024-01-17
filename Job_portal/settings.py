@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'Job_portal.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "mssql",
-        "NAME": "Sonata_ConnectHR",
-        "USER": "SFPL_Connect",
-        "PASSWORD": "$%n5bF33%X",
-        "HOST": "172.17.130.216",
+        "NAME": "HR_RMG",
+        "USER": "SFPL_Aakash",
+        "PASSWORD": "$A@kasH#241%",
+        "HOST": "172.17.130.206",
         "PORT": "1433",
         "OPTIONS": {
             "driver": "ODBC Driver 17 for SQL Server",
